@@ -5,10 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Üstəgəl Kafe — Kofe, kino, intellektual oyunlar, canlı musiqi və karaoke bir məkanda.">
   <title>Üstəgəl Kafe — Coffee • Events • Games</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%234A2A17'/%3E%3Cpath d='M32 16v32M16 32h32' stroke='%23F2D3A8' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" href="https://docs.google.com/drawings/d/e/2PACX-1vQbzxPda05zw-xlcupsexZXTdDejHMneiSYpebnPi4kDrTlAGoWDvzmG54n2X7AAZuNllQMYRsKgCjV/pub?w=693&h=690">
   <link rel="preconnect" href="https://script.google.com" crossorigin>
   <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
   <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin>
+  <link rel="dns-prefetch" href="https://docs.google.com">
+  <link rel="preload" as="image" href="https://docs.google.com/drawings/d/e/2PACX-1vQbzxPda05zw-xlcupsexZXTdDejHMneiSYpebnPi4kDrTlAGoWDvzmG54n2X7AAZuNllQMYRsKgCjV/pub?w=693&h=690" fetchpriority="high">
+  <script>
+    /* Sorğu səhifə yüklənən kimi (CSS/JS parse olunmamış) başlayır + son uğurlu data keşdən dərhal göstərilir */
+    (function () {
+      var API = 'https://script.google.com/macros/s/AKfycbziig0rBRdHKOE32h9BwUQ7aoEzVG8FNgF92KiWPOG2xLrgt0RIfd1a2kmbl50H2lL0/exec';
+      window.__API_URL = API;
+      try {
+        var c = localStorage.getItem('ustegel:data:v2');
+        if (c) window.__CACHED = JSON.parse(c);
+      } catch (e) {}
+      window.__EARLY = fetch(API + '?action=getAppData', { redirect: 'follow' })
+        .then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); });
+      window.__EARLY.catch(function () {});
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -175,36 +191,31 @@
     }
 
     .logo-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 11px;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
       background: var(--brand);
-      color: var(--hero-gold);
+      color: var(--brand-ink);
       display: grid;
       place-items: center;
-      font: 800 22px 'Fraunces', serif;
+      font: 800 20px 'Fraunces', serif;
       box-shadow: var(--shadow-sm);
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .logo:hover .logo-mark {
-      transform: rotate(90deg) scale(1.06);
     }
 
     .logo img {
-      height: 40px;
+      height: 42px;
       width: auto;
       display: block;
       background: #FFFFFF;
       border: 1px solid #E3CFB3;
-      border-radius: 9px;
+      border-radius: 8px;
       padding: 0;
     }
 
     .logo img.logo-icon {
       display: none;
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       object-fit: contain;
     }
 
@@ -250,155 +261,42 @@
     }
 
     /* ==========================================================================
-       4. ART-AURALI, ANİMASİYALI GİRİŞ (HERO) BÖLMƏSİ VƏ DÜYMƏLƏR
+       4. GİRİŞ (HERO) BÖLMƏSİ VƏ DÜYMƏLƏR
        ========================================================================== */
     .hero {
       position: relative;
       background: radial-gradient(circle at 82% 28%, #5B3318 0%, var(--hero) 62%, var(--hero-deep) 100%);
       color: var(--hero-ink);
-      padding: 74px 0 96px;
+      padding: 76px 0 72px;
       overflow: hidden;
+      border-bottom: 1px solid rgba(242, 211, 168, 0.14);
     }
 
-    /* Art-aura nəfəs alan işıq kürələri */
-    .hero-aura {
+    .hero::before {
+      content: "";
       position: absolute;
       inset: 0;
+      background-image: radial-gradient(rgba(242, 211, 168, 0.08) 1px, transparent 1px);
+      background-size: 26px 26px;
       pointer-events: none;
-      overflow: hidden;
-      z-index: 1;
     }
 
-    .aura-orb {
+    .hero::after {
+      content: "";
       position: absolute;
+      right: -80px;
+      bottom: -80px;
+      width: 420px;
+      height: 420px;
       border-radius: 50%;
-      filter: blur(42px);
-      opacity: 0.45;
-      will-change: transform, opacity;
-      animation: auraFloat 11s ease-in-out infinite alternate;
-    }
-
-    .aura-orb-1 {
-      width: 380px;
-      height: 380px;
-      top: -90px;
-      left: -60px;
-      background: radial-gradient(circle, rgba(242, 211, 168, 0.34) 0%, rgba(139, 94, 52, 0.08) 65%, transparent 100%);
-    }
-
-    .aura-orb-2 {
-      width: 460px;
-      height: 460px;
-      right: 12%;
-      top: -40px;
-      background: radial-gradient(circle, rgba(217, 166, 107, 0.28) 0%, rgba(91, 51, 24, 0.05) 68%, transparent 100%);
-      animation-delay: -4s;
-      animation-duration: 14s;
-    }
-
-    .aura-orb-3 {
-      width: 260px;
-      height: 260px;
-      left: 36%;
-      bottom: 10px;
-      background: radial-gradient(circle, rgba(242, 211, 168, 0.22) 0%, transparent 72%);
-      animation-delay: -7s;
-    }
-
-    @keyframes auraFloat {
-      0% {
-        transform: translate3d(0, 0, 0) scale(0.95);
-        opacity: 0.36;
-      }
-      50% {
-        transform: translate3d(22px, -16px, 0) scale(1.06);
-        opacity: 0.56;
-      }
-      100% {
-        transform: translate3d(-14px, 18px, 0) scale(1);
-        opacity: 0.42;
-      }
-    }
-
-    /* Zərif art-line ornament və üzən qəhvə dənələri / ulduzcuqlar */
-    .hero-art-svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+      background: radial-gradient(circle, rgba(242, 211, 168, 0.16) 0%, transparent 70%);
       pointer-events: none;
-      z-index: 1;
-      opacity: 0.55;
-    }
-
-    .art-ring-spin {
-      transform-origin: 620px 175px;
-      animation: slowArtSpin 46s linear infinite;
-    }
-
-    .art-ring-spin-rev {
-      transform-origin: 620px 175px;
-      animation: slowArtSpin 62s linear infinite reverse;
-    }
-
-    @keyframes slowArtSpin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .art-pulse-plus {
-      animation: plusAuraPulse 3.6s ease-in-out infinite;
-    }
-
-    @keyframes plusAuraPulse {
-      0%, 100% {
-        opacity: 0.28;
-        transform: scale(0.96);
-      }
-      50% {
-        opacity: 0.72;
-        transform: scale(1.05);
-      }
-    }
-
-    /* Düz xətt əvəzinə axıcı organik art dalğası */
-    .hero-wave {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -1px;
-      width: 100%;
-      height: 46px;
-      z-index: 3;
-      pointer-events: none;
-      display: block;
     }
 
     .hero-inner {
       position: relative;
       z-index: 2;
-      max-width: 650px;
-    }
-
-    /* Mərhələli kinetik giriş animasiyaları */
-    .stagger-in {
-      opacity: 0;
-      transform: translateY(18px);
-      animation: artEnterUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    .stagger-1 { animation-delay: 0.05s; }
-    .stagger-2 { animation-delay: 0.16s; }
-    .stagger-3 { animation-delay: 0.28s; }
-    .stagger-4 { animation-delay: 0.40s; }
-    .stagger-5 { animation-delay: 0.52s; }
-
-    @keyframes artEnterUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      max-width: 640px;
     }
 
     .tag {
@@ -409,27 +307,12 @@
       font-size: 13px;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding: 6px 15px;
+      padding: 6px 14px;
       border-radius: 999px;
       background: rgba(242, 211, 168, 0.12);
-      border: 1px solid rgba(242, 211, 168, 0.28);
+      border: 1px solid rgba(242, 211, 168, 0.25);
       color: var(--hero-gold);
       margin-bottom: 18px;
-      backdrop-filter: blur(6px);
-    }
-
-    .tag-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--hero-gold);
-      box-shadow: 0 0 10px var(--hero-gold);
-      animation: dotGlow 2.4s ease-in-out infinite;
-    }
-
-    @keyframes dotGlow {
-      0%, 100% { opacity: 0.55; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.25); }
     }
 
     .hero h1 {
@@ -437,17 +320,13 @@
       font-weight: 800;
       letter-spacing: -0.025em;
       max-width: 11ch;
-      background: linear-gradient(125deg, #FFF7EC 0%, #F2D3A8 52%, #E3B377 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
 
     .hero p {
-      font-size: 18px;
+      font-size: 18.5px;
       max-width: 46ch;
-      opacity: 0.9;
-      margin: 20px 0 30px;
+      opacity: 0.88;
+      margin: 20px 0 32px;
       line-height: 1.65;
     }
 
@@ -456,35 +335,6 @@
       flex-wrap: wrap;
       gap: 12px;
       align-items: center;
-    }
-
-    /* Art-auralı interaktiv atmosfer etiketləri */
-    .hero-art-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 26px;
-    }
-
-    .art-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 12.5px;
-      font-weight: 600;
-      color: rgba(251, 239, 224, 0.88);
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(242, 211, 168, 0.18);
-      backdrop-filter: blur(4px);
-      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
-    }
-
-    .art-pill:hover {
-      transform: translateY(-2px);
-      background: rgba(242, 211, 168, 0.16);
-      border-color: rgba(242, 211, 168, 0.45);
     }
 
     .btn {
@@ -500,11 +350,11 @@
       font-weight: 700;
       cursor: pointer;
       text-decoration: none;
-      transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.18s ease, background 0.18s ease, opacity 0.18s ease;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease, opacity 0.16s ease;
     }
 
     .btn:hover:not([disabled]) {
-      transform: translateY(-2px);
+      transform: translateY(-1px);
       box-shadow: var(--shadow-sm);
     }
 
@@ -531,31 +381,19 @@
     }
 
     .hero .btn.ghost {
-      background: rgba(251, 239, 224, 0.05);
+      background: rgba(251, 239, 224, 0.04);
       color: var(--hero-ink);
       border-color: rgba(242, 211, 168, 0.52);
       box-shadow: none;
     }
 
     .hero .btn.ghost:hover {
-      background: rgba(242, 211, 168, 0.15);
+      background: rgba(242, 211, 168, 0.14);
     }
 
     .btn[disabled] {
       opacity: 0.5;
       cursor: not-allowed;
-    }
-
-    /* Scroll zamanı yumşaq açılan bölmələr */
-    .reveal-block {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .reveal-block.is-visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     /* ==========================================================================
@@ -655,14 +493,34 @@
       animation: coffeeSteamFloat 3.4s infinite ease-in-out;
     }
 
-    .companion-steam span:nth-child(1) { left: 8px; animation-delay: 0s; }
-    .companion-steam span:nth-child(2) { left: 22px; height: 44px; animation-delay: 1.1s; }
-    .companion-steam span:nth-child(3) { left: 35px; animation-delay: 2.2s; }
+    .companion-steam span:nth-child(1) {
+      left: 8px;
+      animation-delay: 0s;
+    }
+
+    .companion-steam span:nth-child(2) {
+      left: 22px;
+      height: 44px;
+      animation-delay: 1.1s;
+    }
+
+    .companion-steam span:nth-child(3) {
+      left: 35px;
+      animation-delay: 2.2s;
+    }
 
     @keyframes coffeeSteamFloat {
-      0% { transform: translateY(4px) scaleX(0.85); opacity: 0; }
-      35% { opacity: 0.65; }
-      100% { transform: translateY(-34px) scaleX(1.35); opacity: 0; }
+      0% {
+        transform: translateY(4px) scaleX(0.85);
+        opacity: 0;
+      }
+      35% {
+        opacity: 0.65;
+      }
+      100% {
+        transform: translateY(-34px) scaleX(1.35);
+        opacity: 0;
+      }
     }
 
     @media (max-width: 979px) and (min-width: 641px) {
@@ -674,8 +532,8 @@
 
     @media (max-width: 640px) {
       :root {
-        --companion-w: 155px;
-        --companion-h: 220px;
+        --companion-w: 165px;
+        --companion-h: 235px;
       }
     }
 
@@ -684,11 +542,7 @@
        ========================================================================== */
     section.page {
       display: none;
-      padding: 28px 0 96px;
-    }
-
-    section.page#p-home {
-      padding-top: 0;
+      padding: 42px 0 88px;
     }
 
     section.page.on {
@@ -729,7 +583,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 14px;
-      margin-top: 34px;
+      margin-top: 40px;
     }
 
     .info div {
@@ -738,13 +592,12 @@
       border-radius: var(--radius-md);
       background: var(--surface);
       box-shadow: var(--shadow-sm);
-      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+      transition: transform 0.18s ease, border-color 0.18s ease;
     }
 
     .info div:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       border-color: var(--accent);
-      box-shadow: var(--shadow-md);
     }
 
     .info b {
@@ -760,52 +613,24 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 14px;
-      margin-top: 26px;
+      margin-top: 20px;
     }
 
     .vibe-item {
-      position: relative;
-      overflow: hidden;
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      padding: 18px 18px;
+      padding: 16px 18px;
       border-radius: var(--radius-md);
       background: var(--bg-elevated);
       border: 1px solid var(--line);
-      transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.24s ease, box-shadow 0.24s ease;
-    }
-
-    .vibe-item::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, var(--accent-soft), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.28s ease;
-      pointer-events: none;
-    }
-
-    .vibe-item:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .vibe-item:hover::after {
-      opacity: 1;
     }
 
     .vibe-icon {
-      font-size: 24px;
+      font-size: 22px;
       line-height: 1;
       flex-shrink: 0;
       margin-top: 2px;
-      transition: transform 0.3s ease;
-    }
-
-    .vibe-item:hover .vibe-icon {
-      transform: scale(1.14) rotate(-5deg);
     }
 
     .vibe-item h3 {
@@ -922,19 +747,18 @@
       display: flex;
       flex-direction: column;
       box-shadow: var(--shadow-sm);
-      transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.24s ease, border-color 0.24s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-3px);
       box-shadow: var(--shadow-md);
-      border-color: var(--accent);
     }
 
     .cover {
       position: relative;
       aspect-ratio: 16 / 9;
-      background: linear-gradient(135deg, var(--bg-elevated), var(--line));
+      background: var(--line);
       overflow: hidden;
     }
 
@@ -943,11 +767,11 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.38s ease, opacity 0.25s ease;
+      transition: transform 0.35s ease;
     }
 
     .card:hover .cover img {
-      transform: scale(1.04);
+      transform: scale(1.03);
     }
 
     .badge {
@@ -1144,8 +968,8 @@
       }
       .logo img.logo-icon {
         display: block;
-        width: 38px;
-        height: 38px;
+        width: 40px;
+        height: 40px;
         object-fit: contain;
       }
     }
@@ -1324,7 +1148,7 @@
     .toast-wrap {
       position: fixed;
       left: 20px;
-      bottom: 84px;
+      bottom: 20px;
       z-index: 80;
       display: flex;
       flex-direction: column;
@@ -1365,13 +1189,170 @@
     }
 
     /* ==========================================================================
-       9. KREATİV MENYU BÖLMƏSİ: AXTARIŞ, HORİZONTAL SLİDER KATEQORİYALAR VƏ SƏBƏT POP-UP
+       9. KREATİV MENYU BÖLMƏSİ, KATEQORİYA ANİMASİYALARI VƏ MƏHSUL KARTLARI
        ========================================================================== */
+    .menu-stage {
+      position: relative;
+      border-radius: var(--radius-xl);
+      padding: 26px 28px;
+      margin-bottom: 24px;
+      color: #FBEFE0;
+      background: linear-gradient(135deg, var(--m-c1, #4A2A17) 0%, var(--m-c2, #241207) 100%);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+      transition: background 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s ease;
+    }
+
+    .menu-stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.16) 0%, transparent 62%);
+      pointer-events: none;
+    }
+
+    .menu-stage-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .menu-stage-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      margin-bottom: 10px;
+    }
+
+    .menu-stage h2 {
+      font-size: clamp(26px, 4.5vw, 38px);
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    .menu-stage p {
+      font-size: 15px;
+      opacity: 0.9;
+      max-width: 52ch;
+    }
+
+    .menu-stage-art {
+      position: relative;
+      z-index: 2;
+      width: 118px;
+      height: 118px;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      backdrop-filter: blur(6px);
+      animation: menuStagePop 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes menuStagePop {
+      from {
+        opacity: 0;
+        transform: scale(0.86) rotate(-4deg);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    .menu-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .menu-particles i {
+      position: absolute;
+      font-style: normal;
+      opacity: 0;
+    }
+
+    .anim-steam .menu-particles i {
+      bottom: -10px;
+      width: 14px;
+      height: 46px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 248, 238, 0.45) 0%, transparent 72%);
+      filter: blur(4px);
+      animation: mSteamRise 3.8s infinite ease-in-out;
+    }
+
+    @keyframes mSteamRise {
+      0% { transform: translateY(10px) scaleX(0.8); opacity: 0; }
+      35% { opacity: 0.7; }
+      100% { transform: translateY(-130px) scaleX(1.5); opacity: 0; }
+    }
+
+    .anim-ice .menu-particles i {
+      top: -16px;
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      background: rgba(224, 247, 255, 0.32);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      animation: mIceDrift 4.8s infinite ease-in-out;
+    }
+
+    @keyframes mIceDrift {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+      25% { opacity: 0.85; }
+      100% { transform: translateY(155px) rotate(135deg); opacity: 0; }
+    }
+
+    .anim-bubbles .menu-particles i {
+      bottom: -12px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.16);
+      animation: mBubbleRise 3.2s infinite ease-in;
+    }
+
+    @keyframes mBubbleRise {
+      0% { transform: translateY(0) scale(0.6); opacity: 0; }
+      30% { opacity: 0.85; }
+      100% { transform: translateY(-150px) scale(1.25); opacity: 0; }
+    }
+
+    .anim-sparkle .menu-particles i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #FFF3D1;
+      box-shadow: 0 0 10px #FFE082;
+      animation: mSparkleTwinkle 2.8s infinite ease-in-out;
+    }
+
+    @keyframes mSparkleTwinkle {
+      0%, 100% { transform: scale(0.3); opacity: 0; }
+      50% { transform: scale(1.25); opacity: 0.9; }
+    }
+
     .menu-controls {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 18px;
+      gap: 14px;
+      margin-bottom: 24px;
     }
 
     .menu-search-row {
@@ -1385,12 +1366,12 @@
     .menu-search-box {
       position: relative;
       flex: 1 1 260px;
-      max-width: 460px;
+      max-width: 420px;
     }
 
     .menu-search-box input {
       width: 100%;
-      padding: 12px 40px 12px 16px;
+      padding: 11px 38px 11px 16px;
       border-radius: 999px;
       border: 1.5px solid var(--line);
       background: var(--surface);
@@ -1412,10 +1393,10 @@
       border: 0;
       background: var(--line);
       color: var(--ink);
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1;
       cursor: pointer;
       display: none;
@@ -1427,52 +1408,24 @@
     }
 
     .menu-stats {
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 700;
       color: var(--muted);
     }
 
-    /* Horizontal Slider Kateqoriyalar */
-    .menu-cats-shell {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
     .menu-cats {
       display: flex;
-      flex-wrap: nowrap;
       gap: 8px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      padding: 4px 44px 6px 2px;
-      -webkit-overflow-scrolling: touch;
-      mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 34px), transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 34px), transparent 100%);
-    }
-
-    .menu-cats::-webkit-scrollbar {
-      display: none;
-    }
-
-    .menu-cats.at-end {
-      mask-image: none;
-      -webkit-mask-image: none;
-      padding-right: 4px;
+      flex-wrap: wrap;
     }
 
     .m-cat-btn {
-      flex: 0 0 auto;
-      white-space: nowrap;
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      padding: 9px 15px;
+      padding: 8px 14px;
       border-radius: 999px;
-      border: 1.5px solid var(--line);
+      border: 1px solid var(--line);
       background: var(--surface);
       font-size: 13.5px;
       font-weight: 700;
@@ -1504,50 +1457,18 @@
       color: #FFFFFF;
     }
 
-    .menu-cat-scroll-btn {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-52%);
-      z-index: 4;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 1.5px solid var(--line);
-      background: var(--surface);
-      color: var(--brand);
-      font-size: 18px;
-      font-weight: 800;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      box-shadow: var(--shadow-md);
-      animation: nudgeRight 1.8s ease-in-out infinite;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-
-    .menu-cat-scroll-btn.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    @keyframes nudgeRight {
-      0%, 100% { transform: translate(0, -52%); }
-      50% { transform: translate(3px, -52%); }
-    }
-
     .menu-group-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      margin: 26px 0 14px;
+      margin: 30px 0 14px;
       padding-bottom: 8px;
       border-bottom: 1.5px solid var(--line);
     }
 
     .menu-group-head:first-child {
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
     .menu-group-title {
@@ -1577,9 +1498,9 @@
       cursor: pointer;
       box-shadow: var(--shadow-sm);
       opacity: 0;
-      transform: translateY(10px) scale(0.985);
-      animation: menuCardIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+      transform: translateY(12px) scale(0.98);
+      animation: menuCardIn 0.36s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.24s ease, border-color 0.24s ease;
     }
 
     @keyframes menuCardIn {
@@ -1590,14 +1511,14 @@
     }
 
     .m-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-5px);
       box-shadow: var(--shadow-md);
       border-color: var(--item-accent, var(--accent));
     }
 
     .m-card-art {
       position: relative;
-      height: 142px;
+      height: 146px;
       display: grid;
       place-items: center;
       background: radial-gradient(circle at 50% 42%, var(--item-bg1, #F5E8D7) 0%, var(--item-bg2, #E8D5BC) 100%);
@@ -1605,14 +1526,14 @@
     }
 
     .m-card-art svg {
-      width: 108px;
-      height: 108px;
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      width: 112px;
+      height: 112px;
+      transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
       filter: drop-shadow(0 8px 14px rgba(34, 18, 8, 0.16));
     }
 
     .m-card:hover .m-card-art svg {
-      transform: translateY(-4px) scale(1.07) rotate(-2deg);
+      transform: translateY(-4px) scale(1.08) rotate(-2deg);
     }
 
     .m-card-cat {
@@ -1623,7 +1544,7 @@
       border-radius: 999px;
       font-size: 11px;
       font-weight: 700;
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.86);
       color: #2B1A10;
       backdrop-filter: blur(4px);
     }
@@ -1675,7 +1596,7 @@
     }
 
     .m-add-btn {
-      padding: 6px 12px;
+      padding: 5px 11px;
       border-radius: 999px;
       border: 1px solid var(--line);
       background: var(--bg);
@@ -1696,24 +1617,23 @@
     .m-qty-box {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       background: var(--brand);
       color: var(--brand-ink);
       border-radius: 999px;
-      padding: 3px 7px;
-      font-size: 13px;
+      padding: 2px 6px;
+      font-size: 12.5px;
       font-weight: 800;
     }
 
     .m-qty-box button {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       border: 0;
-      background: rgba(255, 255, 255, 0.20);
+      background: rgba(255, 255, 255, 0.18);
       color: inherit;
       font-weight: 800;
-      font-size: 15px;
       cursor: pointer;
       display: grid;
       place-items: center;
@@ -1721,51 +1641,7 @@
     }
 
     .m-qty-box button:hover {
-      background: rgba(255, 255, 255, 0.34);
-    }
-
-    /* Məhsul detal modalında +/- say seçici */
-    .modal-qty-stepper {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      background: var(--bg);
-      border: 1.5px solid var(--line);
-      border-radius: 999px;
-      padding: 6px 12px;
-      margin-bottom: 16px;
-    }
-
-    .modal-qty-stepper button {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 0;
-      background: var(--brand);
-      color: var(--brand-ink);
-      font-size: 20px;
-      font-weight: 800;
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      transition: transform 0.14s ease, background 0.14s ease;
-    }
-
-    .modal-qty-stepper button:hover {
-      background: var(--brand-hover);
-      transform: scale(1.06);
-    }
-
-    .modal-qty-stepper button:active {
-      transform: scale(0.95);
-    }
-
-    .modal-qty-stepper .qty-val {
-      min-width: 34px;
-      text-align: center;
-      font: 800 20px 'Fraunces', serif;
-      color: var(--ink);
+      background: rgba(255, 255, 255, 0.32);
     }
 
     .order-items-box {
@@ -1808,8 +1684,8 @@
     }
 
     .order-item-controls button {
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       border: 1px solid var(--line);
       background: var(--surface);
@@ -1849,135 +1725,67 @@
       justify-content: space-between;
     }
 
-    /* ==========================================================================
-       10. EKRANIN ALT ORTASINDA ÜZƏN (FLOATING) SƏBƏT POP-UP
-       ========================================================================== */
-    .floating-cart-popup {
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translate(-50%, 130%);
-      z-index: 55;
-      width: min(92vw, 440px);
-      display: flex;
+    .menu-tray {
+      margin-top: 28px;
+      padding: 18px 20px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1.5px solid var(--accent);
+      box-shadow: var(--shadow-md);
+      display: none;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      padding: 12px 16px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--brand) 0%, #2B170C 100%);
-      color: #FBEFE0;
-      border: 1.5px solid rgba(242, 211, 168, 0.36);
-      box-shadow: 0 18px 40px rgba(24, 12, 5, 0.38);
-      cursor: pointer;
-      opacity: 0;
-      pointer-events: none;
-      transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease, box-shadow 0.2s ease;
+      flex-wrap: wrap;
+      gap: 14px;
     }
 
-    @media (prefers-color-scheme: dark) {
-      .floating-cart-popup {
-        background: linear-gradient(135deg, #D9A66B 0%, #B88246 100%);
-        color: #241207;
-        border-color: rgba(255, 255, 255, 0.35);
-      }
-    }
-
-    .floating-cart-popup.show {
-      transform: translate(-50%, 0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .floating-cart-popup:hover {
-      transform: translate(-50%, -3px);
-      box-shadow: 0 22px 46px rgba(24, 12, 5, 0.46);
-    }
-
-    .fcp-left {
+    .menu-tray.show {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
+      animation: pageFadeIn 0.25s ease-out;
     }
 
-    .fcp-badge {
-      flex-shrink: 0;
-      min-width: 30px;
-      height: 30px;
-      padding: 0 8px;
-      border-radius: 999px;
-      background: var(--hero-gold);
-      color: #2B1A10;
-      font-weight: 800;
-      font-size: 14px;
-      display: grid;
-      place-items: center;
+    .menu-tray-info b {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 2px;
     }
 
-    @media (prefers-color-scheme: dark) {
-      .fcp-badge {
-        background: #241207;
-        color: #FBEFE0;
-      }
+    .menu-tray-info span {
+      font-size: 13.5px;
+      color: var(--muted);
     }
 
-    .fcp-text {
+    .menu-tray-actions {
       display: flex;
-      flex-direction: column;
-      min-width: 0;
-      text-align: left;
-    }
-
-    .fcp-text strong {
-      font-size: 14.5px;
-      line-height: 1.2;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .fcp-text span {
-      font-size: 12px;
-      opacity: 0.85;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .fcp-cta {
-      flex-shrink: 0;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.16);
-      font-size: 13px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .fcp-cta {
-        background: rgba(36, 18, 7, 0.16);
-      }
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     @media (max-width: 640px) {
+      .menu-stage {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+      .menu-stage-art {
+        width: 86px;
+        height: 86px;
+      }
       .menu-grid {
-        grid-template-columns: repeat(auto-fill, minmax(162px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
         gap: 12px;
       }
       .m-card-art {
-        height: 118px;
+        height: 122px;
       }
       .m-card-art svg {
-        width: 88px;
-        height: 88px;
+        width: 92px;
+        height: 92px;
       }
     }
 
     footer {
       border-top: 1px solid var(--line);
-      padding: 24px 0 86px;
+      padding: 24px 0;
       color: var(--muted);
       font-size: 14px;
       background: var(--bg-elevated);
@@ -1997,10 +1805,233 @@
         transition: none !important;
         scroll-behavior: auto !important;
       }
-      .stagger-in, .reveal-block {
-        opacity: 1 !important;
-        transform: none !important;
-      }
+    }
+
+    /* ==========================================================================
+       10. YENİ: HERO AURORA, SCROLL REVEAL, MENYU SLIDER, SƏBƏT POP-UP, ŞƏKİL FADE
+       ========================================================================== */
+    .hero {
+      padding: 84px 0 116px;
+      background: linear-gradient(160deg, #4A2A17 0%, var(--hero) 48%, var(--hero-deep) 100%);
+      isolation: isolate;
+    }
+    .hero::before { z-index: 1; opacity: 0.8; }
+    .hero::after { display: none; }
+    .hero .wrap { position: relative; z-index: 3; }
+
+    .aurora { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .au {
+      position: absolute;
+      border-radius: 50%;
+      mix-blend-mode: screen;
+      will-change: transform;
+      transform: translate3d(calc(var(--mx, 0) * var(--k, 20px)), calc(var(--my, 0) * var(--k, 20px)), 0);
+    }
+    .au1 { --k: 34px; width: 68vmax; height: 68vmax; left: -18vmax; top: -34vmax;
+      background: radial-gradient(circle at 40% 40%, rgba(242, 211, 168, 0.42), transparent 62%);
+      animation: auDrift1 19s ease-in-out infinite alternate; }
+    .au2 { --k: -26px; width: 56vmax; height: 56vmax; right: -16vmax; top: -12vmax;
+      background: radial-gradient(circle at 50% 50%, rgba(176, 122, 60, 0.55), transparent 64%);
+      animation: auDrift2 23s ease-in-out infinite alternate; }
+    .au3 { --k: 20px; width: 50vmax; height: 50vmax; left: 8vmax; bottom: -30vmax;
+      background: radial-gradient(circle at 50% 50%, rgba(107, 45, 92, 0.50), transparent 62%);
+      animation: auDrift3 27s ease-in-out infinite alternate; }
+    .au4 { --k: -40px; width: 44vmax; height: 44vmax; right: 6vmax; bottom: -26vmax;
+      background: radial-gradient(circle at 50% 50%, rgba(31, 90, 110, 0.48), transparent 62%);
+      animation: auDrift1 31s ease-in-out infinite alternate-reverse; }
+    @keyframes auDrift1 { 0% { margin: 0 0 0 0; scale: 1; } 100% { margin: 6vmax 0 0 10vmax; scale: 1.18; } }
+    @keyframes auDrift2 { 0% { margin: 0; scale: 1.05; } 100% { margin: 8vmax 8vmax 0 0; scale: 0.88; } }
+    @keyframes auDrift3 { 0% { margin: 0; scale: 0.9; } 100% { margin: -6vmax 0 0 14vmax; scale: 1.2; } }
+
+    .halo {
+      position: absolute;
+      right: 8%;
+      top: 50%;
+      width: min(52vmin, 460px);
+      aspect-ratio: 1;
+      translate: 0 -50%;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 0 20%, rgba(242, 211, 168, 0.5) 38%, transparent 52%, rgba(176, 122, 60, 0.45) 72%, transparent 88%);
+      -webkit-mask: radial-gradient(circle, transparent 56%, #000 57%, #000 59%, transparent 68%);
+              mask: radial-gradient(circle, transparent 56%, #000 57%, #000 59%, transparent 68%);
+      animation: haloSpin 22s linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes haloSpin { to { rotate: 360deg; } }
+    @media (max-width: 640px) { .halo { right: -18%; width: 78vw; opacity: 0.55; } }
+
+    .bokeh { position: absolute; inset: 0; z-index: 2; overflow: hidden; pointer-events: none; }
+    .bokeh i {
+      position: absolute;
+      bottom: -30px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 238, 210, 0.9), rgba(242, 211, 168, 0.12) 60%, transparent 72%);
+      opacity: 0;
+      animation: bokehRise linear infinite;
+    }
+    @keyframes bokehRise {
+      0% { transform: translate3d(0, 0, 0) scale(0.6); opacity: 0; }
+      15% { opacity: 0.75; }
+      100% { transform: translate3d(var(--dx, 20px), -110vh, 0) scale(1.15); opacity: 0; }
+    }
+
+    .hero-inner > * { opacity: 0; animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .hero-inner > :nth-child(1) { animation-delay: 0.05s; }
+    .hero-inner > :nth-child(2) { animation-delay: 0.18s; }
+    .hero-inner > :nth-child(3) { animation-delay: 0.32s; }
+    .hero-inner > :nth-child(4) { animation-delay: 0.46s; }
+    @keyframes heroRise { from { opacity: 0; transform: translateY(26px); filter: blur(6px); } to { opacity: 1; transform: none; filter: blur(0); } }
+
+    .hero h1 {
+      background: linear-gradient(100deg, #FBEFE0 0%, #F2D3A8 30%, #FFFFFF 46%, #F2D3A8 62%, #FBEFE0 100%);
+      background-size: 260% 100%;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.18s forwards, titleShine 7s linear 1.2s infinite;
+    }
+    @keyframes titleShine { to { background-position: -260% 0; } }
+
+    .hero .tag { position: relative; overflow: hidden; }
+    .hero .tag::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+      transform: translateX(-120%); animation: tagSweep 4.5s ease-in-out 1.4s infinite;
+    }
+    @keyframes tagSweep { 60%, 100% { transform: translateX(120%); } }
+
+    .hero .btn:not(.ghost) { box-shadow: 0 0 0 0 rgba(242, 211, 168, 0.55); animation: btnPulse 2.8s ease-out 1.6s infinite; }
+    @keyframes btnPulse { 0% { box-shadow: 0 0 0 0 rgba(242, 211, 168, 0.5); } 70%, 100% { box-shadow: 0 0 0 16px rgba(242, 211, 168, 0); } }
+
+    .hero.paused *, .hero.paused *::before, .hero.paused *::after { animation-play-state: paused !important; }
+
+    .hero-wave { position: absolute; left: 0; right: 0; bottom: -1px; height: 56px; z-index: 2; overflow: hidden; pointer-events: none; }
+    .hero-wave svg { position: absolute; left: 0; bottom: 0; width: 200%; height: 100%; animation: waveSlide 14s linear infinite; }
+    .hero-wave svg path { fill: var(--bg); }
+    .hero-wave svg.w2 { opacity: 0.45; animation-duration: 22s; animation-direction: reverse; }
+    @keyframes waveSlide { to { transform: translateX(-50%); } }
+
+    /* Scroll reveal */
+    .reveal, .reveal-group > * { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal.in, .reveal-group.in > * { opacity: 1; transform: none; }
+    .reveal-group.in > :nth-child(2) { transition-delay: 0.12s; }
+    .reveal-group.in > :nth-child(3) { transition-delay: 0.24s; }
+    .vibe-icon { animation: bob 3.6s ease-in-out infinite; }
+    .vibe-item:nth-child(2) .vibe-icon { animation-delay: 0.5s; }
+    .vibe-item:nth-child(3) .vibe-icon { animation-delay: 1s; }
+    @keyframes bob { 50% { transform: translateY(-4px) rotate(-5deg); } }
+    .vibe-item { transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+    .vibe-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+
+    .card { animation: cardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--i, 0) * 70ms); }
+    @keyframes cardIn { from { opacity: 0; transform: translateY(22px) scale(0.98); } }
+
+    /* Şəkil: yüklənənə qədər shimmer, sonra yumşaq görünmə */
+    .cover::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(100deg, var(--line) 30%, color-mix(in srgb, var(--line) 50%, var(--surface)) 50%, var(--line) 70%);
+      background-size: 220% 100%; animation: sh 1.3s linear infinite;
+    }
+    .cover img[data-lazyfade] { position: relative; opacity: 0; transition: opacity 0.45s ease, transform 0.35s ease; }
+    .cover img[data-lazyfade].ld { opacity: 1; }
+    .cover .badge { z-index: 2; }
+
+    /* Menyu: baner yoxdur, birbaşa axtarış + üfüqi slider kateqoriyalar */
+    #p-menu { padding-top: 22px; }
+    .menu-controls { gap: 10px; margin-bottom: 18px; }
+    .menu-search-row { flex-wrap: nowrap; }
+    .menu-search-box { flex: 1; min-width: 0; }
+    .menu-stats { white-space: nowrap; font-size: 13px; color: var(--muted); font-weight: 700; }
+    @media (max-width: 480px) { .menu-stats { display: none; } }
+
+    .menu-cats-wrap { position: relative; margin: 0 -24px; }
+    .menu-cats {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: 8px;
+      padding: 4px 24px 8px;
+      scroll-snap-type: x proximity;
+      scroll-padding: 0 24px;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+    }
+    .menu-cats::-webkit-scrollbar { display: none; }
+    .m-cat-btn { flex: 0 0 auto; scroll-snap-align: start; white-space: nowrap; }
+    .menu-cats-wrap::before, .menu-cats-wrap::after {
+      content: ""; position: absolute; top: 0; bottom: 6px; width: 46px; z-index: 2; pointer-events: none; transition: opacity 0.25s ease;
+    }
+    .menu-cats-wrap::before { left: 0; background: linear-gradient(90deg, var(--bg) 18%, transparent); opacity: 1; }
+    .menu-cats-wrap::after { right: 0; background: linear-gradient(270deg, var(--bg) 22%, transparent); opacity: 1; }
+    .menu-cats-wrap.at-start::before { opacity: 0; }
+    .menu-cats-wrap.at-end::after { opacity: 0; }
+    .cats-arrow {
+      position: absolute; right: 22px; top: 2px; z-index: 3;
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1px solid var(--line); background: var(--surface); color: var(--brand);
+      font: 700 22px/1 'Manrope', sans-serif; cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      animation: nudge 1.4s ease-in-out infinite;
+    }
+    .menu-cats-wrap.at-end .cats-arrow { display: none; }
+    @keyframes nudge { 50% { transform: translateX(4px); } }
+    @media (max-width: 640px) { .menu-cats-wrap { margin: 0 -24px; } .cats-arrow { display: none; } }
+    #menuCatalog { margin-bottom: 96px; }
+
+    /* Səbət pop-up (alt orta) */
+    .cart-fab {
+      position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 50;
+      transform: translateX(-50%);
+      display: flex; align-items: stretch; gap: 6px;
+      width: min(440px, calc(100vw - 24px));
+      animation: fabIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .cart-fab[hidden] { display: none; }
+    @keyframes fabIn { from { opacity: 0; transform: translate(-50%, 40px) scale(0.92); } }
+    .cart-fab-main {
+      flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px;
+      padding: 10px 16px 10px 12px; border: 0; border-radius: 999px; cursor: pointer; text-align: left;
+      background: linear-gradient(135deg, var(--brand), color-mix(in srgb, var(--brand) 70%, #000));
+      color: var(--brand-ink); box-shadow: 0 14px 34px rgba(24, 13, 6, 0.38), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+    .cart-fab-main:hover { filter: brightness(1.06); }
+    .cart-fab-main:active { transform: scale(0.98); }
+    .cart-fab.bump .cart-fab-main { animation: fabBump 0.38s ease; }
+    @keyframes fabBump { 40% { transform: scale(1.045); } }
+    .cart-fab-ico { position: relative; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-size: 20px; background: rgba(255, 255, 255, 0.16); flex-shrink: 0; }
+    .cart-fab-ico b { position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: #E8B26A; color: #2B1A10; font: 800 12px/20px 'Manrope', sans-serif; text-align: center; }
+    .cart-fab-txt { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; flex: 1; }
+    .cart-fab-txt strong { font: 800 17px 'Fraunces', serif; }
+    .cart-fab-txt small { font-size: 12px; opacity: 0.8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cart-fab-go { font-weight: 800; font-size: 13.5px; padding: 8px 14px; border-radius: 999px; background: var(--brand-ink); color: var(--brand); white-space: nowrap; }
+    .cart-fab-clear { width: 44px; border-radius: 50%; align-self: center; height: 44px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: 22px; cursor: pointer; box-shadow: var(--shadow-md); }
+    @media (max-width: 380px) { .cart-fab-go { display: none; } }
+
+    .toast-wrap { left: 50%; transform: translateX(-50%); bottom: auto; top: 78px; align-items: center; }
+
+    /* Məhsul modalında say seçici */
+    .pq { display: inline-flex; align-items: center; gap: 4px; padding: 5px; border-radius: 999px; background: var(--bg-elevated); border: 1px solid var(--line); margin-bottom: 14px; }
+    .pq button { width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer; font: 700 24px/1 'Manrope', sans-serif; background: var(--surface); color: var(--brand); box-shadow: var(--shadow-sm); transition: transform 0.12s ease; }
+    .pq button:active { transform: scale(0.9); }
+    .pq button:disabled { opacity: 0.35; cursor: default; }
+    .pq output { min-width: 52px; text-align: center; font: 800 22px 'Fraunces', serif; }
+    .m-card-foot .m-qty-box button { min-width: 32px; min-height: 32px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-group > * { opacity: 1 !important; transform: none !important; }
+      .hero-inner > *, .hero h1 { opacity: 1 !important; }
+      .cover img[data-lazyfade] { opacity: 1 !important; }
+    }
+
+    /* Düzəlişlər: hero boşluğu və mobil məhsul düymələri */
+    #p-home { padding-top: 0; }
+    .hero { border-bottom: 0; }
+    @media (max-width: 640px) {
+      .m-card-foot > span { display: none; }
+      .m-card-foot { justify-content: stretch; }
+      .m-card-foot .m-add-btn { width: 100%; white-space: nowrap; border-radius: 999px; padding: 9px 10px; font-size: 13px; }
+      .m-card-foot .m-qty-box { width: 100%; justify-content: space-between; }
     }
   </style>
 </head>
@@ -2225,7 +2256,8 @@
   <header>
     <div class="wrap bar">
       <button class="logo" id="logo" data-go="home">
-        <span class="logo-mark" aria-hidden="true">+</span>
+        <img class="logo-icon logo-icon-desktop" alt="Üstəgəl Kafe" src="https://docs.google.com/drawings/d/e/2PACX-1vQbzxPda05zw-xlcupsexZXTdDejHMneiSYpebnPi4kDrTlAGoWDvzmG54n2X7AAZuNllQMYRsKgCjV/pub?w=693&h=690" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+        <span class="logo-mark" style="display:none" aria-hidden="true">+</span>
         <span class="logo-text" id="logoTxt">Üstəgəl</span>
       </button>
       <nav aria-label="Əsas menyu">
@@ -2241,58 +2273,33 @@
        ƏSAS MƏZMUN SAHƏSİ (4 SƏHİFƏLİ SPA STRUKTURU)
        ======================================================================== -->
   <main>
-    <!-- 1. ANA SƏHİFƏ (HOME) — ART AURALI VƏ ANİMASİYALI GİRİŞ -->
+    <!-- 1. ANA SƏHİFƏ (HOME) -->
     <section class="page on" id="p-home">
-      <div class="hero">
-        <div class="hero-aura" aria-hidden="true">
-          <div class="aura-orb aura-orb-1"></div>
-          <div class="aura-orb aura-orb-2"></div>
-          <div class="aura-orb aura-orb-3"></div>
+      <div class="hero" id="hero">
+        <div class="aurora" aria-hidden="true">
+          <i class="au au1"></i><i class="au au2"></i><i class="au au3"></i><i class="au au4"></i>
+          <span class="halo"></span>
         </div>
-
-        <svg class="hero-art-svg" viewBox="0 0 900 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <g class="art-ring-spin">
-            <circle cx="620" cy="175" r="145" fill="none" stroke="#F2D3A8" stroke-width="1" stroke-dasharray="6 10" opacity="0.45"/>
-            <circle cx="620" cy="175" r="112" fill="none" stroke="#F2D3A8" stroke-width="0.8" stroke-dasharray="2 14" opacity="0.55"/>
-          </g>
-          <g class="art-ring-spin-rev">
-            <circle cx="620" cy="175" r="176" fill="none" stroke="#F2D3A8" stroke-width="0.7" stroke-dasharray="18 22" opacity="0.28"/>
-          </g>
-          <path d="M -40,340 Q 260,210 560,295 T 960,180" fill="none" stroke="#F2D3A8" stroke-width="1.2" opacity="0.22"/>
-          <path d="M -20,375 Q 310,255 610,330 T 940,235" fill="none" stroke="#F2D3A8" stroke-width="0.9" opacity="0.16"/>
-          <g class="art-pulse-plus" style="transform-origin: 620px 175px;">
-            <path d="M 620,155 V 195 M 600,175 H 640" stroke="#F2D3A8" stroke-width="2.5" stroke-linecap="round"/>
-          </g>
-        </svg>
-
+        <div class="bokeh" id="heroBokeh" aria-hidden="true"></div>
         <div class="wrap">
           <div class="hero-inner">
-            <div class="tag stagger-in stagger-1" id="tagline">
-              <span class="tag-dot" aria-hidden="true"></span>
-              <span>Coffee • Events • Games</span>
-            </div>
-            <h1 class="stagger-in stagger-2" id="heroTitle">Üstəgəl Kafe</h1>
-            <p class="stagger-in stagger-3">Kofe, kino, intellektual oyunlar, canlı musiqi və karaoke — bir məkanda. Masanı indi rezerv et, növbəti tədbirə yerini ayır.</p>
-            <div class="hero-actions stagger-in stagger-4">
+            <div class="tag" id="tagline">Coffee • Events • Games</div>
+            <h1 id="heroTitle">Üstəgəl Kafe</h1>
+            <p>Kofe, kino, intellektual oyunlar, canlı musiqi və karaoke — bir məkanda. Masanı indi rezerv et, növbəti tədbirə yerini ayır.</p>
+            <div class="hero-actions">
               <button class="btn" id="heroMenu" data-go="menu">Menyuya bax</button>
               <button class="btn ghost" data-go="reserve">Masa rezerv et</button>
             </div>
-            <div class="hero-art-pills stagger-in stagger-5" aria-label="Atmosfer">
-              <span class="art-pill">☕ Specialty Kofe</span>
-              <span class="art-pill">🎬 Kino Gecələri</span>
-              <span class="art-pill">🧠 KvizArt Oyunları</span>
-              <span class="art-pill">🎵 Canlı Musiqi & Karaoke</span>
-            </div>
           </div>
         </div>
-
-        <svg class="hero-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0,24 C360,64 720,-8 1080,28 C1260,46 1380,36 1440,26 L1440,60 L0,60 Z" fill="var(--bg)"/>
-        </svg>
+        <div class="hero-wave" aria-hidden="true">
+          <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0 30 C120 0 240 0 360 30 S600 60 720 30 C840 0 960 0 1080 30 S1320 60 1440 30 L1440 60 L0 60 Z"/></svg>
+          <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="w2"><path d="M0 36 C120 8 240 8 360 36 S600 62 720 36 C840 8 960 8 1080 36 S1320 62 1440 36 L1440 60 L0 60 Z"/></svg>
+        </div>
       </div>
 
       <div class="wrap">
-        <div class="sec-h reveal-block" style="margin-top: 34px">
+        <div class="sec-h reveal" style="margin-top: 36px">
           <div>
             <h2>Yaxınlaşan tədbirlər</h2>
             <p>Həftənin ən maraqlı axşamları və xüsusi proqramlar.</p>
@@ -2300,13 +2307,13 @@
           <button class="btn ghost" style="color: var(--ink); border-color: var(--line)" data-go="events">Hamısına bax</button>
         </div>
 
-        <div class="grid reveal-block" id="homeEvents">
+        <div class="grid" id="homeEvents">
           <div class="sk"></div>
           <div class="sk"></div>
           <div class="sk"></div>
         </div>
 
-        <div class="vibe-strip reveal-block" aria-label="Kafe imkanları">
+        <div class="vibe-strip reveal-group" aria-label="Kafe imkanları">
           <div class="vibe-item">
             <span class="vibe-icon" aria-hidden="true">☕</span>
             <div>
@@ -2330,11 +2337,11 @@
           </div>
         </div>
 
-        <div class="info reveal-block" id="info"></div>
+        <div class="info reveal" id="info"></div>
       </div>
     </section>
 
-    <!-- 2. KREATİV MENYU SƏHİFƏSİ (MENU) — BANERSİZ, AXTARIŞ VƏ SLİDER KATEQORİYALARLA BAŞLAYIR -->
+    <!-- 2. KREATİV MENYU SƏHİFƏSİ (MENU) -->
     <section class="page" id="p-menu">
       <div class="wrap">
         <div class="menu-controls">
@@ -2345,14 +2352,14 @@
             </div>
             <div class="menu-stats" id="menuStats">100 məhsul</div>
           </div>
-
-          <div class="menu-cats-shell">
+          <div class="menu-cats-wrap at-start" id="menuCatsWrap">
             <div class="menu-cats" id="menuCats" role="tablist" aria-label="Menyu kateqoriyaları"></div>
-            <button type="button" class="menu-cat-scroll-btn" id="menuCatNext" aria-label="Digər kateqoriyalar üçün sağa sürüşdür" title="Digər kateqoriyalar →">›</button>
+            <button type="button" class="cats-arrow" id="catsNext" aria-label="Növbəti kateqoriyalar">›</button>
           </div>
         </div>
 
         <div id="menuCatalog"></div>
+
       </div>
     </section>
 
@@ -2428,20 +2435,6 @@
   </main>
 
   <!-- ========================================================================
-       EKRANIN ALT ORTASINDA ÜZƏN (FLOATING) SƏBƏT POP-UP
-       ======================================================================== -->
-  <button type="button" class="floating-cart-popup" id="floatingCartPopup" aria-label="Səbəti aç və sifarişi təsdiqlə">
-    <span class="fcp-left">
-      <span class="fcp-badge" id="fcpCount">0</span>
-      <span class="fcp-text">
-        <strong id="fcpTitle">Səbət · 0.00 ₼</strong>
-        <span id="fcpItems">Sifarişi tamamlamaq üçün klikləyin</span>
-      </span>
-    </span>
-    <span class="fcp-cta">Təsdiqlə →</span>
-  </button>
-
-  <!-- ========================================================================
        ALT MƏLUMAT ZOLAĞI (FOOTER)
        ======================================================================== -->
   <footer>
@@ -2452,7 +2445,7 @@
   </footer>
 
   <!-- ========================================================================
-       TƏDBİR / MƏHSUL / SİFARİŞ MODALI VƏ BİLDİRİŞ KONTEYNERİ
+       TƏDBİR QEYDİYYATI MODALI VƏ BİLDİRİŞ KONTEYNERİ
        ======================================================================== -->
   <div class="ov" id="ov">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
@@ -2461,39 +2454,56 @@
     </div>
   </div>
 
+  <div class="cart-fab" id="cartFab" role="region" aria-label="Sifariş səbəti" hidden>
+    <button type="button" class="cart-fab-main" id="cartFabMain" aria-label="Səbəti təsdiqlə">
+      <span class="cart-fab-ico" aria-hidden="true">🛒<b id="cartFabCount">0</b></span>
+      <span class="cart-fab-txt">
+        <strong id="cartFabTotal">0.00 ₼</strong>
+        <small id="cartFabSub">Səbəti təsdiqlə</small>
+      </span>
+      <span class="cart-fab-go" aria-hidden="true">Təsdiqlə →</span>
+    </button>
+    <button type="button" class="cart-fab-clear" id="cartFabClear" aria-label="Səbəti təmizlə">×</button>
+  </div>
+
   <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
 
   <script>
     /* ========================================================================
-       0. GOOGLE APPS SCRIPT API KONFİQURASİYASI VƏ SÜRƏTLİ KEŞLƏMƏ (SWR)
+       0. GOOGLE APPS SCRIPT API KONFİQURASİYASI (GITHUB PAGES BACKEND ƏLAQƏSİ)
        ======================================================================== */
-    const API_URL = 'https://script.google.com/macros/s/AKfycbziig0rBRdHKOE32h9BwUQ7aoEzVG8FNgF92KiWPOG2xLrgt0RIfd1a2kmbl50H2lL0/exec';
-    const CACHE_KEY = 'ustegel_app_data_v2';
-
-    /**
-     * Google Drive və Google Docs şəkil linklərini sürətli Google CDN (lh3) formatına çevirir
-     */
-    function optimizeImageUrl(url) {
-      const u = String(url || '').trim();
-      if (!u) return '';
-      const driveMatch = u.match(/(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=\w+&)?id=)|docs\.google\.com\/file\/d\/)([a-zA-Z0-9_-]{15,})/);
-      if (driveMatch && driveMatch[1]) {
-        return `https://lh3.googleusercontent.com/d/${driveMatch[1]}=w800`;
-      }
-      return u;
-    }
+    const API_URL = window.__API_URL;
+    const CACHE_KEY = 'ustegel:data:v2';
 
     async function apiGet(action = 'getAppData') {
-      const url = `${API_URL}?action=${encodeURIComponent(action)}`;
-      const res = await fetch(url, {
-        method: 'GET',
-        redirect: 'follow'
-      });
-      if (!res.ok) throw new Error('Server cavab vermədi');
-      return await res.json();
+      // Səhifə başlayanda artıq göndərilmiş sorğunu təkrar göndərmirik
+      if (action === 'getAppData' && window.__EARLY) {
+        const early = window.__EARLY;
+        window.__EARLY = null;
+        try { return await early; } catch (_) { /* aşağıda təkrar cəhd */ }
+      }
+      let lastErr;
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          const ctrl = new AbortController();
+          const timer = setTimeout(() => ctrl.abort(), 20000);
+          const res = await fetch(`${API_URL}?action=${encodeURIComponent(action)}`, {
+            method: 'GET',
+            redirect: 'follow',
+            signal: ctrl.signal
+          });
+          clearTimeout(timer);
+          if (!res.ok) throw new Error('Server cavab vermədi');
+          return await res.json();
+        } catch (err) {
+          lastErr = err;
+        }
+      }
+      throw lastErr;
     }
 
     async function apiPost(action, payload) {
+      // text/plain istifadə edirik ki, brauzer CORS preflight (OPTIONS) sorğusu göndərməsin
       const res = await fetch(API_URL, {
         method: 'POST',
         redirect: 'follow',
@@ -2524,6 +2534,7 @@
       'İyul', 'Avqust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr'
     ];
     const DOW = ['B.e.', 'Ç.a.', 'Çər.', 'C.a.', 'Cümə', 'Şən.', 'Baz.'];
+    const DEFAULT_ICON_LOGO = 'https://docs.google.com/drawings/d/e/2PACX-1vQbzxPda05zw-xlcupsexZXTdDejHMneiSYpebnPi4kDrTlAGoWDvzmG54n2X7AAZuNllQMYRsKgCjV/pub?w=693&h=690';
 
     const CATS = {
       sinema:       { label: 'Sinema',            emoji: '🎬', c1: '#3B2A4A', c2: '#8B5E34' },
@@ -2560,6 +2571,44 @@
       return d.getDate() + ' ' + MONTHS[d.getMonth()] + ', ' + DOW[(d.getDay() + 6) % 7];
     };
 
+    /* Google Drive / Docs şəkil linklərini sürətli CDN (lh3) linkinə çevirir və ölçüsünü məhdudlaşdırır */
+    const driveId = (u) => {
+      const m = String(u || '').match(/(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:[^#]*&)?id=|thumbnail\?(?:[^#]*&)?id=)|docs\.google\.com\/uc\?(?:[^#]*&)?id=|lh3\.googleusercontent\.com\/d\/)([\w-]{20,})/);
+      return m ? m[1] : null;
+    };
+    const imgUrl = (u, w = 800) => {
+      u = String(u || '').trim();
+      if (!u) return '';
+      const id = driveId(u);
+      if (id) return `https://lh3.googleusercontent.com/d/${id}=w${w}`;
+      return u;
+    };
+    const imgSrcset = (u) => {
+      const id = driveId(u);
+      return id
+        ? `srcset="https://lh3.googleusercontent.com/d/${id}=w480 480w, https://lh3.googleusercontent.com/d/${id}=w800 800w" sizes="(max-width: 640px) 100vw, 380px"`
+        : '';
+    };
+    const IMG_SETTING_KEYS = /(URL|FRAME|COVER_)/;
+    function normalizeSettings(st) {
+      const out = { ...st };
+      Object.keys(out).forEach((k) => {
+        if (!IMG_SETTING_KEYS.test(k) || !out[k]) return;
+        if (/LOGO/.test(k)) out[k] = imgUrl(out[k], 300);
+        else if (/FRAME/.test(k)) out[k] = imgUrl(out[k], 1000);
+        else if (/SPRITE/.test(k)) { const id = driveId(out[k]); if (id) out[k] = `https://lh3.googleusercontent.com/d/${id}`; }
+        else if (/COVER_/.test(k)) out[k] = imgUrl(out[k], 800);
+      });
+      return out;
+    }
+    function wireImgs(root) {
+      (root || document).querySelectorAll('img[data-lazyfade]').forEach((img) => {
+        const done = () => img.classList.add('ld');
+        if (img.complete && img.naturalWidth) done();
+        else img.addEventListener('load', done, { once: true });
+      });
+    }
+
     const money = (p) => (Number(p) > 0 ? p + ' ₼' : 'Pulsuz');
 
     const fallbackCover = (k) => {
@@ -2583,8 +2632,7 @@
       view: 'list',
       cat: 'all',
       month: new Date(),
-      sel: null,
-      initialized: false
+      sel: null
     };
     S.month.setDate(1);
 
@@ -2668,7 +2716,7 @@
           settings.WOMAN_FRAME_3,
           settings.WOMAN_FRAME_4,
           settings.WOMAN_FRAME_5
-        ].map(optimizeImageUrl).filter(Boolean);
+        ].filter(Boolean);
 
         if (frames.length === 5) {
           state.mode = 'frames';
@@ -2679,19 +2727,18 @@
           return;
         }
 
-        const spriteOpt = optimizeImageUrl(settings.WOMAN_SPRITE_URL);
-        if (spriteOpt && spriteOpt !== state.spriteUrl) {
+        if (settings.WOMAN_SPRITE_URL) {
           const probe = new Image();
           probe.onload = () => {
             state.mode = 'sprite';
-            state.spriteUrl = spriteOpt;
+            state.spriteUrl = settings.WOMAN_SPRITE_URL;
             spriteEl.classList.remove('single-mode');
             spriteEl.classList.add('active');
-            spriteEl.style.backgroundImage = `url("${spriteOpt}")`;
+            spriteEl.style.backgroundImage = `url("${settings.WOMAN_SPRITE_URL}")`;
             if (sceneSvgEl) sceneSvgEl.style.display = 'none';
             renderProgress(state.smoothProgress, true);
           };
-          probe.src = spriteOpt;
+          probe.src = settings.WOMAN_SPRITE_URL;
         }
       }
 
@@ -2796,75 +2843,64 @@
     })();
 
     /* ========================================================================
-       3. SERVERDƏN MƏLUMATLARIN ANINDA YÜKLƏNMƏSİ (LOCALSTORAGE SWR + GOOGLE SHEETS)
+       3. SERVERDƏN MƏLUMATLARIN YÜKLƏNMƏSİ (GOOGLE SHEETS API)
        ======================================================================== */
-    function readCachedData() {
-      try {
-        const raw = localStorage.getItem(CACHE_KEY);
-        if (!raw) return null;
-        const parsed = JSON.parse(raw);
-        if (parsed && parsed.ok !== false && parsed.events) return parsed;
-      } catch (_) {}
-      return null;
-    }
-
-    function writeCachedData(data) {
-      try {
-        localStorage.setItem(CACHE_KEY, JSON.stringify(data));
-      } catch (_) {}
-    }
-
     function loadInitialData() {
-      // 1. Keşdə data varsa dərhal (0ms) göstər
-      const cached = readCachedData();
-      if (cached) {
-        init(cached);
+      const cached = window.__CACHED;
+      let painted = false;
+      // 1) Əvvəlki ziyarətin datası varsa dərhal göstər (gözləmə yoxdur)
+      if (cached && cached.ok !== false && cached.settings && Array.isArray(cached.events)) {
+        try { init(cached); painted = true; } catch (_) { painted = false; }
       }
-
-      // 2. Arxa planda ən yeni datanı gətir
+      // 2) Arxa planda təzə datanı al, fərq varsa yenilə
       apiGet('getAppData')
         .then((d) => {
           if (!d || d.ok === false) throw new Error((d && d.error) || 'Məlumat oxunmadı');
-          writeCachedData(d);
+          try { localStorage.setItem(CACHE_KEY, JSON.stringify(d)); } catch (_) {}
+          if (painted && JSON.stringify(d) === JSON.stringify(cached)) return;
           init(d);
         })
         .catch(() => {
-          if (!S.data) {
-            ['#homeEvents', '#evList'].forEach((sel) => {
-              $(sel).innerHTML = '<div class="empty">Məlumatlar yüklənmədi. Səhifəni yeniləyin.</div>';
-            });
-          }
+          if (painted) return;
+          ['#homeEvents', '#evList'].forEach((sel) => {
+            $(sel).innerHTML = '<div class="empty">Məlumatlar yüklənmədi. Səhifəni yeniləyin.</div>';
+          });
         });
     }
 
+    loadInitialData();
+
     function init(d) {
+      const today = ymd(new Date());
+      d = { ...d, settings: normalizeSettings(d.settings || {}), events: (d.events || []).filter((e) => e.date >= today).map((e) => ({ ...e, cover: imgUrl(e.cover, 800) })) };
       S.data = d;
       const s = d.settings || {};
 
       $('#heroTitle').textContent = s.CAFE_NAME || 'Üstəgəl Kafe';
-      const tagEl = $('#tagline');
-      if (tagEl) {
-        tagEl.innerHTML = `<span class="tag-dot" aria-hidden="true"></span><span>${esc(s.TAGLINE || 'Coffee • Events • Games')}</span>`;
-      }
+      $('#tagline').textContent = s.TAGLINE || 'Coffee • Events • Games';
       $('#footCopy').textContent = `© ${new Date().getFullYear()} ${s.CAFE_NAME || 'Üstəgəl Kafe'} — ${s.TAGLINE || 'Coffee • Events • Games'}`;
 
       const cafeTitle = s.CAFE_NAME || 'Üstəgəl Kafe';
-      const fullLogo = optimizeImageUrl(s.LOGO_URL);
-      const iconLogo = optimizeImageUrl(s.ICON_LOGO_URL);
-
-      if (fullLogo) {
+      const iconLogo = s.ICON_LOGO_URL || DEFAULT_ICON_LOGO;
+      if (!s.LOGO_URL && (!s.ICON_LOGO_URL || s.ICON_LOGO_URL === DEFAULT_ICON_LOGO)) {
+        const lt = $('#logoTxt');
+        if (lt) lt.textContent = s.CAFE_NAME || 'Üstəgəl';
+      } else if (s.LOGO_URL) {
         $('#logo').innerHTML =
-          `<img class="logo-full" decoding="async" alt="${esc(cafeTitle)}" src="${esc(fullLogo)}" onerror="this.style.display='none';">` +
-          (iconLogo
-            ? `<img class="logo-icon" decoding="async" alt="${esc(cafeTitle)}" src="${esc(iconLogo)}">`
-            : `<span class="logo-mark" aria-hidden="true">+</span>`);
-      } else if (iconLogo) {
+          `<img class="logo-full" alt="${esc(cafeTitle)}" src="${esc(s.LOGO_URL)}">` +
+          `<img class="logo-icon" alt="${esc(cafeTitle)}" src="${esc(iconLogo)}">`;
+      } else {
         $('#logo').innerHTML =
-          `<img class="logo-icon logo-icon-desktop" decoding="async" alt="${esc(cafeTitle)}" src="${esc(iconLogo)}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">` +
+          `<img class="logo-icon logo-icon-desktop" alt="${esc(cafeTitle)}" src="${esc(iconLogo)}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">` +
           `<span class="logo-mark" style="display:none" aria-hidden="true">+</span>` +
           `<span class="logo-text" id="logoTxt">${esc(s.CAFE_NAME || 'Üstəgəl')}</span>`;
       }
 
+      const menu = s.MENU_URL || 'http://ustegel.github.io/menu';
+      const navMenuEl = $('#navMenu');
+      const heroMenuEl = $('#heroMenu');
+      if (navMenuEl && navMenuEl.tagName === 'A') navMenuEl.href = menu;
+      if (heroMenuEl && heroMenuEl.tagName === 'A') heroMenuEl.href = menu;
       $('#phone2').textContent = s.PHONE || '';
 
       CoffeeCompanion.configureFromSettings(s);
@@ -2887,42 +2923,31 @@
       buildChips();
       renderHome();
       renderEvents();
-      if (!S.initialized) {
+      if (!S.booted) {
+        S.booted = true;
         initReserveForm();
-        S.initialized = true;
+        CreativeMenu.init();
       }
+      preloadCompanionFrames(s);
+    }
+
+    function preloadCompanionFrames(s) {
+      const urls = [s.WOMAN_FRAME_1, s.WOMAN_FRAME_2, s.WOMAN_FRAME_3, s.WOMAN_FRAME_4, s.WOMAN_FRAME_5].filter(Boolean);
+      const run = () => urls.forEach((u) => { const i = new Image(); i.decoding = 'async'; i.src = u; });
+      if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 2500 }); else setTimeout(run, 800);
     }
 
     /* ========================================================================
-       4. DAXİLİ NAVİQASİYA (SPA ROUTING) VƏ SCROLL REVEAL ANİMASİYASI
+       4. DAXİLİ NAVİQASİYA (SPA ROUTING) VƏ KLİK HADİSƏLƏRİ
        ======================================================================== */
-    function initScrollReveal() {
-      const blocks = $$('.reveal-block');
-      if (!('IntersectionObserver' in window)) {
-        blocks.forEach((el) => el.classList.add('is-visible'));
-        return;
-      }
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08 });
-
-      blocks.forEach((el) => io.observe(el));
-    }
-
     function go(id) {
       S.page = id;
       $$('section.page').forEach((p) => p.classList.toggle('on', p.id === 'p-' + id));
       $$('nav button').forEach((b) => b.classList.toggle('on', b.dataset.go === id));
       window.scrollTo({ top: 0, behavior: 'smooth' });
       CoffeeCompanion.onPageChange(id);
-      if (id === 'menu') {
-        CreativeMenu.updateSliderHint();
-      }
+      CreativeMenu.syncTray();
+      if (id === 'menu') setTimeout(CreativeMenu.hintCats, 450);
     }
 
     document.addEventListener('click', (e) => {
@@ -2956,19 +2981,18 @@
        ======================================================================== */
     const visible = () => (S.data ? S.data.events : []).filter((e) => S.cat === 'all' || catKey(e.category) === S.cat);
 
-    function card(e) {
+    function card(e, i = 0, eager = false) {
       const k = catKey(e.category);
       const fb = fallbackCover(k);
-      const rawCover = e.cover || (S.data.settings && S.data.settings['COVER_' + k]) || '';
-      const cover = optimizeImageUrl(rawCover) || fb;
+      const cover = e.cover || (S.data.settings && S.data.settings['COVER_' + k]) || fb;
       const full = e.seatsLeft === 0;
       const seatsLabel = e.seatsLeft !== null && e.seatsLeft !== undefined
         ? ' · ' + (full ? 'yer yoxdur' : e.seatsLeft + ' yer qalıb')
         : '';
 
-      return `<article class="card">
+      return `<article class="card" style="--i:${Math.min(i, 8)}">
         <div class="cover">
-          <img loading="lazy" decoding="async" alt="" src="${esc(cover)}" data-fb="${esc(fb)}" onerror="this.onerror=null;this.src=this.dataset.fb">
+          <img data-lazyfade ${eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async" width="640" height="360" alt="" src="${esc(cover)}" ${imgSrcset(cover)} data-fb="${esc(fb)}" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.fb">
           <span class="badge">${esc(e.category || CATS[k].label)}</span>
         </div>
         <div class="body">
@@ -2986,8 +3010,9 @@
     function renderHome() {
       const list = (S.data ? S.data.events : []).slice(0, 3);
       $('#homeEvents').innerHTML = list.length
-        ? list.map(card).join('')
+        ? list.map((e, i) => card(e, i, true)).join('')
         : '<div class="empty">Yaxın günlərdə tədbir yoxdur. Tezliklə yenilənəcək.</div>';
+      wireImgs($('#homeEvents'));
     }
 
     function buildChips() {
@@ -3007,6 +3032,7 @@
       const ev = visible();
       let last = '';
       let html = '';
+      let idxCounter = 0;
 
       ev.forEach((e) => {
         if (e.date !== last) {
@@ -3014,12 +3040,13 @@
           html += (html ? '</div>' : '') +
             `<h3 class="day-h">${e.date === S.data.today ? 'Bu gün · ' : ''}${fmtD(e.date)}</h3><div class="grid">`;
         }
-        html += card(e);
+        html += card(e, idxCounter++, false);
       });
 
       $('#evList').innerHTML = ev.length
         ? html + '</div>'
         : '<div class="empty">Bu kateqoriyada tədbir tapılmadı.</div>';
+      wireImgs($('#evList'));
     }
 
     function renderCal() {
@@ -3189,7 +3216,6 @@
       apiGet('getAppData')
         .then((d) => {
           if (d && d.ok !== false) {
-            writeCachedData(d);
             S.data = d;
             renderHome();
             renderEvents();
@@ -3202,7 +3228,7 @@
        7. MASA REZERVASİYASI FORMASI VƏ SAAT SLOTLARI
        ======================================================================== */
     function initReserveForm() {
-      const s = (S.data && S.data.settings) || {};
+      const s = S.data.settings || {};
       const today = new Date();
       const max = new Date();
       max.setDate(max.getDate() + (+s.RESERVATION_DAYS_AHEAD || 30));
@@ -3221,7 +3247,7 @@
     }
 
     function fillSlots() {
-      const s = (S.data && S.data.settings) || {};
+      const s = S.data.settings || {};
       const step = +s.SLOT_MINUTES || 60;
       const open = (+s.OPEN_HOUR || 10) * 60;
       const close = (+s.CLOSE_HOUR || 23) * 60;
@@ -3294,21 +3320,153 @@
     }
 
     /* ========================================================================
-       8. KREATİV MENYU KATALOQU, SLİDER KATEQORİYALAR VƏ ÜZƏN SƏBƏT POP-UP
+       8. KREATİV MENYU KATALOQU, KATEQORİYA ANİMASİYALARI VƏ SVG İLLÜSTRASİYALAR
        ======================================================================== */
     const MENU_CATEGORIES = [
-      { id: 'all', label: 'Hamısı', emoji: '✨', accent: '#4A2A17', bg1: '#F7ECDD', bg2: '#EAD7BE' },
-      { id: 'sirniyyat', label: 'Şirniyyat & Desert', emoji: '🍰', accent: '#8B4513', bg1: '#FDF1E3', bg2: '#F3DEC3' },
-      { id: 'isti-kofe', label: 'İsti Kofelər', emoji: '☕', accent: '#5C3317', bg1: '#F6E8D7', bg2: '#E5CFAF' },
-      { id: 'soyuq-kofe', label: 'Soyuq Kofelər', emoji: '🧊', accent: '#1E5B7A', bg1: '#E5F3FA', bg2: '#CCE5F3' },
-      { id: 'milkshake', label: 'Milkshake', emoji: '🥤', accent: '#A83866', bg1: '#FCE9F1', bg2: '#F5D0E0' },
-      { id: 'kokteyl', label: 'Kokteyllər', emoji: '🍹', accent: '#C44D27', bg1: '#FDECE3', bg2: '#F8D4C2' },
-      { id: 'alko-kokteyl', label: 'Alko-kokteyl', emoji: '🍸', accent: '#6E295C', bg1: '#F6E6F2', bg2: '#E8CBE0' },
-      { id: 'moxito', label: 'Moxito', emoji: '🍃', accent: '#1E6B49', bg1: '#E4F7EE', bg2: '#C7EAD9' },
-      { id: 'serin-ickiler', label: 'Sərin İçəcəklər & Enerji', emoji: '⚡', accent: '#1E5B87', bg1: '#E6F2FB', bg2: '#CEE3F5' },
-      { id: 'cay-murebbe', label: 'Çaylar & Mürəbbələr', emoji: '🫖', accent: '#8A2828', bg1: '#FBE8E8', bg2: '#F2CECE' },
-      { id: 'atisdirmaliq', label: 'Atışdırmalıqlar', emoji: '🍿', accent: '#9A6316', bg1: '#FCF2DF', bg2: '#F4E1BE' },
-      { id: 'kvizart', label: 'KvizArt Menu', emoji: '🧠', accent: '#3F3282', bg1: '#ECEAFE', bg2: '#D8D4FC' }
+      {
+        id: 'all',
+        label: 'Hamısı',
+        emoji: '✨',
+        c1: '#4A2A17',
+        c2: '#241207',
+        accent: '#4A2A17',
+        bg1: '#F7ECDD',
+        bg2: '#EAD7BE',
+        anim: 'steam',
+        desc: 'Üstəgəl Kafe-nin bütün isti və soyuq kofeləri, imza desertləri, moxitoları və KvizArt setləri.'
+      },
+      {
+        id: 'sirniyyat',
+        label: 'Şirniyyat & Desert',
+        emoji: '🍰',
+        c1: '#7C3F1D',
+        c2: '#3D1C0B',
+        accent: '#8B4513',
+        bg1: '#FDF1E3',
+        bg2: '#F3DEC3',
+        anim: 'sparkle',
+        desc: 'Sobadan yeni çıxmış San Sebastián, südlü Trileçe, Grolet və ev üsulu tort dilimləri.'
+      },
+      {
+        id: 'isti-kofe',
+        label: 'İsti Kofelər',
+        emoji: '☕',
+        c1: '#4E2A15',
+        c2: '#231107',
+        accent: '#5C3317',
+        bg1: '#F6E8D7',
+        bg2: '#E5CFAF',
+        anim: 'steam',
+        desc: 'Təzə qovrulmuş 100% Arabica dənələrindən məxməri köpüklü klassik və imza isti kofelər.'
+      },
+      {
+        id: 'soyuq-kofe',
+        label: 'Soyuq Kofelər',
+        emoji: '🧊',
+        c1: '#1E4E68',
+        c2: '#132A3A',
+        accent: '#1E5B7A',
+        bg1: '#E5F3FA',
+        bg2: '#CCE5F3',
+        anim: 'ice',
+        desc: 'Buz kimi təravətləndirici Blue Ocean, Lavender, Strawberry Cloud və klassik soyuq espresso içkiləri.'
+      },
+      {
+        id: 'milkshake',
+        label: 'Milkshake',
+        emoji: '🥤',
+        c1: '#9E3A63',
+        c2: '#4A1830',
+        accent: '#A83866',
+        bg1: '#FCE9F1',
+        bg2: '#F5D0E0',
+        anim: 'bubbles',
+        desc: 'Təbii meyvə püreləri, dondurma və qaymaqlı krema ilə hazırlanan qatı milkshakelər.'
+      },
+      {
+        id: 'kokteyl',
+        label: 'Kokteyllər',
+        emoji: '🍹',
+        c1: '#B84A27',
+        c2: '#4B1D0E',
+        accent: '#C44D27',
+        bg1: '#FDECE3',
+        bg2: '#F8D4C2',
+        anim: 'bubbles',
+        desc: 'Tropik meyvə notları ilə zəngin alkoqolsuz müəllif kokteylləri və soyuq çay qarışıqları.'
+      },
+      {
+        id: 'alko-kokteyl',
+        label: 'Alko-kokteyl',
+        emoji: '🍸',
+        c1: '#59234B',
+        c2: '#240D1F',
+        accent: '#6E295C',
+        bg1: '#F6E6F2',
+        bg2: '#E8CBE0',
+        anim: 'sparkle',
+        desc: 'Axşam əhval-ruhiyyəsi üçün xüsusi reseptlə hazırlanan klassik və imza kokteyllər.'
+      },
+      {
+        id: 'moxito',
+        label: 'Moxito',
+        emoji: '🍃',
+        c1: '#1D6344',
+        c2: '#0E3524',
+        accent: '#1E6B49',
+        bg1: '#E4F7EE',
+        bg2: '#C7EAD9',
+        anim: 'bubbles',
+        desc: 'Təzə nanə yarpaqları, laym dilimləri və meyvə çeşidləri ilə köpüklü sərinlik.'
+      },
+      {
+        id: 'serin-ickiler',
+        label: 'Sərin İçəcəklər & Enerji',
+        emoji: '⚡',
+        c1: '#1B527A',
+        c2: '#0E293D',
+        accent: '#1E5B87',
+        bg1: '#E6F2FB',
+        bg2: '#CEE3F5',
+        anim: 'ice',
+        desc: 'Soyudulmuş qazlı içkilər, meyvə şirələri, yerli mineral sular və enerji içkiləri.'
+      },
+      {
+        id: 'cay-murebbe',
+        label: 'Çaylar & Mürəbbələr',
+        emoji: '🫖',
+        c1: '#7E2424',
+        c2: '#3B1010',
+        accent: '#8A2828',
+        bg1: '#FBE8E8',
+        bg2: '#F2CECE',
+        anim: 'steam',
+        desc: 'Ətirli dəmləmə çay və ev üsulu çiyələk, ağ gilas mürəbbələri ilə səmimi söhbətlər.'
+      },
+      {
+        id: 'atisdirmaliq',
+        label: 'Atışdırmalıqlar',
+        emoji: '🍿',
+        c1: '#8F5B14',
+        c2: '#422806',
+        accent: '#9A6316',
+        bg1: '#FCF2DF',
+        bg2: '#F4E1BE',
+        anim: 'sparkle',
+        desc: 'Kino və oyun axşamlarının ayrılmaz yoldaşı — isti popkorn, saçaq pendir, çips və çərəzlər.'
+      },
+      {
+        id: 'kvizart',
+        label: 'KvizArt Menu',
+        emoji: '🧠',
+        c1: '#352A6E',
+        c2: '#191338',
+        accent: '#3F3282',
+        bg1: '#ECEAFE',
+        bg2: '#D8D4FC',
+        anim: 'sparkle',
+        desc: '4 nəfərlik komandalar və intellektual oyun iştirakçıları üçün sərfəli çay + desert setləri.'
+      }
     ];
 
     const MENU_ITEMS = [
@@ -3463,45 +3621,45 @@
       function detectFlavorPalette(item) {
         const n = item.name.toLowerCase();
         if (n.includes('blue') || n.includes('ocean')) {
-          return { main: '#1E88E5', light: '#90CAF9', foam: '#E3F2FD' };
+          return { main: '#1E88E5', light: '#90CAF9', foam: '#E3F2FD', garnish: '🌊' };
         }
         if (n.includes('lavender')) {
-          return { main: '#8E6CEF', light: '#D1C4E9', foam: '#F3E5F5' };
+          return { main: '#8E6CEF', light: '#D1C4E9', foam: '#F3E5F5', garnish: '🪻' };
         }
         if (n.includes('strawberry') || n.includes('çiyələk') || n.includes('barbie')) {
-          return { main: '#E53965', light: '#F8BBD0', foam: '#FFF0F5' };
+          return { main: '#E53965', light: '#F8BBD0', foam: '#FFF0F5', garnish: '🍓' };
         }
         if (n.includes('raspberry') || n.includes('moruq')) {
-          return { main: '#C2185B', light: '#F48FB1', foam: '#FCE4EC' };
+          return { main: '#C2185B', light: '#F48FB1', foam: '#FCE4EC', garnish: '🫐' };
         }
         if (n.includes('blueberry')) {
-          return { main: '#3949AB', light: '#9FA8DA', foam: '#E8EAF6' };
+          return { main: '#3949AB', light: '#9FA8DA', foam: '#E8EAF6', garnish: '🫐' };
         }
         if (n.includes('watermelon') || n.includes('qarpız')) {
-          return { main: '#E53935', light: '#FFCDD2', foam: '#E8F5E9' };
+          return { main: '#E53935', light: '#FFCDD2', foam: '#E8F5E9', garnish: '🍉' };
         }
         if (n.includes('mango') || n.includes('ananas') || n.includes('exotic') || n.includes('sunrise') || n.includes('fanta') || n.includes('pumpkin')) {
-          return { main: '#FB8C00', light: '#FFE082', foam: '#FFF8E1' };
+          return { main: '#FB8C00', light: '#FFE082', foam: '#FFF8E1', garnish: '🥭' };
         }
         if (n.includes('banan')) {
-          return { main: '#FBC02D', light: '#FFF59D', foam: '#FFFDE7' };
+          return { main: '#FBC02D', light: '#FFF59D', foam: '#FFFDE7', garnish: '🍌' };
         }
         if (n.includes('matcha') || n.includes('alma')) {
-          return { main: '#43A047', light: '#A5D6A7', foam: '#E8F5E9' };
+          return { main: '#43A047', light: '#A5D6A7', foam: '#E8F5E9', garnish: '🍵' };
         }
         if (n.includes('white chocolate') || n.includes('vanil') || n.includes('sahlep') || n.includes('raff')) {
-          return { main: '#D7B899', light: '#F5E6D3', foam: '#FFFFFF' };
+          return { main: '#D7B899', light: '#F5E6D3', foam: '#FFFFFF', garnish: '🤍' };
         }
         if (n.includes('caramel') || n.includes('miel') || n.includes('ballı') || n.includes('trileçe') || n.includes('san sebastián')) {
-          return { main: '#B86B28', light: '#E6B57E', foam: '#FFF6E9' };
+          return { main: '#B86B28', light: '#E6B57E', foam: '#FFF6E9', garnish: '🍯' };
         }
         if (n.includes('velvet') || n.includes('gilas') || n.includes('fire')) {
-          return { main: '#9E1C28', light: '#E57373', foam: '#FFEBEE' };
+          return { main: '#9E1C28', light: '#E57373', foam: '#FFEBEE', garnish: '🍒' };
         }
         if (n.includes('chocolate') || n.includes('mocha') || n.includes('şokolad') || n.includes('fındıq')) {
-          return { main: '#4E2A15', light: '#8D5B3C', foam: '#F3E5D8' };
+          return { main: '#4E2A15', light: '#8D5B3C', foam: '#F3E5D8', garnish: '🍫' };
         }
-        return { main: '#6F4226', light: '#C49A6C', foam: '#FBF5EE' };
+        return { main: '#6F4226', light: '#C49A6C', foam: '#FBF5EE', garnish: '☕' };
       }
 
       function buildMenuItemSvg(item) {
@@ -3653,14 +3811,33 @@
         </svg>`;
       }
 
-      function updateSliderHint() {
-        const catsEl = $('#menuCats');
-        const nextBtn = $('#menuCatNext');
-        if (!catsEl || !nextBtn) return;
-        const remaining = catsEl.scrollWidth - catsEl.clientWidth - catsEl.scrollLeft;
-        const atEnd = remaining <= 12;
-        catsEl.classList.toggle('at-end', atEnd);
-        nextBtn.classList.toggle('hidden', atEnd);
+      function renderStage(catObj) {
+        const stage = $('#menuStage');
+        const particles = $('#menuParticles');
+        if (!stage || !particles) return;
+
+        stage.style.setProperty('--m-c1', catObj.c1);
+        stage.style.setProperty('--m-c2', catObj.c2);
+        stage.className = `menu-stage anim-${catObj.anim}`;
+
+        $('#menuStageBadge').textContent = `${catObj.emoji} ${catObj.label}`;
+        $('#menuStageTitle').textContent = catObj.id === 'all' ? 'Bütün Dadlar Bir Yerdə' : catObj.label;
+        $('#menuStageDesc').textContent = catObj.desc;
+
+        let dots = '';
+        for (let i = 0; i < 9; i++) {
+          const left = 6 + i * 10.5;
+          const top = 16 + ((i * 19) % 68);
+          const delay = (i * 0.42).toFixed(2);
+          dots += `<i style="left:${left}%;top:${catObj.anim === 'sparkle' ? top + '%' : 'auto'};animation-delay:${delay}s"></i>`;
+        }
+        particles.innerHTML = dots;
+
+        const artBox = $('#menuStageArt');
+        artBox.style.animation = 'none';
+        void artBox.offsetWidth;
+        artBox.style.animation = '';
+        artBox.innerHTML = `<span style="font-size:54px;line-height:1;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.28))">${catObj.emoji}</span>`;
       }
 
       function renderCategories() {
@@ -3677,8 +3854,6 @@
             <span class="cnt">${count}</span>
           </button>`;
         }).join('');
-
-        requestAnimationFrame(updateSliderHint);
       }
 
       function renderCatalog() {
@@ -3723,7 +3898,7 @@
               </div>
               <div class="menu-grid">
                 ${items.map((item) => {
-                  const delay = Math.min(cardIndex * 20, 320);
+                  const delay = Math.min(cardIndex * 28, 420);
                   cardIndex++;
                   const entry = getTrayEntry(item.name);
                   const actionHtml = entry
@@ -3759,21 +3934,67 @@
         box.innerHTML = html;
       }
 
-      function renderFloatingCart() {
-        const popup = $('#floatingCartPopup');
-        if (!popup) return;
-
+      let lastCount = 0;
+      function renderTray() {
+        const fab = $('#cartFab');
+        if (!fab) return;
         const count = getTrayCount();
-        if (!count) {
-          popup.classList.remove('show');
-          return;
-        }
+        const show = count > 0 && S.page === 'menu';
+        fab.hidden = !show;
+        if (!count) { lastCount = 0; return; }
 
-        const total = getTrayTotal();
-        $('#fcpCount').textContent = String(count);
-        $('#fcpTitle').textContent = `Səbət (${count} məhsul) · ${total.toFixed(2)} ₼`;
-        $('#fcpItems').textContent = formatOrderLines().join(' · ');
-        popup.classList.add('show');
+        $('#cartFabCount').textContent = count;
+        $('#cartFabTotal').textContent = `${getTrayTotal().toFixed(2)} ₼`;
+        $('#cartFabSub').textContent = mState.tray.map((e) => `${e.qty}× ${e.name}`).join(', ');
+        if (show && count !== lastCount) {
+          fab.classList.remove('bump');
+          void fab.offsetWidth;
+          fab.classList.add('bump');
+        }
+        lastCount = count;
+      }
+
+      function setQty(name, qty) {
+        const item = MENU_ITEMS.find((i) => i.name === name);
+        if (!item) return;
+        qty = Math.max(0, Math.min(50, Math.floor(qty)));
+        const idx = mState.tray.findIndex((e) => e.name === name);
+        if (qty === 0) {
+          if (idx !== -1) mState.tray.splice(idx, 1);
+        } else if (idx === -1) {
+          mState.tray.push({ name: item.name, price: item.price, qty });
+        } else {
+          mState.tray[idx].qty = qty;
+        }
+        renderCatalog();
+        renderTray();
+      }
+
+      /* Kateqoriya slider: kənar kölgələri, ox və ilk dəfə "sürüşdür" işarəsi */
+      let hinted = false;
+      function updateCatsEdges() {
+        const w = $('#menuCatsWrap');
+        const c = $('#menuCats');
+        if (!w || !c) return;
+        const max = c.scrollWidth - c.clientWidth;
+        w.classList.toggle('at-start', c.scrollLeft <= 4);
+        w.classList.toggle('at-end', max <= 4 || c.scrollLeft >= max - 4);
+      }
+
+      function hintCats() {
+        const c = $('#menuCats');
+        if (!c) return;
+        updateCatsEdges();
+        if (hinted || c.scrollWidth - c.clientWidth < 24) return;
+        hinted = true;
+        c.scrollTo({ left: 96, behavior: 'smooth' });
+        setTimeout(() => c.scrollTo({ left: 0, behavior: 'smooth' }), 950);
+      }
+
+      function updateActiveCat() {
+        $$('.m-cat-btn').forEach((b) => b.classList.toggle('on', b.dataset.mcat === mState.cat));
+        const on = $('.m-cat-btn.on');
+        if (on) on.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
 
       function addItem(name, silent = false) {
@@ -3785,24 +4006,9 @@
         } else {
           mState.tray.push({ name: item.name, price: item.price, qty: 1 });
         }
-        if (!silent) showToast(`Səbətə əlavə edildi: ${item.name}`);
+        if (!silent) showToast(`Sifarişə əlavə edildi: ${item.name}`);
         renderCatalog();
-        renderFloatingCart();
-      }
-
-      function setItemQty(name, newQty) {
-        const item = MENU_ITEMS.find((i) => i.name === name);
-        if (!item) return;
-        const idx = mState.tray.findIndex((entry) => entry.name === name);
-        if (newQty <= 0) {
-          if (idx !== -1) mState.tray.splice(idx, 1);
-        } else if (idx !== -1) {
-          mState.tray[idx].qty = newQty;
-        } else {
-          mState.tray.push({ name: item.name, price: item.price, qty: newQty });
-        }
-        renderCatalog();
-        renderFloatingCart();
+        renderTray();
       }
 
       function changeItemQty(name, delta) {
@@ -3813,72 +4019,62 @@
           mState.tray.splice(idx, 1);
         }
         renderCatalog();
-        renderFloatingCart();
+        renderTray();
       }
 
       function openItemModal(name) {
         const item = MENU_ITEMS.find((i) => i.name === name);
         if (!item) return;
         const g = catMap[item.cat] || MENU_CATEGORIES[0];
-        const existing = getTrayEntry(item.name);
-        let modalQty = existing ? existing.qty : 1;
+        const entry = getTrayEntry(item.name);
+        const inTray = Boolean(entry);
+        const min = inTray ? 0 : 1;
+        let pq = inTray ? entry.qty : 1;
 
         $('#mBody').innerHTML = `
           <div style="text-align:center">
-            <div style="width:144px;height:144px;margin:0 auto 14px;border-radius:26px;display:grid;place-items:center;background:radial-gradient(circle,${g.bg1},${g.bg2})">
-              <div style="width:118px;height:118px">${buildMenuItemSvg(item)}</div>
+            <div style="width:150px;height:150px;margin:0 auto 14px;border-radius:26px;display:grid;place-items:center;background:radial-gradient(circle,${g.bg1},${g.bg2})">
+              <div style="width:124px;height:124px">${buildMenuItemSvg(item)}</div>
             </div>
             <span style="display:inline-block;padding:4px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12.5px;font-weight:700;margin-bottom:8px">
               ${g.emoji} ${esc(g.label)}
             </span>
             <h3 id="mTitle" style="margin-bottom:6px">${esc(item.name)}</h3>
             <p style="color:var(--muted);margin-bottom:12px">${esc(item.note)}</p>
-            <div style="font:800 24px 'Fraunces',serif;color:var(--brand);margin-bottom:14px">
-              <span id="mModalTotalPrice">${(item.price * modalQty).toFixed(2)} ₼</span>
+            <div style="font:800 24px 'Fraunces',serif;color:var(--brand);margin-bottom:14px">${item.price.toFixed(2)} ₼</div>
+            <div class="pq" role="group" aria-label="Say">
+              <button type="button" id="pqDec" aria-label="Azalt">−</button>
+              <output id="pqVal" aria-live="polite">${pq}</output>
+              <button type="button" id="pqInc" aria-label="Artır">+</button>
             </div>
-
-            <div class="modal-qty-stepper" aria-label="Məhsul sayı">
-              <button type="button" id="mModalQtyDec" aria-label="Sayı azalt">−</button>
-              <span class="qty-val" id="mModalQtyVal">${modalQty}</span>
-              <button type="button" id="mModalQtyInc" aria-label="Sayı artır">+</button>
-            </div>
-
             <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-              <button type="button" class="btn" id="mModalAddOrder">Səbətə əlavə et (${modalQty})</button>
+              <button type="button" class="btn" id="mModalAddOrder"></button>
               <button type="button" class="btn ghost" id="mModalCheckout">Sifarişi tamamla</button>
             </div>
           </div>
         `;
         openModal();
 
-        const syncModalQtyUi = () => {
-          $('#mModalQtyVal').textContent = String(modalQty);
-          $('#mModalTotalPrice').textContent = `${(item.price * modalQty).toFixed(2)} ₼`;
-          $('#mModalAddOrder').textContent = `Səbətə əlavə et (${modalQty})`;
+        const sync = () => {
+          $('#pqVal').textContent = pq;
+          $('#pqDec').disabled = pq <= min;
+          $('#pqInc').disabled = pq >= 50;
+          const sum = (item.price * pq).toFixed(2);
+          $('#mModalAddOrder').textContent = pq === 0
+            ? 'Səbətdən çıxar'
+            : (inTray ? `Yenilə · ${pq} × = ${sum} ₼` : `+ Sifarişə əlavə et · ${sum} ₼`);
         };
+        sync();
 
-        $('#mModalQtyDec').onclick = () => {
-          if (modalQty > 1) {
-            modalQty -= 1;
-            syncModalQtyUi();
-          }
-        };
-
-        $('#mModalQtyInc').onclick = () => {
-          if (modalQty < 50) {
-            modalQty += 1;
-            syncModalQtyUi();
-          }
-        };
-
+        $('#pqDec').onclick = () => { if (pq > min) { pq--; sync(); } };
+        $('#pqInc').onclick = () => { if (pq < 50) { pq++; sync(); } };
         $('#mModalAddOrder').onclick = () => {
-          setItemQty(item.name, modalQty);
-          showToast(`Səbət yeniləndi: ${item.name} × ${modalQty}`);
+          setQty(item.name, pq);
+          showToast(pq === 0 ? `Səbətdən çıxarıldı: ${item.name}` : `Səbətdə: ${pq} × ${item.name}`);
           closeModal();
         };
-
         $('#mModalCheckout').onclick = () => {
-          setItemQty(item.name, modalQty);
+          if (pq > 0) setQty(item.name, pq);
           openOrderModal();
         };
       }
@@ -3995,7 +4191,7 @@
             }
             mState.tray = [];
             renderCatalog();
-            renderFloatingCart();
+            renderTray();
             showOrderDone(r.id, teamOrTable, customerName, linesSnapshot, r.total || totalSnapshot, r.createdAt);
           })
           .catch(() => {
@@ -4027,20 +4223,9 @@
       }
 
       function init() {
+        renderStage(MENU_CATEGORIES[0]);
         renderCategories();
         renderCatalog();
-
-        const catsEl = $('#menuCats');
-        const nextBtn = $('#menuCatNext');
-        if (catsEl) {
-          catsEl.addEventListener('scroll', updateSliderHint, { passive: true });
-          window.addEventListener('resize', updateSliderHint, { passive: true });
-        }
-        if (nextBtn && catsEl) {
-          nextBtn.addEventListener('click', () => {
-            catsEl.scrollBy({ left: 220, behavior: 'smooth' });
-          });
-        }
 
         const searchInput = $('#menuSearch');
         const clearBtn = $('#menuSearchClear');
@@ -4063,18 +4248,28 @@
           });
         }
 
-        $('#floatingCartPopup')?.addEventListener('click', openOrderModal);
+        $('#cartFabClear')?.addEventListener('click', () => {
+          mState.tray = [];
+          renderCatalog();
+          renderTray();
+        });
+
+        $('#cartFabMain')?.addEventListener('click', openOrderModal);
+
+        const catsEl = $('#menuCats');
+        if (catsEl) {
+          catsEl.addEventListener('scroll', updateCatsEdges, { passive: true });
+          window.addEventListener('resize', updateCatsEdges);
+          $('#catsNext')?.addEventListener('click', () => catsEl.scrollBy({ left: 240, behavior: 'smooth' }));
+          updateCatsEdges();
+        }
 
         document.addEventListener('click', (e) => {
           const catBtn = e.target.closest('[data-mcat]');
           if (catBtn) {
             mState.cat = catBtn.dataset.mcat;
-            renderCategories();
+            updateActiveCat();
             renderCatalog();
-            const activeBtn = $(`[data-mcat="${mState.cat}"]`);
-            if (activeBtn) {
-              activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-            }
             return;
           }
 
@@ -4120,7 +4315,56 @@
         });
       }
 
-      return { init, updateSliderHint };
+      return { init, hintCats, syncTray: renderTray };
+    })();
+
+    /* ========================================================================
+       8b. HERO AURA EFFEKTLƏRİ (BOKEH, PARALLAX) VƏ SCROLL REVEAL
+       ======================================================================== */
+    (function heroFX() {
+      const hero = $('#hero');
+      const bokeh = $('#heroBokeh');
+      if (bokeh) {
+        const n = window.innerWidth < 640 ? 9 : 16;
+        let h = '';
+        for (let i = 0; i < n; i++) {
+          const size = (4 + Math.random() * 10).toFixed(1);
+          h += `<i style="left:${(Math.random() * 100).toFixed(1)}%;width:${size}px;height:${size}px;` +
+               `animation-duration:${(9 + Math.random() * 10).toFixed(1)}s;animation-delay:${(-Math.random() * 14).toFixed(1)}s;` +
+               `--dx:${(Math.random() * 70 - 35).toFixed(0)}px"></i>`;
+        }
+        bokeh.innerHTML = h;
+      }
+
+      if (hero && window.matchMedia('(pointer: fine)').matches) {
+        let raf = 0;
+        hero.addEventListener('pointermove', (e) => {
+          if (raf) return;
+          raf = requestAnimationFrame(() => {
+            raf = 0;
+            const r = hero.getBoundingClientRect();
+            hero.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
+            hero.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
+          });
+        }, { passive: true });
+      }
+
+      const targets = $$('.reveal, .reveal-group');
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach((t) => t.classList.add('in'));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      targets.forEach((t) => io.observe(t));
+
+      // Hero ekrandan çıxanda animasiyaları dayandır (batareya / performans)
+      if (hero) {
+        new IntersectionObserver((en) => hero.classList.toggle('paused', !en[0].isIntersecting)).observe(hero);
+      }
     })();
 
     /* ========================================================================
@@ -4137,7 +4381,7 @@
         el.style.opacity = '0';
         el.style.transition = 'opacity 0.25s ease';
         setTimeout(() => el.remove(), 260);
-      }, 2600);
+      }, 2800);
     }
 
     function copyText(text) {
@@ -4155,13 +4399,6 @@
       }
       ta.remove();
     }
-
-    /* ========================================================================
-       10. TƏTBİQİN DƏRHAL İŞƏ SALINMASI (API CAVABINI GÖZLƏMƏDƏN)
-       ======================================================================== */
-    CreativeMenu.init();
-    initScrollReveal();
-    loadInitialData();
   </script>
 </body>
 </html>
