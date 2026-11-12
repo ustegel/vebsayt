@@ -1,0 +1,3943 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Üstəgəl Kafe — Kofe, kino, intellektual oyunlar, canlı musiqi və karaoke bir məkanda.">
+  <title>Üstəgəl Kafe — Coffee • Events • Games</title>
+  <link rel="icon" type="image/png" href="https://docs.google.com/drawings/d/e/2PACX-1vQbzxPda05zw-xlcupsexZXTdDejHMneiSYpebnPi4kDrTlAGoWDvzmG54n2X7AAZuNllQMYRsKgCjV/pub?w=693&h=690">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       1. DİZAYN TOKENLƏRİ VƏ RƏNG PALİTRASI (LIGHT & DARK MODE)
+       ========================================================================== */
+    :root {
+      --bg: #FAF5EE;
+      --bg-elevated: #F3EAD9;
+      --surface: #FFFFFF;
+      --ink: #2B1A10;
+      --muted: #7A6454;
+      --line: #E8DCCB;
+      --brand: #4A2A17;
+      --brand-hover: #381F10;
+      --brand-ink: #FFFFFF;
+      --accent: #8B5E34;
+      --accent-soft: rgba(139, 94, 52, 0.12);
+      --err: #B3261E;
+      --err-bg: rgba(179, 38, 30, 0.10);
+      --ok: #2E7D4F;
+      --ok-bg: rgba(46, 125, 79, 0.12);
+      --hero: #3A200F;
+      --hero-deep: #241207;
+      --hero-ink: #FBEFE0;
+      --hero-gold: #F2D3A8;
+      --shadow-sm: 0 4px 14px rgba(43, 26, 16, 0.06);
+      --shadow-md: 0 12px 30px rgba(43, 26, 16, 0.10);
+      --shadow-lg: 0 24px 54px rgba(24, 13, 6, 0.22);
+      --companion-w: 330px;
+      --companion-h: 470px;
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #17100B;
+        --bg-elevated: #1E150E;
+        --surface: #231710;
+        --ink: #F5ECE0;
+        --muted: #B9A592;
+        --line: #3A2A1E;
+        --brand: #D9A66B;
+        --brand-hover: #E5B67E;
+        --brand-ink: #2B1A10;
+        --accent: #D9A66B;
+        --accent-soft: rgba(217, 166, 107, 0.14);
+        --hero: #0F0905;
+        --hero-deep: #090503;
+        --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.28);
+        --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.38);
+        --shadow-lg: 0 24px 54px rgba(0, 0, 0, 0.55);
+      }
+    }
+
+    /* ==========================================================================
+       2. QLOBAL RESET, TİPOQRAFİYA VƏ ƏSAS LAYOUT STRUKTURU
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.6 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Fraunces', Georgia, serif;
+      line-height: 1.15;
+      margin: 0;
+      color: inherit;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    main {
+      flex: 1;
+      position: relative;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    @media (min-width: 980px) {
+      .wrap {
+        padding-right: calc(var(--companion-w) + 28px);
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 979px) {
+      .wrap {
+        padding-right: 245px;
+      }
+    }
+
+    /* ==========================================================================
+       3. YAPIŞQAN (STICKY) BAŞLIQ VƏ NAVİQASİYA PANELİ
+       ========================================================================== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: color-mix(in srgb, var(--bg) 90%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      height: 68px;
+    }
+
+    .logo {
+      font: 800 23px 'Fraunces', serif;
+      color: var(--brand);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 0;
+      background: none;
+      cursor: pointer;
+      padding: 4px 0;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--brand);
+      color: var(--brand-ink);
+      display: grid;
+      place-items: center;
+      font: 800 20px 'Fraunces', serif;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .logo img {
+      height: 42px;
+      width: auto;
+      display: block;
+      background: #FFFFFF;
+      border: 1px solid #E3CFB3;
+      border-radius: 8px;
+      padding: 0;
+    }
+
+    .logo img.logo-icon {
+      display: none;
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .logo img.logo-icon.logo-icon-desktop {
+      display: block;
+      width: 38px;
+      height: 38px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a,
+    nav button {
+      padding: 9px 15px;
+      border-radius: 999px;
+      border: 0;
+      background: none;
+      text-decoration: none;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 15px;
+      color: var(--ink);
+      transition: background 0.18s ease, color 0.18s ease, transform 0.14s ease;
+    }
+
+    nav .on {
+      background: var(--brand);
+      color: var(--brand-ink);
+      box-shadow: var(--shadow-sm);
+    }
+
+    nav a:hover,
+    nav button:hover {
+      background: var(--line);
+    }
+
+    nav .on:hover {
+      background: var(--brand-hover);
+    }
+
+    /* ==========================================================================
+       4. GİRİŞ (HERO) BÖLMƏSİ VƏ DÜYMƏLƏR
+       ========================================================================== */
+    .hero {
+      position: relative;
+      background: radial-gradient(circle at 82% 28%, #5B3318 0%, var(--hero) 62%, var(--hero-deep) 100%);
+      color: var(--hero-ink);
+      padding: 76px 0 72px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(242, 211, 168, 0.14);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(242, 211, 168, 0.08) 1px, transparent 1px);
+      background-size: 26px 26px;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      bottom: -80px;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(242, 211, 168, 0.16) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 640px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(242, 211, 168, 0.12);
+      border: 1px solid rgba(242, 211, 168, 0.25);
+      color: var(--hero-gold);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7.5vw, 82px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      max-width: 11ch;
+    }
+
+    .hero p {
+      font-size: 18.5px;
+      max-width: 46ch;
+      opacity: 0.88;
+      margin: 20px 0 32px;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 22px;
+      border-radius: 12px;
+      border: 2px solid var(--brand);
+      background: var(--brand);
+      color: var(--brand-ink);
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease, opacity 0.16s ease;
+    }
+
+    .btn:hover:not([disabled]) {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn:active:not([disabled]) {
+      transform: translateY(0);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: inherit;
+      border-color: currentColor;
+    }
+
+    .hero .btn {
+      background: var(--hero-gold);
+      color: #2B1A10;
+      border-color: var(--hero-gold);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero .btn:hover {
+      background: #F8DFC0;
+      border-color: #F8DFC0;
+    }
+
+    .hero .btn.ghost {
+      background: rgba(251, 239, 224, 0.04);
+      color: var(--hero-ink);
+      border-color: rgba(242, 211, 168, 0.52);
+      box-shadow: none;
+    }
+
+    .hero .btn.ghost:hover {
+      background: rgba(242, 211, 168, 0.14);
+    }
+
+    .btn[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* ==========================================================================
+       5. SAĞ TƏRƏFDƏ SABİT REAL İNSAN HİSSİYYATLI 5-POZALI KOFE KOMPANYONU
+       ========================================================================== */
+    .coffee-companion {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      width: var(--companion-w);
+      height: var(--companion-h);
+      z-index: 35;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-end;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+    }
+
+    .companion-visual-shell {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-top-left-radius: 28px;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.88) 12%, #000 24%),
+                          linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.88) 8%, #000 18%);
+      -webkit-mask-composite: source-in;
+      mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.88) 12%, #000 24%),
+                  linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.88) 8%, #000 18%);
+      mask-composite: intersect;
+    }
+
+    .companion-scene-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      will-change: transform;
+      transform-origin: bottom right;
+      animation: naturalBreathing 5.4s ease-in-out infinite;
+    }
+
+    .companion-sprite {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      background-size: 500% 100%;
+      background-position: 0% 50%;
+      background-repeat: no-repeat;
+      will-change: background-position, transform;
+      transform-origin: bottom right;
+      animation: naturalBreathing 5.4s ease-in-out infinite;
+    }
+
+    .companion-sprite.active {
+      display: block;
+    }
+
+    .companion-sprite.single-mode {
+      background-size: cover;
+      background-position: right bottom;
+    }
+
+    @keyframes naturalBreathing {
+      0%, 100% {
+        transform: translateY(0px) scale(1);
+      }
+      50% {
+        transform: translateY(-2.5px) scale(1.004);
+      }
+    }
+
+    .companion-steam {
+      position: absolute;
+      left: 34%;
+      top: 34%;
+      width: 54px;
+      height: 64px;
+      pointer-events: none;
+      transition: top 0.35s ease, left 0.35s ease, opacity 0.35s ease;
+    }
+
+    .companion-steam span {
+      position: absolute;
+      bottom: 0;
+      width: 10px;
+      height: 36px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 248, 238, 0.55) 0%, transparent 72%);
+      filter: blur(4px);
+      opacity: 0;
+      animation: coffeeSteamFloat 3.4s infinite ease-in-out;
+    }
+
+    .companion-steam span:nth-child(1) {
+      left: 8px;
+      animation-delay: 0s;
+    }
+
+    .companion-steam span:nth-child(2) {
+      left: 22px;
+      height: 44px;
+      animation-delay: 1.1s;
+    }
+
+    .companion-steam span:nth-child(3) {
+      left: 35px;
+      animation-delay: 2.2s;
+    }
+
+    @keyframes coffeeSteamFloat {
+      0% {
+        transform: translateY(4px) scaleX(0.85);
+        opacity: 0;
+      }
+      35% {
+        opacity: 0.65;
+      }
+      100% {
+        transform: translateY(-34px) scaleX(1.35);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 979px) and (min-width: 641px) {
+      :root {
+        --companion-w: 235px;
+        --companion-h: 340px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --companion-w: 165px;
+        --companion-h: 235px;
+      }
+    }
+
+    /* ==========================================================================
+       6. SƏHİFƏ BÖLMƏLƏRİ, BAŞLIQLAR VƏ KAFE MƏLUMAT KARTLARI
+       ========================================================================== */
+    section.page {
+      display: none;
+      padding: 42px 0 88px;
+    }
+
+    section.page.on {
+      display: block;
+      animation: pageFadeIn 0.24s ease-out;
+    }
+
+    @keyframes pageFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .sec-h {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .sec-h h2 {
+      font-size: clamp(28px, 5vw, 40px);
+    }
+
+    .sec-h p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    .info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-top: 40px;
+    }
+
+    .info div {
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .info div:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    .info b {
+      display: block;
+      color: var(--accent);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .vibe-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .vibe-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 18px;
+      border-radius: var(--radius-md);
+      background: var(--bg-elevated);
+      border: 1px solid var(--line);
+    }
+
+    .vibe-icon {
+      font-size: 22px;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .vibe-item h3 {
+      font-size: 17px;
+      margin-bottom: 3px;
+    }
+
+    .vibe-item p {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    /* ==========================================================================
+       7. TƏDBİRLƏR ALƏT PANELİ, KARTLAR VƏ TƏQVİM GÖRÜNÜŞÜ
+       ========================================================================== */
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 24px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .tools .chips {
+      order: 1;
+      justify-content: flex-start;
+    }
+
+    .tools .seg {
+      order: 2;
+      margin-left: auto;
+    }
+
+    @media (max-width: 860px) {
+      .tools .seg {
+        order: 0;
+        margin-left: 0;
+      }
+      .tools .chips {
+        order: 1;
+        flex-basis: 100%;
+      }
+    }
+
+    .seg {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .seg button {
+      border: 0;
+      background: none;
+      padding: 9px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.16s ease, color 0.16s ease;
+    }
+
+    .seg .on {
+      background: var(--brand);
+      color: var(--brand-ink);
+    }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+    }
+
+    .chip:hover {
+      border-color: var(--accent);
+    }
+
+    .chip.on {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+    }
+
+    .day-h {
+      font: 600 20px 'Fraunces', serif;
+      margin: 28px 0 12px;
+      color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .cover {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: var(--line);
+      overflow: hidden;
+    }
+
+    .cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+
+    .card:hover .cover img {
+      transform: scale(1.03);
+    }
+
+    .badge {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      padding: 4px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #2B1A10;
+      font-size: 12.5px;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    .body {
+      padding: 16px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .when {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 13.5px;
+    }
+
+    .body h3 {
+      font-size: 21px;
+    }
+
+    .body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14.5px;
+      flex: 1;
+    }
+
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    .foot small {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .empty {
+      padding: 48px 20px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+      background: var(--surface);
+    }
+
+    .cal-h {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .cal-h h3 {
+      font-size: 24px;
+    }
+
+    .cal-h button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 18px;
+      transition: background 0.16s ease;
+    }
+
+    .cal-h button:hover {
+      background: var(--line);
+    }
+
+    .cal {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+
+    .cal .dow {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-align: center;
+      padding: 6px 0;
+    }
+
+    .cell {
+      min-height: 92px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 6px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      overflow: hidden;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .cell:hover {
+      border-color: var(--accent);
+    }
+
+    .cell.out {
+      opacity: 0.4;
+    }
+
+    .cell.today .n {
+      background: var(--brand);
+      color: var(--brand-ink);
+    }
+
+    .cell.sel {
+      outline: 2px solid var(--accent);
+    }
+
+    .n {
+      font-weight: 700;
+      font-size: 13px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+    }
+
+    .ev {
+      font-size: 11.5px;
+      line-height: 1.25;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #FFFFFF;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .more {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .dots {
+      display: none;
+      gap: 3px;
+      flex-wrap: wrap;
+    }
+
+    .dots i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    @media (max-width: 640px) {
+      .cell {
+        min-height: 58px;
+        padding: 4px;
+      }
+      .ev {
+        display: none;
+      }
+      .cell .dots {
+        display: flex !important;
+      }
+      nav a, nav button {
+        padding: 7px 10px;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+      .logo img.logo-full,
+      .logo span.logo-text {
+        display: none;
+      }
+      .logo img.logo-icon {
+        display: block;
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+    }
+
+    /* ==========================================================================
+       8. FORMALAR, REZERVASİYA BÖLMƏSİ VƏ MODAL PƏNCƏRƏ
+       ========================================================================== */
+    .form {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      max-width: 560px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .f {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 15px;
+    }
+
+    .f label {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .f input,
+    .f select,
+    .f textarea {
+      padding: 12px 14px;
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      transition: border-color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .f input:focus,
+    .f select:focus,
+    .f textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .msg {
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 14px;
+      background: var(--err-bg);
+      color: var(--err);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .done {
+      text-align: center;
+      padding: 14px 0;
+    }
+
+    .done h3 {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .done .code {
+      display: inline-block;
+      margin: 12px 0;
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+    }
+
+    .side {
+      display: grid;
+      grid-template-columns: minmax(0, 560px) 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .side {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .note {
+      color: var(--muted);
+      padding: 18px 20px 18px 34px;
+      margin: 0;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+
+    .note li {
+      margin-bottom: 10px;
+    }
+
+    .note li:last-child {
+      margin-bottom: 0;
+    }
+
+    .ov {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 9, 5, 0.68);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 60;
+    }
+
+    .ov.on {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 26px;
+      width: 100%;
+      max-width: 460px;
+      max-height: 92vh;
+      overflow: auto;
+      box-shadow: var(--shadow-lg);
+      animation: pop 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes pop {
+      from {
+        transform: translateY(14px) scale(0.97);
+        opacity: 0;
+      }
+    }
+
+    .modal h3 {
+      font-size: 26px;
+      margin-bottom: 14px;
+    }
+
+    .x {
+      float: right;
+      border: 0;
+      background: none;
+      font-size: 26px;
+      cursor: pointer;
+      line-height: 1;
+      color: var(--muted);
+    }
+
+    .x:hover {
+      color: var(--ink);
+    }
+
+    .toast-wrap {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      z-index: 80;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 11px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+      animation: toastIn 0.22s ease-out;
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+    }
+
+    .sk {
+      height: 260px;
+      border-radius: 16px;
+      background: linear-gradient(90deg, var(--line), transparent, var(--line));
+      background-size: 200% 100%;
+      animation: sh 1.2s infinite;
+    }
+
+    @keyframes sh {
+      to {
+        background-position: -200% 0;
+      }
+    }
+
+    /* ==========================================================================
+       9. KREATİV MENYU BÖLMƏSİ, KATEQORİYA ANİMASİYALARI VƏ MƏHSUL KARTLARI
+       ========================================================================== */
+    .menu-stage {
+      position: relative;
+      border-radius: var(--radius-xl);
+      padding: 26px 28px;
+      margin-bottom: 24px;
+      color: #FBEFE0;
+      background: linear-gradient(135deg, var(--m-c1, #4A2A17) 0%, var(--m-c2, #241207) 100%);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+      transition: background 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s ease;
+    }
+
+    .menu-stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.16) 0%, transparent 62%);
+      pointer-events: none;
+    }
+
+    .menu-stage-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .menu-stage-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      margin-bottom: 10px;
+    }
+
+    .menu-stage h2 {
+      font-size: clamp(26px, 4.5vw, 38px);
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    .menu-stage p {
+      font-size: 15px;
+      opacity: 0.9;
+      max-width: 52ch;
+    }
+
+    .menu-stage-art {
+      position: relative;
+      z-index: 2;
+      width: 118px;
+      height: 118px;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      backdrop-filter: blur(6px);
+      animation: menuStagePop 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes menuStagePop {
+      from {
+        opacity: 0;
+        transform: scale(0.86) rotate(-4deg);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    .menu-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .menu-particles i {
+      position: absolute;
+      font-style: normal;
+      opacity: 0;
+    }
+
+    .anim-steam .menu-particles i {
+      bottom: -10px;
+      width: 14px;
+      height: 46px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 248, 238, 0.45) 0%, transparent 72%);
+      filter: blur(4px);
+      animation: mSteamRise 3.8s infinite ease-in-out;
+    }
+
+    @keyframes mSteamRise {
+      0% { transform: translateY(10px) scaleX(0.8); opacity: 0; }
+      35% { opacity: 0.7; }
+      100% { transform: translateY(-130px) scaleX(1.5); opacity: 0; }
+    }
+
+    .anim-ice .menu-particles i {
+      top: -16px;
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      background: rgba(224, 247, 255, 0.32);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      animation: mIceDrift 4.8s infinite ease-in-out;
+    }
+
+    @keyframes mIceDrift {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+      25% { opacity: 0.85; }
+      100% { transform: translateY(155px) rotate(135deg); opacity: 0; }
+    }
+
+    .anim-bubbles .menu-particles i {
+      bottom: -12px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.16);
+      animation: mBubbleRise 3.2s infinite ease-in;
+    }
+
+    @keyframes mBubbleRise {
+      0% { transform: translateY(0) scale(0.6); opacity: 0; }
+      30% { opacity: 0.85; }
+      100% { transform: translateY(-150px) scale(1.25); opacity: 0; }
+    }
+
+    .anim-sparkle .menu-particles i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #FFF3D1;
+      box-shadow: 0 0 10px #FFE082;
+      animation: mSparkleTwinkle 2.8s infinite ease-in-out;
+    }
+
+    @keyframes mSparkleTwinkle {
+      0%, 100% { transform: scale(0.3); opacity: 0; }
+      50% { transform: scale(1.25); opacity: 0.9; }
+    }
+
+    .menu-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .menu-search-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .menu-search-box {
+      position: relative;
+      flex: 1 1 260px;
+      max-width: 420px;
+    }
+
+    .menu-search-box input {
+      width: 100%;
+      padding: 11px 38px 11px 16px;
+      border-radius: 999px;
+      border: 1.5px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .menu-search-box input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .menu-search-clear {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 0;
+      background: var(--line);
+      color: var(--ink);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+      display: none;
+      place-items: center;
+    }
+
+    .menu-search-clear.show {
+      display: grid;
+    }
+
+    .menu-stats {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .menu-cats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .m-cat-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.16s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .m-cat-btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    .m-cat-btn.on {
+      background: var(--cat-accent, var(--brand));
+      color: #FFFFFF;
+      border-color: var(--cat-accent, var(--brand));
+      box-shadow: var(--shadow-sm);
+    }
+
+    .m-cat-btn .cnt {
+      font-size: 11.5px;
+      padding: 1px 7px;
+      border-radius: 999px;
+      background: rgba(127, 127, 127, 0.14);
+    }
+
+    .m-cat-btn.on .cnt {
+      background: rgba(255, 255, 255, 0.22);
+      color: #FFFFFF;
+    }
+
+    .menu-group-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 30px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid var(--line);
+    }
+
+    .menu-group-head:first-child {
+      margin-top: 6px;
+    }
+
+    .menu-group-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-group-title h3 {
+      font-size: 23px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+      gap: 16px;
+    }
+
+    .m-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+      animation: menuCardIn 0.36s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.24s ease, border-color 0.24s ease;
+    }
+
+    @keyframes menuCardIn {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .m-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--item-accent, var(--accent));
+    }
+
+    .m-card-art {
+      position: relative;
+      height: 146px;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 50% 42%, var(--item-bg1, #F5E8D7) 0%, var(--item-bg2, #E8D5BC) 100%);
+      overflow: hidden;
+    }
+
+    .m-card-art svg {
+      width: 112px;
+      height: 112px;
+      transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+      filter: drop-shadow(0 8px 14px rgba(34, 18, 8, 0.16));
+    }
+
+    .m-card:hover .m-card-art svg {
+      transform: translateY(-4px) scale(1.08) rotate(-2deg);
+    }
+
+    .m-card-cat {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.86);
+      color: #2B1A10;
+      backdrop-filter: blur(4px);
+    }
+
+    .m-card-price {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 800;
+      background: var(--brand);
+      color: var(--brand-ink);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
+    }
+
+    .m-card-body {
+      padding: 14px 15px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .m-card-body h4 {
+      font-size: 17.5px;
+      line-height: 1.25;
+    }
+
+    .m-card-note {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .m-card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 6px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--line);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .m-add-btn {
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+    }
+
+    .m-add-btn:hover,
+    .m-add-btn.added {
+      background: var(--brand);
+      color: var(--brand-ink);
+      border-color: var(--brand);
+    }
+
+    .m-qty-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--brand);
+      color: var(--brand-ink);
+      border-radius: 999px;
+      padding: 2px 6px;
+      font-size: 12.5px;
+      font-weight: 800;
+    }
+
+    .m-qty-box button {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 0;
+      background: rgba(255, 255, 255, 0.18);
+      color: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      line-height: 1;
+    }
+
+    .m-qty-box button:hover {
+      background: rgba(255, 255, 255, 0.32);
+    }
+
+    .order-items-box {
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      background: var(--bg);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 210px;
+      overflow-y: auto;
+    }
+
+    .order-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--line);
+      font-size: 13.5px;
+    }
+
+    .order-item-row:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .order-item-label {
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .order-item-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .order-item-controls button {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font-weight: 800;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+
+    .order-total-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .order-total-bar span {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .order-total-bar strong {
+      font: 800 20px 'Fraunces', serif;
+      color: var(--brand);
+    }
+
+    .order-auto-time {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .menu-tray {
+      margin-top: 28px;
+      padding: 18px 20px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1.5px solid var(--accent);
+      box-shadow: var(--shadow-md);
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .menu-tray.show {
+      display: flex;
+      animation: pageFadeIn 0.25s ease-out;
+    }
+
+    .menu-tray-info b {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+
+    .menu-tray-info span {
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+
+    .menu-tray-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 640px) {
+      .menu-stage {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+      .menu-stage-art {
+        width: 86px;
+        height: 86px;
+      }
+      .menu-grid {
+        grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+        gap: 12px;
+      }
+      .m-card-art {
+        height: 122px;
+      }
+      .m-card-art svg {
+        width: 92px;
+        height: 92px;
+      }
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0;
+      color: var(--muted);
+      font-size: 14px;
+      background: var(--bg-elevated);
+    }
+
+    .foot-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       SAĞ TƏRƏFDƏ DAİMİ SABİT (FIXED) 5-POZALI KOFE İÇƏN XANIM KOMPANYONU
+       ======================================================================== -->
+  <aside class="coffee-companion" id="coffeeCompanion" aria-label="Üstəgəl Kafe atmosferi — kofe içən qonaq">
+    <div class="companion-visual-shell">
+      <svg class="companion-scene-svg" id="companionSceneSvg" viewBox="0 0 360 500" preserveAspectRatio="xMaxYMax slice" aria-label="Kofe içən xanım">
+        <defs>
+          <radialGradient id="cafeAmbientGrad" cx="42%" cy="32%" r="68%">
+            <stop offset="0%" stop-color="#6B442A" stop-opacity="0.22"/>
+            <stop offset="55%" stop-color="#3A200F" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#1E1008" stop-opacity="0"/>
+          </radialGradient>
+
+          <linearGradient id="walnutTableGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#56321B"/>
+            <stop offset="14%" stop-color="#3B2010"/>
+            <stop offset="55%" stop-color="#271409"/>
+            <stop offset="100%" stop-color="#160B05"/>
+          </linearGradient>
+
+          <linearGradient id="tableRimGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#9A6842" stop-opacity="0.15"/>
+            <stop offset="45%" stop-color="#D7A778" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#7A4C2B" stop-opacity="0.2"/>
+          </linearGradient>
+
+          <linearGradient id="skinToneGrad" x1="0%" y1="15%" x2="100%" y2="85%">
+            <stop offset="0%" stop-color="#F6D3BC"/>
+            <stop offset="48%" stop-color="#E5B08F"/>
+            <stop offset="85%" stop-color="#C98A68"/>
+            <stop offset="100%" stop-color="#AD6E4E"/>
+          </linearGradient>
+
+          <linearGradient id="skinShadowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#D89B79"/>
+            <stop offset="100%" stop-color="#A86949"/>
+          </linearGradient>
+
+          <linearGradient id="hairDarkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#261A14"/>
+            <stop offset="45%" stop-color="#17100C"/>
+            <stop offset="100%" stop-color="#0D0806"/>
+          </linearGradient>
+
+          <linearGradient id="hairCaramelGrad" x1="15%" y1="0%" x2="85%" y2="100%">
+            <stop offset="0%" stop-color="#7B5232"/>
+            <stop offset="50%" stop-color="#B58556"/>
+            <stop offset="82%" stop-color="#D2A676"/>
+            <stop offset="100%" stop-color="#6B4528"/>
+          </linearGradient>
+
+          <linearGradient id="blazerGrad" x1="0%" y1="0%" x2="100%" y2="95%">
+            <stop offset="0%" stop-color="#2D2D33"/>
+            <stop offset="35%" stop-color="#1C1C20"/>
+            <stop offset="100%" stop-color="#0F0F12"/>
+          </linearGradient>
+
+          <linearGradient id="ceramicCupGrad" x1="0%" y1="10%" x2="100%" y2="90%">
+            <stop offset="0%" stop-color="#FFFFFF"/>
+            <stop offset="42%" stop-color="#F5F0E8"/>
+            <stop offset="78%" stop-color="#DFD6C9"/>
+            <stop offset="100%" stop-color="#BFB3A3"/>
+          </linearGradient>
+
+          <linearGradient id="saucerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#EDE7DE"/>
+            <stop offset="32%" stop-color="#FFFFFF"/>
+            <stop offset="75%" stop-color="#E3DBD0"/>
+            <stop offset="100%" stop-color="#C6BCAE"/>
+          </linearGradient>
+
+          <radialGradient id="latteCremaGrad" cx="45%" cy="45%" r="55%">
+            <stop offset="0%" stop-color="#C78A52"/>
+            <stop offset="68%" stop-color="#9A5D2E"/>
+            <stop offset="100%" stop-color="#6E3D19"/>
+          </radialGradient>
+
+          <filter id="softDropShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+            <feOffset dx="0" dy="4"/>
+            <feComponentTransfer>
+              <feFuncA type="linear" slope="0.32"/>
+            </feComponentTransfer>
+            <feMerge>
+              <feMergeNode/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <rect x="0" y="0" width="360" height="500" fill="url(#cafeAmbientGrad)"/>
+        <circle cx="88" cy="128" r="56" fill="#F2D3A8" opacity="0.08"/>
+        <circle cx="155" cy="92" r="34" fill="#F2D3A8" opacity="0.06"/>
+
+        <g id="backHairGroup">
+          <path d="M 232,102 C 282,92 332,126 346,192 C 358,248 355,334 342,418 L 235,418 C 228,340 226,245 232,102 Z" fill="url(#hairDarkGrad)"/>
+          <path d="M 285,138 C 318,168 332,235 322,302 C 314,352 326,388 334,418" fill="none" stroke="url(#hairCaramelGrad)" stroke-width="11" stroke-linecap="round" opacity="0.55"/>
+          <path d="M 306,158 C 336,196 344,264 334,332 C 328,368 338,396 344,418" fill="none" stroke="url(#hairCaramelGrad)" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+        </g>
+
+        <g id="backArmGroup">
+          <path id="backArmPath" d="M 228,282 C 194,292 164,268 144,224" fill="none" stroke="#141417" stroke-width="34" stroke-linecap="round"/>
+          <path id="backArmHighlight" d="M 226,274 C 194,283 166,262 146,220" fill="none" stroke="#2A2A30" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+          <g id="backHandGroup" transform="translate(142, 212)">
+            <ellipse cx="0" cy="4" rx="13" ry="16" fill="url(#skinShadowGrad)"/>
+            <rect x="-12" y="-8" width="16" height="6" rx="3" fill="url(#skinToneGrad)"/>
+            <rect x="-14" y="-1" width="17" height="6" rx="3" fill="url(#skinToneGrad)"/>
+            <rect x="-12" y="6" width="16" height="6" rx="3" fill="url(#skinShadowGrad)"/>
+          </g>
+        </g>
+
+        <g id="torsoGroup">
+          <path d="M 224,205 L 258,205 L 266,265 L 214,265 Z" fill="url(#skinShadowGrad)"/>
+          <path d="M 212,252 C 228,248 248,252 262,265 L 246,368 L 204,368 Z" fill="#F4EFE8"/>
+          <path d="M 216,265 C 226,295 224,332 214,365" fill="none" stroke="#DFD7CC" stroke-width="3"/>
+          <path d="M 205,256 C 216,246 232,244 246,246 L 218,342 L 244,422 L 194,422 C 192,358 196,296 205,256 Z" fill="url(#blazerGrad)"/>
+          <path d="M 248,245 C 296,246 338,268 356,318 L 360,422 L 236,422 L 248,334 Z" fill="url(#blazerGrad)"/>
+          <path d="M 216,250 L 234,296 L 215,322 L 204,292 Z" fill="#28282E"/>
+          <path d="M 248,248 L 236,318 L 258,342 L 268,274 Z" fill="#26262C"/>
+        </g>
+
+        <g id="headGroup" transform="translate(244, 224) rotate(-4) translate(-244, -224)">
+          <path d="M 226,112
+                   C 205,112 194,126 192,145
+                   C 191,152 188,158 183,167
+                   C 178,175 174,180 176,184
+                   C 178,187 183,188 184,190
+                   C 181,193 180,196 183,198
+                   C 181,201 182,204 185,206
+                   C 185,213 190,219 201,220
+                   C 214,221 228,217 240,208
+                   L 252,155 Z"
+                fill="url(#skinToneGrad)"/>
+
+          <ellipse cx="212" cy="184" rx="14" ry="11" fill="#D98B72" opacity="0.22"/>
+          <path d="M 196,216 C 212,218 226,213 236,204" fill="none" stroke="#B67656" stroke-width="2.2" stroke-linecap="round" opacity="0.55"/>
+
+          <path d="M 183,197 C 187,197.5 191,197 194,196" fill="none" stroke="#B86B62" stroke-width="2" stroke-linecap="round"/>
+          <path d="M 182,193.5 C 185,193 188,194 191,195" fill="none" stroke="#C87B71" stroke-width="1.6" stroke-linecap="round"/>
+
+          <path d="M 193,152 C 199,149 207,150 213,153" fill="none" stroke="#2A1B12" stroke-width="2.4" stroke-linecap="round"/>
+          <path id="eyelidPath" d="M 196,163 C 201,166 207,166 211,163" fill="none" stroke="#24160E" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M 195,163 L 192,161 M 198,165 L 195,164" stroke="#24160E" stroke-width="1.3" stroke-linecap="round"/>
+
+          <path d="M 228,102
+                   C 204,102 192,118 192,138
+                   C 199,124 210,118 218,124
+                   C 214,154 216,198 210,248
+                   C 204,296 196,342 206,386
+                   C 218,365 224,335 226,304
+                   C 232,342 238,378 254,404
+                   C 262,368 258,318 264,274
+                   C 272,222 276,154 256,116
+                   C 248,105 238,102 228,102 Z"
+                fill="url(#hairDarkGrad)"/>
+
+          <path d="M 224,122 C 222,175 220,238 212,296 C 207,332 204,358 210,382" fill="none" stroke="url(#hairCaramelGrad)" stroke-width="7.5" stroke-linecap="round" opacity="0.78"/>
+          <path d="M 238,128 C 242,188 238,255 238,316 C 238,352 244,378 252,398" fill="none" stroke="url(#hairCaramelGrad)" stroke-width="9" stroke-linecap="round" opacity="0.72"/>
+          <path d="M 250,144 C 258,205 256,272 254,334" fill="none" stroke="#C99B6B" stroke-width="4" stroke-linecap="round" opacity="0.52"/>
+        </g>
+
+        <g id="tableGroup">
+          <path d="M 0,418 L 285,418 C 308,418 324,424 334,436 L 334,500 L 0,500 Z" fill="url(#walnutTableGrad)"/>
+          <path d="M 0,418.5 L 285,418.5 C 306,418.5 322,424 332,435" fill="none" stroke="url(#tableRimGrad)" stroke-width="2.2"/>
+          <path d="M 12,442 C 95,438 185,444 275,440" fill="none" stroke="#140904" stroke-width="1.6" opacity="0.5"/>
+          <path d="M 28,468 C 115,464 205,470 296,466" fill="none" stroke="#5A361F" stroke-width="1.4" opacity="0.35"/>
+
+          <g id="saucerGroup" transform="translate(112, 424)">
+            <ellipse cx="0" cy="6" rx="60" ry="12" fill="#0E0603" opacity="0.55"/>
+            <ellipse cx="0" cy="2" rx="58" ry="12" fill="url(#saucerGrad)" stroke="#D4CBC0" stroke-width="1"/>
+            <ellipse cx="0" cy="1" rx="31" ry="6.2" fill="#DDD4C8" stroke="#C5BBB0" stroke-width="0.9"/>
+            <ellipse id="cupContactShadow" cx="0" cy="1" rx="22" ry="4.5" fill="#2B1A10" opacity="0.12"/>
+          </g>
+        </g>
+
+        <g id="cupGroup" transform="translate(152, 194) rotate(-7)" filter="url(#softDropShadow)">
+          <path d="M 30,11 C 46,11 46,33 29,34" fill="none" stroke="url(#ceramicCupGrad)" stroke-width="6.5" stroke-linecap="round"/>
+          <path d="M 31,11 C 44,11 44,32 30,33" fill="none" stroke="#CFC5B8" stroke-width="1.5" stroke-linecap="round"/>
+
+          <path d="M -33,0 C -33,34 -20,48 0,48 C 20,48 33,34 33,0 Z" fill="url(#ceramicCupGrad)"/>
+
+          <ellipse cx="0" cy="0" rx="33" ry="8.5" fill="#FAF6F0" stroke="#DDD4C7" stroke-width="1.2"/>
+          <ellipse cx="0" cy="0.6" rx="29.5" ry="6.8" fill="url(#latteCremaGrad)"/>
+          <path d="M -11,0.5 C -6,-2.5 0,-1.5 0,1.5 C 0,-1.5 6,-2.5 11,0.5 C 6,3.2 0,3.8 0,4.5 C 0,3.8 -6,3.2 -11,0.5 Z" fill="#FBF7F1" opacity="0.88"/>
+          <circle cx="0" cy="-2.2" r="2.2" fill="#FBF7F1" opacity="0.85"/>
+        </g>
+
+        <g id="frontArmGroup">
+          <path id="frontArmPath" d="M 284,284 C 254,326 212,312 174,224" fill="none" stroke="url(#blazerGrad)" stroke-width="42" stroke-linecap="round"/>
+          <path id="frontArmCrease" d="M 278,274 C 250,312 212,298 178,220" fill="none" stroke="#34343C" stroke-width="5" stroke-linecap="round" opacity="0.65"/>
+          <path id="cuffPath" d="M 183,234 L 171,221" stroke="#F4EFE8" stroke-width="9" stroke-linecap="round"/>
+
+          <g id="frontHandGroup" transform="translate(166, 214)">
+            <path d="M 14,14 C 18,4 12,-10 1,-13 C -8,-15 -16,-9 -16,-1 C -16,9 -6,17 6,18 Z" fill="url(#skinToneGrad)"/>
+            <rect x="-24" y="-11" width="20" height="5.8" rx="2.9" fill="url(#skinToneGrad)" stroke="#C78A68" stroke-width="0.6"/>
+            <rect x="-26" y="-4.5" width="22" height="6" rx="3" fill="url(#skinToneGrad)" stroke="#C78A68" stroke-width="0.6"/>
+            <rect x="-24" y="2" width="20" height="5.8" rx="2.9" fill="url(#skinToneGrad)" stroke="#C78A68" stroke-width="0.6"/>
+            <rect x="-20" y="8.2" width="17" height="5.2" rx="2.6" fill="url(#skinShadowGrad)"/>
+            <path d="M -4,-12 C -12,-16 -19,-13 -20,-8" fill="none" stroke="url(#skinToneGrad)" stroke-width="5.2" stroke-linecap="round"/>
+          </g>
+        </g>
+      </svg>
+
+      <div class="companion-sprite" id="companionSprite" role="img" aria-label="Kofe içən xanım"></div>
+
+      <div class="companion-steam" id="companionSteam" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       YUXARI NAVİQASİYA PANELİ (HEADER)
+       ======================================================================== -->
+  <header>
+    <div class="wrap bar">
+      <button class="logo" id="logo" data-go="home">
+        <img class="logo-icon logo-icon-desktop" alt="Üstəgəl Kafe" src="https://docs.google.com/drawings/d/e/2PACX-1vQbzxPda05zw-xlcupsexZXTdDejHMneiSYpebnPi4kDrTlAGoWDvzmG54n2X7AAZuNllQMYRsKgCjV/pub?w=693&h=690" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+        <span class="logo-mark" style="display:none" aria-hidden="true">+</span>
+        <span class="logo-text" id="logoTxt">Üstəgəl</span>
+      </button>
+      <nav aria-label="Əsas menyu">
+        <button data-go="home" class="on">Əsas</button>
+        <button data-go="menu">Menyu</button>
+        <button data-go="events">Tədbirlər</button>
+        <button data-go="reserve">Rezervasiya</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       ƏSAS MƏZMUN SAHƏSİ (4 SƏHİFƏLİ SPA STRUKTURU)
+       ======================================================================== -->
+  <main>
+    <!-- 1. ANA SƏHİFƏ (HOME) -->
+    <section class="page on" id="p-home">
+      <div class="hero">
+        <div class="wrap">
+          <div class="hero-inner">
+            <div class="tag" id="tagline">Coffee • Events • Games</div>
+            <h1 id="heroTitle">Üstəgəl Kafe</h1>
+            <p>Kofe, kino, intellektual oyunlar, canlı musiqi və karaoke — bir məkanda. Masanı indi rezerv et, növbəti tədbirə yerini ayır.</p>
+            <div class="hero-actions">
+              <button class="btn" id="heroMenu" data-go="menu">Menyuya bax</button>
+              <button class="btn ghost" data-go="reserve">Masa rezerv et</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="sec-h" style="margin-top: 44px">
+          <div>
+            <h2>Yaxınlaşan tədbirlər</h2>
+            <p>Həftənin ən maraqlı axşamları və xüsusi proqramlar.</p>
+          </div>
+          <button class="btn ghost" style="color: var(--ink); border-color: var(--line)" data-go="events">Hamısına bax</button>
+        </div>
+
+        <div class="grid" id="homeEvents">
+          <div class="sk"></div>
+          <div class="sk"></div>
+          <div class="sk"></div>
+        </div>
+
+        <div class="vibe-strip" aria-label="Kafe imkanları">
+          <div class="vibe-item">
+            <span class="vibe-icon" aria-hidden="true">☕</span>
+            <div>
+              <h3>Specialty Kofe</h3>
+              <p>Təzə qovrulmuş dənələrdən hazırlanan espresso, latte və imza içkilər.</p>
+            </div>
+          </div>
+          <div class="vibe-item">
+            <span class="vibe-icon" aria-hidden="true">🎬</span>
+            <div>
+              <h3>Kino & Quiz</h3>
+              <p>Hər həftə tematik film nümayişləri və komanda intellektual oyunları.</p>
+            </div>
+          </div>
+          <div class="vibe-item">
+            <span class="vibe-icon" aria-hidden="true">🎵</span>
+            <div>
+              <h3>Canlı Musiqi</h3>
+              <p>Akustik axşamlar, karaoke gecələri və səmimi dost məclisləri.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="info" id="info"></div>
+      </div>
+    </section>
+
+    <!-- 2. KREATİV MENYU SƏHİFƏSİ (MENU) -->
+    <section class="page" id="p-menu">
+      <div class="wrap">
+        <div class="menu-stage anim-steam" id="menuStage">
+          <div class="menu-particles" id="menuParticles" aria-hidden="true"></div>
+          <div class="menu-stage-copy">
+            <div class="menu-stage-badge" id="menuStageBadge">☕ Üstəgəl Kafe Menyusu</div>
+            <h2 id="menuStageTitle">Bütün Dadlar Bir Yerdə</h2>
+            <p id="menuStageDesc">Təzə qovrulmuş kofelər, ev üsulu desertlər, sərinləşdirici moxitolar və KvizArt gecələrinə özəl setlər.</p>
+          </div>
+          <div class="menu-stage-art" id="menuStageArt" aria-hidden="true"></div>
+        </div>
+
+        <div class="menu-controls">
+          <div class="menu-search-row">
+            <div class="menu-search-box">
+              <input id="menuSearch" type="search" placeholder="İçki, desert və ya dad axtar (məs: Latte, San Sebastián, Moxito)…" aria-label="Menyuda axtar">
+              <button class="menu-search-clear" id="menuSearchClear" type="button" aria-label="Axtarışı təmizlə">×</button>
+            </div>
+            <div class="menu-stats" id="menuStats">100 məhsul</div>
+          </div>
+          <div class="menu-cats" id="menuCats" role="tablist" aria-label="Menyu kateqoriyaları"></div>
+        </div>
+
+        <div id="menuCatalog"></div>
+
+        <div class="menu-tray" id="menuTray">
+          <div class="menu-tray-info">
+            <b id="menuTrayTitle">Sifariş səbəti (0)</b>
+            <span id="menuTrayList"></span>
+          </div>
+          <div class="menu-tray-actions">
+            <button class="btn ghost" type="button" id="menuTrayClear">Təmizlə</button>
+            <button class="btn" type="button" id="menuTrayOrder">Sifarişi rəsmiləşdir</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TƏDBİRLƏR SƏHİFƏSİ (EVENTS) -->
+    <section class="page" id="p-events">
+      <div class="wrap">
+        <div class="sec-h">
+          <div>
+            <h2>Tədbirlər</h2>
+            <p>Bu gündən etibarən bütün tədbirlər.</p>
+          </div>
+        </div>
+        <div class="tools">
+          <div class="seg" role="tablist">
+            <button id="vList" class="on">Siyahı</button>
+            <button id="vCal">Təqvim</button>
+          </div>
+          <div class="chips" id="chips"></div>
+        </div>
+        <div id="evList"><div class="sk"></div></div>
+        <div id="evCal" hidden></div>
+      </div>
+    </section>
+
+    <!-- 4. MASA REZERVASİYASI SƏHİFƏSİ (RESERVE) -->
+    <section class="page" id="p-reserve">
+      <div class="wrap">
+        <div class="sec-h">
+          <div>
+            <h2>Masa rezervasiyası</h2>
+            <p>Boş masanı sistem avtomatik seçir.</p>
+          </div>
+        </div>
+        <div class="side">
+          <div class="form" id="rzBox">
+            <div id="rzErr"></div>
+            <div class="f">
+              <label for="rzName">Ad, soyad</label>
+              <input id="rzName" autocomplete="name" maxlength="80" placeholder="Məsələn: Aysel Məmmədova">
+            </div>
+            <div class="f">
+              <label for="rzPhone">Əlaqə nömrəsi</label>
+              <input id="rzPhone" type="tel" autocomplete="tel" placeholder="+994 50 000 00 00">
+            </div>
+            <div class="row">
+              <div class="f">
+                <label for="rzDate">Tarix</label>
+                <input id="rzDate" type="date">
+              </div>
+              <div class="f">
+                <label for="rzTime">Saat</label>
+                <select id="rzTime"></select>
+              </div>
+            </div>
+            <div class="f">
+              <label for="rzGuests">Neçə nəfər?</label>
+              <select id="rzGuests"></select>
+            </div>
+            <div class="f">
+              <label for="rzNote">Qeyd (ixtiyari)</label>
+              <textarea id="rzNote" rows="2" maxlength="200" placeholder="Pəncərə kənarı masa, ad günü və s."></textarea>
+            </div>
+            <button class="btn" id="rzSend" style="width: 100%">Masanı rezerv et</button>
+          </div>
+          <ul class="note">
+            <li>Rezervasiya göndərildikdən sonra komandamız sizinlə əlaqə saxlayıb təsdiqləyəcək.</li>
+            <li>Masa 2 saat ərzində sizin üçün saxlanılır.</li>
+            <li>Böyük qrup və xüsusi günlər üçün bizə zəng edin: <b id="phone2"></b></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       ALT MƏLUMAT ZOLAĞI (FOOTER)
+       ======================================================================== -->
+  <footer>
+    <div class="wrap foot-bar">
+      <span id="footCopy">© Üstəgəl Kafe — Coffee • Events • Games</span>
+      <span>Səhifəni aşağı və yuxarı sürüşdürərək kofe anını izləyin ☕</span>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       TƏDBİR QEYDİYYATI MODALI VƏ BİLDİRİŞ KONTEYNERİ
+       ======================================================================== -->
+  <div class="ov" id="ov">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+      <button class="x" id="mClose" aria-label="Bağla">×</button>
+      <div id="mBody"></div>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+  <script>
+    /* ========================================================================
+       0. GOOGLE APPS SCRIPT API KONFİQURASİYASI (GITHUB PAGES BACKEND ƏLAQƏSİ)
+       ======================================================================== */
+    const API_URL = 'https://script.google.com/macros/s/AKfycbziig0rBRdHKOE32h9BwUQ7aoEzVG8FNgF92KiWPOG2xLrgt0RIfd1a2kmbl50H2lL0/exec';
+
+    async function apiGet(action = 'getAppData') {
+      const url = `${API_URL}?action=${encodeURIComponent(action)}&_t=${Date.now()}`;
+      const res = await fetch(url, {
+        method: 'GET',
+        redirect: 'follow'
+      });
+      if (!res.ok) throw new Error('Server cavab vermədi');
+      return await res.json();
+    }
+
+    async function apiPost(action, payload) {
+      // text/plain istifadə edirik ki, brauzer CORS preflight (OPTIONS) sorğusu göndərməsin
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        redirect: 'follow',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify({ action, payload })
+      });
+      if (!res.ok) throw new Error('Server cavab vermədi');
+      return await res.json();
+    }
+
+    /* ========================================================================
+       1. KÖMƏKÇİ FUNKSİYALAR, SABİTLƏR VƏ QLOBAL VƏZİYYƏT (STATE)
+       ======================================================================== */
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => [...document.querySelectorAll(s)];
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[c]));
+
+    const MONTHS = [
+      'Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'İyun',
+      'İyul', 'Avqust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr'
+    ];
+    const DOW = ['B.e.', 'Ç.a.', 'Çər.', 'C.a.', 'Cümə', 'Şən.', 'Baz.'];
+    const DEFAULT_ICON_LOGO = 'https://docs.google.com/drawings/d/e/2PACX-1vQbzxPda05zw-xlcupsexZXTdDejHMneiSYpebnPi4kDrTlAGoWDvzmG54n2X7AAZuNllQMYRsKgCjV/pub?w=693&h=690';
+
+    const CATS = {
+      sinema:       { label: 'Sinema',            emoji: '🎬', c1: '#3B2A4A', c2: '#8B5E34' },
+      intellektual: { label: 'İntellektual oyun', emoji: '🧠', c1: '#1F3A4D', c2: '#4A2A17' },
+      musiqi:       { label: 'Canlı musiqi',      emoji: '🎵', c1: '#5A2A2A', c2: '#B07A3C' },
+      karaoke:      { label: 'Karaoke',           emoji: '🎤', c1: '#6B2D5C', c2: '#4A2A17' },
+      party:        { label: 'Party',             emoji: '🎉', c1: '#8B3A1E', c2: '#3A200F' },
+      other:        { label: 'Digər',             emoji: '☕', c1: '#4A2A17', c2: '#8B5E34' }
+    };
+
+    const catKey = (n) => {
+      const s = String(n || '').toLowerCase();
+      if (s.includes('sinema') || s.includes('kino')) return 'sinema';
+      if (s.includes('intellekt')) return 'intellektual';
+      if (s.includes('musiqi')) return 'musiqi';
+      if (s.includes('karaoke')) return 'karaoke';
+      if (s.includes('part')) return 'party';
+      return 'other';
+    };
+
+    const parseD = (s) => {
+      const [y, m, d] = String(s).split('-').map(Number);
+      return new Date(y, m - 1, d);
+    };
+
+    const ymd = (d) => (
+      d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0')
+    );
+
+    const fmtD = (s) => {
+      const d = parseD(s);
+      return d.getDate() + ' ' + MONTHS[d.getMonth()] + ', ' + DOW[(d.getDay() + 6) % 7];
+    };
+
+    const money = (p) => (Number(p) > 0 ? p + ' ₼' : 'Pulsuz');
+
+    const fallbackCover = (k) => {
+      const c = CATS[k] || CATS.other;
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="${c.c1}"/>
+            <stop offset="1" stop-color="${c.c2}"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#g)"/>
+        <text x="320" y="215" font-size="120" text-anchor="middle">${c.emoji}</text>
+      </svg>`;
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    };
+
+    const S = {
+      data: null,
+      page: 'home',
+      view: 'list',
+      cat: 'all',
+      month: new Date(),
+      sel: null
+    };
+    S.month.setDate(1);
+
+    /* ========================================================================
+       2. REAL İNSAN HİSSİYYATLI 5-POZALI SCROLL KOFE KOMPANYONU MÜHƏRRİKİ
+       ======================================================================== */
+    const CoffeeCompanion = (() => {
+      const sceneSvgEl = $('#companionSceneSvg');
+      const spriteEl = $('#companionSprite');
+      const steamEl = $('#companionSteam');
+
+      const headGroup = $('#headGroup');
+      const cupGroup = $('#cupGroup');
+      const cupContactShadow = $('#cupContactShadow');
+      const backArmPath = $('#backArmPath');
+      const backArmHighlight = $('#backArmHighlight');
+      const backHandGroup = $('#backHandGroup');
+      const frontArmPath = $('#frontArmPath');
+      const frontArmCrease = $('#frontArmCrease');
+      const cuffPath = $('#cuffPath');
+      const frontHandGroup = $('#frontHandGroup');
+
+      const POSES = [
+        {
+          headRot: -4.5,
+          cupX: 152, cupY: 194, cupTilt: -7,
+          backElbowX: 184, backElbowY: 282, backHandX: 142, backHandY: 212,
+          frontElbowX: 244, frontElbowY: 318, frontHandX: 166, frontHandY: 214,
+          shadowOpacity: 0.08,
+          steamTop: '30%', steamLeft: '36%', steamOpacity: 0.88
+        },
+        {
+          headRot: -1.0,
+          cupX: 141, cupY: 232, cupTilt: -2.5,
+          backElbowX: 178, backElbowY: 298, backHandX: 131, backHandY: 250,
+          frontElbowX: 242, frontElbowY: 334, frontHandX: 156, frontHandY: 252,
+          shadowOpacity: 0.14,
+          steamTop: '38%', steamLeft: '33%', steamOpacity: 0.72
+        },
+        {
+          headRot: 2.5,
+          cupX: 127, cupY: 286, cupTilt: 0,
+          backElbowX: 168, backElbowY: 324, backHandX: 116, backHandY: 304,
+          frontElbowX: 238, frontElbowY: 356, frontHandX: 144, frontHandY: 306,
+          shadowOpacity: 0.24,
+          steamTop: '49%', steamLeft: '29%', steamOpacity: 0.60
+        },
+        {
+          headRot: 4.5,
+          cupX: 115, cupY: 342, cupTilt: 0,
+          backElbowX: 152, backElbowY: 364, backHandX: 84, backHandY: 408,
+          frontElbowX: 234, frontElbowY: 382, frontHandX: 138, frontHandY: 360,
+          shadowOpacity: 0.42,
+          steamTop: '60%', steamLeft: '26%', steamOpacity: 0.70
+        },
+        {
+          headRot: 5.5,
+          cupX: 112, cupY: 376, cupTilt: 0,
+          backElbowX: 146, backElbowY: 376, backHandX: 74, backHandY: 418,
+          frontElbowX: 232, frontElbowY: 396, frontHandX: 138, frontHandY: 394,
+          shadowOpacity: 0.68,
+          steamTop: '67%', steamLeft: '25%', steamOpacity: 0.92
+        }
+      ];
+
+      const state = {
+        mode: 'svg',
+        spriteUrl: '',
+        frameUrls: [],
+        targetProgress: 0,
+        smoothProgress: 0,
+        activePoseIndex: 0
+      };
+
+      const lerp = (a, b, t) => a + (b - a) * t;
+
+      function configureFromSettings(settings = {}) {
+        const frames = [
+          settings.WOMAN_FRAME_1,
+          settings.WOMAN_FRAME_2,
+          settings.WOMAN_FRAME_3,
+          settings.WOMAN_FRAME_4,
+          settings.WOMAN_FRAME_5
+        ].filter(Boolean);
+
+        if (frames.length === 5) {
+          state.mode = 'frames';
+          state.frameUrls = frames;
+          spriteEl.classList.add('active', 'single-mode');
+          if (sceneSvgEl) sceneSvgEl.style.display = 'none';
+          renderProgress(state.smoothProgress, true);
+          return;
+        }
+
+        if (settings.WOMAN_SPRITE_URL) {
+          const probe = new Image();
+          probe.onload = () => {
+            state.mode = 'sprite';
+            state.spriteUrl = settings.WOMAN_SPRITE_URL;
+            spriteEl.classList.remove('single-mode');
+            spriteEl.classList.add('active');
+            spriteEl.style.backgroundImage = `url("${settings.WOMAN_SPRITE_URL}")`;
+            if (sceneSvgEl) sceneSvgEl.style.display = 'none';
+            renderProgress(state.smoothProgress, true);
+          };
+          probe.src = settings.WOMAN_SPRITE_URL;
+        }
+      }
+
+      function computeScrollTarget() {
+        const scrollTop = Math.max(0, window.scrollY || document.documentElement.scrollTop || 0);
+        const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        if (maxScroll <= 8) return 0;
+        const ratio = Math.max(0, Math.min(1, scrollTop / maxScroll));
+        return ratio * 4;
+      }
+
+      function renderProgress(progress, force = false) {
+        const clampedProg = Math.max(0, Math.min(4, progress));
+        const idx0 = Math.floor(clampedProg);
+        const idx1 = Math.min(4, idx0 + 1);
+        const t = clampedProg - idx0;
+
+        const p0 = POSES[idx0];
+        const p1 = POSES[idx1];
+
+        if (state.mode === 'svg' && cupGroup) {
+          const headRot = lerp(p0.headRot, p1.headRot, t);
+          const cupX = lerp(p0.cupX, p1.cupX, t);
+          const cupY = lerp(p0.cupY, p1.cupY, t);
+          const cupTilt = lerp(p0.cupTilt, p1.cupTilt, t);
+
+          const bElbowX = lerp(p0.backElbowX, p1.backElbowX, t);
+          const bElbowY = lerp(p0.backElbowY, p1.backElbowY, t);
+          const bHandX = lerp(p0.backHandX, p1.backHandX, t);
+          const bHandY = lerp(p0.backHandY, p1.backHandY, t);
+
+          const fElbowX = lerp(p0.frontElbowX, p1.frontElbowX, t);
+          const fElbowY = lerp(p0.frontElbowY, p1.frontElbowY, t);
+          const fHandX = lerp(p0.frontHandX, p1.frontHandX, t);
+          const fHandY = lerp(p0.frontHandY, p1.frontHandY, t);
+          const shadowOp = lerp(p0.shadowOpacity, p1.shadowOpacity, t);
+
+          headGroup.setAttribute('transform', `translate(244, 224) rotate(${headRot.toFixed(2)}) translate(-244, -224)`);
+          cupGroup.setAttribute('transform', `translate(${cupX.toFixed(1)}, ${cupY.toFixed(1)}) rotate(${cupTilt.toFixed(2)})`);
+          if (cupContactShadow) cupContactShadow.setAttribute('opacity', shadowOp.toFixed(2));
+
+          backArmPath.setAttribute('d', `M 228,282 Q ${bElbowX.toFixed(1)},${bElbowY.toFixed(1)} ${(bHandX + 4).toFixed(1)},${(bHandY + 8).toFixed(1)}`);
+          backArmHighlight.setAttribute('d', `M 226,274 Q ${bElbowX.toFixed(1)},${(bElbowY - 8).toFixed(1)} ${(bHandX + 4).toFixed(1)},${(bHandY + 4).toFixed(1)}`);
+          backHandGroup.setAttribute('transform', `translate(${bHandX.toFixed(1)}, ${bHandY.toFixed(1)})`);
+
+          const wristX = fHandX + 10;
+          const wristY = fHandY + 12;
+          frontArmPath.setAttribute('d', `M 284,284 Q ${fElbowX.toFixed(1)},${fElbowY.toFixed(1)} ${wristX.toFixed(1)},${wristY.toFixed(1)}`);
+          frontArmCrease.setAttribute('d', `M 278,274 Q ${(fElbowX - 4).toFixed(1)},${(fElbowY - 12).toFixed(1)} ${(wristX + 2).toFixed(1)},${(wristY - 4).toFixed(1)}`);
+          cuffPath.setAttribute('d', `M ${(wristX + 8).toFixed(1)},${(wristY + 10).toFixed(1)} L ${(wristX - 2).toFixed(1)},${(wristY - 2).toFixed(1)}`);
+          frontHandGroup.setAttribute('transform', `translate(${fHandX.toFixed(1)}, ${fHandY.toFixed(1)})`);
+        }
+
+        const roundedPose = Math.round(clampedProg);
+        if (force || roundedPose !== state.activePoseIndex) {
+          state.activePoseIndex = roundedPose;
+
+          if (state.mode === 'frames' && state.frameUrls[roundedPose]) {
+            spriteEl.style.backgroundImage = `url("${state.frameUrls[roundedPose]}")`;
+          } else if (state.mode === 'sprite') {
+            spriteEl.style.backgroundPosition = `${roundedPose * 25}% 50%`;
+          }
+
+          const meta = POSES[roundedPose];
+          if (steamEl && meta) {
+            steamEl.style.top = meta.steamTop;
+            steamEl.style.left = meta.steamLeft;
+            steamEl.style.opacity = String(meta.steamOpacity);
+          }
+        }
+      }
+
+      function animationLoop() {
+        state.targetProgress = computeScrollTarget();
+
+        const diff = state.targetProgress - state.smoothProgress;
+        if (Math.abs(diff) > 0.0015) {
+          state.smoothProgress += diff * 0.20;
+        } else {
+          state.smoothProgress = state.targetProgress;
+        }
+
+        renderProgress(state.smoothProgress);
+        requestAnimationFrame(animationLoop);
+      }
+
+      window.addEventListener('resize', () => {
+        state.targetProgress = computeScrollTarget();
+      }, { passive: true });
+
+      renderProgress(0, true);
+      requestAnimationFrame(animationLoop);
+
+      return {
+        configureFromSettings,
+        onPageChange() {
+          state.smoothProgress = 0;
+          state.targetProgress = 0;
+          renderProgress(0, true);
+        }
+      };
+    })();
+
+    /* ========================================================================
+       3. SERVERDƏN MƏLUMATLARIN YÜKLƏNMƏSİ (GOOGLE SHEETS API)
+       ======================================================================== */
+    function loadInitialData() {
+      apiGet('getAppData')
+        .then((d) => {
+          if (!d || d.ok === false) throw new Error((d && d.error) || 'Məlumat oxunmadı');
+          init(d);
+        })
+        .catch(() => {
+          ['#homeEvents', '#evList'].forEach((sel) => {
+            $(sel).innerHTML = '<div class="empty">Məlumatlar yüklənmədi. Səhifəni yeniləyin.</div>';
+          });
+        });
+    }
+
+    loadInitialData();
+
+    function init(d) {
+      S.data = d;
+      const s = d.settings || {};
+
+      $('#heroTitle').textContent = s.CAFE_NAME || 'Üstəgəl Kafe';
+      $('#tagline').textContent = s.TAGLINE || 'Coffee • Events • Games';
+      $('#footCopy').textContent = `© ${new Date().getFullYear()} ${s.CAFE_NAME || 'Üstəgəl Kafe'} — ${s.TAGLINE || 'Coffee • Events • Games'}`;
+
+      const cafeTitle = s.CAFE_NAME || 'Üstəgəl Kafe';
+      const iconLogo = s.ICON_LOGO_URL || DEFAULT_ICON_LOGO;
+      if (s.LOGO_URL) {
+        $('#logo').innerHTML =
+          `<img class="logo-full" alt="${esc(cafeTitle)}" src="${esc(s.LOGO_URL)}">` +
+          `<img class="logo-icon" alt="${esc(cafeTitle)}" src="${esc(iconLogo)}">`;
+      } else {
+        $('#logo').innerHTML =
+          `<img class="logo-icon logo-icon-desktop" alt="${esc(cafeTitle)}" src="${esc(iconLogo)}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">` +
+          `<span class="logo-mark" style="display:none" aria-hidden="true">+</span>` +
+          `<span class="logo-text" id="logoTxt">${esc(s.CAFE_NAME || 'Üstəgəl')}</span>`;
+      }
+
+      const menu = s.MENU_URL || 'http://ustegel.github.io/menu';
+      const navMenuEl = $('#navMenu');
+      const heroMenuEl = $('#heroMenu');
+      if (navMenuEl && navMenuEl.tagName === 'A') navMenuEl.href = menu;
+      if (heroMenuEl && heroMenuEl.tagName === 'A') heroMenuEl.href = menu;
+      $('#phone2').textContent = s.PHONE || '';
+
+      CoffeeCompanion.configureFromSettings(s);
+
+      const infoItems = [
+        ['İş saatları', s.WORKING_HOURS],
+        ['Ünvan', s.ADDRESS],
+        ['Telefon', s.PHONE]
+      ].filter((x) => x[1]);
+
+      let infoHtml = infoItems
+        .map((x) => `<div><b>${x[0]}</b>${esc(x[1])}</div>`)
+        .join('');
+
+      if (s.INSTAGRAM_URL) {
+        infoHtml += `<div><b>Instagram</b><a href="${esc(s.INSTAGRAM_URL)}" target="_blank" rel="noopener">Bizi izləyin →</a></div>`;
+      }
+      $('#info').innerHTML = infoHtml;
+
+      buildChips();
+      renderHome();
+      renderEvents();
+      initReserveForm();
+      CreativeMenu.init();
+    }
+
+    /* ========================================================================
+       4. DAXİLİ NAVİQASİYA (SPA ROUTING) VƏ KLİK HADİSƏLƏRİ
+       ======================================================================== */
+    function go(id) {
+      S.page = id;
+      $$('section.page').forEach((p) => p.classList.toggle('on', p.id === 'p-' + id));
+      $$('nav button').forEach((b) => b.classList.toggle('on', b.dataset.go === id));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      CoffeeCompanion.onPageChange(id);
+    }
+
+    document.addEventListener('click', (e) => {
+      const g = e.target.closest('[data-go]');
+      if (g) return go(g.dataset.go);
+
+      const r = e.target.closest('[data-reg]');
+      if (r) return register(r.dataset.reg);
+
+      const d = e.target.closest('[data-day]');
+      if (d) {
+        S.sel = d.dataset.day;
+        return renderCal();
+      }
+
+      const c = e.target.closest('[data-cat]');
+      if (c) {
+        S.cat = c.dataset.cat;
+        buildChips();
+        return renderEvents();
+      }
+
+      const copyEl = e.target.closest('[data-copy]');
+      if (copyEl) {
+        copyText(copyEl.dataset.copy);
+      }
+    });
+
+    /* ========================================================================
+       5. TƏDBİRLƏR SİYAHISI VƏ İNTERAKTİV AYLIQ TƏQVİM
+       ======================================================================== */
+    const visible = () => (S.data ? S.data.events : []).filter((e) => S.cat === 'all' || catKey(e.category) === S.cat);
+
+    function card(e) {
+      const k = catKey(e.category);
+      const fb = fallbackCover(k);
+      const cover = e.cover || (S.data.settings && S.data.settings['COVER_' + k]) || fb;
+      const full = e.seatsLeft === 0;
+      const seatsLabel = e.seatsLeft !== null && e.seatsLeft !== undefined
+        ? ' · ' + (full ? 'yer yoxdur' : e.seatsLeft + ' yer qalıb')
+        : '';
+
+      return `<article class="card">
+        <div class="cover">
+          <img loading="lazy" alt="" src="${esc(cover)}" data-fb="${esc(fb)}" onerror="this.onerror=null;this.src=this.dataset.fb">
+          <span class="badge">${esc(e.category || CATS[k].label)}</span>
+        </div>
+        <div class="body">
+          <div class="when">${fmtD(e.date)}, ${esc(e.time)}</div>
+          <h3>${esc(e.title)}</h3>
+          <p>${esc(e.description)}</p>
+          <div class="foot">
+            <small>${money(e.price)}${seatsLabel}</small>
+            <button class="btn" data-reg="${esc(e.id)}"${full ? ' disabled' : ''}>${full ? 'Yerlər bitib' : 'Qeydiyyat'}</button>
+          </div>
+        </div>
+      </article>`;
+    }
+
+    function renderHome() {
+      const list = (S.data ? S.data.events : []).slice(0, 3);
+      $('#homeEvents').innerHTML = list.length
+        ? list.map(card).join('')
+        : '<div class="empty">Yaxın günlərdə tədbir yoxdur. Tezliklə yenilənəcək.</div>';
+    }
+
+    function buildChips() {
+      const present = ['all', ...new Set((S.data ? S.data.events : []).map((e) => catKey(e.category)))];
+      $('#chips').innerHTML = present
+        .map((k) => `<button class="chip${S.cat === k ? ' on' : ''}" data-cat="${k}">${k === 'all' ? 'Hamısı' : CATS[k].label}</button>`)
+        .join('');
+    }
+
+    function renderEvents() {
+      S.view === 'list' ? renderList() : renderCal();
+    }
+
+    function renderList() {
+      $('#evList').hidden = false;
+      $('#evCal').hidden = true;
+      const ev = visible();
+      let last = '';
+      let html = '';
+
+      ev.forEach((e) => {
+        if (e.date !== last) {
+          last = e.date;
+          html += (html ? '</div>' : '') +
+            `<h3 class="day-h">${e.date === S.data.today ? 'Bu gün · ' : ''}${fmtD(e.date)}</h3><div class="grid">`;
+        }
+        html += card(e);
+      });
+
+      $('#evList').innerHTML = ev.length
+        ? html + '</div>'
+        : '<div class="empty">Bu kateqoriyada tədbir tapılmadı.</div>';
+    }
+
+    function renderCal() {
+      $('#evList').hidden = true;
+      $('#evCal').hidden = false;
+
+      const y = S.month.getFullYear();
+      const m = S.month.getMonth();
+      const first = new Date(y, m, 1);
+      const lead = (first.getDay() + 6) % 7;
+
+      const byDay = {};
+      visible().forEach((e) => {
+        (byDay[e.date] = byDay[e.date] || []).push(e);
+      });
+
+      let h = `<div class="cal-h">
+        <button id="prev" aria-label="Əvvəlki ay">‹</button>
+        <h3>${MONTHS[m]} ${y}</h3>
+        <button id="next" aria-label="Növbəti ay">›</button>
+      </div><div class="cal">` + DOW.map((d) => `<div class="dow">${d}</div>`).join('');
+
+      for (let i = 0; i < 42; i++) {
+        const d = new Date(y, m, 1 - lead + i);
+        const k = ymd(d);
+        const list = byDay[k] || [];
+        if (i >= 35 && d.getMonth() !== m) break;
+
+        h += `<button class="cell${d.getMonth() !== m ? ' out' : ''}${k === S.data.today ? ' today' : ''}${k === S.sel ? ' sel' : ''}" data-day="${k}">
+          <span class="n">${d.getDate()}</span>
+          ${list.slice(0, 2).map((e) => `<span class="ev" style="background:${CATS[catKey(e.category)].c2}">${esc(e.title)}</span>`).join('')}
+          ${list.length > 2 ? `<span class="more">+${list.length - 2} daha</span>` : ''}
+          <span class="dots">${list.map((e) => `<i style="background:${CATS[catKey(e.category)].c2}"></i>`).join('')}</span>
+        </button>`;
+      }
+      h += '</div>';
+
+      if (S.sel) {
+        const l = byDay[S.sel] || [];
+        h += `<h3 class="day-h">${fmtD(S.sel)}</h3>` + (
+          l.length
+            ? `<div class="grid">${l.map(card).join('')}</div>`
+            : '<div class="empty">Bu gün tədbir yoxdur.</div>'
+        );
+      }
+
+      $('#evCal').innerHTML = h;
+      $('#prev').onclick = () => { S.month = new Date(y, m - 1, 1); renderCal(); };
+      $('#next').onclick = () => { S.month = new Date(y, m + 1, 1); renderCal(); };
+    }
+
+    $('#vList').onclick = () => {
+      S.view = 'list';
+      $('#vList').classList.add('on');
+      $('#vCal').classList.remove('on');
+      renderEvents();
+    };
+
+    $('#vCal').onclick = () => {
+      S.view = 'cal';
+      $('#vCal').classList.add('on');
+      $('#vList').classList.remove('on');
+      renderEvents();
+    };
+
+    /* ========================================================================
+       6. TƏDBİRƏ QEYDİYYAT MODALI
+       ======================================================================== */
+    function register(id) {
+      const e = S.data.events.find((x) => x.id === id);
+      if (!e) return;
+      if (e.regUrl) return void window.open(e.regUrl, '_blank', 'noopener');
+
+      const max = Math.min(10, e.seatsLeft === null ? 10 : e.seatsLeft);
+      $('#mBody').innerHTML = `
+        <h3 id="mTitle">Tədbirə qeydiyyat</h3>
+        <div id="mErr"></div>
+        <div class="f">
+          <label>Tədbir</label>
+          <input id="gEv" value="${esc(e.title + ' — ' + fmtD(e.date) + ', ' + e.time)}" readonly>
+        </div>
+        <div class="f">
+          <label for="gName">Ad, soyad</label>
+          <input id="gName" autocomplete="name" maxlength="80" placeholder="Adınız və soyadınız">
+        </div>
+        <div class="f">
+          <label for="gPhone">Əlaqə nömrəsi</label>
+          <input id="gPhone" type="tel" autocomplete="tel" placeholder="+994 50 000 00 00">
+        </div>
+        <div class="f">
+          <label for="gN">Neçə nəfər üçün rezerv edirsiniz?</label>
+          <select id="gN">${Array.from({ length: max }, (_, i) => `<option>${i + 1}</option>`).join('')}</select>
+        </div>
+        <button class="btn" id="gSend" style="width: 100%">Qeydiyyatı göndər</button>
+      `;
+      openModal();
+
+      $('#gSend').onclick = () => {
+        const nameVal = $('#gName').value.trim();
+        const phoneVal = $('#gPhone').value.trim();
+        if (nameVal.length < 2) {
+          $('#mErr').innerHTML = '<div class="msg">Zəhmət olmasa ad və soyadınızı daxil edin.</div>';
+          return;
+        }
+        if (phoneVal.length < 7) {
+          $('#mErr').innerHTML = '<div class="msg">Düzgün əlaqə nömrəsi daxil edin.</div>';
+          return;
+        }
+
+        const btn = $('#gSend');
+        btn.disabled = true;
+        btn.textContent = 'Göndərilir…';
+
+        apiPost('createEventRegistration', {
+          eventId: id,
+          name: nameVal,
+          phone: phoneVal,
+          guests: $('#gN').value
+        })
+          .then((r) => {
+            if (!r || !r.ok) {
+              $('#mErr').innerHTML = `<div class="msg">${esc((r && r.error) || 'Qeydiyyat alınmadı.')}</div>`;
+              btn.disabled = false;
+              btn.textContent = 'Qeydiyyatı göndər';
+              return;
+            }
+            showRegistrationDone(e.title, r.id);
+            refresh();
+          })
+          .catch(() => {
+            $('#mErr').innerHTML = '<div class="msg">Əlaqə xətası. Bir az sonra yenidən cəhd edin.</div>';
+            btn.disabled = false;
+            btn.textContent = 'Qeydiyyatı göndər';
+          });
+      };
+    }
+
+    function showRegistrationDone(eventTitle, regId) {
+      $('#mBody').innerHTML = `
+        <div class="done">
+          <h3>Qeydiyyat qəbul edildi</h3>
+          <p>${esc(eventTitle)} üçün yeriniz ayrıldı.</p>
+          <div class="code" data-copy="${esc(regId)}" title="Kodu kopyalamaq üçün klikləyin">${esc(regId)}</div>
+          <p style="margin-top: 10px"><button class="btn" id="mOk">Bağla</button></p>
+        </div>
+      `;
+      $('#mOk').onclick = closeModal;
+    }
+
+    function openModal() {
+      $('#ov').classList.add('on');
+    }
+
+    function closeModal() {
+      $('#ov').classList.remove('on');
+    }
+
+    $('#mClose').onclick = closeModal;
+    $('#ov').addEventListener('click', (e) => {
+      if (e.target.id === 'ov') closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    function refresh() {
+      apiGet('getAppData')
+        .then((d) => {
+          if (d && d.ok !== false) {
+            S.data = d;
+            renderHome();
+            renderEvents();
+          }
+        })
+        .catch(() => {});
+    }
+
+    /* ========================================================================
+       7. MASA REZERVASİYASI FORMASI VƏ SAAT SLOTLARI
+       ======================================================================== */
+    function initReserveForm() {
+      const s = S.data.settings || {};
+      const today = new Date();
+      const max = new Date();
+      max.setDate(max.getDate() + (+s.RESERVATION_DAYS_AHEAD || 30));
+
+      const dt = $('#rzDate');
+      dt.min = ymd(today);
+      dt.max = ymd(max);
+      dt.value = ymd(today);
+      dt.onchange = fillSlots;
+
+      $('#rzGuests').innerHTML = Array.from({ length: +s.MAX_GUESTS || 12 }, (_, i) =>
+        `<option value="${i + 1}">${i + 1} nəfər</option>`
+      ).join('');
+      $('#rzGuests').value = '2';
+      fillSlots();
+    }
+
+    function fillSlots() {
+      const s = S.data.settings || {};
+      const step = +s.SLOT_MINUTES || 60;
+      const open = (+s.OPEN_HOUR || 10) * 60;
+      const close = (+s.CLOSE_HOUR || 23) * 60;
+
+      const now = new Date();
+      const isToday = $('#rzDate').value === ymd(now);
+      const nowMin = now.getHours() * 60 + now.getMinutes();
+
+      let o = '';
+      for (let t = open; t < close; t += step) {
+        if (!isToday || t > nowMin) {
+          o += `<option>${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}</option>`;
+        }
+      }
+      $('#rzTime').innerHTML = o || '<option value="">Bu gün üçün saat qalmayıb</option>';
+    }
+
+    $('#rzSend').onclick = () => {
+      const btn = $('#rzSend');
+      const err = (m) => {
+        $('#rzErr').innerHTML = m ? `<div class="msg">${esc(m)}</div>` : '';
+      };
+      err('');
+
+      const nameVal = $('#rzName').value.trim();
+      const phoneVal = $('#rzPhone').value.trim();
+      if (nameVal.length < 2) return err('Zəhmət olmasa ad və soyadınızı daxil edin.');
+      if (phoneVal.length < 7) return err('Düzgün əlaqə nömrəsi daxil edin.');
+      if (!$('#rzTime').value) return err('Başqa tarix seçin.');
+
+      btn.disabled = true;
+      btn.textContent = 'Göndərilir…';
+
+      const f = {
+        name: nameVal,
+        phone: phoneVal,
+        date: $('#rzDate').value,
+        time: $('#rzTime').value,
+        guests: $('#rzGuests').value,
+        note: $('#rzNote').value.trim()
+      };
+
+      apiPost('createReservation', f)
+        .then((r) => {
+          btn.disabled = false;
+          btn.textContent = 'Masanı rezerv et';
+          if (!r || !r.ok) return err((r && r.error) || 'Rezervasiya alınmadı.');
+          showReservationDone(f, r.id, r.table);
+        })
+        .catch(() => {
+          btn.disabled = false;
+          btn.textContent = 'Masanı rezerv et';
+          err('Əlaqə xətası. Bir az sonra yenidən cəhd edin.');
+        });
+    };
+
+    function showReservationDone(f, rzId, tableLabel) {
+      $('#rzBox').innerHTML = `
+        <div class="done">
+          <h3>Rezervasiya göndərildi</h3>
+          <p>${esc(f.name)}, sizi ${fmtD(f.date)} saat ${esc(f.time)}-də gözləyirik.</p>
+          <div class="code" data-copy="${esc(rzId)}" title="Kodu kopyalamaq üçün klikləyin">${esc(rzId)} · ${esc(tableLabel)}</div>
+          <p style="margin-bottom: 14px">Komandamız tezliklə təsdiq üçün əlaqə saxlayacaq.</p>
+          <button class="btn" id="rzNewBtn">Yeni rezervasiya</button>
+        </div>
+      `;
+      $('#rzNewBtn').onclick = () => {
+        window.location.reload();
+      };
+    }
+
+    /* ========================================================================
+       8. KREATİV MENYU KATALOQU, KATEQORİYA ANİMASİYALARI VƏ SVG İLLÜSTRASİYALAR
+       ======================================================================== */
+    const MENU_CATEGORIES = [
+      {
+        id: 'all',
+        label: 'Hamısı',
+        emoji: '✨',
+        c1: '#4A2A17',
+        c2: '#241207',
+        accent: '#4A2A17',
+        bg1: '#F7ECDD',
+        bg2: '#EAD7BE',
+        anim: 'steam',
+        desc: 'Üstəgəl Kafe-nin bütün isti və soyuq kofeləri, imza desertləri, moxitoları və KvizArt setləri.'
+      },
+      {
+        id: 'sirniyyat',
+        label: 'Şirniyyat & Desert',
+        emoji: '🍰',
+        c1: '#7C3F1D',
+        c2: '#3D1C0B',
+        accent: '#8B4513',
+        bg1: '#FDF1E3',
+        bg2: '#F3DEC3',
+        anim: 'sparkle',
+        desc: 'Sobadan yeni çıxmış San Sebastián, südlü Trileçe, Grolet və ev üsulu tort dilimləri.'
+      },
+      {
+        id: 'isti-kofe',
+        label: 'İsti Kofelər',
+        emoji: '☕',
+        c1: '#4E2A15',
+        c2: '#231107',
+        accent: '#5C3317',
+        bg1: '#F6E8D7',
+        bg2: '#E5CFAF',
+        anim: 'steam',
+        desc: 'Təzə qovrulmuş 100% Arabica dənələrindən məxməri köpüklü klassik və imza isti kofelər.'
+      },
+      {
+        id: 'soyuq-kofe',
+        label: 'Soyuq Kofelər',
+        emoji: '🧊',
+        c1: '#1E4E68',
+        c2: '#132A3A',
+        accent: '#1E5B7A',
+        bg1: '#E5F3FA',
+        bg2: '#CCE5F3',
+        anim: 'ice',
+        desc: 'Buz kimi təravətləndirici Blue Ocean, Lavender, Strawberry Cloud və klassik soyuq espresso içkiləri.'
+      },
+      {
+        id: 'milkshake',
+        label: 'Milkshake',
+        emoji: '🥤',
+        c1: '#9E3A63',
+        c2: '#4A1830',
+        accent: '#A83866',
+        bg1: '#FCE9F1',
+        bg2: '#F5D0E0',
+        anim: 'bubbles',
+        desc: 'Təbii meyvə püreləri, dondurma və qaymaqlı krema ilə hazırlanan qatı milkshakelər.'
+      },
+      {
+        id: 'kokteyl',
+        label: 'Kokteyllər',
+        emoji: '🍹',
+        c1: '#B84A27',
+        c2: '#4B1D0E',
+        accent: '#C44D27',
+        bg1: '#FDECE3',
+        bg2: '#F8D4C2',
+        anim: 'bubbles',
+        desc: 'Tropik meyvə notları ilə zəngin alkoqolsuz müəllif kokteylləri və soyuq çay qarışıqları.'
+      },
+      {
+        id: 'alko-kokteyl',
+        label: 'Alko-kokteyl',
+        emoji: '🍸',
+        c1: '#59234B',
+        c2: '#240D1F',
+        accent: '#6E295C',
+        bg1: '#F6E6F2',
+        bg2: '#E8CBE0',
+        anim: 'sparkle',
+        desc: 'Axşam əhval-ruhiyyəsi üçün xüsusi reseptlə hazırlanan klassik və imza kokteyllər.'
+      },
+      {
+        id: 'moxito',
+        label: 'Moxito',
+        emoji: '🍃',
+        c1: '#1D6344',
+        c2: '#0E3524',
+        accent: '#1E6B49',
+        bg1: '#E4F7EE',
+        bg2: '#C7EAD9',
+        anim: 'bubbles',
+        desc: 'Təzə nanə yarpaqları, laym dilimləri və meyvə çeşidləri ilə köpüklü sərinlik.'
+      },
+      {
+        id: 'serin-ickiler',
+        label: 'Sərin İçəcəklər & Enerji',
+        emoji: '⚡',
+        c1: '#1B527A',
+        c2: '#0E293D',
+        accent: '#1E5B87',
+        bg1: '#E6F2FB',
+        bg2: '#CEE3F5',
+        anim: 'ice',
+        desc: 'Soyudulmuş qazlı içkilər, meyvə şirələri, yerli mineral sular və enerji içkiləri.'
+      },
+      {
+        id: 'cay-murebbe',
+        label: 'Çaylar & Mürəbbələr',
+        emoji: '🫖',
+        c1: '#7E2424',
+        c2: '#3B1010',
+        accent: '#8A2828',
+        bg1: '#FBE8E8',
+        bg2: '#F2CECE',
+        anim: 'steam',
+        desc: 'Ətirli dəmləmə çay və ev üsulu çiyələk, ağ gilas mürəbbələri ilə səmimi söhbətlər.'
+      },
+      {
+        id: 'atisdirmaliq',
+        label: 'Atışdırmalıqlar',
+        emoji: '🍿',
+        c1: '#8F5B14',
+        c2: '#422806',
+        accent: '#9A6316',
+        bg1: '#FCF2DF',
+        bg2: '#F4E1BE',
+        anim: 'sparkle',
+        desc: 'Kino və oyun axşamlarının ayrılmaz yoldaşı — isti popkorn, saçaq pendir, çips və çərəzlər.'
+      },
+      {
+        id: 'kvizart',
+        label: 'KvizArt Menu',
+        emoji: '🧠',
+        c1: '#352A6E',
+        c2: '#191338',
+        accent: '#3F3282',
+        bg1: '#ECEAFE',
+        bg2: '#D8D4FC',
+        anim: 'sparkle',
+        desc: '4 nəfərlik komandalar və intellektual oyun iştirakçıları üçün sərfəli çay + desert setləri.'
+      }
+    ];
+
+    const MENU_ITEMS = [
+      // 1. Şirniyyat & Desert
+      { cat: 'sirniyyat', name: 'San Sebastián', price: 7.00, note: 'Karamelizə olunmuş üst qatlı, kremli İspan çizkeyki' },
+      { cat: 'sirniyyat', name: 'Trileçe', price: 6.50, note: 'Üç südlü yumşaq biskvit və karamel sousu' },
+      { cat: 'sirniyyat', name: 'Bilincik', price: 6.00, note: 'Zərif bükülmüş krep və şirin içlik' },
+      { cat: 'sirniyyat', name: 'Grolet', price: 6.50, note: 'Fransız üsulu zərif muss və parlaq qlazur' },
+      { cat: 'sirniyyat', name: 'Cake (ballı tort)', price: 6.00, note: 'Təbii ballı qatlar və xama-qaymaq kremi' },
+      { cat: 'sirniyyat', name: 'Cake (velvet)', price: 6.00, note: 'Məxməri qırmızı biskvit və pendirli krem' },
+
+      // 2. İsti Kofelər
+      { cat: 'isti-kofe', name: 'Capuccino', price: 6.00, note: 'Klassik espresso və sıx ipək kimi süd köpüyü' },
+      { cat: 'isti-kofe', name: 'Latte', price: 6.00, note: 'Yumşaq südlü espresso və zərif latte art' },
+      { cat: 'isti-kofe', name: 'Americano', price: 5.00, note: 'Təmiz və balanslı qara espresso dadı' },
+      { cat: 'isti-kofe', name: 'Caramel Macchiato', price: 7.00, note: 'Vanil, buxarlanmış süd, espresso və karamel' },
+      { cat: 'isti-kofe', name: 'Mocha (dark chocolate)', price: 7.00, note: 'Tünd Belçika şokoladı ilə zənginləşdirilmiş latte' },
+      { cat: 'isti-kofe', name: 'Mocha (white chocolate)', price: 7.00, note: 'Ağ şokoladın kremli şirinliyi və espresso' },
+      { cat: 'isti-kofe', name: 'Cortado', price: 6.00, note: 'Bərabər nisbətdə tünd espresso və isti süd' },
+      { cat: 'isti-kofe', name: 'Filtre kahve', price: 5.00, note: 'Yavaş dəmlənmiş aromatik qara kofe' },
+      { cat: 'isti-kofe', name: 'Flat white', price: 6.00, note: 'İkiqat ristretto üzərində nazik mikroköpük' },
+      { cat: 'isti-kofe', name: 'Hot chocolate', price: 5.00, note: 'Qatı və məxməri isti şokolad' },
+      { cat: 'isti-kofe', name: 'Miel', price: 7.00, note: 'Təbii bal və darçın toxunuşlu imza kofe' },
+      { cat: 'isti-kofe', name: 'Raf coffee', price: 7.00, note: 'Qaymaq və vanil şəkəri ilə çırpılmış kremli kofe' },
+      { cat: 'isti-kofe', name: 'Sahlep', price: 5.00, note: 'Darçın səpilmiş ənənəvi isti səhləb' },
+      { cat: 'isti-kofe', name: 'Türk kahvesi', price: 7.00, note: 'Köz dadında köpüklü ənənəvi türk qəhvəsi' },
+      { cat: 'isti-kofe', name: 'Espresso (double)', price: 4.00, note: 'İkiqat enerji verən tünd crema-lı espresso' },
+      { cat: 'isti-kofe', name: 'Chai tea Latte', price: 4.00, note: 'Ədviyyatlı hind çayı və isti süd köpüyü' },
+      { cat: 'isti-kofe', name: 'Matcha', price: 7.00, note: 'Yapon yaşıl çay tozu və südlü məxməri dad' },
+
+      // 3. Soyuq Kofelər
+      { cat: 'soyuq-kofe', name: 'Frappe', price: 7.00, note: 'Buzlu köpüklü soyuq kofe klassikası' },
+      { cat: 'soyuq-kofe', name: 'Affogato', price: 6.00, note: 'Vanilli dondurma üzərinə tökülən isti espresso' },
+      { cat: 'soyuq-kofe', name: 'Ice Americano', price: 5.00, note: 'Buz kubları ilə təravətləndirici qara kofe' },
+      { cat: 'soyuq-kofe', name: 'Ice Latte', price: 6.00, note: 'Soyuq süd, buz və espresso harmoniyası' },
+      { cat: 'soyuq-kofe', name: 'Ice Mocha (white chocolate)', price: 7.00, note: 'Ağ şokoladlı buzlu kofe ləzzəti' },
+      { cat: 'soyuq-kofe', name: 'Ice Mocha (dark chocolate)', price: 7.00, note: 'Tünd şokolad souslu buzlu espresso' },
+      { cat: 'soyuq-kofe', name: 'Ice Caramel Macchiato', price: 7.00, note: 'Karamel xətləri ilə soyuq südlü espresso' },
+      { cat: 'soyuq-kofe', name: 'Ice Latte Lavender', price: 7.00, note: 'Zərif lavanda ətirli sərin latte' },
+      { cat: 'soyuq-kofe', name: 'Blue Ocean Ice Coffee', price: 7.00, note: 'Mavi okean rəngli qatlar və soyuq espresso' },
+      { cat: 'soyuq-kofe', name: 'Ice Strawberry Cloud Latte', price: 7.00, note: 'Çiyələkli bulud köpüyü ilə soyuq latte' },
+      { cat: 'soyuq-kofe', name: 'Ice Pumpkin Latte', price: 7.00, note: 'Ədviyyatlı balqabaq aromalı buzlu latte' },
+      { cat: 'soyuq-kofe', name: 'Summer is coffee', price: 7.00, note: 'Sitrus və meyvə notlu yay imza kofesi' },
+      { cat: 'soyuq-kofe', name: 'Ice Raff', price: 7.00, note: 'Soyuq qaymaqlı və vanilli kremli kofe' },
+
+      // 4. Milkshake
+      { cat: 'milkshake', name: 'Banan Milkshake', price: 8.00, note: 'Təzə banan, süd və qaymaqlı dondurma' },
+      { cat: 'milkshake', name: 'Çiyələk Milkshake', price: 8.00, note: 'Şirin çiyələk dadı və məxməri köpük' },
+      { cat: 'milkshake', name: 'Mango Milkshake', price: 8.00, note: 'Tropik manqo püresi ilə sərin milkshake' },
+      { cat: 'milkshake', name: 'Şokolad Milkshake', price: 8.00, note: 'Zəngin kakao və şokoladlı dondurma qarışığı' },
+      { cat: 'milkshake', name: 'Caramel Milkshake', price: 8.00, note: 'Duzlu-şirin karamel souslu kremli içki' },
+      { cat: 'milkshake', name: 'Vanil Milkshake', price: 8.00, note: 'Madaqaskar vanili ilə klassik milkshake' },
+      { cat: 'milkshake', name: 'Raspberry Milkshake', price: 8.00, note: 'Təravətli moruq notlu meyvəli milkshake' },
+
+      // 5. Kokteyllər
+      { cat: 'kokteyl', name: 'Blue angel', price: 7.00, note: 'Parlaq mavi sitrus və tropik meyvə qarışığı' },
+      { cat: 'kokteyl', name: 'Bull mocktail', price: 8.00, note: 'Enerji verən meyvəli və sərin mocktail' },
+      { cat: 'kokteyl', name: 'Cool line', price: 7.00, note: 'Laym və nanə təravətli yüngül kokteyl' },
+      { cat: 'kokteyl', name: 'Malibu Barbie', price: 7.00, note: 'Kokos və çəhrayı giləmeyvə aromalı kokteyl' },
+      { cat: 'kokteyl', name: 'Frozen', price: 6.00, note: 'Əzilmiş buz və meyvə şirəsi ilə sərinlik' },
+      { cat: 'kokteyl', name: 'Marakuya-lime mocktail', price: 7.00, note: 'Ekzotik marakuya və turşməzə laym balansı' },
+      { cat: 'kokteyl', name: 'Exotic Paradise', price: 8.00, note: 'Ananas, manqo və sitrus tropik buketi' },
+      { cat: 'kokteyl', name: 'Fındıq mocha', price: 8.00, note: 'Qovrulmuş fındıq və şokoladlı soyuq kokteyl' },
+      { cat: 'kokteyl', name: 'Mango-ananas soyuq çay', price: 7.00, note: 'Təbii dəmləmə çay, manqo və ananas dilimləri' },
+
+      // 6. Alko-kokteyl
+      { cat: 'alko-kokteyl', name: 'Long Iceland', price: 8.00, note: 'Klassik çoxkomponentli sərin axşam kokteyli' },
+      { cat: 'alko-kokteyl', name: 'Malibu Cocktail (Tequila, cin)', price: 8.00, note: 'Tequila, cin və tropik kokos harmoniyası' },
+      { cat: 'alko-kokteyl', name: 'Sunrise on the Beach', price: 7.50, note: 'Portağal və nar rəng keçidli günəşli kokteyl' },
+      { cat: 'alko-kokteyl', name: 'Mojito Fire', price: 7.00, note: 'Nanə, laym və xüsusi alovlu təqdimat' },
+      { cat: 'alko-kokteyl', name: 'Barbie Cocktail', price: 7.00, note: 'Zərif çəhrayı tonlu meyvəli axşam kokteyli' },
+
+      // 7. Moxito
+      { cat: 'moxito', name: 'Classic Moxito', price: 7.00, note: 'Təzə nanə, laym, qəhvəyi şəkər və qazlı su' },
+      { cat: 'moxito', name: 'Strawberry Moxito', price: 7.00, note: 'Təzə çiyələk dilimləri və nanəli sərinlik' },
+      { cat: 'moxito', name: 'Blueberry Moxito', price: 7.00, note: 'Meşə qaragiləsi və laym təravəti' },
+      { cat: 'moxito', name: 'Watermelon Moxito', price: 7.00, note: 'Şirəli qarpız və nanəli yay moxitosu' },
+      { cat: 'moxito', name: 'Mango Moxito', price: 7.00, note: 'Yetişmiş manqo və laym qarışığı' },
+      { cat: 'moxito', name: 'Ananas Moxito', price: 7.00, note: 'Tropik ananas şirəsi və təzə nanə' },
+      { cat: 'moxito', name: 'Raspberry Moxito', price: 7.00, note: 'Ətirli moruq gilələri ilə köpüklü moxito' },
+      { cat: 'moxito', name: 'Marakuya Moxito', price: 7.00, note: 'Ekzotik marakuya toxumları və laym' },
+
+      // 8. Sərin İçəcəklər & Enerji
+      { cat: 'serin-ickiler', name: 'CocaCola Tənəkə (0.5 L)', price: 3.00, note: 'Buz kimi soyuq klassik qazlı içki' },
+      { cat: 'serin-ickiler', name: 'CocaCola (0.5 L)', price: 2.50, note: 'Sərinləşdirici klassik kola' },
+      { cat: 'serin-ickiler', name: 'Sprite (0.5 L)', price: 2.50, note: 'Limon və laym dadlı şəffaf qazlı içki' },
+      { cat: 'serin-ickiler', name: 'Natura meyvə şirəsi', price: 1.50, note: 'Təbii meyvə nektarı çeşidləri' },
+      { cat: 'serin-ickiler', name: 'Fuse Tea (0.5 L)', price: 2.50, note: 'Soyuq çay və meyvə ekstraktı' },
+      { cat: 'serin-ickiler', name: 'Cappy - Şaftalı (0.5 L)', price: 2.50, note: 'Şirəli şaftalı nektarı' },
+      { cat: 'serin-ickiler', name: 'Cappy - Qarışıq subtropik meyvə (0.5 L)', price: 2.50, note: 'Multimeyvə vitamin qarışığı' },
+      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.5 L) Limon', price: 2.50, note: 'Təravətli limonlu soyuq çay' },
+      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.5 L) Şaftalı', price: 2.50, note: 'Şirin şaftalılı soyuq çay' },
+      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.35 L) Limon', price: 2.00, note: 'Limonlu soyuq çay (kompakt ölçü)' },
+      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.35 L) Şaftalı', price: 2.00, note: 'Şaftalılı soyuq çay (kompakt ölçü)' },
+      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.5 L) Mango-ananas', price: 2.50, note: 'Tropik manqo və ananaslı soyuq çay' },
+      { cat: 'serin-ickiler', name: 'Power Plus böyük', price: 2.00, note: 'Yüksək tonus verən enerji içkisi' },
+      { cat: 'serin-ickiler', name: 'Fanta (0.5 L)', price: 2.50, note: 'Parlaq portağal dadlı qazlı içki' },
+      { cat: 'serin-ickiler', name: 'Buzz Cola', price: 2.00, note: 'Sərinləşdirici kola içkisi' },
+      { cat: 'serin-ickiler', name: 'Badamlı (qazlı, qazsız)', price: 1.50, note: 'Təbii mineral süfrə suyu' },
+      { cat: 'serin-ickiler', name: 'Power Plus balaca', price: 1.50, note: 'Kompakt enerji içkisi' },
+      { cat: 'serin-ickiler', name: 'Dark Horse enerji içəcəyi', price: 2.00, note: 'Gecə oyunları üçün güclü enerji içkisi' },
+      { cat: 'serin-ickiler', name: 'Sirab qazlı (0.5 L)', price: 1.50, note: 'Naxçıvanın təbii qazlı mineral suyu' },
+      { cat: 'serin-ickiler', name: 'Sirab qazsız (0.5 L)', price: 1.50, note: 'Təbii bulaq mineral suyu' },
+      { cat: 'serin-ickiler', name: 'Sirab qazoz limon', price: 1.50, note: 'Limon ətirli sərin qazoz' },
+      { cat: 'serin-ickiler', name: 'Sirab qazoz alma', price: 1.50, note: 'Yaşıl alma ətirli sərin qazoz' },
+
+      // 9. Çaylar & Mürəbbələr
+      { cat: 'cay-murebbe', name: 'Çay (birnəfərlik, takeaway)', price: 2.00, note: 'Təzə dəmlənmiş ətirli qara çay' },
+      { cat: 'cay-murebbe', name: 'Çiyələk mürəbbəsi', price: 7.00, note: 'Bütöv giləli ev üsulu çiyələk mürəbbəsi' },
+      { cat: 'cay-murebbe', name: 'Ağ gilas mürəbbəsi', price: 8.00, note: 'Ənənəvi kəhrəba rəngli ağ gilas mürəbbəsi' },
+
+      // 10. Atışdırmalıqlar
+      { cat: 'atisdirmaliq', name: 'Çips balaca porsiya', price: 3.50, note: 'Xırtıldayan ədviyyatlı kartof çipsi' },
+      { cat: 'atisdirmaliq', name: 'Çips böyük porsiya', price: 4.50, note: 'Dostlarla bölüşmək üçün böyük porsiya çips' },
+      { cat: 'atisdirmaliq', name: 'Suxari', price: 2.50, note: 'Sarımsaqlı və ədviyyatlı xırtıldayan suxari' },
+      { cat: 'atisdirmaliq', name: 'Fıstıq', price: 3.00, note: 'Qovrulmuş duzlu yerfıstığı' },
+      { cat: 'atisdirmaliq', name: 'Saçaq pendir', price: 3.00, note: 'Təbii hisə verilmiş və ya klassik saçaq pendir' },
+      { cat: 'atisdirmaliq', name: 'Popkorn', price: 4.00, note: 'Kino axşamları üçün isti və xırtıldayan popkorn' },
+
+      // 11. KvizArt Menu
+      { cat: 'kvizart', name: '4 Çay + 4 San Sebastián', price: 30.00, note: 'Kviz komandası üçün 4 isti çay və 4 San Sebastián' },
+      { cat: 'kvizart', name: '4 Çay + 4 Trileçe', price: 27.00, note: '4 nəfərlik çay dəstgahı və 4 porsiya Trileçe' },
+      { cat: 'kvizart', name: '4 Çay + Gilas mürəbbəsi', price: 13.00, note: '4 stəkan dəmləmə çay və ağ gilas mürəbbəsi' },
+      { cat: 'kvizart', name: '4 Çay + Çiyələk mürəbbəsi', price: 12.00, note: '4 stəkan dəmləmə çay və çiyələk mürəbbəsi' }
+    ];
+
+    const CreativeMenu = (() => {
+      const mState = {
+        cat: 'all',
+        query: '',
+        tray: []
+      };
+
+      const catMap = Object.fromEntries(MENU_CATEGORIES.map((c) => [c.id, c]));
+
+      function getTrayEntry(name) {
+        return mState.tray.find((entry) => entry.name === name) || null;
+      }
+
+      function getTrayCount() {
+        return mState.tray.reduce((sum, entry) => sum + entry.qty, 0);
+      }
+
+      function getTrayTotal() {
+        return mState.tray.reduce((sum, entry) => sum + entry.price * entry.qty, 0);
+      }
+
+      function formatOrderLines() {
+        return mState.tray.map((entry) => `${entry.name} ${entry.price.toFixed(2)} ₼ x ${entry.qty}`);
+      }
+
+      function detectFlavorPalette(item) {
+        const n = item.name.toLowerCase();
+        if (n.includes('blue') || n.includes('ocean')) {
+          return { main: '#1E88E5', light: '#90CAF9', foam: '#E3F2FD', garnish: '🌊' };
+        }
+        if (n.includes('lavender')) {
+          return { main: '#8E6CEF', light: '#D1C4E9', foam: '#F3E5F5', garnish: '🪻' };
+        }
+        if (n.includes('strawberry') || n.includes('çiyələk') || n.includes('barbie')) {
+          return { main: '#E53965', light: '#F8BBD0', foam: '#FFF0F5', garnish: '🍓' };
+        }
+        if (n.includes('raspberry') || n.includes('moruq')) {
+          return { main: '#C2185B', light: '#F48FB1', foam: '#FCE4EC', garnish: '🫐' };
+        }
+        if (n.includes('blueberry')) {
+          return { main: '#3949AB', light: '#9FA8DA', foam: '#E8EAF6', garnish: '🫐' };
+        }
+        if (n.includes('watermelon') || n.includes('qarpız')) {
+          return { main: '#E53935', light: '#FFCDD2', foam: '#E8F5E9', garnish: '🍉' };
+        }
+        if (n.includes('mango') || n.includes('ananas') || n.includes('exotic') || n.includes('sunrise') || n.includes('fanta') || n.includes('pumpkin')) {
+          return { main: '#FB8C00', light: '#FFE082', foam: '#FFF8E1', garnish: '🥭' };
+        }
+        if (n.includes('banan')) {
+          return { main: '#FBC02D', light: '#FFF59D', foam: '#FFFDE7', garnish: '🍌' };
+        }
+        if (n.includes('matcha') || n.includes('alma')) {
+          return { main: '#43A047', light: '#A5D6A7', foam: '#E8F5E9', garnish: '🍵' };
+        }
+        if (n.includes('white chocolate') || n.includes('vanil') || n.includes('sahlep') || n.includes('raff')) {
+          return { main: '#D7B899', light: '#F5E6D3', foam: '#FFFFFF', garnish: '🤍' };
+        }
+        if (n.includes('caramel') || n.includes('miel') || n.includes('ballı') || n.includes('trileçe') || n.includes('san sebastián')) {
+          return { main: '#B86B28', light: '#E6B57E', foam: '#FFF6E9', garnish: '🍯' };
+        }
+        if (n.includes('velvet') || n.includes('gilas') || n.includes('fire')) {
+          return { main: '#9E1C28', light: '#E57373', foam: '#FFEBEE', garnish: '🍒' };
+        }
+        if (n.includes('chocolate') || n.includes('mocha') || n.includes('şokolad') || n.includes('fındıq')) {
+          return { main: '#4E2A15', light: '#8D5B3C', foam: '#F3E5D8', garnish: '🍫' };
+        }
+        return { main: '#6F4226', light: '#C49A6C', foam: '#FBF5EE', garnish: '☕' };
+      }
+
+      function buildMenuItemSvg(item) {
+        const p = detectFlavorPalette(item);
+        const n = item.name.toLowerCase();
+
+        if (item.cat === 'sirniyyat') {
+          if (n.includes('bilincik')) {
+            return `<svg viewBox="0 0 120 120" aria-hidden="true">
+              <ellipse cx="60" cy="96" rx="44" ry="10" fill="#D9C5AD"/>
+              <rect x="26" y="64" width="68" height="16" rx="8" fill="#E3A857" stroke="#A66B24" stroke-width="2"/>
+              <rect x="30" y="50" width="60" height="15" rx="7.5" fill="#F0BC68" stroke="#A66B24" stroke-width="2"/>
+              <path d="M 34,52 Q 48,64 60,54 T 86,52" fill="none" stroke="#4E2A15" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="60" cy="44" r="6" fill="#E53965"/>
+            </svg>`;
+          }
+          if (n.includes('grolet')) {
+            return `<svg viewBox="0 0 120 120" aria-hidden="true">
+              <ellipse cx="60" cy="96" rx="42" ry="9" fill="#D9C5AD"/>
+              <path d="M 32,74 C 32,46 46,34 60,34 C 74,34 88,46 88,74 C 88,86 76,92 60,92 C 44,92 32,86 32,74 Z" fill="${p.main}"/>
+              <path d="M 44,44 C 50,38 62,38 68,44" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" opacity="0.65"/>
+              <path d="M 60,34 C 62,24 72,22 76,26 C 70,30 64,32 60,34 Z" fill="#43A047"/>
+            </svg>`;
+          }
+          return `<svg viewBox="0 0 120 120" aria-hidden="true">
+            <ellipse cx="60" cy="96" rx="46" ry="10" fill="#D9C5AD"/>
+            <path d="M 24,84 L 94,84 L 94,52 L 24,64 Z" fill="${p.light}" stroke="${p.main}" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M 24,64 L 68,36 L 94,52 L 24,64 Z" fill="${p.main}"/>
+            <path d="M 24,72 L 94,65" stroke="${p.foam}" stroke-width="4" opacity="0.85"/>
+            <circle cx="66" cy="46" r="5" fill="#E53965"/>
+          </svg>`;
+        }
+
+        if (item.cat === 'isti-kofe') {
+          return `<svg viewBox="0 0 120 120" aria-hidden="true">
+            <ellipse cx="56" cy="96" rx="38" ry="8" fill="#D6C2AA"/>
+            <path d="M 82,54 C 98,54 98,76 81,77" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+            <path d="M 28,46 C 28,78 40,92 56,92 C 72,92 84,78 84,46 Z" fill="#FFFFFF" stroke="#E0D3C3" stroke-width="2"/>
+            <ellipse cx="56" cy="46" rx="28" ry="7.5" fill="${p.main}"/>
+            <path d="M 46,46 C 51,43 56,44 56,47 C 56,44 61,43 66,46 C 61,49 56,50 56,51 C 56,50 51,49 46,46 Z" fill="${p.foam}"/>
+            <path d="M 44,32 Q 40,24 45,16" fill="none" stroke="${p.light}" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M 56,30 Q 52,20 57,12" fill="none" stroke="${p.light}" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M 68,32 Q 64,24 69,16" fill="none" stroke="${p.light}" stroke-width="2.6" stroke-linecap="round"/>
+          </svg>`;
+        }
+
+        if (item.cat === 'soyuq-kofe') {
+          return `<svg viewBox="0 0 120 120" aria-hidden="true">
+            <line x1="74" y1="16" x2="62" y2="54" stroke="#E53965" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M 36,34 L 84,34 L 78,96 C 77,100 73,102 60,102 C 47,102 43,100 42,96 Z" fill="${p.light}" stroke="#FFFFFF" stroke-width="2.5"/>
+            <path d="M 39,58 L 81,58 L 78,96 C 77,100 73,102 60,102 C 47,102 43,100 42,96 Z" fill="${p.main}" opacity="0.88"/>
+            <ellipse cx="60" cy="34" rx="24" ry="6" fill="${p.foam}"/>
+            <rect x="46" y="42" width="12" height="12" rx="3" fill="#FFFFFF" opacity="0.72" transform="rotate(12 52 48)"/>
+            <rect x="62" y="45" width="11" height="11" rx="3" fill="#FFFFFF" opacity="0.65" transform="rotate(-14 67 50)"/>
+          </svg>`;
+        }
+
+        if (item.cat === 'milkshake') {
+          return `<svg viewBox="0 0 120 120" aria-hidden="true">
+            <line x1="72" y1="14" x2="62" y2="52" stroke="#D81B60" stroke-width="5" stroke-linecap="round"/>
+            <path d="M 38,44 L 82,44 L 75,98 C 74,102 68,104 60,104 C 52,104 46,102 45,98 Z" fill="${p.main}"/>
+            <path d="M 36,44 C 36,28 48,22 60,22 C 72,22 84,28 84,44 Z" fill="#FFFFFF"/>
+            <circle cx="60" cy="20" r="6" fill="#E53965"/>
+            <path d="M 44,54 Q 60,64 76,54" fill="none" stroke="${p.foam}" stroke-width="4" stroke-linecap="round" opacity="0.75"/>
+          </svg>`;
+        }
+
+        if (item.cat === 'moxito') {
+          return `<svg viewBox="0 0 120 120" aria-hidden="true">
+            <line x1="74" y1="14" x2="62" y2="54" stroke="#1B5E20" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M 38,32 L 82,32 L 77,98 L 43,98 Z" fill="${p.light}" stroke="#FFFFFF" stroke-width="2.5"/>
+            <path d="M 40,52 L 80,52 L 77,98 L 43,98 Z" fill="${p.main}" opacity="0.82"/>
+            <circle cx="46" cy="32" r="11" fill="#7CB342" stroke="#DCE775" stroke-width="2"/>
+            <ellipse cx="64" cy="46" rx="9" ry="5" fill="#2E7D32" transform="rotate(-22 64 46)"/>
+            <circle cx="52" cy="72" r="3" fill="#FFFFFF" opacity="0.8"/>
+            <circle cx="66" cy="64" r="2.5" fill="#FFFFFF" opacity="0.8"/>
+            <circle cx="58" cy="84" r="3.5" fill="#FFFFFF" opacity="0.75"/>
+          </svg>`;
+        }
+
+        if (item.cat === 'kokteyl' || item.cat === 'alko-kokteyl') {
+          return `<svg viewBox="0 0 120 120" aria-hidden="true">
+            <line x1="60" y1="68" x2="60" y2="100" stroke="#FFFFFF" stroke-width="4.5"/>
+            <ellipse cx="60" cy="101" rx="20" ry="5" fill="#E0E0E0"/>
+            <path d="M 28,32 L 92,32 L 60,70 Z" fill="${p.main}" stroke="#FFFFFF" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M 36,42 L 84,42 L 60,70 Z" fill="${p.light}" opacity="0.78"/>
+            <circle cx="88" cy="30" r="10" fill="#FFB300" stroke="#FFF8E1" stroke-width="2"/>
+            <line x1="42" y1="18" x2="62" y2="48" stroke="#E53965" stroke-width="3.5" stroke-linecap="round"/>
+          </svg>`;
+        }
+
+        if (item.cat === 'serin-ickiler') {
+          return `<svg viewBox="0 0 120 120" aria-hidden="true">
+            <rect x="40" y="26" width="40" height="74" rx="10" fill="${p.main}" stroke="#FFFFFF" stroke-width="2.5"/>
+            <rect x="44" y="20" width="32" height="7" rx="3.5" fill="#CFD8DC"/>
+            <path d="M 40,54 Q 60,46 80,54 L 80,74 Q 60,82 40,74 Z" fill="#FFFFFF" opacity="0.24"/>
+            <circle cx="52" cy="40" r="3" fill="#FFFFFF" opacity="0.75"/>
+            <circle cx="68" cy="84" r="3.5" fill="#FFFFFF" opacity="0.75"/>
+            <path d="M 62,38 L 54,58 L 62,58 L 57,76" fill="none" stroke="#FFF59D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>`;
+        }
+
+        if (item.cat === 'cay-murebbe') {
+          if (n.includes('mürəbbə')) {
+            return `<svg viewBox="0 0 120 120" aria-hidden="true">
+              <ellipse cx="60" cy="94" rx="34" ry="8" fill="#D7CCC8"/>
+              <path d="M 32,54 C 32,78 44,90 60,90 C 76,90 88,78 88,54 Z" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="2"/>
+              <ellipse cx="60" cy="54" rx="28" ry="9" fill="${p.main}"/>
+              <circle cx="52" cy="53" r="5" fill="${p.light}"/>
+              <circle cx="66" cy="55" r="5.5" fill="${p.light}"/>
+              <circle cx="59" cy="49" r="4.5" fill="${p.light}"/>
+            </svg>`;
+          }
+          return `<svg viewBox="0 0 120 120" aria-hidden="true">
+            <ellipse cx="60" cy="98" rx="36" ry="7" fill="#D7CCC8"/>
+            <path d="M 42,30 C 42,44 48,50 48,60 C 48,72 38,80 42,92 L 78,92 C 82,80 72,72 72,60 C 72,50 78,44 78,30 Z" fill="#B71C1C" stroke="#FFFFFF" stroke-width="2.5"/>
+            <path d="M 45,30 L 75,30 L 74,40 L 46,40 Z" fill="#FFF8E1" opacity="0.8"/>
+            <path d="M 54,22 Q 50,14 55,8" fill="none" stroke="#BCAAA4" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M 65,22 Q 61,14 66,8" fill="none" stroke="#BCAAA4" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>`;
+        }
+
+        if (item.cat === 'atisdirmaliq') {
+          if (n.includes('popkorn')) {
+            return `<svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle cx="46" cy="36" r="10" fill="#FFF8E1"/>
+              <circle cx="60" cy="32" r="11" fill="#FFE082"/>
+              <circle cx="74" cy="37" r="10" fill="#FFF8E1"/>
+              <path d="M 36,42 L 84,42 L 76,98 L 44,98 Z" fill="#D32F2F"/>
+              <path d="M 48,42 L 54,42 L 52,98 L 47,98 Z" fill="#FFFFFF"/>
+              <path d="M 66,42 L 72,42 L 69,98 L 64,98 Z" fill="#FFFFFF"/>
+            </svg>`;
+          }
+          return `<svg viewBox="0 0 120 120" aria-hidden="true">
+            <ellipse cx="60" cy="94" rx="40" ry="9" fill="#D7CCC8"/>
+            <path d="M 26,56 C 26,80 42,92 60,92 C 78,92 94,80 94,56 Z" fill="#5D4037"/>
+            <ellipse cx="50" cy="54" rx="14" ry="8" fill="#FFB300" transform="rotate(-15 50 54)"/>
+            <ellipse cx="70" cy="55" rx="14" ry="8" fill="#FFA000" transform="rotate(14 70 55)"/>
+            <ellipse cx="60" cy="48" rx="13" ry="7" fill="#FFD54F"/>
+          </svg>`;
+        }
+
+        return `<svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="44" fill="#3F3282" opacity="0.16"/>
+          <path d="M 34,54 L 62,54 L 58,88 L 38,88 Z" fill="#B71C1C" stroke="#FFFFFF" stroke-width="2"/>
+          <path d="M 56,66 L 94,66 L 94,48 L 56,56 Z" fill="#F6C270" stroke="#8B4513" stroke-width="2"/>
+          <rect x="26" y="24" width="68" height="22" rx="11" fill="#3F3282"/>
+          <text x="60" y="39" fill="#FFFFFF" font-size="11" font-weight="800" text-anchor="middle">4× KVİZ SET</text>
+        </svg>`;
+      }
+
+      function renderStage(catObj) {
+        const stage = $('#menuStage');
+        const particles = $('#menuParticles');
+        if (!stage || !particles) return;
+
+        stage.style.setProperty('--m-c1', catObj.c1);
+        stage.style.setProperty('--m-c2', catObj.c2);
+        stage.className = `menu-stage anim-${catObj.anim}`;
+
+        $('#menuStageBadge').textContent = `${catObj.emoji} ${catObj.label}`;
+        $('#menuStageTitle').textContent = catObj.id === 'all' ? 'Bütün Dadlar Bir Yerdə' : catObj.label;
+        $('#menuStageDesc').textContent = catObj.desc;
+
+        let dots = '';
+        for (let i = 0; i < 9; i++) {
+          const left = 6 + i * 10.5;
+          const top = 16 + ((i * 19) % 68);
+          const delay = (i * 0.42).toFixed(2);
+          dots += `<i style="left:${left}%;top:${catObj.anim === 'sparkle' ? top + '%' : 'auto'};animation-delay:${delay}s"></i>`;
+        }
+        particles.innerHTML = dots;
+
+        const artBox = $('#menuStageArt');
+        artBox.style.animation = 'none';
+        void artBox.offsetWidth;
+        artBox.style.animation = '';
+        artBox.innerHTML = `<span style="font-size:54px;line-height:1;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.28))">${catObj.emoji}</span>`;
+      }
+
+      function renderCategories() {
+        const wrap = $('#menuCats');
+        if (!wrap) return;
+
+        wrap.innerHTML = MENU_CATEGORIES.map((c) => {
+          const count = c.id === 'all'
+            ? MENU_ITEMS.length
+            : MENU_ITEMS.filter((i) => i.cat === c.id).length;
+          const isOn = mState.cat === c.id;
+          return `<button type="button" class="m-cat-btn${isOn ? ' on' : ''}" data-mcat="${c.id}" style="--cat-accent:${c.accent}">
+            <span>${c.emoji} ${esc(c.label)}</span>
+            <span class="cnt">${count}</span>
+          </button>`;
+        }).join('');
+      }
+
+      function renderCatalog() {
+        const box = $('#menuCatalog');
+        if (!box) return;
+
+        const q = mState.query.trim().toLowerCase();
+        const filtered = MENU_ITEMS.filter((item) => {
+          const matchCat = mState.cat === 'all' || item.cat === mState.cat;
+          const matchQuery = !q ||
+            item.name.toLowerCase().includes(q) ||
+            item.note.toLowerCase().includes(q) ||
+            (catMap[item.cat] && catMap[item.cat].label.toLowerCase().includes(q));
+          return matchCat && matchQuery;
+        });
+
+        $('#menuStats').textContent = `${filtered.length} məhsul göstərilir`;
+
+        if (!filtered.length) {
+          box.innerHTML = `<div class="empty">
+            <b>"${esc(mState.query)}"</b> üzrə məhsul tapılmadı. Başqa açar söz və ya kateqoriya yoxlayın.
+          </div>`;
+          return;
+        }
+
+        const groups = MENU_CATEGORIES.filter((c) => c.id !== 'all');
+        let html = '';
+        let cardIndex = 0;
+
+        groups.forEach((g) => {
+          const items = filtered.filter((it) => it.cat === g.id);
+          if (!items.length) return;
+
+          html += `
+            <div class="menu-group">
+              <div class="menu-group-head">
+                <div class="menu-group-title">
+                  <span style="font-size:24px" aria-hidden="true">${g.emoji}</span>
+                  <h3>${esc(g.label)}</h3>
+                </div>
+                <small style="color:var(--muted);font-weight:700">${items.length} çeşid</small>
+              </div>
+              <div class="menu-grid">
+                ${items.map((item) => {
+                  const delay = Math.min(cardIndex * 28, 420);
+                  cardIndex++;
+                  const entry = getTrayEntry(item.name);
+                  const actionHtml = entry
+                    ? `<div class="m-qty-box">
+                        <button type="button" data-mdec="${esc(item.name)}" aria-label="Azalt">−</button>
+                        <span>${entry.qty}</span>
+                        <button type="button" data-minc="${esc(item.name)}" aria-label="Artır">+</button>
+                      </div>`
+                    : `<button type="button" class="m-add-btn" data-madd="${esc(item.name)}">+ Sifarişə at</button>`;
+
+                  return `<article class="m-card" data-mitem="${esc(item.name)}"
+                    style="animation-delay:${delay}ms;--item-accent:${g.accent};--item-bg1:${g.bg1};--item-bg2:${g.bg2}">
+                    <div class="m-card-art">
+                      <span class="m-card-cat">${g.emoji} ${esc(g.label)}</span>
+                      ${buildMenuItemSvg(item)}
+                      <span class="m-card-price">${item.price.toFixed(2)} ₼</span>
+                    </div>
+                    <div class="m-card-body">
+                      <h4>${esc(item.name)}</h4>
+                      <p class="m-card-note">${esc(item.note)}</p>
+                      <div class="m-card-foot">
+                        <span>Ətraflı bax</span>
+                        ${actionHtml}
+                      </div>
+                    </div>
+                  </article>`;
+                }).join('')}
+              </div>
+            </div>
+          `;
+        });
+
+        box.innerHTML = html;
+      }
+
+      function renderTray() {
+        const trayEl = $('#menuTray');
+        if (!trayEl) return;
+
+        const count = getTrayCount();
+        if (!count) {
+          trayEl.classList.remove('show');
+          return;
+        }
+
+        const total = getTrayTotal();
+        trayEl.classList.add('show');
+        $('#menuTrayTitle').textContent = `Sifariş səbəti (${count} məhsul) · Ümumi məbləğ: ${total.toFixed(2)} ₼`;
+        $('#menuTrayList').textContent = formatOrderLines().join(' · ');
+      }
+
+      function addItem(name, silent = false) {
+        const item = MENU_ITEMS.find((i) => i.name === name);
+        if (!item) return;
+        const existing = getTrayEntry(name);
+        if (existing) {
+          existing.qty += 1;
+        } else {
+          mState.tray.push({ name: item.name, price: item.price, qty: 1 });
+        }
+        if (!silent) showToast(`Sifarişə əlavə edildi: ${item.name}`);
+        renderCatalog();
+        renderTray();
+      }
+
+      function changeItemQty(name, delta) {
+        const idx = mState.tray.findIndex((entry) => entry.name === name);
+        if (idx === -1) return;
+        mState.tray[idx].qty += delta;
+        if (mState.tray[idx].qty <= 0) {
+          mState.tray.splice(idx, 1);
+        }
+        renderCatalog();
+        renderTray();
+      }
+
+      function openItemModal(name) {
+        const item = MENU_ITEMS.find((i) => i.name === name);
+        if (!item) return;
+        const g = catMap[item.cat] || MENU_CATEGORIES[0];
+        const entry = getTrayEntry(item.name);
+
+        $('#mBody').innerHTML = `
+          <div style="text-align:center">
+            <div style="width:150px;height:150px;margin:0 auto 14px;border-radius:26px;display:grid;place-items:center;background:radial-gradient(circle,${g.bg1},${g.bg2})">
+              <div style="width:124px;height:124px">${buildMenuItemSvg(item)}</div>
+            </div>
+            <span style="display:inline-block;padding:4px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12.5px;font-weight:700;margin-bottom:8px">
+              ${g.emoji} ${esc(g.label)}
+            </span>
+            <h3 id="mTitle" style="margin-bottom:6px">${esc(item.name)}</h3>
+            <p style="color:var(--muted);margin-bottom:12px">${esc(item.note)}</p>
+            <div style="font:800 24px 'Fraunces',serif;color:var(--brand);margin-bottom:16px">${item.price.toFixed(2)} ₼</div>
+            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+              <button type="button" class="btn" id="mModalAddOrder">+ Sifarişə əlavə et${entry ? ` (${entry.qty})` : ''}</button>
+              <button type="button" class="btn ghost" id="mModalCheckout">Sifarişi tamamla</button>
+            </div>
+          </div>
+        `;
+        openModal();
+
+        $('#mModalAddOrder').onclick = () => {
+          addItem(item.name);
+          closeModal();
+        };
+        $('#mModalCheckout').onclick = () => {
+          if (!getTrayEntry(item.name)) addItem(item.name, true);
+          openOrderModal();
+        };
+      }
+
+      function openOrderModal() {
+        if (!mState.tray.length) {
+          showToast('Əvvəlcə menyudan məhsul seçin.');
+          return;
+        }
+
+        const now = new Date();
+        const autoTimePreview = `${ymd(now)} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        $('#mBody').innerHTML = `
+          <h3 id="mTitle">Menyu sifarişi</h3>
+          <div id="ordErr"></div>
+          <div class="f">
+            <label for="ordTeam">Komanda adı (və ya masa nömrəsi) *</label>
+            <input id="ordTeam" maxlength="80" placeholder="Məsələn: Masa 5 və ya Kviz Komandası">
+          </div>
+          <div class="f">
+            <label for="ordName">Adınız *</label>
+            <input id="ordName" autocomplete="name" maxlength="80" placeholder="Adınız">
+          </div>
+          <div class="f">
+            <label>Seçilmiş Məhsullar</label>
+            <div class="order-items-box" id="ordItemsBox"></div>
+          </div>
+          <div class="order-total-bar">
+            <span>Ümumi Məbləğ:</span>
+            <strong id="ordTotalVal">0.00 ₼</strong>
+          </div>
+          <div class="order-auto-time">
+            <span>Sifariş vaxtı (avtomatik):</span>
+            <b>${esc(autoTimePreview)}</b>
+          </div>
+          <button type="button" class="btn" id="ordSend" style="width:100%">Sifarişi göndər</button>
+        `;
+
+        renderOrderModalItems();
+        openModal();
+
+        $('#ordSend').onclick = submitOrder;
+      }
+
+      function renderOrderModalItems() {
+        const box = $('#ordItemsBox');
+        const totalEl = $('#ordTotalVal');
+        if (!box || !totalEl) return;
+
+        if (!mState.tray.length) {
+          closeModal();
+          return;
+        }
+
+        box.innerHTML = mState.tray.map((entry) => `
+          <div class="order-item-row">
+            <span class="order-item-label">${esc(entry.name)} ${entry.price.toFixed(2)} ₼ x ${entry.qty}</span>
+            <div class="order-item-controls">
+              <button type="button" data-ord-dec="${esc(entry.name)}" aria-label="Azalt">−</button>
+              <b>${entry.qty}</b>
+              <button type="button" data-ord-inc="${esc(entry.name)}" aria-label="Artır">+</button>
+            </div>
+          </div>
+        `).join('');
+
+        totalEl.textContent = `${getTrayTotal().toFixed(2)} ₼`;
+      }
+
+      function submitOrder() {
+        const teamOrTable = ($('#ordTeam')?.value || '').trim();
+        const customerName = ($('#ordName')?.value || '').trim();
+        const errBox = $('#ordErr');
+
+        if (teamOrTable.length < 1) {
+          errBox.innerHTML = '<div class="msg">Zəhmət olmasa komanda adı və ya masa nömrəsini daxil edin.</div>';
+          return;
+        }
+        if (customerName.length < 2) {
+          errBox.innerHTML = '<div class="msg">Zəhmət olmasa adınızı daxil edin.</div>';
+          return;
+        }
+        if (!mState.tray.length) {
+          errBox.innerHTML = '<div class="msg">Sifariş səbəti boşdur.</div>';
+          return;
+        }
+
+        errBox.innerHTML = '';
+        const btn = $('#ordSend');
+        btn.disabled = true;
+        btn.textContent = 'Göndərilir…';
+
+        const payload = {
+          teamOrTable,
+          customerName,
+          items: mState.tray.map((entry) => ({
+            name: entry.name,
+            price: entry.price,
+            qty: entry.qty
+          })),
+          totalAmount: getTrayTotal().toFixed(2)
+        };
+
+        const linesSnapshot = formatOrderLines();
+        const totalSnapshot = `${getTrayTotal().toFixed(2)} ₼`;
+
+        apiPost('createOrder', payload)
+          .then((r) => {
+            if (!r || !r.ok) {
+              errBox.innerHTML = `<div class="msg">${esc((r && r.error) || 'Sifariş göndərilmədi.')}</div>`;
+              btn.disabled = false;
+              btn.textContent = 'Sifarişi göndər';
+              return;
+            }
+            mState.tray = [];
+            renderCatalog();
+            renderTray();
+            showOrderDone(r.id, teamOrTable, customerName, linesSnapshot, r.total || totalSnapshot, r.createdAt);
+          })
+          .catch(() => {
+            errBox.innerHTML = '<div class="msg">Əlaqə xətası. Bir az sonra yenidən cəhd edin.</div>';
+            btn.disabled = false;
+            btn.textContent = 'Sifarişi göndər';
+          });
+      }
+
+      function showOrderDone(orderId, teamOrTable, customerName, lines, totalStr, createdAt) {
+        $('#mBody').innerHTML = `
+          <div class="done">
+            <h3>Sifariş qəbul edildi</h3>
+            <p><b>${esc(teamOrTable)}</b> · ${esc(customerName)}</p>
+            <div class="code" data-copy="${esc(orderId)}" title="Kodu kopyalamaq üçün klikləyin">${esc(orderId)}</div>
+            <div style="text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0;font-size:13.5px">
+              <div style="font-weight:700;margin-bottom:4px;color:var(--accent)">Seçilmiş Məhsullar:</div>
+              ${lines.map((l) => `<div>• ${esc(l)}</div>`).join('')}
+              <div style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);display:flex;justify-content:space-between">
+                <span>Ümumi Məbləğ:</span>
+                <b>${esc(totalStr)}</b>
+              </div>
+              ${createdAt ? `<div style="margin-top:4px;font-size:12px;color:var(--muted)">Sifariş vaxtı: ${esc(createdAt)}</div>` : ''}
+            </div>
+            <p style="margin-top:12px"><button type="button" class="btn" id="mOrdOk">Bağla</button></p>
+          </div>
+        `;
+        $('#mOrdOk').onclick = closeModal;
+      }
+
+      function init() {
+        renderStage(MENU_CATEGORIES[0]);
+        renderCategories();
+        renderCatalog();
+
+        const searchInput = $('#menuSearch');
+        const clearBtn = $('#menuSearchClear');
+
+        if (searchInput) {
+          searchInput.addEventListener('input', () => {
+            mState.query = searchInput.value;
+            clearBtn.classList.toggle('show', Boolean(mState.query));
+            renderCatalog();
+          });
+        }
+
+        if (clearBtn) {
+          clearBtn.addEventListener('click', () => {
+            mState.query = '';
+            searchInput.value = '';
+            clearBtn.classList.remove('show');
+            renderCatalog();
+            searchInput.focus();
+          });
+        }
+
+        $('#menuTrayClear')?.addEventListener('click', () => {
+          mState.tray = [];
+          renderCatalog();
+          renderTray();
+        });
+
+        $('#menuTrayOrder')?.addEventListener('click', openOrderModal);
+
+        document.addEventListener('click', (e) => {
+          const catBtn = e.target.closest('[data-mcat]');
+          if (catBtn) {
+            mState.cat = catBtn.dataset.mcat;
+            renderStage(catMap[mState.cat] || MENU_CATEGORIES[0]);
+            renderCategories();
+            renderCatalog();
+            return;
+          }
+
+          const addBtn = e.target.closest('[data-madd]');
+          if (addBtn) {
+            e.stopPropagation();
+            addItem(addBtn.dataset.madd);
+            return;
+          }
+
+          const incBtn = e.target.closest('[data-minc]');
+          if (incBtn) {
+            e.stopPropagation();
+            changeItemQty(incBtn.dataset.minc, 1);
+            return;
+          }
+
+          const decBtn = e.target.closest('[data-mdec]');
+          if (decBtn) {
+            e.stopPropagation();
+            changeItemQty(decBtn.dataset.mdec, -1);
+            return;
+          }
+
+          const ordInc = e.target.closest('[data-ord-inc]');
+          if (ordInc) {
+            changeItemQty(ordInc.dataset.ordInc, 1);
+            renderOrderModalItems();
+            return;
+          }
+
+          const ordDec = e.target.closest('[data-ord-dec]');
+          if (ordDec) {
+            changeItemQty(ordDec.dataset.ordDec, -1);
+            renderOrderModalItems();
+            return;
+          }
+
+          const cardEl = e.target.closest('[data-mitem]');
+          if (cardEl) {
+            openItemModal(cardEl.dataset.mitem);
+          }
+        });
+      }
+
+      return { init };
+    })();
+
+    /* ========================================================================
+       9. BİLDİRİŞ (TOAST) VƏ BUFERƏ KOPYALAMA KÖMƏKÇİLƏRİ
+       ======================================================================== */
+    function showToast(text) {
+      const wrap = $('#toastWrap');
+      if (!wrap) return;
+      const el = document.createElement('div');
+      el.className = 'toast';
+      el.textContent = text;
+      wrap.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transition = 'opacity 0.25s ease';
+        setTimeout(() => el.remove(), 260);
+      }, 2800);
+    }
+
+    function copyText(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(`Kod kopyalandı: ${text}`);
+      } catch (_) {
+        showToast(text);
+      }
+      ta.remove();
+    }
+  </script>
+</body>
+</html>
