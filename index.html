@@ -33,6 +33,9 @@
        1. DİZAYN TOKENLƏRİ VƏ RƏNG PALİTRASI (LIGHT & DARK MODE)
        ========================================================================== */
     :root {
+      /* Azərbaycan hərfləri (ə ü ö ğ ı İ ş ç) dəstəkləyən fallback zənciri */
+      --font-serif: 'Fraunces', 'Noto Serif', 'DejaVu Serif', Cambria, 'Times New Roman', serif;
+      --font-sans: 'Manrope', 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', Arial, system-ui, -apple-system, sans-serif;
       --bg: #FAF5EE;
       --bg-elevated: #F3EAD9;
       --surface: #FFFFFF;
@@ -100,7 +103,7 @@
       margin: 0;
       background: var(--bg);
       color: var(--ink);
-      font: 16px/1.6 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font: 16px/1.6 var(--font-sans);
       overflow-x: hidden;
       min-height: 100vh;
       display: flex;
@@ -108,7 +111,7 @@
     }
 
     h1, h2, h3, h4 {
-      font-family: 'Fraunces', Georgia, serif;
+      font-family: var(--font-serif);
       line-height: 1.15;
       margin: 0;
       color: inherit;
@@ -178,7 +181,7 @@
     }
 
     .logo {
-      font: 800 23px 'Fraunces', serif;
+      font: 800 23px var(--font-serif);
       color: var(--brand);
       text-decoration: none;
       display: inline-flex;
@@ -198,7 +201,7 @@
       color: var(--brand-ink);
       display: grid;
       place-items: center;
-      font: 800 20px 'Fraunces', serif;
+      font: 800 20px var(--font-serif);
       box-shadow: var(--shadow-sm);
     }
 
@@ -728,7 +731,7 @@
     }
 
     .day-h {
-      font: 600 20px 'Fraunces', serif;
+      font: 600 20px var(--font-serif);
       margin: 28px 0 12px;
       color: var(--accent);
     }
@@ -1712,7 +1715,7 @@
     }
 
     .order-total-bar strong {
-      font: 800 20px 'Fraunces', serif;
+      font: 800 20px var(--font-serif);
       color: var(--brand);
     }
 
@@ -1969,7 +1972,7 @@
       position: absolute; right: 22px; top: 2px; z-index: 3;
       width: 34px; height: 34px; border-radius: 50%;
       border: 1px solid var(--line); background: var(--surface); color: var(--brand);
-      font: 700 22px/1 'Manrope', sans-serif; cursor: pointer;
+      font: 700 22px/1 var(--font-sans); cursor: pointer;
       box-shadow: var(--shadow-sm);
       animation: nudge 1.4s ease-in-out infinite;
     }
@@ -2000,9 +2003,9 @@
     .cart-fab.bump .cart-fab-main { animation: fabBump 0.38s ease; }
     @keyframes fabBump { 40% { transform: scale(1.045); } }
     .cart-fab-ico { position: relative; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-size: 20px; background: rgba(255, 255, 255, 0.16); flex-shrink: 0; }
-    .cart-fab-ico b { position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: #E8B26A; color: #2B1A10; font: 800 12px/20px 'Manrope', sans-serif; text-align: center; }
+    .cart-fab-ico b { position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: #E8B26A; color: #2B1A10; font: 800 12px/20px var(--font-sans); text-align: center; }
     .cart-fab-txt { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; flex: 1; }
-    .cart-fab-txt strong { font: 800 17px 'Fraunces', serif; }
+    .cart-fab-txt strong { font: 800 17px var(--font-serif); }
     .cart-fab-txt small { font-size: 12px; opacity: 0.8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .cart-fab-go { font-weight: 800; font-size: 13.5px; padding: 8px 14px; border-radius: 999px; background: var(--brand-ink); color: var(--brand); white-space: nowrap; }
     .cart-fab-clear { width: 44px; border-radius: 50%; align-self: center; height: 44px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: 22px; cursor: pointer; box-shadow: var(--shadow-md); }
@@ -2012,10 +2015,10 @@
 
     /* Məhsul modalında say seçici */
     .pq { display: inline-flex; align-items: center; gap: 4px; padding: 5px; border-radius: 999px; background: var(--bg-elevated); border: 1px solid var(--line); margin-bottom: 14px; }
-    .pq button { width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer; font: 700 24px/1 'Manrope', sans-serif; background: var(--surface); color: var(--brand); box-shadow: var(--shadow-sm); transition: transform 0.12s ease; }
+    .pq button { width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer; font: 700 24px/1 var(--font-sans); background: var(--surface); color: var(--brand); box-shadow: var(--shadow-sm); transition: transform 0.12s ease; }
     .pq button:active { transform: scale(0.9); }
     .pq button:disabled { opacity: 0.35; cursor: default; }
-    .pq output { min-width: 52px; text-align: center; font: 800 22px 'Fraunces', serif; }
+    .pq output { min-width: 52px; text-align: center; font: 800 22px var(--font-serif); }
     .m-card-foot .m-qty-box button { min-width: 32px; min-height: 32px; }
 
     @media (prefers-reduced-motion: reduce) {
@@ -2033,6 +2036,14 @@
       .m-card-foot .m-add-btn { width: 100%; white-space: nowrap; border-radius: 999px; padding: 9px 10px; font-size: 13px; }
       .m-card-foot .m-qty-box { width: 100%; justify-content: space-between; }
     }
+
+    /* Azərbaycan əlifbası üçün mətn keyfiyyəti */
+    html { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-synthesis: none; }
+    body, button, input, select, textarea { font-family: var(--font-sans); font-variant-ligatures: none; }
+    h1, h2, h3, h4 { font-variant-ligatures: none; }
+    .hero h1 { padding: 0.12em 0 0.06em; }
+    .tag, .menu-stage-badge, .vibe-item h3 { text-transform: none; }
+    .hero .tag { text-transform: uppercase; }
   </style>
 </head>
 <body>
@@ -4041,7 +4052,7 @@
             </span>
             <h3 id="mTitle" style="margin-bottom:6px">${esc(item.name)}</h3>
             <p style="color:var(--muted);margin-bottom:12px">${esc(item.note)}</p>
-            <div style="font:800 24px 'Fraunces',serif;color:var(--brand);margin-bottom:14px">${item.price.toFixed(2)} ₼</div>
+            <div style="font:800 24px var(--font-serif);color:var(--brand);margin-bottom:14px">${item.price.toFixed(2)} ₼</div>
             <div class="pq" role="group" aria-label="Say">
               <button type="button" id="pqDec" aria-label="Azalt">−</button>
               <output id="pqVal" aria-live="polite">${pq}</output>
