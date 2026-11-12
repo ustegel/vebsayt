@@ -2175,32 +2175,54 @@
 
   <script>
     /* ========================================================================
-       0. GOOGLE APPS SCRIPT API KONFİQURASİYASI (GITHUB PAGES BACKEND ƏLAQƏSİ)
+       0. GOOGLE APPS SCRIPT API KONFİQURASİYASI (SÜRƏTLİ KEŞ + TIMEOUT)
        ======================================================================== */
     const API_URL = 'https://script.google.com/macros/s/AKfycbziig0rBRdHKOE32h9BwUQ7aoEzVG8FNgF92KiWPOG2xLrgt0RIfd1a2kmbl50H2lL0/exec';
+    const CACHE_KEY = 'ustegel_app_cache_v1';
+
+    async function fetchWithTimeout(url, options = {}, timeoutMs = 9000) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const res = await fetch(url, { ...options, signal: controller.signal, redirect: 'follow' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return await res.json();
+      } finally {
+        clearTimeout(timer);
+      }
+    }
 
     async function apiGet(action = 'getAppData') {
-      const url = `${API_URL}?action=${encodeURIComponent(action)}&_t=${Date.now()}`;
-      const res = await fetch(url, {
-        method: 'GET',
-        redirect: 'follow'
-      });
-      if (!res.ok) throw new Error('Server cavab vermədi');
-      return await res.json();
+      // Brauzer keşindən istifadəyə icazə veririk ki, Apps Script CDN sorğunu dərhal qaytarsın
+      const url = `${API_URL}?action=${encodeURIComponent(action)}`;
+      return await fetchWithTimeout(url, { method: 'GET' }, 9000);
     }
 
     async function apiPost(action, payload) {
-      // text/plain istifadə edirik ki, brauzer CORS preflight (OPTIONS) sorğusu göndərməsin
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        redirect: 'follow',
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8'
+      return await fetchWithTimeout(
+        API_URL,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action, payload })
         },
-        body: JSON.stringify({ action, payload })
-      });
-      if (!res.ok) throw new Error('Server cavab vermədi');
-      return await res.json();
+        12000
+      );
+    }
+
+    function readClientCache() {
+      try {
+        const raw = sessionStorage.getItem(CACHE_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function writeClientCache(data) {
+      try {
+        sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+      } catch (_) {}
     }
 
     /* ========================================================================
@@ -2492,18 +2514,120 @@
     })();
 
     /* ========================================================================
-       3. SERVERDƏN MƏLUMATLARIN YÜKLƏNMƏSİ (GOOGLE SHEETS API)
+       3. SERVERDƏN MƏLUMATLARIN YÜKLƏNMƏSİ (ANI KEŞ + ARXA PLAN YENİLƏNMƏSİ)
        ======================================================================== */
+    function fallbackBootstrapData() {
+      const today = ymd(new Date());
+      return {
+        ok: true,
+        today,
+        settings: {
+          CAFE_NAME: 'Üstəgəl Kafe',
+          TAGLINE: 'Coffee • Events • Games',
+          WORKING_HOURS: 'Hər gün 10:00 – 23:00',
+          ADDRESS: 'Bakı şəhəri',
+          PHONE: '+994 50 000 00 00',
+          RESERVATION_DAYS_AHEAD: 30,
+          MAX_GUESTS: 12,
+          SLOT_MINUTES: 60,
+          OPEN_HOUR: 10,
+          CLOSE_HOUR: 23
+        },
+        events: []
+      };
+    }
+
     function loadInitialData() {
+      // 1) Keşdə məlumat varsa 0ms-də ekrana veririk
+      const cached = readClientCache();
+      if (cached && cached.settings) {
+        init(cached, true);
+      }
+
+      // 2) Paralel olaraq Google Sheets-dən ən son məlumatı çəkirik
       apiGet('getAppData')
         .then((d) => {
           if (!d || d.ok === false) throw new Error((d && d.error) || 'Məlumat oxunmadı');
-          init(d);
+          writeClientCache(d);
+          init(d, false);
         })
         .catch(() => {
-          ['#homeEvents', '#evList'].forEach((sel) => {
-            $(sel).innerHTML = '<div class="empty">Məlumatlar yüklənmədi. Səhifəni yeniləyin.</div>';
-          });
+          if (!S.data) {
+            init(fallbackBootstrapData(), false);
+            ['#homeEvents', '#evList'].forEach((sel) => {
+              const el = $(sel);
+              if (el) el.innerHTML = '<div class="empty">Tədbirlər yüklənmədi. İnternet bağlantısını yoxlayın və ya səhifəni yeniləyin.</div>';
+            });
+          }
+        });
+    }
+
+    let menuInitialized = false;
+
+    function init(d, fromCache = false) {
+      S.data = d;
+      const s = d.settings || {};
+
+      $('#heroTitle').textContent = s.CAFE_NAME || 'Üstəgəl Kafe';
+      $('#tagline').textContent = s.TAGLINE || 'Coffee • Events • Games';
+      $('#footCopy').textContent = `© ${new Date().getFullYear()} ${s.CAFE_NAME || 'Üstəgəl Kafe'} — ${s.TAGLINE || 'Coffee • Events • Games'}`;
+
+      const cafeTitle = s.CAFE_NAME || 'Üstəgəl Kafe';
+      const iconLogo = s.ICON_LOGO_URL || DEFAULT_ICON_LOGO;
+      if (s.LOGO_URL) {
+        $('#logo').innerHTML =
+          `<img class="logo-full" alt="${esc(cafeTitle)}" src="${esc(s.LOGO_URL)}">` +
+          `<img class="logo-icon" alt="${esc(cafeTitle)}" src="${esc(iconLogo)}">`;
+      } else {
+        $('#logo').innerHTML =
+          `<img class="logo-icon logo-icon-desktop" alt="${esc(cafeTitle)}" src="${esc(iconLogo)}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">` +
+          `<span class="logo-mark" style="display:none" aria-hidden="true">+</span>` +
+          `<span class="logo-text" id="logoTxt">${esc(s.CAFE_NAME || 'Üstəgəl')}</span>`;
+      }
+
+      const menu = s.MENU_URL || 'http://ustegel.github.io/menu';
+      const navMenuEl = $('#navMenu');
+      const heroMenuEl = $('#heroMenu');
+      if (navMenuEl && navMenuEl.tagName === 'A') navMenuEl.href = menu;
+      if (heroMenuEl && heroMenuEl.tagName === 'A') heroMenuEl.href = menu;
+      $('#phone2').textContent = s.PHONE || '';
+
+      CoffeeCompanion.configureFromSettings(s);
+
+      const infoItems = [
+        ['İş saatları', s.WORKING_HOURS],
+        ['Ünvan', s.ADDRESS],
+        ['Telefon', s.PHONE]
+      ].filter((x) => x[1]);
+
+      let infoHtml = infoItems
+        .map((x) => `<div><b>${x[0]}</b>${esc(x[1])}</div>`)
+        .join('');
+
+      if (s.INSTAGRAM_URL) {
+        infoHtml += `<div><b>Instagram</b><a href="${esc(s.INSTAGRAM_URL)}" target="_blank" rel="noopener">Bizi izləyin →</a></div>`;
+      }
+      $('#info').innerHTML = infoHtml;
+
+      buildChips();
+      renderHome();
+      renderEvents();
+      initReserveForm();
+
+      if (!menuInitialized) {
+        menuInitialized = true;
+        CreativeMenu.init();
+      }
+    }
+
+    // Səhifə açılan kimi menyunu və sorğunu dərhal işə salırıq
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!menuInitialized) {
+        menuInitialized = true;
+        CreativeMenu.init();
+      }
+      loadInitialData();
+    });
         });
     }
 
