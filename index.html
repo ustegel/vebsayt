@@ -1170,13 +1170,170 @@
     }
 
     /* ==========================================================================
-       9. KREATİV MENYU BÖLMƏSİ, KATEQORİYA SLAYDERİ VƏ ÜZƏN SƏBƏT POP-UP
+       9. KREATİV MENYU BÖLMƏSİ, KATEQORİYA ANİMASİYALARI VƏ MƏHSUL KARTLARI
        ========================================================================== */
+    .menu-stage {
+      position: relative;
+      border-radius: var(--radius-xl);
+      padding: 26px 28px;
+      margin-bottom: 24px;
+      color: #FBEFE0;
+      background: linear-gradient(135deg, var(--m-c1, #4A2A17) 0%, var(--m-c2, #241207) 100%);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+      transition: background 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s ease;
+    }
+
+    .menu-stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.16) 0%, transparent 62%);
+      pointer-events: none;
+    }
+
+    .menu-stage-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .menu-stage-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      margin-bottom: 10px;
+    }
+
+    .menu-stage h2 {
+      font-size: clamp(26px, 4.5vw, 38px);
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    .menu-stage p {
+      font-size: 15px;
+      opacity: 0.9;
+      max-width: 52ch;
+    }
+
+    .menu-stage-art {
+      position: relative;
+      z-index: 2;
+      width: 118px;
+      height: 118px;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      backdrop-filter: blur(6px);
+      animation: menuStagePop 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes menuStagePop {
+      from {
+        opacity: 0;
+        transform: scale(0.86) rotate(-4deg);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    .menu-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .menu-particles i {
+      position: absolute;
+      font-style: normal;
+      opacity: 0;
+    }
+
+    .anim-steam .menu-particles i {
+      bottom: -10px;
+      width: 14px;
+      height: 46px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 248, 238, 0.45) 0%, transparent 72%);
+      filter: blur(4px);
+      animation: mSteamRise 3.8s infinite ease-in-out;
+    }
+
+    @keyframes mSteamRise {
+      0% { transform: translateY(10px) scaleX(0.8); opacity: 0; }
+      35% { opacity: 0.7; }
+      100% { transform: translateY(-130px) scaleX(1.5); opacity: 0; }
+    }
+
+    .anim-ice .menu-particles i {
+      top: -16px;
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      background: rgba(224, 247, 255, 0.32);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      animation: mIceDrift 4.8s infinite ease-in-out;
+    }
+
+    @keyframes mIceDrift {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+      25% { opacity: 0.85; }
+      100% { transform: translateY(155px) rotate(135deg); opacity: 0; }
+    }
+
+    .anim-bubbles .menu-particles i {
+      bottom: -12px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.16);
+      animation: mBubbleRise 3.2s infinite ease-in;
+    }
+
+    @keyframes mBubbleRise {
+      0% { transform: translateY(0) scale(0.6); opacity: 0; }
+      30% { opacity: 0.85; }
+      100% { transform: translateY(-150px) scale(1.25); opacity: 0; }
+    }
+
+    .anim-sparkle .menu-particles i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #FFF3D1;
+      box-shadow: 0 0 10px #FFE082;
+      animation: mSparkleTwinkle 2.8s infinite ease-in-out;
+    }
+
+    @keyframes mSparkleTwinkle {
+      0%, 100% { transform: scale(0.3); opacity: 0; }
+      50% { transform: scale(1.25); opacity: 0.9; }
+    }
+
     .menu-controls {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 20px;
+      gap: 14px;
+      margin-bottom: 24px;
     }
 
     .menu-search-row {
@@ -1190,7 +1347,7 @@
     .menu-search-box {
       position: relative;
       flex: 1 1 260px;
-      max-width: 440px;
+      max-width: 420px;
     }
 
     .menu-search-box input {
@@ -1237,48 +1394,17 @@
       color: var(--muted);
     }
 
-    /* Sağa doğru sürüşdürülə bilən (Horizontal Slider) kateqoriya zolağı */
-    .menu-cats-slider {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .menu-cats-slider::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 4px;
-      width: 44px;
-      background: linear-gradient(to right, transparent, var(--bg) 88%);
-      pointer-events: none;
-      border-radius: 0 999px 999px 0;
-    }
-
     .menu-cats {
       display: flex;
       gap: 8px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scroll-behavior: smooth;
-      scrollbar-width: none;
-      padding: 4px 44px 6px 2px;
-      width: 100%;
-    }
-
-    .menu-cats::-webkit-scrollbar {
-      display: none;
+      flex-wrap: wrap;
     }
 
     .m-cat-btn {
-      flex: 0 0 auto;
-      white-space: nowrap;
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      padding: 9px 15px;
+      padding: 8px 14px;
       border-radius: 999px;
       border: 1px solid var(--line);
       background: var(--surface);
@@ -1499,40 +1625,6 @@
       background: rgba(255, 255, 255, 0.32);
     }
 
-    /* Detal modalında böyük + / − say tənzimləyicisi */
-    .modal-qty-stepper {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      padding: 7px 14px;
-      border-radius: 999px;
-      background: var(--bg);
-      border: 1.5px solid var(--accent);
-      font-weight: 800;
-      font-size: 17px;
-    }
-
-    .modal-qty-stepper button {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 0;
-      background: var(--brand);
-      color: var(--brand-ink);
-      font-size: 19px;
-      font-weight: 800;
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      line-height: 1;
-      transition: transform 0.14s ease, background 0.16s ease;
-    }
-
-    .modal-qty-stepper button:hover {
-      background: var(--brand-hover);
-      transform: scale(1.06);
-    }
-
     .order-items-box {
       border: 1.5px solid var(--line);
       border-radius: 12px;
@@ -1650,61 +1742,14 @@
       flex-wrap: wrap;
     }
 
-    /* Ekranın alt orta hissəsində üzən (Floating) Səbət Pop-up düyməsi */
-    .floating-cart-pill {
-      position: fixed;
-      left: 50%;
-      bottom: 20px;
-      transform: translate(-50%, 130%);
-      z-index: 50;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 20px;
-      border-radius: 999px;
-      border: 1.5px solid rgba(255, 255, 255, 0.22);
-      background: var(--brand);
-      color: var(--brand-ink);
-      font-weight: 800;
-      font-size: 14.5px;
-      cursor: pointer;
-      box-shadow: 0 14px 34px rgba(24, 13, 6, 0.34);
-      opacity: 0;
-      pointer-events: none;
-      white-space: nowrap;
-      transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease, background 0.18s ease;
-    }
-
-    .floating-cart-pill.show {
-      transform: translate(-50%, 0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .floating-cart-pill:hover {
-      background: var(--brand-hover);
-      transform: translate(-50%, -2px);
-    }
-
-    .floating-cart-badge {
-      display: inline-grid;
-      place-items: center;
-      min-width: 24px;
-      height: 24px;
-      padding: 0 7px;
-      border-radius: 999px;
-      background: #FFFFFF;
-      color: #2B1A10;
-      font-size: 12.5px;
-      font-weight: 800;
-    }
-
     @media (max-width: 640px) {
-      .floating-cart-pill {
-        bottom: 14px;
-        padding: 11px 16px;
-        font-size: 13.5px;
-        gap: 9px;
+      .menu-stage {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+      .menu-stage-art {
+        width: 86px;
+        height: 86px;
       }
       .menu-grid {
         grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
@@ -2044,7 +2089,16 @@
     <!-- 2. KREATİV MENYU SƏHİFƏSİ (MENU) -->
     <section class="page" id="p-menu">
       <div class="wrap">
-        <!-- Axtarış və Üfüqi Sürüşdürülən Kateqoriya Keçidləri -->
+        <div class="menu-stage anim-steam" id="menuStage">
+          <div class="menu-particles" id="menuParticles" aria-hidden="true"></div>
+          <div class="menu-stage-copy">
+            <div class="menu-stage-badge" id="menuStageBadge">☕ Üstəgəl Kafe Menyusu</div>
+            <h2 id="menuStageTitle">Bütün Dadlar Bir Yerdə</h2>
+            <p id="menuStageDesc">Təzə qovrulmuş kofelər, ev üsulu desertlər, sərinləşdirici moxitolar və KvizArt gecələrinə özəl setlər.</p>
+          </div>
+          <div class="menu-stage-art" id="menuStageArt" aria-hidden="true"></div>
+        </div>
+
         <div class="menu-controls">
           <div class="menu-search-row">
             <div class="menu-search-box">
@@ -2053,9 +2107,7 @@
             </div>
             <div class="menu-stats" id="menuStats">100 məhsul</div>
           </div>
-          <div class="menu-cats-slider">
-            <div class="menu-cats" id="menuCats" role="tablist" aria-label="Menyu kateqoriyaları"></div>
-          </div>
+          <div class="menu-cats" id="menuCats" role="tablist" aria-label="Menyu kateqoriyaları"></div>
         </div>
 
         <div id="menuCatalog"></div>
@@ -2164,65 +2216,36 @@
     </div>
   </div>
 
-  <!-- Ekranın alt mərkəzində üzən səbət pop-up düyməsi -->
-  <button type="button" class="floating-cart-pill" id="floatingCartPill" aria-label="Səbətə bax və sifarişi təsdiqlə">
-    <span class="floating-cart-badge" id="floatingCartCount">0</span>
-    <span>Səbət · <span id="floatingCartTotal">0.00 ₼</span></span>
-    <span aria-hidden="true">→</span>
-  </button>
-
   <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
 
   <script>
     /* ========================================================================
-       0. GOOGLE APPS SCRIPT API KONFİQURASİYASI (SÜRƏTLİ KEŞ + TIMEOUT)
+       0. GOOGLE APPS SCRIPT API KONFİQURASİYASI (GITHUB PAGES BACKEND ƏLAQƏSİ)
        ======================================================================== */
     const API_URL = 'https://script.google.com/macros/s/AKfycbziig0rBRdHKOE32h9BwUQ7aoEzVG8FNgF92KiWPOG2xLrgt0RIfd1a2kmbl50H2lL0/exec';
-    const CACHE_KEY = 'ustegel_app_cache_v1';
-
-    async function fetchWithTimeout(url, options = {}, timeoutMs = 9000) {
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), timeoutMs);
-      try {
-        const res = await fetch(url, { ...options, signal: controller.signal, redirect: 'follow' });
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        return await res.json();
-      } finally {
-        clearTimeout(timer);
-      }
-    }
 
     async function apiGet(action = 'getAppData') {
-      // Brauzer keşindən istifadəyə icazə veririk ki, Apps Script CDN sorğunu dərhal qaytarsın
-      const url = `${API_URL}?action=${encodeURIComponent(action)}`;
-      return await fetchWithTimeout(url, { method: 'GET' }, 9000);
+      const url = `${API_URL}?action=${encodeURIComponent(action)}&_t=${Date.now()}`;
+      const res = await fetch(url, {
+        method: 'GET',
+        redirect: 'follow'
+      });
+      if (!res.ok) throw new Error('Server cavab vermədi');
+      return await res.json();
     }
 
     async function apiPost(action, payload) {
-      return await fetchWithTimeout(
-        API_URL,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ action, payload })
+      // text/plain istifadə edirik ki, brauzer CORS preflight (OPTIONS) sorğusu göndərməsin
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        redirect: 'follow',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
         },
-        12000
-      );
-    }
-
-    function readClientCache() {
-      try {
-        const raw = sessionStorage.getItem(CACHE_KEY);
-        return raw ? JSON.parse(raw) : null;
-      } catch (_) {
-        return null;
-      }
-    }
-
-    function writeClientCache(data) {
-      try {
-        sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
-      } catch (_) {}
+        body: JSON.stringify({ action, payload })
+      });
+      if (!res.ok) throw new Error('Server cavab vermədi');
+      return await res.json();
     }
 
     /* ========================================================================
@@ -2514,120 +2537,18 @@
     })();
 
     /* ========================================================================
-       3. SERVERDƏN MƏLUMATLARIN YÜKLƏNMƏSİ (ANI KEŞ + ARXA PLAN YENİLƏNMƏSİ)
+       3. SERVERDƏN MƏLUMATLARIN YÜKLƏNMƏSİ (GOOGLE SHEETS API)
        ======================================================================== */
-    function fallbackBootstrapData() {
-      const today = ymd(new Date());
-      return {
-        ok: true,
-        today,
-        settings: {
-          CAFE_NAME: 'Üstəgəl Kafe',
-          TAGLINE: 'Coffee • Events • Games',
-          WORKING_HOURS: 'Hər gün 10:00 – 23:00',
-          ADDRESS: 'Bakı şəhəri',
-          PHONE: '+994 50 000 00 00',
-          RESERVATION_DAYS_AHEAD: 30,
-          MAX_GUESTS: 12,
-          SLOT_MINUTES: 60,
-          OPEN_HOUR: 10,
-          CLOSE_HOUR: 23
-        },
-        events: []
-      };
-    }
-
     function loadInitialData() {
-      // 1) Keşdə məlumat varsa 0ms-də ekrana veririk
-      const cached = readClientCache();
-      if (cached && cached.settings) {
-        init(cached, true);
-      }
-
-      // 2) Paralel olaraq Google Sheets-dən ən son məlumatı çəkirik
       apiGet('getAppData')
         .then((d) => {
           if (!d || d.ok === false) throw new Error((d && d.error) || 'Məlumat oxunmadı');
-          writeClientCache(d);
-          init(d, false);
+          init(d);
         })
         .catch(() => {
-          if (!S.data) {
-            init(fallbackBootstrapData(), false);
-            ['#homeEvents', '#evList'].forEach((sel) => {
-              const el = $(sel);
-              if (el) el.innerHTML = '<div class="empty">Tədbirlər yüklənmədi. İnternet bağlantısını yoxlayın və ya səhifəni yeniləyin.</div>';
-            });
-          }
-        });
-    }
-
-    let menuInitialized = false;
-
-    function init(d, fromCache = false) {
-      S.data = d;
-      const s = d.settings || {};
-
-      $('#heroTitle').textContent = s.CAFE_NAME || 'Üstəgəl Kafe';
-      $('#tagline').textContent = s.TAGLINE || 'Coffee • Events • Games';
-      $('#footCopy').textContent = `© ${new Date().getFullYear()} ${s.CAFE_NAME || 'Üstəgəl Kafe'} — ${s.TAGLINE || 'Coffee • Events • Games'}`;
-
-      const cafeTitle = s.CAFE_NAME || 'Üstəgəl Kafe';
-      const iconLogo = s.ICON_LOGO_URL || DEFAULT_ICON_LOGO;
-      if (s.LOGO_URL) {
-        $('#logo').innerHTML =
-          `<img class="logo-full" alt="${esc(cafeTitle)}" src="${esc(s.LOGO_URL)}">` +
-          `<img class="logo-icon" alt="${esc(cafeTitle)}" src="${esc(iconLogo)}">`;
-      } else {
-        $('#logo').innerHTML =
-          `<img class="logo-icon logo-icon-desktop" alt="${esc(cafeTitle)}" src="${esc(iconLogo)}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">` +
-          `<span class="logo-mark" style="display:none" aria-hidden="true">+</span>` +
-          `<span class="logo-text" id="logoTxt">${esc(s.CAFE_NAME || 'Üstəgəl')}</span>`;
-      }
-
-      const menu = s.MENU_URL || 'http://ustegel.github.io/menu';
-      const navMenuEl = $('#navMenu');
-      const heroMenuEl = $('#heroMenu');
-      if (navMenuEl && navMenuEl.tagName === 'A') navMenuEl.href = menu;
-      if (heroMenuEl && heroMenuEl.tagName === 'A') heroMenuEl.href = menu;
-      $('#phone2').textContent = s.PHONE || '';
-
-      CoffeeCompanion.configureFromSettings(s);
-
-      const infoItems = [
-        ['İş saatları', s.WORKING_HOURS],
-        ['Ünvan', s.ADDRESS],
-        ['Telefon', s.PHONE]
-      ].filter((x) => x[1]);
-
-      let infoHtml = infoItems
-        .map((x) => `<div><b>${x[0]}</b>${esc(x[1])}</div>`)
-        .join('');
-
-      if (s.INSTAGRAM_URL) {
-        infoHtml += `<div><b>Instagram</b><a href="${esc(s.INSTAGRAM_URL)}" target="_blank" rel="noopener">Bizi izləyin →</a></div>`;
-      }
-      $('#info').innerHTML = infoHtml;
-
-      buildChips();
-      renderHome();
-      renderEvents();
-      initReserveForm();
-
-      if (!menuInitialized) {
-        menuInitialized = true;
-        CreativeMenu.init();
-      }
-    }
-
-    // Səhifə açılan kimi menyunu və sorğunu dərhal işə salırıq
-    document.addEventListener('DOMContentLoaded', () => {
-      if (!menuInitialized) {
-        menuInitialized = true;
-        CreativeMenu.init();
-      }
-      loadInitialData();
-    });
+          ['#homeEvents', '#evList'].forEach((sel) => {
+            $(sel).innerHTML = '<div class="empty">Məlumatlar yüklənmədi. Səhifəni yeniləyin.</div>';
+          });
         });
     }
 
@@ -2694,9 +2615,6 @@
       $$('nav button').forEach((b) => b.classList.toggle('on', b.dataset.go === id));
       window.scrollTo({ top: 0, behavior: 'smooth' });
       CoffeeCompanion.onPageChange(id);
-      if (typeof CreativeMenu !== 'undefined' && CreativeMenu.syncFloatingPill) {
-        CreativeMenu.syncFloatingPill();
-      }
     }
 
     document.addEventListener('click', (e) => {
@@ -3557,6 +3475,35 @@
         </svg>`;
       }
 
+      function renderStage(catObj) {
+        const stage = $('#menuStage');
+        const particles = $('#menuParticles');
+        if (!stage || !particles) return;
+
+        stage.style.setProperty('--m-c1', catObj.c1);
+        stage.style.setProperty('--m-c2', catObj.c2);
+        stage.className = `menu-stage anim-${catObj.anim}`;
+
+        $('#menuStageBadge').textContent = `${catObj.emoji} ${catObj.label}`;
+        $('#menuStageTitle').textContent = catObj.id === 'all' ? 'Bütün Dadlar Bir Yerdə' : catObj.label;
+        $('#menuStageDesc').textContent = catObj.desc;
+
+        let dots = '';
+        for (let i = 0; i < 9; i++) {
+          const left = 6 + i * 10.5;
+          const top = 16 + ((i * 19) % 68);
+          const delay = (i * 0.42).toFixed(2);
+          dots += `<i style="left:${left}%;top:${catObj.anim === 'sparkle' ? top + '%' : 'auto'};animation-delay:${delay}s"></i>`;
+        }
+        particles.innerHTML = dots;
+
+        const artBox = $('#menuStageArt');
+        artBox.style.animation = 'none';
+        void artBox.offsetWidth;
+        artBox.style.animation = '';
+        artBox.innerHTML = `<span style="font-size:54px;line-height:1;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.28))">${catObj.emoji}</span>`;
+      }
+
       function renderCategories() {
         const wrap = $('#menuCats');
         if (!wrap) return;
@@ -3616,22 +3563,43 @@
               <div class="menu-grid">
                 ${items.map((item) => {
                   const delay = Math.min(cardIndex * 28, 420);
-      function syncFloatingPill() {
-        const pill = $('#floatingCartPill');
-        if (!pill) return;
-        const count = getTrayCount();
-        if (count > 0 && S.page === 'menu') {
-          $('#floatingCartCount').textContent = String(count);
-          $('#floatingCartTotal').textContent = `${getTrayTotal().toFixed(2)} ₼`;
-          pill.classList.add('show');
-        } else {
-          pill.classList.remove('show');
-        }
+                  cardIndex++;
+                  const entry = getTrayEntry(item.name);
+                  const actionHtml = entry
+                    ? `<div class="m-qty-box">
+                        <button type="button" data-mdec="${esc(item.name)}" aria-label="Azalt">−</button>
+                        <span>${entry.qty}</span>
+                        <button type="button" data-minc="${esc(item.name)}" aria-label="Artır">+</button>
+                      </div>`
+                    : `<button type="button" class="m-add-btn" data-madd="${esc(item.name)}">+ Sifarişə at</button>`;
+
+                  return `<article class="m-card" data-mitem="${esc(item.name)}"
+                    style="animation-delay:${delay}ms;--item-accent:${g.accent};--item-bg1:${g.bg1};--item-bg2:${g.bg2}">
+                    <div class="m-card-art">
+                      <span class="m-card-cat">${g.emoji} ${esc(g.label)}</span>
+                      ${buildMenuItemSvg(item)}
+                      <span class="m-card-price">${item.price.toFixed(2)} ₼</span>
+                    </div>
+                    <div class="m-card-body">
+                      <h4>${esc(item.name)}</h4>
+                      <p class="m-card-note">${esc(item.note)}</p>
+                      <div class="m-card-foot">
+                        <span>Ətraflı bax</span>
+                        ${actionHtml}
+                      </div>
+                    </div>
+                  </article>`;
+                }).join('')}
+              </div>
+            </div>
+          `;
+        });
+
+        box.innerHTML = html;
       }
 
       function renderTray() {
         const trayEl = $('#menuTray');
-        syncFloatingPill();
         if (!trayEl) return;
 
         const count = getTrayCount();
@@ -3675,56 +3643,35 @@
         const item = MENU_ITEMS.find((i) => i.name === name);
         if (!item) return;
         const g = catMap[item.cat] || MENU_CATEGORIES[0];
+        const entry = getTrayEntry(item.name);
 
-        const renderModalContent = () => {
-          const entry = getTrayEntry(item.name);
-          const qty = entry ? entry.qty : 0;
-          const controlHtml = qty > 0
-            ? `<div class="modal-qty-stepper">
-                <button type="button" id="mModalDec" aria-label="Azalt">−</button>
-                <span>${qty} ədəd</span>
-                <button type="button" id="mModalInc" aria-label="Artır">+</button>
-              </div>`
-            : `<button type="button" class="btn" id="mModalAddOrder">+ Sifarişə əlavə et</button>`;
-
-          $('#mBody').innerHTML = `
-            <div style="text-align:center">
-              <div style="width:140px;height:140px;margin:0 auto 12px;border-radius:26px;display:grid;place-items:center;background:radial-gradient(circle,${g.bg1},${g.bg2})">
-                <div style="width:116px;height:116px">${buildMenuItemSvg(item)}</div>
-              </div>
-              <span style="display:inline-block;padding:4px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12.5px;font-weight:700;margin-bottom:8px">
-                ${g.emoji} ${esc(g.label)}
-              </span>
-              <h3 id="mTitle" style="margin-bottom:6px">${esc(item.name)}</h3>
-              <p style="color:var(--muted);margin-bottom:12px">${esc(item.note)}</p>
-              <div style="font:800 24px 'Fraunces',serif;color:var(--brand);margin-bottom:16px">${item.price.toFixed(2)} ₼</div>
-              <div style="display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap">
-                ${controlHtml}
-                <button type="button" class="btn ghost" id="mModalCheckout">Səbəti təsdiqlə</button>
-              </div>
+        $('#mBody').innerHTML = `
+          <div style="text-align:center">
+            <div style="width:150px;height:150px;margin:0 auto 14px;border-radius:26px;display:grid;place-items:center;background:radial-gradient(circle,${g.bg1},${g.bg2})">
+              <div style="width:124px;height:124px">${buildMenuItemSvg(item)}</div>
             </div>
-          `;
-
-          $('#mModalAddOrder')?.addEventListener('click', () => {
-            addItem(item.name);
-            renderModalContent();
-          });
-          $('#mModalInc')?.addEventListener('click', () => {
-            addItem(item.name);
-            renderModalContent();
-          });
-          $('#mModalDec')?.addEventListener('click', () => {
-            changeItemQty(item.name, -1);
-            renderModalContent();
-          });
-          $('#mModalCheckout')?.addEventListener('click', () => {
-            if (!getTrayEntry(item.name)) addItem(item.name, true);
-            openOrderModal();
-          });
-        };
-
-        renderModalContent();
+            <span style="display:inline-block;padding:4px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12.5px;font-weight:700;margin-bottom:8px">
+              ${g.emoji} ${esc(g.label)}
+            </span>
+            <h3 id="mTitle" style="margin-bottom:6px">${esc(item.name)}</h3>
+            <p style="color:var(--muted);margin-bottom:12px">${esc(item.note)}</p>
+            <div style="font:800 24px 'Fraunces',serif;color:var(--brand);margin-bottom:16px">${item.price.toFixed(2)} ₼</div>
+            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+              <button type="button" class="btn" id="mModalAddOrder">+ Sifarişə əlavə et${entry ? ` (${entry.qty})` : ''}</button>
+              <button type="button" class="btn ghost" id="mModalCheckout">Sifarişi tamamla</button>
+            </div>
+          </div>
+        `;
         openModal();
+
+        $('#mModalAddOrder').onclick = () => {
+          addItem(item.name);
+          closeModal();
+        };
+        $('#mModalCheckout').onclick = () => {
+          if (!getTrayEntry(item.name)) addItem(item.name, true);
+          openOrderModal();
+        };
       }
 
       function openOrderModal() {
@@ -3871,9 +3818,9 @@
       }
 
       function init() {
+        renderStage(MENU_CATEGORIES[0]);
         renderCategories();
         renderCatalog();
-        syncFloatingPill();
 
         const searchInput = $('#menuSearch');
         const clearBtn = $('#menuSearchClear');
@@ -3903,17 +3850,13 @@
         });
 
         $('#menuTrayOrder')?.addEventListener('click', openOrderModal);
-        $('#floatingCartPill')?.addEventListener('click', openOrderModal);
 
         document.addEventListener('click', (e) => {
           const catBtn = e.target.closest('[data-mcat]');
           if (catBtn) {
             mState.cat = catBtn.dataset.mcat;
+            renderStage(catMap[mState.cat] || MENU_CATEGORIES[0]);
             renderCategories();
-            const activeBtn = $(`[data-mcat="${mState.cat}"]`);
-            if (activeBtn) {
-              activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-            }
             renderCatalog();
             return;
           }
@@ -3960,7 +3903,7 @@
         });
       }
 
-      return { init, syncFloatingPill };
+      return { init };
     })();
 
     /* ========================================================================
