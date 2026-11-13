@@ -2080,6 +2080,7 @@
 
     .pp { position: fixed; inset: 0; z-index: 90; display: flex; flex-direction: column; background: #140A04; color: #FBEFE0; }
     .pp[hidden] { display: none; }
+    .pp.is-full .pp-bar { display: none; }
     .pp.is-full.is-rotated {
       inset: auto;
       top: 0;
@@ -2097,6 +2098,10 @@
     .pp-actions button { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(242, 211, 168, 0.3); background: rgba(255, 255, 255, 0.07); color: #FBEFE0; font-size: 20px; cursor: pointer; display: grid; place-items: center; }
     .pp-actions button:hover { background: rgba(255, 255, 255, 0.16); }
     .pp-actions button.active { background: #F2D3A8; color: #2B1A10; border-color: #F2D3A8; }
+    .pp-float-actions { position: absolute; top: 10px; right: 12px; z-index: 4; display: none; gap: 6px; }
+    .pp.is-full .pp-float-actions { display: flex; }
+    .pp-float-actions button { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(242, 211, 168, 0.28); background: rgba(20, 10, 4, 0.42); color: rgba(251, 239, 224, 0.82); font-size: 15px; cursor: pointer; display: grid; place-items: center; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+    .pp-float-actions button:hover { background: rgba(20, 10, 4, 0.72); color: #fff; }
     .pp-stage { position: relative; flex: 1; min-height: 0; overflow: hidden; }
     .pp canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: none; -webkit-user-select: none; user-select: none; }
     .pp-label { position: absolute; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); font-weight: 800; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(251, 239, 224, 0.55); pointer-events: none; }
@@ -2616,6 +2621,10 @@
     </div>
     <div class="pp-stage" id="ppStage">
       <canvas id="ppCanvas" aria-label="Masa tenisi oyun sahəsi"></canvas>
+      <div class="pp-float-actions">
+        <button type="button" id="ppFloatSound" aria-label="Səsi aç/bağla" title="Səs">🔊</button>
+        <button type="button" id="ppFloatExitFull" aria-label="Tam ekrandan çıx" title="Tam ekrandan çıx">✕</button>
+      </div>
       <span class="pp-label l">Rəqib</span>
       <span class="pp-label r">Sən</span>
       <div class="pp-overlay" id="ppStart">
@@ -4758,7 +4767,10 @@
         ctx.fillStyle = bg; ctx.fillRect(-20, -20, W + 40, H + 40);
 
         // masa
-        const tx = W * 0.03, ty = H * 0.09, tw = W * 0.94, th = H * 0.8;
+        const tx = isFull ? W * 0.02 : W * 0.03;
+        const ty = isFull ? H * 0.035 : H * 0.09;
+        const tw = isFull ? W * 0.96 : W * 0.94;
+        const th = isFull ? H * 0.93 : H * 0.8;
         ctx.save();
         ctx.shadowColor = 'rgba(0,0,0,0.55)'; ctx.shadowBlur = 28; ctx.shadowOffsetY = 14;
         const tg = ctx.createLinearGradient(0, ty, 0, ty + th);
@@ -4780,6 +4792,32 @@
         for (let y = ty - 8; y < ty + th + 10; y += 9) { ctx.beginPath(); ctx.moveTo(nx - 4, y); ctx.lineTo(nx + 4, y); ctx.stroke(); }
         ctx.fillStyle = '#F2D3A8';
         ctx.beginPath(); ctx.arc(nx, ty - 10, 6, 0, TAU); ctx.arc(nx, ty + th + 10, 6, 0, TAU); ctx.fill();
+
+        // tam ekran rejimində sol tərəfdə masanın üzərində xal və rekord
+        if (isFull) {
+          const sx = tx + Math.max(18, W * 0.12);
+          const sy = ty + 18;
+          const bestVal = Math.max(G.best, G.rally);
+          ctx.save();
+          ctx.fillStyle = 'rgba(15, 36, 48, 0.42)';
+          rr(sx, sy, 188, 52, 11);
+          ctx.fill();
+          ctx.strokeStyle = 'rgba(242, 211, 168, 0.25)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          ctx.textBaseline = 'top';
+          ctx.font = '700 10px Manrope, system-ui, sans-serif';
+          ctx.fillStyle = 'rgba(251, 239, 224, 0.68)';
+          ctx.fillText('QAYTARILAN', sx + 14, sy + 9);
+          ctx.fillText('REKORD', sx + 106, sy + 9);
+
+          ctx.font = '800 20px Fraunces, Georgia, serif';
+          ctx.fillStyle = '#F2D3A8';
+          ctx.fillText(String(G.rally), sx + 14, sy + 23);
+          ctx.fillText(String(bestVal), sx + 106, sy + 23);
+          ctx.restore();
+        }
 
         // effektlər (yerdəki halqalar)
         G.fx.forEach((f) => {
@@ -4892,13 +4930,18 @@
       $('#ppGo').addEventListener('click', start);
       $('#ppStartFull').addEventListener('click', toggleFull);
       $('#ppFull').addEventListener('click', toggleFull);
+      $('#ppFloatExitFull').addEventListener('click', exitFull);
       $('#ppAgain').addEventListener('click', start);
       $('#ppExit').addEventListener('click', close);
       $('#ppClose').addEventListener('click', close);
-      $('#ppSound').addEventListener('click', () => {
+      const toggleMute = () => {
         G.muted = !G.muted;
-        $('#ppSound').textContent = G.muted ? '🔇' : '🔊';
-      });
+        const ico = G.muted ? '🔇' : '🔊';
+        $('#ppSound').textContent = ico;
+        $('#ppFloatSound').textContent = ico;
+      };
+      $('#ppSound').addEventListener('click', toggleMute);
+      $('#ppFloatSound').addEventListener('click', toggleMute);
       document.addEventListener('fullscreenchange', () => {
         if (!document.fullscreenElement && isFull && window.innerWidth >= window.innerHeight) {
           isFull = false;
