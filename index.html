@@ -33,7 +33,6 @@
        1. DİZAYN TOKENLƏRİ VƏ RƏNG PALİTRASI (LIGHT & DARK MODE)
        ========================================================================== */
     :root {
-      /* Azərbaycan hərfləri (ə ü ö ğ ı İ ş ç) dəstəkləyən fallback zənciri */
       --font-serif: 'Fraunces', 'Noto Serif', 'DejaVu Serif', Cambria, 'Times New Roman', serif;
       --font-sans: 'Manrope', 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', Arial, system-ui, -apple-system, sans-serif;
       --bg: #FAF5EE;
@@ -1728,6 +1727,42 @@
       justify-content: space-between;
     }
 
+    .menu-tray {
+      margin-top: 28px;
+      padding: 18px 20px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1.5px solid var(--accent);
+      box-shadow: var(--shadow-md);
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .menu-tray.show {
+      display: flex;
+      animation: pageFadeIn 0.25s ease-out;
+    }
+
+    .menu-tray-info b {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+
+    .menu-tray-info span {
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+
+    .menu-tray-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
     @media (max-width: 640px) {
       .menu-stage {
         grid-template-columns: 1fr;
@@ -1902,7 +1937,7 @@
     .cover img[data-lazyfade].ld { opacity: 1; }
     .cover .badge { z-index: 2; }
 
-    /* Menyu: axtarış + üfüqi slider kateqoriyalar */
+    /* Menyu: baner yoxdur, birbaşa axtarış + üfüqi slider kateqoriyalar */
     #p-menu { padding-top: 22px; }
     .menu-controls { gap: 10px; margin-bottom: 18px; }
     .menu-search-row { flex-wrap: nowrap; }
@@ -2010,7 +2045,7 @@
     .hero .tag { text-transform: uppercase; }
 
     /* ==========================================================================
-       11. OYUNLAR SƏHİFƏSİ VƏ MASA TENİSİ OYUNU
+       11. OYUNLAR SƏHİFƏSİ, MASA TENİSİ VƏ KÖRLİNQ OYUNLARI
        ========================================================================== */
     @media (max-width: 760px) {
       header .bar { gap: 8px; }
@@ -2027,50 +2062,109 @@
     }
     .games-cat-head h3 { font-size: clamp(22px, 4vw, 30px); }
     .games-cat-head small { color: var(--muted); font-weight: 700; }
-    .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 14px; }
+    .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; align-items: stretch; }
     .game-card {
-      position: relative; display: flex; align-items: center; gap: 12px; padding: 16px 16px 16px 20px;
+      position: relative; display: flex; align-items: center; gap: 12px; padding: 15px 16px 15px 20px; min-height: 76px;
       border-radius: 16px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); overflow: hidden;
       transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
     .game-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: linear-gradient(var(--g1), var(--g2)); }
     .game-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--accent); }
-    .game-emoji { font-size: 28px; width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--accent-soft); flex-shrink: 0; transition: transform 0.3s ease; }
+    .game-emoji { font-size: 26px; width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: var(--accent-soft); flex-shrink: 0; transition: transform 0.3s ease; }
     .game-card:hover .game-emoji { transform: rotate(-8deg) scale(1.1); }
-    .game-name { font-weight: 800; line-height: 1.25; }
+    .game-name { font-weight: 800; line-height: 1.25; font-size: 15.5px; }
     .game-soon { display: inline-block; margin-left: 4px; padding: 2px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 800; background: var(--accent-soft); color: var(--accent); vertical-align: middle; }
-    .game-card .btn { margin-left: auto; padding: 9px 16px; font-size: 14px; white-space: nowrap; }
+    .game-card .btn { margin-left: auto; padding: 9px 15px; font-size: 13.5px; white-space: nowrap; flex-shrink: 0; }
     @media (min-width: 680px) { .game-card.has-play { grid-column: span 2; } }
+    @media (max-width: 679px) {
+      .games-cat { margin-top: 26px; }
+      .games-cat-head { gap: 11px; margin-bottom: 12px; }
+      .games-cat-ico { width: 44px; height: 44px; border-radius: 13px; font-size: 22px; }
+      .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .game-card { padding: 12px 11px 12px 14px; gap: 9px; min-height: 66px; border-radius: 14px; }
+      .game-card.has-play { grid-column: 1 / -1; padding: 13px 14px 13px 17px; }
+      .game-emoji { width: 38px; height: 38px; border-radius: 11px; font-size: 20px; }
+      .game-name { font-size: 13.5px; line-height: 1.25; }
+      .game-card.has-play .game-name { font-size: 15px; }
+      .game-card .btn { padding: 8px 13px; font-size: 13px; }
+    }
 
     .pp { position: fixed; inset: 0; z-index: 90; display: flex; flex-direction: column; background: #140A04; color: #FBEFE0; }
     .pp[hidden] { display: none; }
-    .pp.is-full .pp-bar { display: none; }
-    .pp.is-full.is-rotated {
-      inset: auto;
-      top: 0;
-      left: 100vw;
-      width: 100vh;
-      width: 100dvh;
-      height: 100vw;
-      transform: rotate(90deg);
-      transform-origin: top left;
-    }
     .pp-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 10px; background: rgba(255, 255, 255, 0.04); border-bottom: 1px solid rgba(242, 211, 168, 0.14); }
     .pp-score { display: flex; gap: 18px; font-weight: 700; font-size: 14px; color: rgba(251, 239, 224, 0.8); }
     .pp-score b { font: 800 21px var(--font-serif); color: #F2D3A8; margin-left: 4px; }
     .pp-actions { display: flex; gap: 8px; }
-    .pp-actions button { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(242, 211, 168, 0.3); background: rgba(255, 255, 255, 0.07); color: #FBEFE0; font-size: 20px; cursor: pointer; display: grid; place-items: center; }
+    .pp-actions button { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(242, 211, 168, 0.3); background: rgba(255, 255, 255, 0.07); color: #FBEFE0; font-size: 19px; cursor: pointer; display: grid; place-items: center; transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease; }
     .pp-actions button:hover { background: rgba(255, 255, 255, 0.16); }
     .pp-actions button.active { background: #F2D3A8; color: #2B1A10; border-color: #F2D3A8; }
-    .pp-float-actions { position: absolute; top: 10px; right: 12px; z-index: 4; display: none; gap: 6px; }
-    .pp.is-full .pp-float-actions { display: flex; }
-    .pp-float-actions button { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(242, 211, 168, 0.28); background: rgba(20, 10, 4, 0.42); color: rgba(251, 239, 224, 0.82); font-size: 15px; cursor: pointer; display: grid; place-items: center; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
-    .pp-float-actions button:hover { background: rgba(20, 10, 4, 0.72); color: #fff; }
     .pp-stage { position: relative; flex: 1; min-height: 0; overflow: hidden; }
     .pp canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: none; -webkit-user-select: none; user-select: none; }
     .pp-label { position: absolute; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); font-weight: 800; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(251, 239, 224, 0.55); pointer-events: none; }
     .pp-label.l { left: 5%; }
     .pp-label.r { right: 5%; }
+
+    /* Tam ekran modunda yuxarı panel gizlənir, masa maksimal enli olur, xal sol tərəfdə masanın üzərində görünür */
+    .pp.is-full .pp-bar { display: none; }
+    .pp-stage-score {
+      display: none;
+      position: absolute;
+      left: 7%;
+      top: 12%;
+      z-index: 2;
+      pointer-events: none;
+      flex-direction: column;
+      gap: 4px;
+      padding: 8px 13px;
+      border-radius: 12px;
+      background: rgba(16, 8, 3, 0.48);
+      border: 1px solid rgba(242, 211, 168, 0.22);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: rgba(251, 239, 224, 0.85);
+    }
+    .pp-stage-score b { font: 800 18px var(--font-serif); color: #F2D3A8; margin-left: 4px; }
+    .pp.is-full .pp-stage-score { display: flex; }
+
+    .pp-full-float {
+      display: none;
+      position: absolute;
+      right: calc(10px + env(safe-area-inset-right, 0px));
+      top: calc(10px + env(safe-area-inset-top, 0px));
+      z-index: 4;
+      gap: 6px;
+    }
+    .pp.is-full .pp-full-float { display: flex; }
+    .pp-full-float button {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(242, 211, 168, 0.32);
+      background: rgba(20, 10, 4, 0.62);
+      color: #FBEFE0;
+      font-size: 16px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    .pp-full-float button:hover { background: rgba(242, 211, 168, 0.24); }
+
+    /* Portret mobil cihazlarda tam ekran (landscape) 90 dərəcə dönüş rejimi */
+    .pp.is-rotated .pp-stage {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 100vh;
+      width: 100dvh;
+      height: 100vw;
+      transform: translate(-50%, -50%) rotate(90deg);
+      transform-origin: center center;
+      flex: none;
+    }
     .pp-overlay { position: absolute; inset: 0; display: grid; place-items: center; padding: 20px; text-align: center; background: rgba(20, 10, 4, 0.66); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); animation: pageFadeIn 0.3s ease-out; z-index: 3; }
     .pp-overlay[hidden] { display: none; }
     .pp-card { max-width: 460px; }
@@ -2079,6 +2173,30 @@
     .pp-card p { color: rgba(251, 239, 224, 0.82); margin-bottom: 16px; }
     .pp-rotate { display: none; font-size: 13.5px; color: #F2D3A8 !important; }
     @media (orientation: portrait) and (max-width: 700px) { .pp-rotate { display: block; } }
+
+    /* Mərhələli animasiyalı son mesajlar (Masa tenisi & Körlinq) */
+    .pp-overlay.is-visible { animation: pageFadeIn 0.35s ease-out forwards; }
+    .end-step1 {
+      font: 800 clamp(22px, 4.5vw, 32px)/1.2 var(--font-serif);
+      color: #F2D3A8;
+      margin-bottom: 10px;
+      animation: step1In 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes step1In {
+      from { opacity: 0; transform: translateY(18px) scale(0.92); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .end-step2 {
+      opacity: 0;
+      transform: translateY(16px) scale(0.96);
+      pointer-events: none;
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .end-step2.is-shown {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
     .pp-lost-msg {
       font: 800 clamp(28px, 6.5vw, 52px)/1.12 var(--font-serif); margin-bottom: 14px;
       background: linear-gradient(100deg, #FBEFE0, #F2D3A8 40%, #fff 55%, #F2D3A8 70%); background-size: 240% 100%;
@@ -2090,129 +2208,70 @@
     .pp .btn:not(.ghost):hover { background: #FBE3C2; }
     .pp .btn.ghost { color: #FBEFE0; border-color: rgba(242, 211, 168, 0.4); }
 
-    /* Oyun sonu mərhələli animasiya keçidi (Masa tenisi & Körling) */
-    .end-overlay {
-      opacity: 0;
-      transition: opacity 0.45s ease;
-    }
-    .end-overlay.is-visible {
-      opacity: 1;
-    }
-    .end-step-1 {
-      font: 800 clamp(22px, 4.5vw, 32px)/1.2 var(--font-serif);
-      color: #F2D3A8;
-      margin-bottom: 10px;
-      opacity: 0;
-      transform: translateY(18px) scale(0.92);
-      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .end-overlay.is-visible .end-step-1 {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-    .end-step-2 {
-      opacity: 0;
-      transform: translateY(22px) scale(0.96);
-      pointer-events: none;
-      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .end-step-2.is-shown {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-    }
-
     /* ==========================================================================
-       12. MASAÜSTÜ KÖRLİNQ OYUNU
+       12. MASAÜSTÜ KÖRLİNQ OYUNU (4 NARINCI vs 4 MAVİ DAŞ)
        ========================================================================== */
-    .cl-score-group {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .cl-player {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 11px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(242, 211, 168, 0.16);
-      font-size: 13.5px;
-      font-weight: 700;
-    }
-    .cl-player b {
-      font: 800 19px var(--font-serif);
-      color: #F2D3A8;
-    }
-    .cl-dots {
-      display: inline-flex;
-      gap: 4px;
-    }
-    .cl-dots i {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      display: inline-block;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-    .cl-dots i.used {
-      opacity: 0.22;
-      transform: scale(0.75);
-    }
+    .cl { position: fixed; inset: 0; z-index: 92; display: flex; flex-direction: column; background: #140A04; color: #FBEFE0; }
+    .cl[hidden] { display: none; }
+    .cl-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 10px; background: rgba(255, 255, 255, 0.04); border-bottom: 1px solid rgba(242, 211, 168, 0.14); }
+    .cl-hud { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 13.5px; font-weight: 700; }
+    .cl-team { display: inline-flex; align-items: center; gap: 6px; }
+    .cl-team b { font: 800 20px var(--font-serif); color: #F2D3A8; }
+    .cl-dots { display: inline-flex; gap: 4px; margin-left: 2px; }
+    .cl-dots i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; transition: opacity 0.2s ease, transform 0.2s ease; }
     .cl-dots.user i { background: #F97316; box-shadow: 0 0 6px rgba(249, 115, 22, 0.6); }
     .cl-dots.opp i { background: #3B82F6; box-shadow: 0 0 6px rgba(59, 130, 246, 0.6); }
-    .cl-turn {
-      padding: 5px 13px;
-      border-radius: 999px;
-      font-size: 12.5px;
-      font-weight: 800;
-      letter-spacing: 0.03em;
-      background: rgba(249, 115, 22, 0.22);
-      border: 1px solid rgba(249, 115, 22, 0.5);
-      color: #FDBA74;
-      transition: all 0.25s ease;
-    }
-    .cl-turn.opp {
-      background: rgba(59, 130, 246, 0.22);
-      border-color: rgba(59, 130, 246, 0.5);
-      color: #93C5FD;
-    }
+    .cl-dots i.used { opacity: 0.22; transform: scale(0.75); box-shadow: none; }
+    .cl-turn { padding: 4px 11px; border-radius: 999px; font-size: 12px; font-weight: 800; background: rgba(249, 115, 22, 0.2); border: 1px solid rgba(249, 115, 22, 0.45); color: #FDBA74; }
+    .cl-turn.opp { background: rgba(59, 130, 246, 0.2); border-color: rgba(59, 130, 246, 0.45); color: #93C5FD; }
+    .cl-stage { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+    .cl canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; -webkit-user-select: none; user-select: none; cursor: pointer; }
     .cl-hint {
       position: absolute;
-      bottom: calc(12px + env(safe-area-inset-bottom, 0px));
       left: 50%;
+      bottom: calc(12px + env(safe-area-inset-bottom, 0px));
       transform: translateX(-50%);
-      width: max-content;
-      max-width: calc(100% - 24px);
-      padding: 7px 14px;
-      border-radius: 16px;
-      background: rgba(20, 10, 4, 0.76);
-      border: 1px solid rgba(242, 211, 168, 0.24);
-      color: #FBEFE0;
-      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(20, 10, 4, 0.72);
+      border: 1px solid rgba(242, 211, 168, 0.22);
+      color: rgba(251, 239, 224, 0.9);
+      font-size: 12.5px;
       font-weight: 700;
-      line-height: 1.3;
       text-align: center;
+      max-width: calc(100vw - 24px);
       pointer-events: none;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
       z-index: 2;
     }
-    #cl.is-full .pp-float-actions {
+
+    /* Körlinq Tam ekran modu: yuxarı panel gizlənir, ekran boyunca uzunasına açılır */
+    .cl.is-full .cl-bar { display: none; }
+    .cl-full-float {
+      display: none;
+      position: absolute;
+      right: calc(10px + env(safe-area-inset-right, 0px));
       top: calc(10px + env(safe-area-inset-top, 0px));
-      right: 10px;
+      z-index: 4;
+      gap: 6px;
     }
-    #clCanvas {
+    .cl.is-full .cl-full-float { display: flex; }
+    .cl-full-float button {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(242, 211, 168, 0.32);
+      background: rgba(20, 10, 4, 0.62);
+      color: #FBEFE0;
+      font-size: 16px;
       cursor: pointer;
+      display: grid;
+      place-items: center;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
-    @media (max-width: 520px) {
-      .cl-score-group { gap: 8px; }
-      .cl-player { padding: 4px 8px; font-size: 12px; gap: 5px; }
-      .cl-player b { font-size: 16px; }
-      .cl-turn { font-size: 11.5px; padding: 4px 9px; }
-    }
+    .cl .btn:not(.ghost) { background: #F2D3A8; color: #2B1A10; }
+    .cl .btn:not(.ghost):hover { background: #FBE3C2; }
+    .cl .btn.ghost { color: #FBEFE0; border-color: rgba(242, 211, 168, 0.4); }
   </style>
 </head>
 <body>
@@ -2435,7 +2494,7 @@
        ======================================================================== -->
   <header>
     <div class="wrap bar">
-      <button class="logo" id="logo" data-go="home" aria-label="Ana səhifə">
+      <button class="logo" id="logo" data-go="home">
         <img class="logo-icon logo-icon-desktop" alt="Üstəgəl Kafe" src="https://docs.google.com/drawings/d/e/2PACX-1vQbzxPda05zw-xlcupsexZXTdDejHMneiSYpebnPi4kDrTlAGoWDvzmG54n2X7AAZuNllQMYRsKgCjV/pub?w=693&h=690" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
         <span class="logo-mark" style="display:none" aria-hidden="true">+</span>
         <span class="logo-text" id="logoTxt">Üstəgəl</span>
@@ -2450,7 +2509,7 @@
   </header>
 
   <!-- ========================================================================
-       ƏSAS MƏZMUN SAHƏSİ (SPA STRUKTURU)
+       ƏSAS MƏZMUN SAHƏSİ (SƏHİFƏLƏR)
        ======================================================================== -->
   <main>
     <!-- 1. ANA SƏHİFƏ (HOME) -->
@@ -2592,15 +2651,20 @@
           </div>
         </div>
 
-        <div class="games-cat" style="--g1:#6B3E26;--g2:#9A6316">
+        <div class="games-cat" style="--g1:#2E6B4E;--g2:#8B5E34">
           <div class="games-cat-head">
             <span class="games-cat-ico" aria-hidden="true">🎲</span>
-            <div><h3>Masaüstü oyunlar</h3><small>3 oyun</small></div>
+            <div><h3>Masaüstü oyunlar</h3><small>8 oyun</small></div>
           </div>
           <div class="game-grid reveal-group">
-            <div class="game-card"><span class="game-emoji" aria-hidden="true">🧱</span><span class="game-name">Jenga</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">♟️</span><span class="game-name">Şahmat</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">⏱️</span><span class="game-name">Saniyə-təxmin</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">🪵</span><span class="game-name">Jenga</span></div>
             <div class="game-card"><span class="game-emoji" aria-hidden="true">🎩</span><span class="game-name">Monopoly</span></div>
             <div class="game-card"><span class="game-emoji" aria-hidden="true">🃏</span><span class="game-name">Uno</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">🔴</span><span class="game-name">Connect4</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">❌</span><span class="game-name">Tic Tac Toe</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">🔩</span><span class="game-name">Qayka ilə qala qurma</span></div>
           </div>
         </div>
       </div>
@@ -2688,7 +2752,7 @@
   </footer>
 
   <!-- ========================================================================
-       TƏDBİR QEYDİYYATI MODALI, OYUN PƏNCƏRƏLƏRİ VƏ BİLDİRİŞ KONTEYNERİ
+       TƏDBİR QEYDİYYATI MODALI, OYUN MODALLARI VƏ BİLDİRİŞ KONTEYNERİ
        ======================================================================== -->
   <div class="ov" id="ov">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
@@ -2705,15 +2769,19 @@
         <span>Rekord: <b id="ppBest">0</b></span>
       </div>
       <div class="pp-actions">
-        <button type="button" id="ppFull" aria-label="Tam ekran" title="Tam ekran">⛶</button>
+        <button type="button" id="ppFull" aria-label="Tam ekran / Üfüqi rejim" title="Tam ekran (Üfüqi)">⛶</button>
         <button type="button" id="ppClose" aria-label="Oyunu bağla">×</button>
       </div>
     </div>
     <div class="pp-stage" id="ppStage">
-      <div class="pp-float-actions">
+      <canvas id="ppCanvas" aria-label="Masa tenisi oyun sahəsi"></canvas>
+      <div class="pp-stage-score" aria-hidden="true">
+        <span>Qaytarılan: <b id="ppStageScoreVal">0</b></span>
+        <span>Rekord: <b id="ppStageBestVal">0</b></span>
+      </div>
+      <div class="pp-full-float">
         <button type="button" id="ppExitFullFloat" aria-label="Tam ekrandan çıx" title="Tam ekrandan çıx">✕</button>
       </div>
-      <canvas id="ppCanvas" aria-label="Masa tenisi oyun sahəsi"></canvas>
       <span class="pp-label l">Rəqib</span>
       <span class="pp-label r">Sən</span>
       <div class="pp-overlay" id="ppStart">
@@ -2721,17 +2789,17 @@
           <div class="pp-emoji" aria-hidden="true">🏓</div>
           <h3>Masa tenisi</h3>
           <p>Top sağ tərəfə gələndə raketkanı topun üstünə gətirib klikləyin (telefonda barmağınızla toxunun) və topu rəqibə qaytarın. Vaxtında vura bilməsəniz, uduzursunuz.</p>
-          <p class="pp-rotate">📱 Daha geniş masa üçün tam ekran (üfüqi) rejiminə keçin.</p>
+          <p class="pp-rotate">📱 Daha geniş görünüş üçün <b>Tam ekran</b> rejimində üfüqi oynayın.</p>
           <div class="pp-btns">
             <button type="button" class="btn" id="ppGo">Başla</button>
-            <button type="button" class="btn ghost" id="ppStartFull">⛶ Tam ekran</button>
+            <button type="button" class="btn ghost" id="ppStartFull">⛶ Tam ekran oyna</button>
           </div>
         </div>
       </div>
-      <div class="pp-overlay end-overlay" id="ppLost" hidden>
+      <div class="pp-overlay" id="ppLost" hidden>
         <div class="pp-card">
-          <div class="end-step-1" id="ppEndStep1">Əla cəhd idi! 👏</div>
-          <div class="end-step-2" id="ppEndStep2">
+          <div class="end-step1" id="ppLostStep1">Əla cəhd idi! 👏</div>
+          <div class="end-step2" id="ppLostStep2">
             <div class="pp-lost-msg">Üstəgələ gəl, bərabər oynayaq!</div>
             <p id="ppLostInfo"></p>
             <div class="pp-btns">
@@ -2745,17 +2813,15 @@
   </div>
 
   <!-- MASAÜSTÜ KÖRLİNQ OYUNU -->
-  <div class="pp" id="cl" hidden role="dialog" aria-modal="true" aria-label="Masaüstü Körling oyunu">
-    <div class="pp-bar">
-      <div class="cl-score-group">
-        <div class="cl-player">
-          <span>Sən: <b id="clUserScore">0</b></span>
-          <span class="cl-dots user" id="clUserDots" aria-label="Sənin qalan daşların"><i></i><i></i><i></i><i></i></span>
-        </div>
-        <div class="cl-player">
-          <span>Rəqib: <b id="clOppScore">0</b></span>
-          <span class="cl-dots opp" id="clOppDots" aria-label="Rəqibin qalan daşları"><i></i><i></i><i></i><i></i></span>
-        </div>
+  <div class="cl" id="cl" hidden role="dialog" aria-modal="true" aria-label="Masaüstü Körling oyunu">
+    <div class="cl-bar">
+      <div class="cl-hud">
+        <span class="cl-team">Sən: <b id="clUserScore">0</b>
+          <span class="cl-dots user" id="clUserDots"><i></i><i></i><i></i><i></i></span>
+        </span>
+        <span class="cl-team">Rəqib: <b id="clOppScore">0</b>
+          <span class="cl-dots opp" id="clOppDots"><i></i><i></i><i></i><i></i></span>
+        </span>
         <span class="cl-turn" id="clTurn">Sənin növbən</span>
       </div>
       <div class="pp-actions">
@@ -2763,27 +2829,28 @@
         <button type="button" id="clClose" aria-label="Oyunu bağla">×</button>
       </div>
     </div>
-    <div class="pp-stage" id="clStage">
-      <div class="pp-float-actions">
+    <div class="cl-stage" id="clStage">
+      <canvas id="clCanvas" aria-label="Masaüstü Körling oyun sahəsi"></canvas>
+      <div class="cl-full-float">
         <button type="button" id="clExitFullFloat" aria-label="Tam ekrandan çıx" title="Tam ekrandan çıx">✕</button>
       </div>
-      <canvas id="clCanvas" aria-label="Masaüstü Körling oyun sahəsi"></canvas>
       <div class="cl-hint" id="clHint">Oxun istiqamətini tutarkən ekranı basılı saxla və şiddəti tənzimləyərək topu burax.</div>
       <div class="pp-overlay" id="clStart">
         <div class="pp-card">
           <div class="pp-emoji" aria-hidden="true">🥌</div>
           <h3>Masaüstü Körling</h3>
-          <p>Oxun istiqamətini tutarkən ekranı basılı saxla və şiddəti tənzimləyərək topu burax. 4 narıncı (sən) və 4 mavi (rəqib) daşla növbə ilə oynayın — çöldən mərkəzə halqalar: <b>1, 2, 3 və 4 xal</b>!</p>
+          <p>4 narıncı (sən) və 4 mavi (rəqib) daşla növbə ilə oynayırsınız. Halqalara təmas çöldən mərkəzə doğru <b>1, 2, 3 və 4 xal</b> qazandırır.</p>
+          <p style="font-size:14px;color:#F2D3A8">Oxun istiqamətini tutarkən ekranı basılı saxla və şiddəti tənzimləyərək topu burax.</p>
           <div class="pp-btns">
             <button type="button" class="btn" id="clGo">Başla</button>
-            <button type="button" class="btn ghost" id="clStartFull">⛶ Tam ekran</button>
+            <button type="button" class="btn ghost" id="clStartFull">⛶ Tam ekran oyna</button>
           </div>
         </div>
       </div>
-      <div class="pp-overlay end-overlay" id="clEnd" hidden>
+      <div class="pp-overlay" id="clEnd" hidden>
         <div class="pp-card">
-          <div class="end-step-1" id="clEndStep1">Əla cəhd idi! 👏</div>
-          <div class="end-step-2" id="clEndStep2">
+          <div class="end-step1" id="clEndStep1">Əla cəhd idi! 👏</div>
+          <div class="end-step2" id="clEndStep2">
             <div class="pp-lost-msg" id="clEndMsg">Üstəgələ gəl, bərabər oynayaq!</div>
             <p id="clEndInfo"></p>
             <div class="pp-btns">
@@ -3814,8 +3881,8 @@
       { cat: 'sirniyyat', name: 'Grolet', price: 6.50, note: 'Fransız üsulu zərif muss və parlaq qlazur' },
       { cat: 'sirniyyat', name: 'Cake (ballı tort)', price: 6.00, note: 'Təbii ballı qatlar və xama-qaymaq kremi' },
       { cat: 'sirniyyat', name: 'Cake (velvet)', price: 6.00, note: 'Məxməri qırmızı biskvit və pendirli krem' },
-      { cat: 'sirniyyat', name: 'Ekler', price: 2.00, note: 'Zərif bişmiş xəmir, vanilli krem və şokolad qlazuru' },
-      { cat: 'sirniyyat', name: 'Kurabiye', price: 1.00, note: 'Xırtıldayan kərə yağlı və şokolad damlalı ev peçenyesi' },
+      { cat: 'sirniyyat', name: 'Ekler', price: 2.00, note: 'Zərif vanilli krem və şokoladlı qlazurlu klassik ekler' },
+      { cat: 'sirniyyat', name: 'Kurabiye', price: 1.00, note: 'Kərə yağı və şokolad damlalı xırtıldayan ev kurabiyəsi' },
 
       // 2. İsti Kofelər
       { cat: 'isti-kofe', name: 'Capuccino', price: 6.00, note: 'Klassik espresso və sıx ipək kimi süd köpüyü' },
@@ -3989,13 +4056,13 @@
         if (n.includes('white chocolate') || n.includes('vanil') || n.includes('sahlep') || n.includes('raff')) {
           return { main: '#D7B899', light: '#F5E6D3', foam: '#FFFFFF', garnish: '🤍' };
         }
-        if (n.includes('caramel') || n.includes('miel') || n.includes('ballı') || n.includes('trileçe') || n.includes('san sebastián') || n.includes('kurabiye')) {
+        if (n.includes('caramel') || n.includes('miel') || n.includes('ballı') || n.includes('trileçe') || n.includes('san sebastián')) {
           return { main: '#B86B28', light: '#E6B57E', foam: '#FFF6E9', garnish: '🍯' };
         }
         if (n.includes('velvet') || n.includes('gilas') || n.includes('fire')) {
           return { main: '#9E1C28', light: '#E57373', foam: '#FFEBEE', garnish: '🍒' };
         }
-        if (n.includes('chocolate') || n.includes('mocha') || n.includes('şokolad') || n.includes('fındıq') || n.includes('ekler')) {
+        if (n.includes('chocolate') || n.includes('mocha') || n.includes('şokolad') || n.includes('fındıq')) {
           return { main: '#4E2A15', light: '#8D5B3C', foam: '#F3E5D8', garnish: '🍫' };
         }
         return { main: '#6F4226', light: '#C49A6C', foam: '#FBF5EE', garnish: '☕' };
@@ -4009,20 +4076,20 @@
           if (n.includes('ekler')) {
             return `<svg viewBox="0 0 120 120" aria-hidden="true">
               <ellipse cx="60" cy="94" rx="44" ry="9" fill="#D9C5AD"/>
-              <rect x="22" y="54" width="76" height="26" rx="13" fill="#E8B878" stroke="#A66B24" stroke-width="2"/>
-              <path d="M 24,64 C 24,53 34,50 60,50 C 86,50 96,53 96,64 C 86,69 74,62 60,66 C 46,70 34,62 24,64 Z" fill="#4E2A15"/>
-              <path d="M 34,56 Q 60,52 86,56" fill="none" stroke="#F6DEC2" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+              <rect x="22" y="54" width="76" height="28" rx="14" fill="#E8B872" stroke="#A66B24" stroke-width="2"/>
+              <path d="M 24,62 C 24,52 96,52 96,62 C 92,68 82,63 72,67 C 62,71 54,63 44,67 C 34,71 26,66 24,62 Z" fill="#4E2A15"/>
+              <path d="M 34,58 Q 60,54 86,58" fill="none" stroke="#F5E6D3" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
             </svg>`;
           }
           if (n.includes('kurabiye')) {
             return `<svg viewBox="0 0 120 120" aria-hidden="true">
               <ellipse cx="60" cy="96" rx="38" ry="8" fill="#D9C5AD"/>
-              <circle cx="60" cy="62" r="28" fill="#D89A56" stroke="#9A6125" stroke-width="2.5"/>
-              <circle cx="49" cy="52" r="3.5" fill="#3E200E"/>
-              <circle cx="69" cy="50" r="4" fill="#3E200E"/>
-              <circle cx="58" cy="64" r="3.5" fill="#3E200E"/>
-              <circle cx="47" cy="72" r="3" fill="#3E200E"/>
-              <circle cx="71" cy="70" r="3.5" fill="#3E200E"/>
+              <circle cx="60" cy="64" r="28" fill="#D99B52" stroke="#9C6324" stroke-width="2.2"/>
+              <circle cx="49" cy="54" r="3.5" fill="#3E200E"/>
+              <circle cx="68" cy="52" r="3.2" fill="#3E200E"/>
+              <circle cx="58" cy="66" r="4" fill="#3E200E"/>
+              <circle cx="72" cy="70" r="3.4" fill="#3E200E"/>
+              <circle cx="46" cy="72" r="3" fill="#3E200E"/>
             </svg>`;
           }
           if (n.includes('bilincik')) {
@@ -4167,6 +4234,35 @@
           <rect x="26" y="24" width="68" height="22" rx="11" fill="#3F3282"/>
           <text x="60" y="39" fill="#FFFFFF" font-size="11" font-weight="800" text-anchor="middle">4× KVİZ SET</text>
         </svg>`;
+      }
+
+      function renderStage(catObj) {
+        const stage = $('#menuStage');
+        const particles = $('#menuParticles');
+        if (!stage || !particles) return;
+
+        stage.style.setProperty('--m-c1', catObj.c1);
+        stage.style.setProperty('--m-c2', catObj.c2);
+        stage.className = `menu-stage anim-${catObj.anim}`;
+
+        $('#menuStageBadge').textContent = `${catObj.emoji} ${catObj.label}`;
+        $('#menuStageTitle').textContent = catObj.id === 'all' ? 'Bütün Dadlar Bir Yerdə' : catObj.label;
+        $('#menuStageDesc').textContent = catObj.desc;
+
+        let dots = '';
+        for (let i = 0; i < 9; i++) {
+          const left = 6 + i * 10.5;
+          const top = 16 + ((i * 19) % 68);
+          const delay = (i * 0.42).toFixed(2);
+          dots += `<i style="left:${left}%;top:${catObj.anim === 'sparkle' ? top + '%' : 'auto'};animation-delay:${delay}s"></i>`;
+        }
+        particles.innerHTML = dots;
+
+        const artBox = $('#menuStageArt');
+        artBox.style.animation = 'none';
+        void artBox.offsetWidth;
+        artBox.style.animation = '';
+        artBox.innerHTML = `<span style="font-size:54px;line-height:1;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.28))">${catObj.emoji}</span>`;
       }
 
       function renderCategories() {
@@ -4551,6 +4647,7 @@
       }
 
       function init() {
+        renderStage(MENU_CATEGORIES[0]);
         renderCategories();
         renderCatalog();
 
@@ -4694,28 +4791,27 @@
     })();
 
     /* ========================================================================
-       8c. ORTAQ SƏS KÖMƏKÇİSİ VƏ MASA TENİSİ MİNİ-OYUNU
+       ORTAQ SƏS EFFEKTİ (HƏMİŞƏ AKTİV VƏ YÜNGÜL)
        ======================================================================== */
-    const playTone = (() => {
-      let ac = null;
-      return (freq, dur = 0.07, type = 'sine', vol = 0.06) => {
-        try {
-          ac = ac || new (window.AudioContext || window.webkitAudioContext)();
-          if (ac.state === 'suspended') ac.resume();
-          const o = ac.createOscillator();
-          const g = ac.createGain();
-          o.type = type;
-          o.frequency.value = freq;
-          g.gain.setValueAtTime(vol, ac.currentTime);
-          g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + dur);
-          o.connect(g);
-          g.connect(ac.destination);
-          o.start();
-          o.stop(ac.currentTime + dur);
-        } catch (_) {}
-      };
-    })();
+    let _sharedAc = null;
+    function playTone(freq, dur = 0.07, type = 'sine', vol = 0.06) {
+      try {
+        _sharedAc = _sharedAc || new (window.AudioContext || window.webkitAudioContext)();
+        if (_sharedAc.state === 'suspended') _sharedAc.resume();
+        const o = _sharedAc.createOscillator();
+        const g = _sharedAc.createGain();
+        o.type = type;
+        o.frequency.value = freq;
+        g.gain.setValueAtTime(vol, _sharedAc.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.0001, _sharedAc.currentTime + dur);
+        o.connect(g); g.connect(_sharedAc.destination);
+        o.start(); o.stop(_sharedAc.currentTime + dur);
+      } catch (_) {}
+    }
 
+    /* ========================================================================
+       8c. MASA TENİSİ MİNİ-OYUNU (CANVAS + TAM EKRAN LANDSCAPE)
+       ======================================================================== */
     const PingPong = (() => {
       const root = $('#pp');
       const cv = $('#ppCanvas');
@@ -4728,59 +4824,80 @@
       const USER_END_X = 0.86;
       const LOSE_X = 1.04;
 
-      let W = 0, H = 0, dpr = 1, raf = 0, running = false, last = 0, endTimer = 0;
+      let W = 0, H = 0, dpr = 1, raf = 0, running = false, last = 0, lostTimer = 0;
 
       const G = {
-        state: 'ready', rally: 0, best: 0, full: false,
+        state: 'ready', rally: 0, best: 0,
         shot: null, serveTimer: 0, oppY: 0.5, oppSwing: 0, userSwing: 0,
-        racket: { x: 0.85, y: 0.5 }, fx: [], trail: [], shake: 0
+        racket: { x: 0.85, y: 0.5 }, fx: [], trail: [], shake: 0,
+        full: false, rotated: false
       };
       try { G.best = Number(localStorage.getItem('ustegel:pp:best')) || 0; } catch (_) {}
 
       const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
       const rand = (a, b) => a + Math.random() * (b - a);
-      const tFor = (r) => Math.max(0.78, 1.7 - 0.055 * r) * rand(0.94, 1.06);
+      const tFor = (r) => Math.max(0.38, 1.65 * Math.pow(0.94, r)) * rand(0.95, 1.05);
       const hitR = () => Math.max(50, Math.min(W, H) * 0.115);
       const ballR = () => Math.max(9, Math.min(W, H) * 0.024);
       const hMax = () => Math.min(H * 0.2, 120);
 
+      /* ---------- ölçü və tam ekran orientasiya ---------- */
+      function resize() {
+        const r = stage.getBoundingClientRect();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = Math.max(1, G.rotated ? r.height : r.width);
+        H = Math.max(1, G.rotated ? r.width : r.height);
+        cv.width = Math.round(W * dpr);
+        cv.height = Math.round(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
       function syncFullLayout() {
+        const isPortrait = window.innerHeight > window.innerWidth;
+        G.rotated = G.full && isPortrait;
         root.classList.toggle('is-full', G.full);
-        root.classList.toggle('is-rotated', G.full && window.innerHeight > window.innerWidth);
-        $('#ppFull')?.classList.toggle('active', G.full);
+        root.classList.toggle('is-rotated', G.rotated);
+        const fullBtn = $('#ppFull');
+        if (fullBtn) fullBtn.classList.toggle('active', G.full);
         requestAnimationFrame(resize);
       }
 
       async function enterFull() {
         G.full = true;
         try {
-          if (root.requestFullscreen && !document.fullscreenElement) await root.requestFullscreen();
-          else if (root.webkitRequestFullscreen) root.webkitRequestFullscreen();
-          if (screen.orientation?.lock) await screen.orientation.lock('landscape').catch(() => {});
+          if (root.requestFullscreen && !document.fullscreenElement) {
+            await root.requestFullscreen();
+          } else if (root.webkitRequestFullscreen) {
+            root.webkitRequestFullscreen();
+          }
+        } catch (_) {}
+        try {
+          if (screen.orientation && screen.orientation.lock) {
+            await screen.orientation.lock('landscape');
+          }
         } catch (_) {}
         syncFullLayout();
       }
 
       async function exitFull() {
         G.full = false;
+        G.rotated = false;
         try {
-          screen.orientation?.unlock?.();
-          if (document.fullscreenElement && document.exitFullscreen) await document.exitFullscreen();
-          else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
+          if (screen.orientation && screen.orientation.unlock) {
+            screen.orientation.unlock();
+          }
+        } catch (_) {}
+        try {
+          if (document.fullscreenElement && document.exitFullscreen) {
+            await document.exitFullscreen();
+          } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          }
         } catch (_) {}
         syncFullLayout();
       }
 
-      function resize() {
-        const r = stage.getBoundingClientRect();
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        W = Math.max(1, r.width);
-        H = Math.max(1, r.height);
-        cv.width = Math.round(W * dpr);
-        cv.height = Math.round(H * dpr);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      }
-
+      /* ---------- vuruş məntiqi ---------- */
       const heightAt = (t) => {
         if (t < BOUNCE) { const u = t / BOUNCE; return (1 - u) * 0.22 + 4 * u * (1 - u) * 0.78; }
         const v = Math.min(1, (t - BOUNCE) / 0.5);
@@ -4806,16 +4923,17 @@
         const sh = G.shot;
         if (!sh || sh.dir !== 1 || sh.t < HIT_FROM) { playTone(180, 0.05, 'sine', 0.025); return; }
         const b = drawnBall(sh);
-        const d = Math.hypot(b.x - G.racket.x * W, b.y - G.racket.y * H);
+        const rx = G.racket.x * W, ry = G.racket.y * H;
+        const d = Math.hypot(b.x - rx, b.y - ry);
         if (d > hitR()) { playTone(180, 0.05, 'sine', 0.025); return; }
 
         G.rally += 1;
-        const off = clamp((b.y - G.racket.y * H) / hitR(), -1, 1);
+        const off = clamp((b.y - ry) / hitR(), -1, 1);
         const sp = shotPos(sh);
         const y1 = clamp(sp.y + off * 0.32 + rand(-0.12, 0.12), 0.16, 0.84);
-        G.shot = { dir: -1, x0: clamp(sp.x, 0.52, 1), y0: sp.y, x1: 0.12, y1, t: 0, T: Math.max(0.7, tFor(G.rally) * 0.95), bounced: false };
+        G.shot = { dir: -1, x0: clamp(sp.x, 0.52, 1), y0: sp.y, x1: 0.12, y1, t: 0, T: Math.max(0.35, tFor(G.rally) * 0.92), bounced: false };
         G.trail.length = 0;
-        for (let i = 0; i < 10; i++) G.fx.push({ k: 'spark', x: b.x, y: b.y, vx: rand(-220, 220), vy: rand(-220, 220), age: 0, life: rand(0.3, 0.55) });
+        for (let i = 0; i < 12; i++) G.fx.push({ k: 'spark', x: b.x, y: b.y, vx: rand(-220, 220), vy: rand(-220, 220), age: 0, life: rand(0.3, 0.6) });
         G.fx.push({ k: 'ring', x: b.x, y: b.y, age: 0, life: 0.4 });
         playTone(660 + Math.min(G.rally, 25) * 18, 0.08, 'square', 0.05);
         updateHud();
@@ -4831,21 +4949,27 @@
         }
         updateHud();
         $('#ppLostInfo').textContent = `Qaytardığınız top: ${G.rally} · Rekord: ${G.best}`;
-        const ov = $('#ppLost');
-        const step2 = $('#ppEndStep2');
-        clearTimeout(endTimer);
-        ov.classList.remove('is-visible');
+
+        const lostOv = $('#ppLost');
+        const step2 = $('#ppLostStep2');
+        clearTimeout(lostTimer);
+        lostOv.classList.remove('is-visible');
         step2.classList.remove('is-shown');
-        ov.hidden = false;
+        lostOv.hidden = false;
         requestAnimationFrame(() => {
-          ov.classList.add('is-visible');
-          endTimer = setTimeout(() => step2.classList.add('is-shown'), 950);
+          lostOv.classList.add('is-visible');
+          lostTimer = setTimeout(() => step2.classList.add('is-shown'), 950);
         });
       }
 
       function updateHud() {
+        const bestVal = Math.max(G.best, G.rally);
         $('#ppScore').textContent = G.rally;
-        $('#ppBest').textContent = Math.max(G.best, G.rally);
+        $('#ppBest').textContent = bestVal;
+        const stScore = $('#ppStageScoreVal');
+        const stBest = $('#ppStageBestVal');
+        if (stScore) stScore.textContent = G.rally;
+        if (stBest) stBest.textContent = bestVal;
       }
 
       function reset() {
@@ -4854,6 +4978,7 @@
         updateHud();
       }
 
+      /* ---------- yeniləmə ---------- */
       function update(dt) {
         G.oppSwing = Math.max(0, G.oppSwing - dt * 5);
         G.userSwing = Math.max(0, G.userSwing - dt * 5);
@@ -4873,7 +4998,7 @@
         sh.t += dt / sh.T;
         const b = drawnBall(sh);
         G.trail.push({ x: b.x, y: b.y });
-        if (G.trail.length > 8) G.trail.shift();
+        if (G.trail.length > 9) G.trail.shift();
 
         if (!sh.bounced && sh.t >= BOUNCE) {
           sh.bounced = true;
@@ -4882,7 +5007,7 @@
         }
 
         if (sh.dir === -1) {
-          G.oppY += (sh.y1 - G.oppY) * Math.min(1, dt * 7);
+          G.oppY += (sh.y1 - G.oppY) * Math.min(1, dt * (7 + G.rally * 0.35));
           if (sh.t >= 1) serveFromOpp(sh.y1);
         } else {
           G.oppY += (0.5 - G.oppY) * Math.min(1, dt * 1.5);
@@ -4890,6 +5015,7 @@
         }
       }
 
+      /* ---------- çəkmə ---------- */
       function rr(x, y, w, h, r) {
         ctx.beginPath();
         ctx.moveTo(x + r, y);
@@ -4934,47 +5060,22 @@
         bg.addColorStop(0, '#3A200F'); bg.addColorStop(1, '#120904');
         ctx.fillStyle = bg; ctx.fillRect(-20, -20, W + 40, H + 40);
 
-        const tx = W * 0.025, ty = G.full ? H * 0.05 : H * 0.09, tw = W * 0.95, th = G.full ? H * 0.90 : H * 0.80;
+        const tx = G.full ? W * 0.015 : W * 0.03;
+        const ty = G.full ? H * 0.04 : H * 0.09;
+        const tw = G.full ? W * 0.97 : W * 0.94;
+        const th = G.full ? H * 0.90 : H * 0.80;
         ctx.save();
         ctx.shadowColor = 'rgba(0,0,0,0.55)'; ctx.shadowBlur = 28; ctx.shadowOffsetY = 14;
         const tg = ctx.createLinearGradient(0, ty, 0, ty + th);
         tg.addColorStop(0, '#256E89'); tg.addColorStop(1, '#17485C');
         ctx.fillStyle = tg; rr(tx, ty, tw, th, 14); ctx.fill();
         ctx.restore();
-
         ctx.fillStyle = 'rgba(0,0,0,0.10)'; rr(tx, ty, tw / 2, th, 14); ctx.fill();
         ctx.fillStyle = 'rgba(255,255,255,0.05)'; ctx.fillRect(tx + tw / 2, ty, tw / 2 - 14, th);
-
         ctx.strokeStyle = 'rgba(255,244,228,0.85)'; ctx.lineWidth = 3;
         rr(tx + 8, ty + 8, tw - 16, th - 16, 10); ctx.stroke();
         ctx.lineWidth = 1.5; ctx.strokeStyle = 'rgba(255,244,228,0.45)';
         ctx.beginPath(); ctx.moveTo(tx + 8, ty + th / 2); ctx.lineTo(tx + tw - 8, ty + th / 2); ctx.stroke();
-
-        // Tam ekran modunda sol tərəfdə masanın üzərində Xal və Rekord göstəriciləri
-        if (G.full) {
-          ctx.save();
-          const padX = tx + Math.max(22, tw * 0.055);
-          const padY = ty + Math.max(24, th * 0.08);
-          const fsVal = Math.max(22, Math.min(34, W * 0.036));
-          const fsLbl = Math.max(10, Math.min(13, W * 0.014));
-          ctx.textBaseline = 'top';
-          ctx.fillStyle = 'rgba(251, 239, 224, 0.52)';
-          ctx.font = `700 ${fsLbl}px Manrope, sans-serif`;
-          ctx.fillText('QAYTARILAN', padX, padY);
-          ctx.fillStyle = 'rgba(242, 211, 168, 0.85)';
-          ctx.font = `800 ${fsVal}px Fraunces, Georgia, serif`;
-          ctx.fillText(String(G.rally), padX, padY + fsLbl + 3);
-
-          const col2X = padX + Math.max(96, tw * 0.14);
-          ctx.fillStyle = 'rgba(251, 239, 224, 0.52)';
-          ctx.font = `700 ${fsLbl}px Manrope, sans-serif`;
-          ctx.fillText('REKORD', col2X, padY);
-          ctx.fillStyle = 'rgba(242, 211, 168, 0.72)';
-          ctx.font = `800 ${fsVal}px Fraunces, Georgia, serif`;
-          ctx.fillText(String(Math.max(G.best, G.rally)), col2X, padY + fsLbl + 3);
-          ctx.restore();
-        }
-
         const nx = W / 2;
         ctx.fillStyle = 'rgba(255,255,255,0.22)'; ctx.fillRect(nx - 4, ty - 10, 8, th + 20);
         ctx.strokeStyle = 'rgba(255,255,255,0.55)'; ctx.lineWidth = 1;
@@ -5032,22 +5133,23 @@
 
       function frame(ts) {
         if (!running) return;
-        raf = requestAnimationFrame(frame);
         const dt = Math.min(0.05, (ts - last) / 1000 || 0.016);
         last = ts;
         update(dt);
         draw();
+        raf = requestAnimationFrame(frame);
       }
 
+      /* ---------- idarəetmə ---------- */
       function setRacket(e) {
+        const r = cv.getBoundingClientRect();
         let nx, ny;
-        if (root.classList.contains('is-rotated')) {
-          nx = e.clientY / Math.max(1, window.innerHeight);
-          ny = 1 - (e.clientX / Math.max(1, window.innerWidth));
+        if (G.rotated) {
+          nx = (e.clientY - r.top) / r.height;
+          ny = 1 - (e.clientX - r.left) / r.width;
         } else {
-          const r = cv.getBoundingClientRect();
-          nx = (e.clientX - r.left) / Math.max(1, r.width);
-          ny = (e.clientY - r.top) / Math.max(1, r.height);
+          nx = (e.clientX - r.left) / r.width;
+          ny = (e.clientY - r.top) / r.height;
         }
         G.racket.x = clamp(nx, 0.52, 1);
         G.racket.y = clamp(ny, 0, 1);
@@ -5070,14 +5172,14 @@
       function close() {
         running = false;
         cancelAnimationFrame(raf);
-        clearTimeout(endTimer);
+        clearTimeout(lostTimer);
         if (G.full) exitFull();
         root.hidden = true;
         document.body.style.overflow = '';
       }
 
       function start() {
-        clearTimeout(endTimer);
+        clearTimeout(lostTimer);
         $('#ppStart').hidden = true;
         $('#ppLost').hidden = true;
         reset();
@@ -5094,8 +5196,9 @@
       $('#ppExit').addEventListener('click', close);
       $('#ppClose').addEventListener('click', close);
       document.addEventListener('fullscreenchange', () => {
-        if (!document.fullscreenElement && G.full && window.innerWidth >= window.innerHeight) {
+        if (!document.fullscreenElement && G.full) {
           G.full = false;
+          G.rotated = false;
           syncFullLayout();
         }
       });
@@ -5108,7 +5211,7 @@
     })();
 
     /* ========================================================================
-       8d. MASAÜSTÜ KÖRLİNQ OYUNU (4 NARIINCI vs 4 MAVİ DAŞ)
+       8d. MASAÜSTÜ KÖRLİNQ OYUNU (4 NARINCI vs 4 MAVİ DAŞ)
        ======================================================================== */
     const CurlingGame = (() => {
       const root = $('#cl');
@@ -5130,7 +5233,7 @@
         stones: [],
         angle: 0,
         angleDir: 1,
-        power: 0,
+        power: 0.08,
         powerDir: 1,
         slideTime: 0,
         oppPlan: [],
@@ -5140,27 +5243,221 @@
 
       const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
       const rand = (a, b) => a + Math.random() * (b - a);
-      const tFor = (r) => Math.max(0.38, 1.65 * Math.pow(0.94, r)) * rand(0.95, 1.05);
-      const hitR = () => Math.max(50, Math.min(W, H) * 0.115);
-// ... existing code ... -->
-        G.rally += 1;
-        const off = clamp((b.y - G.racket.y * H) / hitR(), -1, 1);
-        const sp = shotPos(sh);
-        const y1 = clamp(sp.y + off * 0.32 + rand(-0.12, 0.12), 0.16, 0.84);
-        G.shot = { dir: -1, x0: clamp(sp.x, 0.52, 1), y0: sp.y, x1: 0.12, y1, t: 0, T: Math.max(0.35, tFor(G.rally) * 0.92), bounced: false };
-        G.trail.length = 0;
-// ... existing code ... -->
-        if (sh.dir === -1) {
-          G.oppY += (sh.y1 - G.oppY) * Math.min(1, dt * (7 + G.rally * 0.35));
-          if (sh.t >= 1) serveFromOpp(sh.y1);
-        } else {
-// ... existing code ... -->
+
+      function layout() {
+        const padX = G.full ? Math.max(10, W * 0.03) : Math.max(14, W * 0.06);
+        const padTop = G.full ? Math.max(48, H * 0.065) : Math.max(14, H * 0.025);
+        const padBot = G.full ? Math.max(54, H * 0.075) : Math.max(56, H * 0.085);
+        const maxW = Math.min(W - padX * 2, G.full ? 520 : 440);
+        L.w = Math.max(220, maxW);
+        L.h = Math.max(300, H - padTop - padBot);
+        L.x = (W - L.w) / 2;
+        L.y = padTop;
+
+        L.houseX = L.x + L.w / 2;
+        L.houseY = L.y + L.h * 0.27;
+        const maxR = Math.min(L.w * 0.42, L.h * 0.20);
+        L.rings = [
+          { r: maxR * 1.00, pts: 1, fill: '#2563EB', stroke: '#93C5FD' },
+          { r: maxR * 0.74, pts: 2, fill: '#F8FAFC', stroke: '#CBD5E1' },
+          { r: maxR * 0.49, pts: 3, fill: '#DC2626', stroke: '#FCA5A5' },
+          { r: maxR * 0.24, pts: 4, fill: '#F59E0B', stroke: '#FDE68A' }
+        ];
+
+        L.launchX = L.x + L.w / 2;
+        L.launchY = L.y + L.h * 0.88;
+        L.stoneR = clamp(Math.min(L.w * 0.048, maxR * 0.16), 11, 19);
+      }
+
+      function resize() {
+        const prevW = W, prevH = H;
+        const r = stage.getBoundingClientRect();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = Math.max(1, r.width);
+        H = Math.max(1, r.height);
+        cv.width = Math.round(W * dpr);
+        cv.height = Math.round(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const old = { x: L.x, y: L.y, w: L.w, h: L.h };
+        layout();
+        if (prevW > 0 && prevH > 0 && old.w > 0 && old.h > 0 && G.stones.length) {
+          G.stones.forEach((s) => {
+            const rx = (s.x - old.x) / old.w;
+            const ry = (s.y - old.y) / old.h;
+            s.x = L.x + rx * L.w;
+            s.y = L.y + ry * L.h;
+          });
+        }
+      }
+
+      function syncFullLayout() {
+        root.classList.toggle('is-full', G.full);
+        $('#clFull')?.classList.toggle('active', G.full);
+        requestAnimationFrame(resize);
+      }
+
+      async function enterFull() {
+        G.full = true;
+        try {
+          if (root.requestFullscreen && !document.fullscreenElement) await root.requestFullscreen();
+          else if (root.webkitRequestFullscreen) root.webkitRequestFullscreen();
+        } catch (_) {}
+        syncFullLayout();
+      }
+
+      async function exitFull() {
+        G.full = false;
+        try {
+          if (document.fullscreenElement && document.exitFullscreen) await document.exitFullscreen();
+          else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
+        } catch (_) {}
+        syncFullLayout();
+      }
+
+      function stonePoints(s) {
+        const d = Math.hypot(s.x - L.houseX, s.y - L.houseY);
+        const touch = L.stoneR * 0.85;
+        for (let i = L.rings.length - 1; i >= 0; i--) {
+          if (d <= L.rings[i].r + touch) return L.rings[i].pts;
+        }
+        return 0;
+      }
+
+      function calcScores() {
+        let user = 0, opp = 0;
+        G.stones.forEach((s) => {
+          const p = stonePoints(s);
+          if (s.owner === 'user') user += p;
+          else opp += p;
+        });
+        return { user, opp };
+      }
+
+      function updateHud() {
+        const sc = calcScores();
+        $('#clUserScore').textContent = sc.user;
+        $('#clOppScore').textContent = sc.opp;
+
+        const uDots = $('#clUserDots')?.children || [];
+        for (let i = 0; i < uDots.length; i++) uDots[i].classList.toggle('used', i < G.userUsed);
+
+        const oDots = $('#clOppDots')?.children || [];
+        for (let i = 0; i < oDots.length; i++) oDots[i].classList.toggle('used', i < G.oppUsed);
+
+        const turnEl = $('#clTurn');
+        if (turnEl) {
+          const isOpp = G.turn === 'opp';
+          turnEl.classList.toggle('opp', isOpp);
+          turnEl.textContent = G.phase === 'end'
+            ? 'Oyun bitdi'
+            : (isOpp ? 'Rəqibin növbəsi' : 'Sənin növbən');
+        }
+      }
+
+      function makeOppPlan() {
+        const presets = [
+          [3, 3, 3, 2],
+          [4, 3, 2, 2],
+          [3, 3, 2, 2],
+          [4, 3, 3, 2],
+          [3, 3, 3, 1]
+        ];
+        return presets[Math.floor(Math.random() * presets.length)].slice();
+      }
+
+      function travelDistance(power) {
+        return L.h * (0.10 + 0.76 * power);
+      }
+
+      function launchStone(owner, angle, power) {
+        const decel = 0.72 * L.h;
+        const dist = travelDistance(power);
+        const v0 = Math.sqrt(2 * decel * dist);
+        const vx = Math.sin(angle) * v0;
+        const vy = -Math.cos(angle) * v0;
+
+        G.stones.push({
+          owner,
+          x: L.launchX,
+          y: L.launchY,
+          vx,
+          vy
+        });
+
+        if (owner === 'user') G.userUsed += 1;
+        else G.oppUsed += 1;
+
+        G.slideTime = 0;
+        G.phase = 'slide';
+        updateHud();
+        playTone(owner === 'user' ? 490 : 370, 0.08, 'triangle', 0.06);
+      }
+
+      function aiThrow() {
+        if (!running || G.phase !== 'ai_wait') return;
+        const idx = clamp(G.oppUsed, 0, 3);
+        const targetPts = G.oppPlan[idx] || 3;
+        const ringIdx = clamp(targetPts - 1, 0, L.rings.length - 1);
+        const innerR = ringIdx === 3 ? 0 : L.rings[ringIdx + 1].r;
+        const outerR = L.rings[ringIdx].r;
+        const targetR = innerR + (outerR - innerR) * rand(0.28, 0.72);
+        const theta = rand(-Math.PI * 0.85, Math.PI * 0.85);
+
+        const tx = clamp(L.houseX + Math.cos(theta) * targetR, L.x + L.stoneR * 1.5, L.x + L.w - L.stoneR * 1.5);
+        const ty = L.houseY + Math.sin(theta) * targetR * 0.75;
+
+        const dx = tx - L.launchX;
+        const dy = ty - L.launchY;
+        const angle = clamp(Math.atan2(dx, -dy), -0.62, 0.62);
+        const dist = Math.hypot(dx, dy);
+        const power = clamp((dist / L.h - 0.10) / 0.76, 0.14, 0.96);
+
+        launchStone('opp', angle, power);
+      }
+
+      function finishGame() {
+        G.phase = 'end';
+        updateHud();
+        const sc = calcScores();
+        const finalUser = sc.user;
+        const finalOpp = sc.opp;
+
+        const ov = $('#clEnd');
+        const step1 = $('#clEndStep1');
+        const step2 = $('#clEndStep2');
+        const msgEl = $('#clEndMsg');
+        const infoEl = $('#clEndInfo');
+
         if (finalUser > finalOpp) {
           step1.textContent = 'Təbriklər, qalib gəldiniz! 🏆';
           msgEl.textContent = 'Üstəgələ gəl, bərabər oynayaq!';
           playTone(780, 0.24, 'triangle', 0.08);
         } else if (finalUser === finalOpp) {
-// ... existing code ... -->
+          step1.textContent = 'Əla cəhd idi! 🤝';
+          msgEl.textContent = 'Bərabərə bitdi!';
+          playTone(540, 0.20, 'sine', 0.07);
+        } else {
+          step1.textContent = 'Əla cəhd idi! 👏';
+          msgEl.textContent = 'Üstəgələ gəl, bərabər oynayaq!';
+          playTone(220, 0.28, 'sawtooth', 0.06);
+        }
+
+        infoEl.textContent = `Sənin xalın: ${finalUser} · Rəqibin xalı: ${finalOpp}`;
+
+        clearTimeout(endTimer);
+        ov.classList.remove('is-visible');
+        step2.classList.remove('is-shown');
+        ov.hidden = false;
+        requestAnimationFrame(() => {
+          ov.classList.add('is-visible');
+          endTimer = setTimeout(() => step2.classList.add('is-shown'), 950);
+        });
+      }
+
+      function update(dt) {
+        G.fx = G.fx.filter((f) => (f.age += dt) < f.life);
+
         if (G.phase === 'aim') {
           const maxAng = 0.64;
           G.angle += G.angleDir * 2.69 * dt;
@@ -5171,4 +5468,423 @@
           if (G.power >= 1) { G.power = 1; G.powerDir = -1; }
           if (G.power <= 0.08) { G.power = 0.08; G.powerDir = 1; }
         } else if (G.phase === 'slide') {
-// ... existing code ... -->
+          G.slideTime += dt;
+          const decel = 0.72 * L.h;
+          const r = L.stoneR;
+          let moving = false;
+
+          for (let i = 0; i < G.stones.length; i++) {
+            const s = G.stones[i];
+            const spd = Math.hypot(s.vx, s.vy);
+            if (spd > 0.5) {
+              moving = true;
+              s.x += s.vx * dt;
+              s.y += s.vy * dt;
+              const nextSpd = Math.max(0, spd - decel * dt);
+              const k = nextSpd / spd;
+              s.vx *= k;
+              s.vy *= k;
+
+              if (s.x < L.x + r) { s.x = L.x + r; s.vx = Math.abs(s.vx) * 0.65; }
+              if (s.x > L.x + L.w - r) { s.x = L.x + L.w - r; s.vx = -Math.abs(s.vx) * 0.65; }
+              if (s.y < L.y + r) { s.y = L.y + r; s.vy = Math.abs(s.vy) * 0.45; }
+              if (s.y > L.y + L.h - r) { s.y = L.y + L.h - r; s.vy = -Math.abs(s.vy) * 0.45; }
+            } else {
+              s.vx = 0;
+              s.vy = 0;
+            }
+          }
+
+          for (let i = 0; i < G.stones.length; i++) {
+            for (let j = i + 1; j < G.stones.length; j++) {
+              const a = G.stones[i];
+              const b = G.stones[j];
+              const dx = b.x - a.x;
+              const dy = b.y - a.y;
+              const dist = Math.hypot(dx, dy);
+              const minD = r * 2;
+              if (dist > 0.001 && dist < minD) {
+                const nx = dx / dist;
+                const ny = dy / dist;
+                const overlap = (minD - dist) * 0.5;
+                a.x -= nx * overlap;
+                a.y -= ny * overlap;
+                b.x += nx * overlap;
+                b.y += ny * overlap;
+
+                const dv = (a.vx - b.vx) * nx + (a.vy - b.vy) * ny;
+                if (dv > 0) {
+                  const imp = dv * 0.92;
+                  a.vx -= imp * nx;
+                  a.vy -= imp * ny;
+                  b.vx += imp * nx;
+                  b.vy += imp * ny;
+                  moving = true;
+                  G.fx.push({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2, age: 0, life: 0.35 });
+                  playTone(460, 0.05, 'triangle', 0.05);
+                }
+              }
+            }
+          }
+
+          if (!moving || G.slideTime > 5.5) {
+            G.stones.forEach((s) => { s.vx = 0; s.vy = 0; });
+            updateHud();
+            if (G.userUsed >= 4 && G.oppUsed >= 4) {
+              finishGame();
+            } else if (G.turn === 'user') {
+              G.turn = 'opp';
+              G.phase = 'ai_wait';
+              updateHud();
+              clearTimeout(aiTimer);
+              aiTimer = setTimeout(aiThrow, 650);
+            } else {
+              G.turn = 'user';
+              G.phase = 'aim';
+              G.angle = 0;
+              G.angleDir = 1;
+              G.power = 0.08;
+              G.powerDir = 1;
+              updateHud();
+            }
+          }
+        }
+      }
+
+      function rr(x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+        ctx.closePath();
+      }
+
+      function drawStone(x, y, r, owner, pts) {
+        ctx.save();
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.28)';
+        ctx.beginPath(); ctx.arc(x + 2, y + 4, r, 0, TAU); ctx.fill();
+
+        const g = ctx.createRadialGradient(x - r * 0.3, y - r * 0.35, r * 0.1, x, y, r);
+        g.addColorStop(0, '#E2E8F0');
+        g.addColorStop(0.65, '#94A3B8');
+        g.addColorStop(1, '#475569');
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fill();
+
+        const core = ctx.createRadialGradient(x - r * 0.2, y - r * 0.25, r * 0.08, x, y, r * 0.72);
+        if (owner === 'user') {
+          core.addColorStop(0, '#FDBA74');
+          core.addColorStop(0.55, '#F97316');
+          core.addColorStop(1, '#C2410C');
+        } else {
+          core.addColorStop(0, '#93C5FD');
+          core.addColorStop(0.55, '#2563EB');
+          core.addColorStop(1, '#1D4ED8');
+        }
+        ctx.fillStyle = core;
+        ctx.beginPath(); ctx.arc(x, y, r * 0.72, 0, TAU); ctx.fill();
+
+        if (pts > 0) {
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = `800 ${Math.max(10, Math.round(r * 0.78))}px Manrope, sans-serif`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('+' + pts, x, y + 0.5);
+        }
+        ctx.restore();
+      }
+
+      function draw() {
+        const bg = ctx.createRadialGradient(W / 2, H / 2, 20, W / 2, H / 2, Math.max(W, H) * 0.75);
+        bg.addColorStop(0, '#2B180C'); bg.addColorStop(1, '#120904');
+        ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+
+        // Buz meydançası
+        ctx.save();
+        ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 24; ctx.shadowOffsetY = 10;
+        const ice = ctx.createLinearGradient(0, L.y, 0, L.y + L.h);
+        ice.addColorStop(0, '#E0F2FE');
+        ice.addColorStop(0.5, '#F0F9FF');
+        ice.addColorStop(1, '#BAE6FD');
+        ctx.fillStyle = ice;
+        rr(L.x, L.y, L.w, L.h, 18); ctx.fill();
+        ctx.restore();
+
+        // Taxta bordür
+        ctx.strokeStyle = '#8B5E34';
+        ctx.lineWidth = 4;
+        rr(L.x, L.y, L.w, L.h, 18); ctx.stroke();
+
+        // Mərkəz xətti və buraxılış xətti
+        ctx.strokeStyle = 'rgba(30, 58, 138, 0.16)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([6, 6]);
+        ctx.beginPath();
+        ctx.moveTo(L.houseX, L.y + 10);
+        ctx.lineTo(L.houseX, L.y + L.h - 10);
+        ctx.moveTo(L.x + 12, L.launchY - L.stoneR * 1.8);
+        ctx.lineTo(L.x + L.w - 12, L.launchY - L.stoneR * 1.8);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // 4 konsentrik hədəf halqası (1, 2, 3, 4 xal)
+        L.rings.forEach((rg) => {
+          ctx.beginPath();
+          ctx.arc(L.houseX, L.houseY, rg.r, 0, TAU);
+          ctx.fillStyle = rg.fill;
+          ctx.fill();
+          ctx.lineWidth = 2;
+          ctx.strokeStyle = rg.stroke;
+          ctx.stroke();
+        });
+
+        // Halqaların xal etiketləri
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = `800 ${Math.max(10, Math.round(L.stoneR * 0.72))}px Manrope, sans-serif`;
+        L.rings.forEach((rg, idx) => {
+          if (idx === 3) {
+            ctx.fillStyle = '#2B1A10';
+            ctx.fillText('4', L.houseX, L.houseY + 0.5);
+          } else {
+            const nextR = L.rings[idx + 1].r;
+            const midR = (rg.r + nextR) / 2;
+            ctx.fillStyle = idx === 1 ? '#1E293B' : '#FFFFFF';
+            ctx.fillText(String(rg.pts), L.houseX, L.houseY - midR);
+          }
+        });
+
+        // Tam ekran modunda yuxarıda kompakt xal paneli
+        if (G.full) {
+          const sc = calcScores();
+          ctx.save();
+          ctx.fillStyle = 'rgba(20, 10, 4, 0.78)';
+          rr(L.x + 10, L.y + 8, L.w - 20, 32, 999);
+          ctx.fill();
+          ctx.font = '800 13px Manrope, sans-serif';
+          ctx.textBaseline = 'middle';
+          ctx.textAlign = 'left';
+          ctx.fillStyle = '#FDBA74';
+          ctx.fillText(`Sən: ${sc.user} (${4 - G.userUsed} daş)`, L.x + 24, L.y + 24);
+          ctx.textAlign = 'right';
+          ctx.fillStyle = '#93C5FD';
+          ctx.fillText(`Rəqib: ${sc.opp} (${4 - G.oppUsed} daş)`, L.x + L.w - 24, L.y + 24);
+          ctx.restore();
+        }
+
+        // Atılmış daşlar
+        G.stones.forEach((s) => {
+          drawStone(s.x, s.y, L.stoneR, s.owner, G.phase === 'slide' ? 0 : stonePoints(s));
+        });
+
+        // Toqquşma halqaları
+        G.fx.forEach((f) => {
+          const a = 1 - f.age / f.life;
+          ctx.strokeStyle = `rgba(249, 115, 22, ${a.toFixed(3)})`;
+          ctx.lineWidth = 2.5;
+          ctx.beginPath();
+          ctx.arc(f.x, f.y, L.stoneR * 0.6 + f.age * 70, 0, TAU);
+          ctx.stroke();
+        });
+
+        // İstifadəçinin növbəti daşı, istiqamət oxu və şiddət məsafəsi
+        if (G.turn === 'user' && (G.phase === 'aim' || G.phase === 'charge')) {
+          const dirX = Math.sin(G.angle);
+          const dirY = -Math.cos(G.angle);
+
+          if (G.phase === 'charge') {
+            const dist = travelDistance(G.power);
+            const endX = L.launchX + dirX * dist;
+            const endY = L.launchY + dirY * dist;
+
+            ctx.save();
+            ctx.strokeStyle = 'rgba(234, 88, 12, 0.75)';
+            ctx.lineWidth = 3;
+            ctx.setLineDash([7, 6]);
+            ctx.beginPath();
+            ctx.moveTo(L.launchX, L.launchY);
+            ctx.lineTo(endX, endY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.strokeStyle = '#EA580C';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.arc(endX, endY, L.stoneR, 0, TAU);
+            ctx.stroke();
+            ctx.fillStyle = 'rgba(249, 115, 22, 0.22)';
+            ctx.fill();
+            ctx.restore();
+          } else {
+            const arrowLen = Math.min(L.h * 0.22, 115);
+            const ax = L.launchX + dirX * arrowLen;
+            const ay = L.launchY + dirY * arrowLen;
+
+            ctx.save();
+            ctx.strokeStyle = 'rgba(30, 41, 59, 0.22)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(L.launchX, L.launchY, arrowLen, -Math.PI / 2 - 0.64, -Math.PI / 2 + 0.64);
+            ctx.stroke();
+
+            ctx.strokeStyle = '#EA580C';
+            ctx.lineWidth = 3.5;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(L.launchX, L.launchY);
+            ctx.lineTo(ax, ay);
+            ctx.stroke();
+
+            const head = 11;
+            const ang = Math.atan2(dirY, dirX);
+            ctx.fillStyle = '#EA580C';
+            ctx.beginPath();
+            ctx.moveTo(ax, ay);
+            ctx.lineTo(ax - head * Math.cos(ang - 0.45), ay - head * Math.sin(ang - 0.45));
+            ctx.lineTo(ax - head * Math.cos(ang + 0.45), ay - head * Math.sin(ang + 0.45));
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+          }
+
+          drawStone(L.launchX, L.launchY, L.stoneR, 'user', 0);
+        }
+      }
+
+      function frame(ts) {
+        if (!running) return;
+        raf = requestAnimationFrame(frame);
+        const dt = Math.min(0.05, (ts - last) / 1000 || 0.016);
+        last = ts;
+        update(dt);
+        draw();
+      }
+
+      function open() {
+        root.hidden = false;
+        document.body.style.overflow = 'hidden';
+        syncFullLayout();
+        G.phase = 'ready';
+        G.stones = [];
+        G.userUsed = 0;
+        G.oppUsed = 0;
+        G.turn = 'user';
+        G.fx.length = 0;
+        $('#clHint').textContent = HINT_TEXT;
+        updateHud();
+        $('#clStart').hidden = false;
+        $('#clEnd').hidden = true;
+        running = true;
+        last = performance.now();
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(frame);
+      }
+
+      function close() {
+        running = false;
+        cancelAnimationFrame(raf);
+        clearTimeout(endTimer);
+        clearTimeout(aiTimer);
+        if (G.full) exitFull();
+        root.hidden = true;
+        document.body.style.overflow = '';
+      }
+
+      function start() {
+        clearTimeout(endTimer);
+        clearTimeout(aiTimer);
+        $('#clStart').hidden = true;
+        $('#clEnd').hidden = true;
+        G.stones = [];
+        G.userUsed = 0;
+        G.oppUsed = 0;
+        G.turn = 'user';
+        G.angle = 0;
+        G.angleDir = 1;
+        G.power = 0.08;
+        G.powerDir = 1;
+        G.oppPlan = makeOppPlan();
+        G.fx.length = 0;
+        G.phase = 'aim';
+        updateHud();
+        playTone(440, 0.08, 'triangle', 0.05);
+      }
+
+      cv.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        if (G.phase === 'aim' && G.turn === 'user') {
+          G.power = 0.08;
+          G.powerDir = 1;
+          G.phase = 'charge';
+          playTone(380, 0.05, 'sine', 0.04);
+        }
+      });
+
+      const releaseShot = () => {
+        if (G.phase === 'charge' && G.turn === 'user') {
+          launchStone('user', G.angle, G.power);
+        }
+      };
+
+      window.addEventListener('pointerup', releaseShot);
+      window.addEventListener('pointercancel', releaseShot);
+
+      $('#clGo').addEventListener('click', start);
+      $('#clStartFull').addEventListener('click', async () => { await enterFull(); start(); });
+      $('#clFull').addEventListener('click', () => (G.full ? exitFull() : enterFull()));
+      $('#clExitFullFloat').addEventListener('click', exitFull);
+      $('#clAgain').addEventListener('click', start);
+      $('#clExit').addEventListener('click', close);
+      $('#clClose').addEventListener('click', close);
+
+      document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement && G.full) {
+          G.full = false;
+          syncFullLayout();
+        }
+      });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !root.hidden) close(); });
+      window.addEventListener('resize', () => { if (!root.hidden) syncFullLayout(); });
+      window.addEventListener('orientationchange', () => setTimeout(() => { if (!root.hidden) syncFullLayout(); }, 250));
+      document.addEventListener('click', (e) => { if (e.target.closest('[data-play="curling"]')) open(); });
+
+      return { open, close };
+    })();
+
+    /* ========================================================================
+       9. BİLDİRİŞ (TOAST) VƏ BUFERƏ KOPYALAMA KÖMƏKÇİLƏRİ
+       ======================================================================== */
+    function showToast(text) {
+      const wrap = $('#toastWrap');
+      if (!wrap) return;
+      const el = document.createElement('div');
+      el.className = 'toast';
+      el.textContent = text;
+      wrap.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transition = 'opacity 0.25s ease';
+        setTimeout(() => el.remove(), 260);
+      }, 2800);
+    }
+
+    function copyText(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(`Kod kopyalandı: ${text}`);
+      } catch (_) {
+        showToast(text);
+      }
+      ta.remove();
+    }
+  </script>
+</body>
+</html>
