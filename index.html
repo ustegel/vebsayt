@@ -5554,6 +5554,7 @@
       }
 
       function rr(x, y, w, h, r) {
+        r = Math.max(0, Math.min(r, Math.abs(w) / 2, Math.abs(h) / 2));
         ctx.beginPath();
         ctx.moveTo(x + r, y);
         ctx.arcTo(x + w, y, x + w, y + h, r);
@@ -5655,10 +5656,9 @@
         // Buz meydançası
         ctx.save();
         const ice = ctx.createLinearGradient(L.x, L.y, L.x + L.w, L.y + L.h);
-        ice.addColorStop(0, '#D7EDF8');
-        ice.addColorStop(0.45, '#F2FAFE');
-        ice.addColorStop(0.75, '#E3F4FC');
-        ice.addColorStop(1, '#C5E4F4');
+        ice.addColorStop(0, '#F7FBFF');
+        ice.addColorStop(0.5, '#FFFFFF');
+        ice.addColorStop(1, '#F0F7FC');
         ctx.fillStyle = ice;
         rr(L.x, L.y, L.w, L.h, 14);
         ctx.fill();
@@ -5743,8 +5743,8 @@
         if (G.full) {
           const sc = calcScores();
           ctx.save();
-          ctx.fillStyle = 'rgba(20, 10, 4, 0.80)';
-          rr(L.x + 10, L.y + 8, L.w - 20, 32, 999);
+          ctx.fillStyle = 'rgba(20, 10, 4, 0.82)';
+          rr(L.x + 10, L.y + 8, L.w - 20, 32, 16);
           ctx.fill();
           ctx.font = '800 13px Manrope, sans-serif';
           ctx.textBaseline = 'middle';
