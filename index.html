@@ -2080,12 +2080,23 @@
 
     .pp { position: fixed; inset: 0; z-index: 90; display: flex; flex-direction: column; background: #140A04; color: #FBEFE0; }
     .pp[hidden] { display: none; }
+    .pp.is-full.is-rotated {
+      inset: auto;
+      top: 0;
+      left: 100vw;
+      width: 100vh;
+      width: 100dvh;
+      height: 100vw;
+      transform: rotate(90deg);
+      transform-origin: top left;
+    }
     .pp-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 10px; background: rgba(255, 255, 255, 0.04); border-bottom: 1px solid rgba(242, 211, 168, 0.14); }
     .pp-score { display: flex; gap: 18px; font-weight: 700; font-size: 14px; color: rgba(251, 239, 224, 0.8); }
     .pp-score b { font: 800 21px var(--font-serif); color: #F2D3A8; margin-left: 4px; }
     .pp-actions { display: flex; gap: 8px; }
-    .pp-actions button { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(242, 211, 168, 0.3); background: rgba(255, 255, 255, 0.07); color: #FBEFE0; font-size: 20px; cursor: pointer; }
+    .pp-actions button { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(242, 211, 168, 0.3); background: rgba(255, 255, 255, 0.07); color: #FBEFE0; font-size: 20px; cursor: pointer; display: grid; place-items: center; }
     .pp-actions button:hover { background: rgba(255, 255, 255, 0.16); }
+    .pp-actions button.active { background: #F2D3A8; color: #2B1A10; border-color: #F2D3A8; }
     .pp-stage { position: relative; flex: 1; min-height: 0; overflow: hidden; }
     .pp canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: none; -webkit-user-select: none; user-select: none; }
     .pp-label { position: absolute; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); font-weight: 800; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(251, 239, 224, 0.55); pointer-events: none; }
@@ -2338,7 +2349,6 @@
         <span class="logo-text" id="logoTxt">Üstəgəl</span>
       </button>
       <nav aria-label="Əsas menyu">
-        <button data-go="home" class="on">Əsas</button>
         <button data-go="menu">Menyu</button>
         <button data-go="games">Oyunlar</button>
         <button data-go="events">Tədbirlər</button>
@@ -2587,6 +2597,7 @@
         <span>Rekord: <b id="ppBest">0</b></span>
       </div>
       <div class="pp-actions">
+        <button type="button" id="ppFull" aria-label="Tam ekran" title="Tam ekran">⛶</button>
         <button type="button" id="ppSound" aria-label="Səsi aç/bağla">🔊</button>
         <button type="button" id="ppClose" aria-label="Oyunu bağla">×</button>
       </div>
@@ -2600,8 +2611,11 @@
           <div class="pp-emoji" aria-hidden="true">🏓</div>
           <h3>Masa tenisi</h3>
           <p>Top sağ tərəfə gələndə raketkanı topun üstünə gətirib klikləyin (telefonda barmağınızla toxunun) və topu rəqibə qaytarın. Vaxtında vura bilməsəniz, uduzursunuz.</p>
-          <p class="pp-rotate">📱 Telefonu üfüqi tutsanız daha rahat olar.</p>
-          <button type="button" class="btn" id="ppGo">Başla</button>
+          <p class="pp-rotate">📱 Daha geniş oyun sahəsi üçün Tam ekran (üfüqi) rejiminə keçin.</p>
+          <div class="pp-btns">
+            <button type="button" class="btn" id="ppGo">Başla</button>
+            <button type="button" class="btn ghost" id="ppStartFull">⛶ Tam ekran</button>
+          </div>
         </div>
       </div>
       <div class="pp-overlay" id="ppLost" hidden>
@@ -4547,6 +4561,7 @@
 
       let W = 0, H = 0, dpr = 1, raf = 0, running = false, last = 0;
       let ac = null;
+      let isFull = false, isRotated = false;
 
       const G = {
         state: 'ready', rally: 0, best: 0, muted: false,
@@ -4579,12 +4594,64 @@
         } catch (_) {}
       }
 
+      /* ---------- tam ekran & orientasiya ---------- */
+      function syncFullLayout() {
+        const portrait = window.innerHeight > window.innerWidth;
+        isRotated = isFull && portrait;
+        root.classList.toggle('is-full', isFull);
+        root.classList.toggle('is-rotated', isRotated);
+        const btn = $('#ppFull');
+        if (btn) {
+          btn.classList.toggle('active', isFull);
+          btn.setAttribute('aria-pressed', String(isFull));
+          btn.setAttribute('aria-label', isFull ? 'Tam ekrandan çıx' : 'Tam ekran');
+          btn.title = isFull ? 'Tam ekrandan çıx' : 'Tam ekran';
+        }
+        const startFullBtn = $('#ppStartFull');
+        if (startFullBtn) {
+          startFullBtn.textContent = isFull ? '⛶ Normal ekran' : '⛶ Tam ekran';
+        }
+        resize();
+      }
+
+      function enterFull() {
+        isFull = true;
+        const reqFs = root.requestFullscreen || root.webkitRequestFullscreen || root.msRequestFullscreen;
+        if (reqFs && !document.fullscreenElement && !document.webkitFullscreenElement) {
+          Promise.resolve(reqFs.call(root)).then(() => {
+            if (screen.orientation && screen.orientation.lock) {
+              screen.orientation.lock('landscape').catch(() => {});
+            }
+          }).catch(() => {});
+        } else if (screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock('landscape').catch(() => {});
+        }
+        syncFullLayout();
+      }
+
+      function exitFull() {
+        isFull = false;
+        isRotated = false;
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+          const exitFs = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+          if (exitFs) Promise.resolve(exitFs.call(document)).catch(() => {});
+        }
+        if (screen.orientation && screen.orientation.unlock) {
+          try { screen.orientation.unlock(); } catch (_) {}
+        }
+        syncFullLayout();
+      }
+
+      function toggleFull() {
+        if (isFull) exitFull();
+        else enterFull();
+      }
+
       /* ---------- ölçü ---------- */
       function resize() {
-        const r = stage.getBoundingClientRect();
         dpr = Math.min(window.devicePixelRatio || 1, 2);
-        W = Math.max(1, r.width);
-        H = Math.max(1, r.height);
+        W = Math.max(1, stage.clientWidth);
+        H = Math.max(1, stage.clientHeight);
         cv.width = Math.round(W * dpr);
         cv.height = Math.round(H * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -4837,14 +4904,20 @@
       /* ---------- idarəetmə ---------- */
       function setRacket(e) {
         const r = cv.getBoundingClientRect();
-        G.racket.x = clamp((e.clientX - r.left) / r.width, 0.52, 1);
-        G.racket.y = clamp((e.clientY - r.top) / r.height, 0, 1);
+        const nx = isRotated
+          ? (e.clientY - r.top) / r.height
+          : (e.clientX - r.left) / r.width;
+        const ny = isRotated
+          ? (r.right - e.clientX) / r.width
+          : (e.clientY - r.top) / r.height;
+        G.racket.x = clamp(nx, 0.52, 1);
+        G.racket.y = clamp(ny, 0, 1);
       }
 
       function open() {
         root.hidden = false;
         document.body.style.overflow = 'hidden';
-        resize();
+        syncFullLayout();
         G.state = 'ready'; G.rally = 0; G.shot = null; G.fx.length = 0; G.trail.length = 0;
         updateHud();
         $('#ppStart').hidden = false;
@@ -4858,6 +4931,7 @@
       function close() {
         running = false;
         cancelAnimationFrame(raf);
+        if (isFull) exitFull();
         root.hidden = true;
         document.body.style.overflow = '';
       }
@@ -4872,6 +4946,8 @@
       cv.addEventListener('pointermove', setRacket, { passive: true });
       cv.addEventListener('pointerdown', (e) => { e.preventDefault(); setRacket(e); userHit(); });
       $('#ppGo').addEventListener('click', start);
+      $('#ppStartFull').addEventListener('click', toggleFull);
+      $('#ppFull').addEventListener('click', toggleFull);
       $('#ppAgain').addEventListener('click', start);
       $('#ppExit').addEventListener('click', close);
       $('#ppClose').addEventListener('click', close);
@@ -4879,9 +4955,15 @@
         G.muted = !G.muted;
         $('#ppSound').textContent = G.muted ? '🔇' : '🔊';
       });
+      document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement && isFull && window.innerWidth >= window.innerHeight) {
+          isFull = false;
+        }
+        if (!root.hidden) syncFullLayout();
+      });
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !root.hidden) close(); });
-      window.addEventListener('resize', () => { if (!root.hidden) resize(); });
-      window.addEventListener('orientationchange', () => setTimeout(() => { if (!root.hidden) resize(); }, 250));
+      window.addEventListener('resize', () => { if (!root.hidden) syncFullLayout(); });
+      window.addEventListener('orientationchange', () => setTimeout(() => { if (!root.hidden) syncFullLayout(); }, 250));
       document.addEventListener('click', (e) => { if (e.target.closest('[data-play="pingpong"]')) open(); });
 
       return { open, close };
