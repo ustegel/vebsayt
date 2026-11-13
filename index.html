@@ -2044,6 +2044,72 @@
     .hero h1 { padding: 0.12em 0 0.06em; }
     .tag, .menu-stage-badge, .vibe-item h3 { text-transform: none; }
     .hero .tag { text-transform: uppercase; }
+
+    /* ==========================================================================
+       11. OYUNLAR SƏHİFƏSİ VƏ MASA TENİSİ OYUNU
+       ========================================================================== */
+    @media (max-width: 760px) {
+      header .bar { gap: 8px; }
+      nav { overflow-x: auto; scrollbar-width: none; min-width: 0; flex: 1; justify-content: flex-start; -webkit-overflow-scrolling: touch; }
+      nav::-webkit-scrollbar { display: none; }
+      nav a, nav button { flex: 0 0 auto; padding: 8px 12px; font-size: 14px; }
+    }
+
+    .games-cat { margin-top: 34px; }
+    .games-cat-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .games-cat-ico {
+      width: 54px; height: 54px; border-radius: 17px; display: grid; place-items: center; font-size: 27px;
+      background: linear-gradient(135deg, var(--g1), var(--g2)); box-shadow: var(--shadow-md);
+    }
+    .games-cat-head h3 { font-size: clamp(22px, 4vw, 30px); }
+    .games-cat-head small { color: var(--muted); font-weight: 700; }
+    .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 14px; }
+    .game-card {
+      position: relative; display: flex; align-items: center; gap: 12px; padding: 16px 16px 16px 20px;
+      border-radius: 16px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); overflow: hidden;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .game-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: linear-gradient(var(--g1), var(--g2)); }
+    .game-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+    .game-emoji { font-size: 28px; width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--accent-soft); flex-shrink: 0; transition: transform 0.3s ease; }
+    .game-card:hover .game-emoji { transform: rotate(-8deg) scale(1.1); }
+    .game-name { font-weight: 800; line-height: 1.25; }
+    .game-soon { display: inline-block; margin-left: 4px; padding: 2px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 800; background: var(--accent-soft); color: var(--accent); vertical-align: middle; }
+    .game-card .btn { margin-left: auto; padding: 9px 16px; font-size: 14px; white-space: nowrap; }
+    @media (min-width: 680px) { .game-card.has-play { grid-column: span 2; } }
+
+    .pp { position: fixed; inset: 0; z-index: 90; display: flex; flex-direction: column; background: #140A04; color: #FBEFE0; }
+    .pp[hidden] { display: none; }
+    .pp-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 10px; background: rgba(255, 255, 255, 0.04); border-bottom: 1px solid rgba(242, 211, 168, 0.14); }
+    .pp-score { display: flex; gap: 18px; font-weight: 700; font-size: 14px; color: rgba(251, 239, 224, 0.8); }
+    .pp-score b { font: 800 21px var(--font-serif); color: #F2D3A8; margin-left: 4px; }
+    .pp-actions { display: flex; gap: 8px; }
+    .pp-actions button { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(242, 211, 168, 0.3); background: rgba(255, 255, 255, 0.07); color: #FBEFE0; font-size: 20px; cursor: pointer; }
+    .pp-actions button:hover { background: rgba(255, 255, 255, 0.16); }
+    .pp-stage { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+    .pp canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: none; -webkit-user-select: none; user-select: none; }
+    .pp-label { position: absolute; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); font-weight: 800; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(251, 239, 224, 0.55); pointer-events: none; }
+    .pp-label.l { left: 5%; }
+    .pp-label.r { right: 5%; }
+    .pp-overlay { position: absolute; inset: 0; display: grid; place-items: center; padding: 20px; text-align: center; background: rgba(20, 10, 4, 0.66); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); animation: pageFadeIn 0.3s ease-out; z-index: 3; }
+    .pp-overlay[hidden] { display: none; }
+    .pp-card { max-width: 460px; }
+    .pp-emoji { font-size: 54px; animation: bob 2.6s ease-in-out infinite; }
+    .pp-card h3 { font-size: clamp(28px, 5vw, 40px); color: #fff; margin: 6px 0 10px; }
+    .pp-card p { color: rgba(251, 239, 224, 0.82); margin-bottom: 16px; }
+    .pp-rotate { display: none; font-size: 13.5px; color: #F2D3A8 !important; }
+    @media (orientation: portrait) and (max-width: 700px) { .pp-rotate { display: block; } }
+    .pp-lost-msg {
+      font: 800 clamp(30px, 7vw, 56px)/1.12 var(--font-serif); margin-bottom: 14px;
+      background: linear-gradient(100deg, #FBEFE0, #F2D3A8 40%, #fff 55%, #F2D3A8 70%); background-size: 240% 100%;
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+      animation: lostPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), titleShine 4s linear infinite;
+    }
+    @keyframes lostPop { from { transform: scale(0.7); opacity: 0; } }
+    .pp-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .pp .btn:not(.ghost) { background: #F2D3A8; color: #2B1A10; }
+    .pp .btn:not(.ghost):hover { background: #FBE3C2; }
+    .pp .btn.ghost { color: #FBEFE0; border-color: rgba(242, 211, 168, 0.4); }
   </style>
 </head>
 <body>
@@ -2274,6 +2340,7 @@
       <nav aria-label="Əsas menyu">
         <button data-go="home" class="on">Əsas</button>
         <button data-go="menu">Menyu</button>
+        <button data-go="games">Oyunlar</button>
         <button data-go="events">Tədbirlər</button>
         <button data-go="reserve">Rezervasiya</button>
       </nav>
@@ -2374,6 +2441,54 @@
       </div>
     </section>
 
+    <!-- 2b. OYUNLAR SƏHİFƏSİ (GAMES) -->
+    <section class="page" id="p-games">
+      <div class="wrap">
+        <div class="sec-h">
+          <div>
+            <h2>Oyunlar</h2>
+            <p>Üstəgəl Kafedə oynaya biləcəyiniz bəzi oyunlar</p>
+          </div>
+        </div>
+
+        <div class="games-cat" style="--g1:#8B3A1E;--g2:#B07A3C">
+          <div class="games-cat-head">
+            <span class="games-cat-ico" aria-hidden="true">🎯</span>
+            <div><h3>İnteraktiv oyunlar</h3><small>8 oyun</small></div>
+          </div>
+          <div class="game-grid reveal-group">
+            <div class="game-card has-play">
+              <span class="game-emoji" aria-hidden="true">🏓</span>
+              <span class="game-name">Masa tenisi</span>
+              <button type="button" class="btn" data-play="pingpong">İndi oyna</button>
+            </div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">🥌</span><span class="game-name">Masaüstü Körling</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">🎒</span><span class="game-name">Qum torbası atma</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">⭕</span><span class="game-name">Halqa Atma</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">🎯</span><span class="game-name">Dart</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">🍺</span><span class="game-name">BeerPong</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">⚽</span><span class="game-name">Ayaq bilyardı</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">🕵️</span><span class="game-name">Detektiv oyunları</span></div>
+          </div>
+        </div>
+
+        <div class="games-cat" style="--g1:#1F3A4D;--g2:#4A2A17">
+          <div class="games-cat-head">
+            <span class="games-cat-ico" aria-hidden="true">🧠</span>
+            <div><h3>İntellektual oyunlar</h3><small>6 oyun</small></div>
+          </div>
+          <div class="game-grid reveal-group">
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">🧩</span><span class="game-name">KvizArt</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">📚</span><span class="game-name">Xəmsə</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">🟦</span><span class="game-name">The Floor</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">👨‍👩‍👧‍👦</span><span class="game-name">Aileler Yarışıyor</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">💡</span><span class="game-name">Bil Bakalım</span></div>
+            <div class="game-card"><span class="game-emoji" aria-hidden="true">🔔</span><span class="game-name">Brain Ring <span class="game-soon">yaxında</span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 3. TƏDBİRLƏR SƏHİFƏSİ (EVENTS) -->
     <section class="page" id="p-events">
       <div class="wrap">
@@ -2462,6 +2577,43 @@
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
       <button class="x" id="mClose" aria-label="Bağla">×</button>
       <div id="mBody"></div>
+    </div>
+  </div>
+
+  <div class="pp" id="pp" hidden role="dialog" aria-modal="true" aria-label="Masa tenisi oyunu">
+    <div class="pp-bar">
+      <div class="pp-score">
+        <span>Qaytarılan: <b id="ppScore">0</b></span>
+        <span>Rekord: <b id="ppBest">0</b></span>
+      </div>
+      <div class="pp-actions">
+        <button type="button" id="ppSound" aria-label="Səsi aç/bağla">🔊</button>
+        <button type="button" id="ppClose" aria-label="Oyunu bağla">×</button>
+      </div>
+    </div>
+    <div class="pp-stage" id="ppStage">
+      <canvas id="ppCanvas" aria-label="Masa tenisi oyun sahəsi"></canvas>
+      <span class="pp-label l">Rəqib</span>
+      <span class="pp-label r">Sən</span>
+      <div class="pp-overlay" id="ppStart">
+        <div class="pp-card">
+          <div class="pp-emoji" aria-hidden="true">🏓</div>
+          <h3>Masa tenisi</h3>
+          <p>Top sağ tərəfə gələndə raketkanı topun üstünə gətirib klikləyin (telefonda barmağınızla toxunun) və topu rəqibə qaytarın. Vaxtında vura bilməsəniz, uduzursunuz.</p>
+          <p class="pp-rotate">📱 Telefonu üfüqi tutsanız daha rahat olar.</p>
+          <button type="button" class="btn" id="ppGo">Başla</button>
+        </div>
+      </div>
+      <div class="pp-overlay" id="ppLost" hidden>
+        <div class="pp-card">
+          <div class="pp-lost-msg">Üstəgələ gəl, bərabər oynayaq!</div>
+          <p id="ppLostInfo"></p>
+          <div class="pp-btns">
+            <button type="button" class="btn" id="ppAgain">Yenidən oyna</button>
+            <button type="button" class="btn ghost" id="ppExit">Bağla</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -4376,6 +4528,363 @@
       if (hero) {
         new IntersectionObserver((en) => hero.classList.toggle('paused', !en[0].isIntersecting)).observe(hero);
       }
+    })();
+
+    /* ========================================================================
+       8c. MASA TENİSİ MİNİ-OYUNU (CANVAS)
+       ======================================================================== */
+    const PingPong = (() => {
+      const root = $('#pp');
+      const cv = $('#ppCanvas');
+      const stage = $('#ppStage');
+      const ctx = cv.getContext('2d');
+      const TAU = Math.PI * 2;
+      const BOUNCE = 0.72;      // topun öz yarısında masaya dəydiyi an (shot.t)
+      const HIT_FROM = 0.66;    // bundan sonra raketka ilə vurmaq olar
+      const OPP_X = 0.07;       // rəqib raketkasının x mövqeyi
+      const USER_END_X = 0.86;  // topun istifadəçi tərəfdə hədəf nöqtəsi
+      const LOSE_X = 1.04;      // top bundan o yana keçsə uduzur
+
+      let W = 0, H = 0, dpr = 1, raf = 0, running = false, last = 0;
+      let ac = null;
+
+      const G = {
+        state: 'ready', rally: 0, best: 0, muted: false,
+        shot: null, serveTimer: 0, oppY: 0.5, oppSwing: 0, userSwing: 0,
+        racket: { x: 0.85, y: 0.5 }, fx: [], trail: [], shake: 0
+      };
+      try { G.best = Number(localStorage.getItem('ustegel:pp:best')) || 0; } catch (_) {}
+
+      const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+      const rand = (a, b) => a + Math.random() * (b - a);
+      const tFor = (r) => Math.max(0.78, 1.7 - 0.055 * r) * rand(0.94, 1.06);
+      const hitR = () => Math.max(50, Math.min(W, H) * 0.115);
+      const ballR = () => Math.max(9, Math.min(W, H) * 0.024);
+      const hMax = () => Math.min(H * 0.2, 120);
+
+      /* ---------- səs ---------- */
+      function beep(freq, dur = 0.07, type = 'sine', vol = 0.06) {
+        if (G.muted) return;
+        try {
+          ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+          if (ac.state === 'suspended') ac.resume();
+          const o = ac.createOscillator();
+          const g = ac.createGain();
+          o.type = type;
+          o.frequency.value = freq;
+          g.gain.setValueAtTime(vol, ac.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + dur);
+          o.connect(g); g.connect(ac.destination);
+          o.start(); o.stop(ac.currentTime + dur);
+        } catch (_) {}
+      }
+
+      /* ---------- ölçü ---------- */
+      function resize() {
+        const r = stage.getBoundingClientRect();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = Math.max(1, r.width);
+        H = Math.max(1, r.height);
+        cv.width = Math.round(W * dpr);
+        cv.height = Math.round(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      /* ---------- vuruş məntiqi ---------- */
+      const heightAt = (t) => {
+        if (t < BOUNCE) { const u = t / BOUNCE; return (1 - u) * 0.22 + 4 * u * (1 - u) * 0.78; }
+        const v = Math.min(1, (t - BOUNCE) / 0.5);
+        return 0.5 * 4 * v * (1 - v);
+      };
+      const shotPos = (sh) => ({ x: sh.x0 + (sh.x1 - sh.x0) * sh.t, y: sh.y0 + (sh.y1 - sh.y0) * sh.t });
+      const drawnBall = (sh) => {
+        const p = shotPos(sh);
+        const h = heightAt(sh.t);
+        return { x: p.x * W, y: p.y * H - h * hMax(), gx: p.x * W, gy: p.y * H, h };
+      };
+
+      function serveFromOpp(fromY) {
+        G.shot = { dir: 1, x0: OPP_X, y0: fromY, x1: USER_END_X, y1: rand(0.2, 0.8), t: 0, T: tFor(G.rally), bounced: false };
+        G.oppSwing = 1;
+        G.trail.length = 0;
+        beep(520 + Math.min(G.rally, 20) * 14, 0.06, 'triangle', 0.07);
+      }
+
+      function userHit() {
+        if (G.state !== 'play') return;
+        G.userSwing = 1;
+        const sh = G.shot;
+        if (!sh || sh.dir !== 1 || sh.t < HIT_FROM) { beep(180, 0.05, 'sine', 0.025); return; }
+        const b = drawnBall(sh);
+        const rx = G.racket.x * W, ry = G.racket.y * H;
+        const d = Math.hypot(b.x - rx, b.y - ry);
+        if (d > hitR()) { beep(180, 0.05, 'sine', 0.025); return; }
+
+        // uğurlu vuruş
+        G.rally += 1;
+        const off = clamp((b.y - ry) / hitR(), -1, 1);
+        const sp = shotPos(sh);
+        const y1 = clamp(sp.y + off * 0.32 + rand(-0.12, 0.12), 0.16, 0.84);
+        G.shot = { dir: -1, x0: clamp(sp.x, 0.52, 1), y0: sp.y, x1: 0.12, y1, t: 0, T: Math.max(0.7, tFor(G.rally) * 0.95), bounced: false };
+        G.trail.length = 0;
+        for (let i = 0; i < 12; i++) G.fx.push({ k: 'spark', x: b.x, y: b.y, vx: rand(-220, 220), vy: rand(-220, 220), age: 0, life: rand(0.3, 0.6) });
+        G.fx.push({ k: 'ring', x: b.x, y: b.y, age: 0, life: 0.4 });
+        beep(660 + Math.min(G.rally, 25) * 18, 0.08, 'square', 0.05);
+        updateHud();
+      }
+
+      function lose() {
+        G.state = 'lost';
+        G.shake = 0.5;
+        beep(140, 0.35, 'sawtooth', 0.07);
+        if (G.rally > G.best) {
+          G.best = G.rally;
+          try { localStorage.setItem('ustegel:pp:best', String(G.best)); } catch (_) {}
+        }
+        updateHud();
+        $('#ppLostInfo').textContent = `Qaytardığınız top: ${G.rally} · Rekord: ${G.best}`;
+        $('#ppLost').hidden = false;
+      }
+
+      function updateHud() {
+        $('#ppScore').textContent = G.rally;
+        $('#ppBest').textContent = Math.max(G.best, G.rally);
+      }
+
+      function reset() {
+        G.rally = 0; G.shot = null; G.serveTimer = 0.7; G.oppY = 0.5; G.fx.length = 0; G.trail.length = 0;
+        G.state = 'play';
+        updateHud();
+      }
+
+      /* ---------- yeniləmə ---------- */
+      function update(dt) {
+        G.oppSwing = Math.max(0, G.oppSwing - dt * 5);
+        G.userSwing = Math.max(0, G.userSwing - dt * 5);
+        G.shake = Math.max(0, G.shake - dt);
+        G.fx = G.fx.filter((f) => (f.age += dt) < f.life);
+
+        if (G.state === 'ready') { G.oppY += (0.5 + Math.sin(performance.now() / 700) * 0.12 - G.oppY) * Math.min(1, dt * 3); return; }
+        if (G.state !== 'play') return;
+
+        const sh = G.shot;
+        if (!sh) {
+          G.serveTimer -= dt;
+          if (G.serveTimer <= 0) serveFromOpp(G.oppY);
+          return;
+        }
+
+        sh.t += dt / sh.T;
+        const b = drawnBall(sh);
+        G.trail.push({ x: b.x, y: b.y });
+        if (G.trail.length > 9) G.trail.shift();
+
+        if (!sh.bounced && sh.t >= BOUNCE) {
+          sh.bounced = true;
+          G.fx.push({ k: 'ring', x: b.gx, y: b.gy, age: 0, life: 0.45, flat: true });
+          beep(sh.dir === 1 ? 300 : 340, 0.04, 'sine', 0.05);
+        }
+
+        if (sh.dir === -1) {
+          G.oppY += (sh.y1 - G.oppY) * Math.min(1, dt * 7);
+          if (sh.t >= 1) serveFromOpp(sh.y1);
+        } else {
+          G.oppY += (0.5 - G.oppY) * Math.min(1, dt * 1.5);
+          if (shotPos(sh).x > LOSE_X) lose();
+        }
+      }
+
+      /* ---------- çəkmə ---------- */
+      function rr(x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+        ctx.closePath();
+      }
+
+      function drawRacket(x, y, r, c1, c2, angle, scale) {
+        ctx.save();
+        ctx.translate(x, y);
+        // kölgə
+        ctx.fillStyle = 'rgba(0,0,0,0.28)';
+        ctx.beginPath(); ctx.ellipse(r * 0.22, r * 0.34, r * 0.98, r * 0.9, 0, 0, TAU); ctx.fill();
+        ctx.rotate(angle);
+        ctx.scale(scale, scale);
+        // sap
+        const hg = ctx.createLinearGradient(-r * 0.14, 0, r * 0.14, 0);
+        hg.addColorStop(0, '#B97B3E'); hg.addColorStop(0.5, '#E2B070'); hg.addColorStop(1, '#A86B33');
+        ctx.fillStyle = hg;
+        rr(-r * 0.14, r * 0.7, r * 0.28, r * 0.95, r * 0.1); ctx.fill();
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        rr(-r * 0.14, r * 1.28, r * 0.28, r * 0.1, r * 0.04); ctx.fill();
+        // taxta çərçivə
+        ctx.fillStyle = '#E0B279';
+        ctx.beginPath(); ctx.arc(0, 0, r, 0, TAU); ctx.fill();
+        // rezin
+        const g = ctx.createRadialGradient(-r * 0.3, -r * 0.35, r * 0.1, 0, 0, r);
+        g.addColorStop(0, c1); g.addColorStop(1, c2);
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(0, 0, r * 0.88, 0, TAU); ctx.fill();
+        // parıltı
+        ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = r * 0.07; ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.arc(0, 0, r * 0.68, Math.PI * 1.1, Math.PI * 1.5); ctx.stroke();
+        // loqo (+)
+        ctx.strokeStyle = 'rgba(255,240,220,0.85)'; ctx.lineWidth = r * 0.09;
+        ctx.beginPath(); ctx.moveTo(-r * 0.2, 0); ctx.lineTo(r * 0.2, 0); ctx.moveTo(0, -r * 0.2); ctx.lineTo(0, r * 0.2); ctx.stroke();
+        ctx.restore();
+      }
+
+      function draw() {
+        ctx.save();
+        if (G.shake > 0) ctx.translate(rand(-1, 1) * G.shake * 14, rand(-1, 1) * G.shake * 14);
+
+        // döşəmə
+        const bg = ctx.createRadialGradient(W / 2, H / 2, 20, W / 2, H / 2, Math.max(W, H) * 0.75);
+        bg.addColorStop(0, '#3A200F'); bg.addColorStop(1, '#120904');
+        ctx.fillStyle = bg; ctx.fillRect(-20, -20, W + 40, H + 40);
+
+        // masa
+        const tx = W * 0.03, ty = H * 0.09, tw = W * 0.94, th = H * 0.8;
+        ctx.save();
+        ctx.shadowColor = 'rgba(0,0,0,0.55)'; ctx.shadowBlur = 28; ctx.shadowOffsetY = 14;
+        const tg = ctx.createLinearGradient(0, ty, 0, ty + th);
+        tg.addColorStop(0, '#256E89'); tg.addColorStop(1, '#17485C');
+        ctx.fillStyle = tg; rr(tx, ty, tw, th, 14); ctx.fill();
+        ctx.restore();
+        // sol (rəqib) və sağ (sən) yarı
+        ctx.fillStyle = 'rgba(0,0,0,0.10)'; rr(tx, ty, tw / 2, th, 14); ctx.fill();
+        ctx.fillStyle = 'rgba(255,255,255,0.05)'; ctx.fillRect(tx + tw / 2, ty, tw / 2 - 14, th);
+        // xətlər
+        ctx.strokeStyle = 'rgba(255,244,228,0.85)'; ctx.lineWidth = 3;
+        rr(tx + 8, ty + 8, tw - 16, th - 16, 10); ctx.stroke();
+        ctx.lineWidth = 1.5; ctx.strokeStyle = 'rgba(255,244,228,0.45)';
+        ctx.beginPath(); ctx.moveTo(tx + 8, ty + th / 2); ctx.lineTo(tx + tw - 8, ty + th / 2); ctx.stroke();
+        // tor
+        const nx = W / 2;
+        ctx.fillStyle = 'rgba(255,255,255,0.22)'; ctx.fillRect(nx - 4, ty - 10, 8, th + 20);
+        ctx.strokeStyle = 'rgba(255,255,255,0.55)'; ctx.lineWidth = 1;
+        for (let y = ty - 8; y < ty + th + 10; y += 9) { ctx.beginPath(); ctx.moveTo(nx - 4, y); ctx.lineTo(nx + 4, y); ctx.stroke(); }
+        ctx.fillStyle = '#F2D3A8';
+        ctx.beginPath(); ctx.arc(nx, ty - 10, 6, 0, TAU); ctx.arc(nx, ty + th + 10, 6, 0, TAU); ctx.fill();
+
+        // effektlər (yerdəki halqalar)
+        G.fx.forEach((f) => {
+          if (f.k !== 'ring') return;
+          const a = 1 - f.age / f.life;
+          ctx.strokeStyle = `rgba(255,244,228,${(a * 0.8).toFixed(3)})`; ctx.lineWidth = 2.5;
+          ctx.beginPath();
+          if (f.flat) ctx.ellipse(f.x, f.y, 10 + f.age * 90, 5 + f.age * 45, 0, 0, TAU); else ctx.arc(f.x, f.y, 14 + f.age * 120, 0, TAU);
+          ctx.stroke();
+        });
+
+        // rəqib raketkası
+        const R = hitR();
+        const oppSwing = G.oppSwing;
+        drawRacket(Math.max(W * 0.06, R * 0.72 + 8), G.oppY * H, R * 0.72, '#3F7FD6', '#1D3F7A', 0.4 - oppSwing * 0.9, 1 + oppSwing * 0.12);
+
+        // top
+        const sh = G.shot;
+        const br = ballR();
+        if (sh) {
+          const b = drawnBall(sh);
+          // iz
+          G.trail.forEach((p, i) => {
+            ctx.fillStyle = `rgba(255,190,110,${(i / G.trail.length * 0.28).toFixed(3)})`;
+            ctx.beginPath(); ctx.arc(p.x, p.y, br * (0.4 + i / G.trail.length * 0.5), 0, TAU); ctx.fill();
+          });
+          // kölgə
+          ctx.fillStyle = `rgba(0,0,0,${(0.34 - b.h * 0.2).toFixed(3)})`;
+          ctx.beginPath(); ctx.ellipse(b.gx, b.gy, br * (1 - b.h * 0.2), br * 0.5 * (1 - b.h * 0.2), 0, 0, TAU); ctx.fill();
+          drawBall(b.x, b.y, br * (1 + b.h * 0.35));
+        } else if (G.state !== 'lost') {
+          drawBall(W * OPP_X + R * 0.9, G.oppY * H - R * 0.3, br);
+        }
+
+        // istifadəçi raketkası (böyük)
+        const rk = G.racket;
+        const sw = G.userSwing;
+        drawRacket(rk.x * W, rk.y * H, R * 0.82, '#E5483A', '#8F1D16', -0.35 + sw * 1.1, 1 + sw * 0.16);
+
+        // hissəciklər
+        G.fx.forEach((f) => {
+          if (f.k !== 'spark') return;
+          const a = 1 - f.age / f.life;
+          ctx.fillStyle = `rgba(255,214,150,${a.toFixed(3)})`;
+          ctx.beginPath(); ctx.arc(f.x + f.vx * f.age, f.y + f.vy * f.age, 3.2 * a + 0.6, 0, TAU); ctx.fill();
+        });
+        ctx.restore();
+      }
+
+      function drawBall(x, y, r) {
+        const g = ctx.createRadialGradient(x - r * 0.35, y - r * 0.4, r * 0.1, x, y, r);
+        g.addColorStop(0, '#FFFFFF'); g.addColorStop(0.55, '#FFE7C4'); g.addColorStop(1, '#F0A64F');
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fill();
+      }
+
+      function frame(ts) {
+        if (!running) return;
+        const dt = Math.min(0.05, (ts - last) / 1000 || 0.016);
+        last = ts;
+        update(dt);
+        draw();
+        raf = requestAnimationFrame(frame);
+      }
+
+      /* ---------- idarəetmə ---------- */
+      function setRacket(e) {
+        const r = cv.getBoundingClientRect();
+        G.racket.x = clamp((e.clientX - r.left) / r.width, 0.52, 1);
+        G.racket.y = clamp((e.clientY - r.top) / r.height, 0, 1);
+      }
+
+      function open() {
+        root.hidden = false;
+        document.body.style.overflow = 'hidden';
+        resize();
+        G.state = 'ready'; G.rally = 0; G.shot = null; G.fx.length = 0; G.trail.length = 0;
+        updateHud();
+        $('#ppStart').hidden = false;
+        $('#ppLost').hidden = true;
+        running = true;
+        last = performance.now();
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(frame);
+      }
+
+      function close() {
+        running = false;
+        cancelAnimationFrame(raf);
+        root.hidden = true;
+        document.body.style.overflow = '';
+      }
+
+      function start() {
+        $('#ppStart').hidden = true;
+        $('#ppLost').hidden = true;
+        reset();
+        beep(440, 0.08, 'triangle', 0.05);
+      }
+
+      cv.addEventListener('pointermove', setRacket, { passive: true });
+      cv.addEventListener('pointerdown', (e) => { e.preventDefault(); setRacket(e); userHit(); });
+      $('#ppGo').addEventListener('click', start);
+      $('#ppAgain').addEventListener('click', start);
+      $('#ppExit').addEventListener('click', close);
+      $('#ppClose').addEventListener('click', close);
+      $('#ppSound').addEventListener('click', () => {
+        G.muted = !G.muted;
+        $('#ppSound').textContent = G.muted ? '🔇' : '🔊';
+      });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !root.hidden) close(); });
+      window.addEventListener('resize', () => { if (!root.hidden) resize(); });
+      window.addEventListener('orientationchange', () => setTimeout(() => { if (!root.hidden) resize(); }, 250));
+      document.addEventListener('click', (e) => { if (e.target.closest('[data-play="pingpong"]')) open(); });
+
+      return { open, close };
     })();
 
     /* ========================================================================
