@@ -1980,6 +1980,327 @@
     @media (max-width: 640px) { .menu-cats-wrap { margin: 0 -24px; } .cats-arrow { display: none; } }
     #menuCatalog { margin-bottom: 96px; }
 
+    /* ==========================================================================
+       9b. KİTAB FORMASINDA MENYU (3D SAĞA-SOLA VƏRƏQLƏMƏ EFFEKTİ)
+       ========================================================================== */
+    .menu-book-wrap {
+      position: relative;
+      margin: 6px 0 96px;
+      perspective: 2000px;
+      -webkit-perspective: 2000px;
+    }
+
+    .menu-book {
+      position: relative;
+      border-radius: 8px 22px 22px 8px;
+      background: linear-gradient(90deg, #E7D8C3 0%, #FBF6EE 22px, #FFFDF9 56px, #FFFDF9 100%);
+      border: 1.5px solid #DFCBB0;
+      box-shadow:
+        -6px 0 0 #3E2212,
+        -10px 4px 16px rgba(24, 13, 6, 0.24),
+        4px 4px 0 #F4EADB,
+        5px 5px 0 #D8C3A5,
+        9px 9px 0 #EFE2CE,
+        10px 10px 0 #CBB392,
+        0 20px 44px rgba(43, 26, 16, 0.14);
+      transform-style: preserve-3d;
+      overflow: hidden;
+      touch-action: pan-y;
+      transition: border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .menu-book {
+        background: linear-gradient(90deg, #160E09 0%, #22160F 22px, #281A12 56px, #281A12 100%);
+        border-color: #463223;
+        box-shadow:
+          -6px 0 0 #0D0704,
+          -10px 4px 18px rgba(0, 0, 0, 0.55),
+          4px 4px 0 #1F140D,
+          5px 5px 0 #3D2B1E,
+          9px 9px 0 #1A110B,
+          10px 10px 0 #332419,
+          0 22px 48px rgba(0, 0, 0, 0.45);
+      }
+    }
+
+    /* Kitabın sol cild tikişi və kölgəsi */
+    .menu-book::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 24px;
+      background: linear-gradient(90deg, rgba(36, 18, 7, 0.22) 0%, rgba(36, 18, 7, 0.06) 55%, transparent 100%);
+      border-right: 1px dashed rgba(139, 94, 52, 0.24);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .book-page-surface {
+      position: relative;
+      padding: 24px 26px 22px 36px;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      background: inherit;
+    }
+
+    /* 3D vərəqləmə yarpağı */
+    .book-flip-leaf {
+      position: absolute;
+      inset: 0;
+      z-index: 8;
+      pointer-events: none;
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      will-change: transform, opacity;
+      border-radius: 8px 22px 22px 8px;
+      overflow: hidden;
+      box-shadow: 12px 0 32px rgba(24, 13, 6, 0.28);
+    }
+
+    .book-flip-leaf[hidden] {
+      display: none;
+    }
+
+    .book-flip-leaf::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.14) 0%, transparent 22%, rgba(255, 255, 255, 0.22) 78%, rgba(0, 0, 0, 0.12) 100%);
+      pointer-events: none;
+    }
+
+    .book-flip-leaf.anim-next {
+      animation: bookTurnNext 0.54s cubic-bezier(0.32, 0.04, 0.22, 1) forwards;
+    }
+
+    .book-flip-leaf.anim-prev {
+      animation: bookTurnPrev 0.54s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes bookTurnNext {
+      0% {
+        transform: rotateY(0deg);
+        opacity: 1;
+      }
+      68% {
+        opacity: 0.96;
+      }
+      100% {
+        transform: rotateY(-158deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes bookTurnPrev {
+      0% {
+        transform: rotateY(-152deg);
+        opacity: 0.15;
+      }
+      28% {
+        opacity: 1;
+      }
+      100% {
+        transform: rotateY(0deg);
+        opacity: 1;
+      }
+    }
+
+    /* Səhifə başlığı (Kitab fəsli) */
+    .book-head {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-bottom: 16px;
+      margin-bottom: 18px;
+      border-bottom: 1.5px solid var(--line);
+    }
+
+    .book-folio-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .book-folio-badge {
+      padding: 4px 11px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+    }
+
+    .book-chapter {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .book-chapter-ico {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 30px;
+      flex-shrink: 0;
+      background: radial-gradient(circle at 35% 35%, var(--ch-bg1, #F7ECDD), var(--ch-bg2, #EAD7BE));
+      border: 1px solid color-mix(in srgb, var(--ch-accent, #4A2A17) 24%, transparent);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .book-chapter-txt h2 {
+      font-size: clamp(23px, 4vw, 31px);
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    .book-chapter-txt p {
+      margin-top: 4px;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .book-body {
+      flex: 1;
+    }
+
+    /* Kitab alt vərəqləmə paneli */
+    .book-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 22px;
+      padding-top: 14px;
+      border-top: 1.5px dashed var(--line);
+    }
+
+    .book-turn-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 15px;
+      border-radius: 999px;
+      border: 1.5px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease;
+    }
+
+    .book-turn-btn:hover:not([disabled]) {
+      border-color: var(--brand);
+      background: var(--brand);
+      color: var(--brand-ink);
+      transform: translateY(-1px);
+    }
+
+    .book-turn-btn[disabled] {
+      opacity: 0.36;
+      cursor: not-allowed;
+    }
+
+    .book-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .book-dot {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: var(--line);
+      cursor: pointer;
+      transition: width 0.22s ease, background 0.22s ease;
+    }
+
+    .book-dot.on {
+      width: 22px;
+      background: var(--brand);
+    }
+
+    /* Qatlanmış səhifə küncü (Page curl hint) */
+    .book-curl {
+      position: absolute;
+      bottom: 0;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      z-index: 5;
+      transition: width 0.22s ease, height 0.22s ease;
+    }
+
+    .book-curl.next {
+      right: 0;
+      border-bottom-right-radius: 20px;
+      background: linear-gradient(315deg, rgba(139, 94, 52, 0.28) 0%, rgba(255, 255, 255, 0.85) 48%, transparent 52%);
+    }
+
+    .book-curl.prev {
+      left: 16px;
+      background: linear-gradient(45deg, rgba(139, 94, 52, 0.24) 0%, rgba(255, 255, 255, 0.82) 48%, transparent 52%);
+    }
+
+    .book-curl:hover {
+      width: 46px;
+      height: 46px;
+    }
+
+    @media (max-width: 640px) {
+      .menu-book {
+        margin-right: 8px;
+        box-shadow:
+          -4px 0 0 #3E2212,
+          3px 3px 0 #F4EADB,
+          4px 4px 0 #D8C3A5,
+          7px 7px 0 #EFE2CE,
+          8px 8px 0 #CBB392,
+          0 14px 32px rgba(43, 26, 16, 0.14);
+      }
+      .menu-book::before {
+        width: 14px;
+      }
+      .book-page-surface {
+        padding: 16px 14px 16px 22px;
+        min-height: 430px;
+      }
+      .book-chapter-ico {
+        width: 44px;
+        height: 44px;
+        font-size: 24px;
+        border-radius: 13px;
+      }
+      .book-turn-btn {
+        padding: 8px 12px;
+        font-size: 12.5px;
+      }
+      .book-dots {
+        gap: 4px;
+      }
+    }
+
     /* Səbət pop-up (alt orta) */
     .cart-fab {
       position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 50;
@@ -2575,12 +2896,7 @@
             </div>
           </div>
         </div>
-
-        <div class="info reveal" id="info"></div>
-      </div>
-    </section>
-
-    <!-- 2. KREATİV MENYU SƏHİFƏSİ (MENU) -->
+    <!-- 2. KREATİV MENYU SƏHİFƏSİ (MENU — KİTAB FORMATI) -->
     <section class="page" id="p-menu">
       <div class="wrap">
         <div class="menu-controls">
@@ -2589,7 +2905,7 @@
               <input id="menuSearch" type="search" placeholder="İçki, desert və ya dad axtar (məs: Latte, San Sebastián, Moxito)…" aria-label="Menyuda axtar">
               <button class="menu-search-clear" id="menuSearchClear" type="button" aria-label="Axtarışı təmizlə">×</button>
             </div>
-            <div class="menu-stats" id="menuStats">102 məhsul</div>
+            <div class="menu-stats" id="menuStats">Səhifə 1 / 11</div>
           </div>
           <div class="menu-cats-wrap at-start" id="menuCatsWrap">
             <div class="menu-cats" id="menuCats" role="tablist" aria-label="Menyu kateqoriyaları"></div>
@@ -2597,7 +2913,12 @@
           </div>
         </div>
 
-        <div id="menuCatalog"></div>
+        <div class="menu-book-wrap">
+          <div class="menu-book" id="menuBook" role="region" aria-label="Menyu kitabı">
+            <div class="book-page-surface" id="bookPageCurrent"></div>
+            <div class="book-page-surface book-flip-leaf" id="bookFlipLeaf" aria-hidden="true" hidden></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -3327,6 +3648,9 @@
       buildChips();
       renderHome();
       renderEvents();
+      if (Array.isArray(d.menu) && d.menu.length) {
+        CreativeMenu.syncExternalMenu(d.menu);
+      }
       if (!S.booted) {
         S.booted = true;
         initReserveForm();
@@ -3334,679 +3658,45 @@
       }
       preloadCompanionFrames(s);
     }
-
-    function preloadCompanionFrames(s) {
-      const urls = [s.WOMAN_FRAME_1, s.WOMAN_FRAME_2, s.WOMAN_FRAME_3, s.WOMAN_FRAME_4, s.WOMAN_FRAME_5].filter(Boolean);
-      const run = () => urls.forEach((u) => { const i = new Image(); i.decoding = 'async'; i.src = u; });
-      if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 2500 }); else setTimeout(run, 800);
-    }
-
-    /* ========================================================================
-       4. DAXİLİ NAVİQASİYA (SPA ROUTING) VƏ KLİK HADİSƏLƏRİ
-       ======================================================================== */
-    function go(id) {
-      S.page = id;
-      $$('section.page').forEach((p) => p.classList.toggle('on', p.id === 'p-' + id));
-      $$('nav button').forEach((b) => b.classList.toggle('on', b.dataset.go === id));
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      CoffeeCompanion.onPageChange(id);
-      CreativeMenu.syncTray();
-      if (id === 'menu') setTimeout(CreativeMenu.hintCats, 450);
-    }
-
-    document.addEventListener('click', (e) => {
-      const g = e.target.closest('[data-go]');
-      if (g) return go(g.dataset.go);
-
-      const r = e.target.closest('[data-reg]');
-      if (r) return register(r.dataset.reg);
-
-      const d = e.target.closest('[data-day]');
-      if (d) {
-        S.sel = d.dataset.day;
-        return renderCal();
-      }
-
-      const c = e.target.closest('[data-cat]');
-      if (c) {
-        S.cat = c.dataset.cat;
-        buildChips();
-        return renderEvents();
-      }
-
-      const copyEl = e.target.closest('[data-copy]');
-      if (copyEl) {
-        copyText(copyEl.dataset.copy);
-      }
-    });
-
-    /* ========================================================================
-       5. TƏDBİRLƏR SİYAHISI VƏ İNTERAKTİV AYLIQ TƏQVİM
-       ======================================================================== */
-    const visible = () => (S.data ? S.data.events : []).filter((e) => S.cat === 'all' || catKey(e.category) === S.cat);
-
-    function card(e, i = 0, eager = false) {
-      const k = catKey(e.category);
-      const fb = fallbackCover(k);
-      const cover = e.cover || (S.data.settings && S.data.settings['COVER_' + k]) || fb;
-      const full = e.seatsLeft === 0;
-      const seatsLabel = e.seatsLeft !== null && e.seatsLeft !== undefined
-        ? ' · ' + (full ? 'yer yoxdur' : e.seatsLeft + ' yer qalıb')
-        : '';
-
-      return `<article class="card" style="--i:${Math.min(i, 8)}">
-        <div class="cover">
-          <img data-lazyfade ${eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async" width="640" height="360" alt="" src="${esc(cover)}" ${imgSrcset(cover)} data-fb="${esc(fb)}" onerror="this.onerror=null;this.removeAttribute('srcset');this.src=this.dataset.fb">
-          <span class="badge">${esc(e.category || CATS[k].label)}</span>
-        </div>
-        <div class="body">
-          <div class="when">${fmtD(e.date)}, ${esc(e.time)}</div>
-          <h3>${esc(e.title)}</h3>
-          <p>${esc(e.description)}</p>
-          <div class="foot">
-            <small>${money(e.price)}${seatsLabel}</small>
-            <button class="btn" data-reg="${esc(e.id)}"${full ? ' disabled' : ''}>${full ? 'Yerlər bitib' : 'Qeydiyyat'}</button>
-          </div>
-        </div>
-      </article>`;
-    }
-
-    function renderHome() {
-      const list = (S.data ? S.data.events : []).slice(0, 3);
-      $('#homeEvents').innerHTML = list.length
-        ? list.map((e, i) => card(e, i, true)).join('')
-        : '<div class="empty">Yaxın günlərdə tədbir yoxdur. Tezliklə yenilənəcək.</div>';
-      wireImgs($('#homeEvents'));
-    }
-
-    function buildChips() {
-      const present = ['all', ...new Set((S.data ? S.data.events : []).map((e) => catKey(e.category)))];
-      $('#chips').innerHTML = present
-        .map((k) => `<button class="chip${S.cat === k ? ' on' : ''}" data-cat="${k}">${k === 'all' ? 'Hamısı' : CATS[k].label}</button>`)
-        .join('');
-    }
-
-    function renderEvents() {
-      S.view === 'list' ? renderList() : renderCal();
-    }
-
-    function renderList() {
-      $('#evList').hidden = false;
-      $('#evCal').hidden = true;
-      const ev = visible();
-      let last = '';
-      let html = '';
-      let idxCounter = 0;
-
-      ev.forEach((e) => {
-        if (e.date !== last) {
-          last = e.date;
-          html += (html ? '</div>' : '') +
-            `<h3 class="day-h">${e.date === S.data.today ? 'Bu gün · ' : ''}${fmtD(e.date)}</h3><div class="grid">`;
-        }
-        html += card(e, idxCounter++, false);
-      });
-
-      $('#evList').innerHTML = ev.length
-        ? html + '</div>'
-        : '<div class="empty">Bu kateqoriyada tədbir tapılmadı.</div>';
-      wireImgs($('#evList'));
-    }
-
-    function renderCal() {
-      $('#evList').hidden = true;
-      $('#evCal').hidden = false;
-
-      const y = S.month.getFullYear();
-      const m = S.month.getMonth();
-      const first = new Date(y, m, 1);
-      const lead = (first.getDay() + 6) % 7;
-
-      const byDay = {};
-      visible().forEach((e) => {
-        (byDay[e.date] = byDay[e.date] || []).push(e);
-      });
-
-      let h = `<div class="cal-h">
-        <button id="prev" aria-label="Əvvəlki ay">‹</button>
-        <h3>${MONTHS[m]} ${y}</h3>
-        <button id="next" aria-label="Növbəti ay">›</button>
-      </div><div class="cal">` + DOW.map((d) => `<div class="dow">${d}</div>`).join('');
-
-      for (let i = 0; i < 42; i++) {
-        const d = new Date(y, m, 1 - lead + i);
-        const k = ymd(d);
-        const list = byDay[k] || [];
-        if (i >= 35 && d.getMonth() !== m) break;
-
-        h += `<button class="cell${d.getMonth() !== m ? ' out' : ''}${k === S.data.today ? ' today' : ''}${k === S.sel ? ' sel' : ''}" data-day="${k}">
-          <span class="n">${d.getDate()}</span>
-          ${list.slice(0, 2).map((e) => `<span class="ev" style="background:${CATS[catKey(e.category)].c2}">${esc(e.title)}</span>`).join('')}
-          ${list.length > 2 ? `<span class="more">+${list.length - 2} daha</span>` : ''}
-          <span class="dots">${list.map((e) => `<i style="background:${CATS[catKey(e.category)].c2}"></i>`).join('')}</span>
-        </button>`;
-      }
-      h += '</div>';
-
-      if (S.sel) {
-        const l = byDay[S.sel] || [];
-        h += `<h3 class="day-h">${fmtD(S.sel)}</h3>` + (
-          l.length
-            ? `<div class="grid">${l.map(card).join('')}</div>`
-            : '<div class="empty">Bu gün tədbir yoxdur.</div>'
-        );
-      }
-
-      $('#evCal').innerHTML = h;
-      $('#prev').onclick = () => { S.month = new Date(y, m - 1, 1); renderCal(); };
-      $('#next').onclick = () => { S.month = new Date(y, m + 1, 1); renderCal(); };
-    }
-
-    $('#vList').onclick = () => {
-      S.view = 'list';
-      $('#vList').classList.add('on');
-      $('#vCal').classList.remove('on');
-      renderEvents();
-    };
-
-    $('#vCal').onclick = () => {
-      S.view = 'cal';
-      $('#vCal').classList.add('on');
-      $('#vList').classList.remove('on');
-      renderEvents();
-    };
-
-    /* ========================================================================
-       6. TƏDBİRƏ QEYDİYYAT MODALI
-       ======================================================================== */
-    function register(id) {
-      const e = S.data.events.find((x) => x.id === id);
-      if (!e) return;
-      if (e.regUrl) return void window.open(e.regUrl, '_blank', 'noopener');
-
-      const max = Math.min(10, e.seatsLeft === null ? 10 : e.seatsLeft);
-      $('#mBody').innerHTML = `
-        <h3 id="mTitle">Tədbirə qeydiyyat</h3>
-        <div id="mErr"></div>
-        <div class="f">
-          <label>Tədbir</label>
-          <input id="gEv" value="${esc(e.title + ' — ' + fmtD(e.date) + ', ' + e.time)}" readonly>
-        </div>
-        <div class="f">
-          <label for="gName">Ad, soyad</label>
-          <input id="gName" autocomplete="name" maxlength="80" placeholder="Adınız və soyadınız">
-        </div>
-        <div class="f">
-          <label for="gPhone">Əlaqə nömrəsi</label>
-          <input id="gPhone" type="tel" autocomplete="tel" placeholder="+994 50 000 00 00">
-        </div>
-        <div class="f">
-          <label for="gN">Neçə nəfər üçün rezerv edirsiniz?</label>
-          <select id="gN">${Array.from({ length: max }, (_, i) => `<option>${i + 1}</option>`).join('')}</select>
-        </div>
-        <button class="btn" id="gSend" style="width: 100%">Qeydiyyatı göndər</button>
-      `;
-      openModal();
-
-      $('#gSend').onclick = () => {
-        const nameVal = $('#gName').value.trim();
-        const phoneVal = $('#gPhone').value.trim();
-        if (nameVal.length < 2) {
-          $('#mErr').innerHTML = '<div class="msg">Zəhmət olmasa ad və soyadınızı daxil edin.</div>';
-          return;
-        }
-        if (phoneVal.length < 7) {
-          $('#mErr').innerHTML = '<div class="msg">Düzgün əlaqə nömrəsi daxil edin.</div>';
-          return;
-        }
-
-        const btn = $('#gSend');
-        btn.disabled = true;
-        btn.textContent = 'Göndərilir…';
-
-        apiPost('createEventRegistration', {
-          eventId: id,
-          name: nameVal,
-          phone: phoneVal,
-          guests: $('#gN').value
-        })
-          .then((r) => {
-            if (!r || !r.ok) {
-              $('#mErr').innerHTML = `<div class="msg">${esc((r && r.error) || 'Qeydiyyat alınmadı.')}</div>`;
-              btn.disabled = false;
-              btn.textContent = 'Qeydiyyatı göndər';
-              return;
-            }
-            showRegistrationDone(e.title, r.id);
-            refresh();
-          })
-          .catch(() => {
-            $('#mErr').innerHTML = '<div class="msg">Əlaqə xətası. Bir az sonra yenidən cəhd edin.</div>';
-            btn.disabled = false;
-            btn.textContent = 'Qeydiyyatı göndər';
-          });
-      };
-    }
-
-    function showRegistrationDone(eventTitle, regId) {
-      $('#mBody').innerHTML = `
-        <div class="done">
-          <h3>Qeydiyyat qəbul edildi</h3>
-          <p>${esc(eventTitle)} üçün yeriniz ayrıldı.</p>
-          <div class="code" data-copy="${esc(regId)}" title="Kodu kopyalamaq üçün klikləyin">${esc(regId)}</div>
-          <p style="margin-top: 10px"><button class="btn" id="mOk">Bağla</button></p>
-        </div>
-      `;
-      $('#mOk').onclick = closeModal;
-    }
-
-    function openModal() {
-      $('#ov').classList.add('on');
-    }
-
-    function closeModal() {
-      $('#ov').classList.remove('on');
-    }
-
-    $('#mClose').onclick = closeModal;
-    $('#ov').addEventListener('click', (e) => {
-      if (e.target.id === 'ov') closeModal();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    function refresh() {
-      apiGet('getAppData')
-        .then((d) => {
-          if (d && d.ok !== false) {
-            S.data = d;
-            renderHome();
-            renderEvents();
-          }
-        })
-        .catch(() => {});
-    }
-
-    /* ========================================================================
-       7. MASA REZERVASİYASI FORMASI VƏ SAAT SLOTLARI
-       ======================================================================== */
-    function initReserveForm() {
-      const s = S.data.settings || {};
-      const today = new Date();
-      const max = new Date();
-      max.setDate(max.getDate() + (+s.RESERVATION_DAYS_AHEAD || 30));
-
-      const dt = $('#rzDate');
-      dt.min = ymd(today);
-      dt.max = ymd(max);
-      dt.value = ymd(today);
-      dt.onchange = fillSlots;
-
-      $('#rzGuests').innerHTML = Array.from({ length: +s.MAX_GUESTS || 12 }, (_, i) =>
-        `<option value="${i + 1}">${i + 1} nəfər</option>`
-      ).join('');
-      $('#rzGuests').value = '2';
-      fillSlots();
-    }
-
-    function fillSlots() {
-      const s = S.data.settings || {};
-      const step = +s.SLOT_MINUTES || 60;
-      const open = (+s.OPEN_HOUR || 10) * 60;
-      const close = (+s.CLOSE_HOUR || 23) * 60;
-
-      const now = new Date();
-      const isToday = $('#rzDate').value === ymd(now);
-      const nowMin = now.getHours() * 60 + now.getMinutes();
-
-      let o = '';
-      for (let t = open; t < close; t += step) {
-        if (!isToday || t > nowMin) {
-          o += `<option>${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}</option>`;
-        }
-      }
-      $('#rzTime').innerHTML = o || '<option value="">Bu gün üçün saat qalmayıb</option>';
-    }
-
-    $('#rzSend').onclick = () => {
-      const btn = $('#rzSend');
-      const err = (m) => {
-        $('#rzErr').innerHTML = m ? `<div class="msg">${esc(m)}</div>` : '';
-      };
-      err('');
-
-      const nameVal = $('#rzName').value.trim();
-      const phoneVal = $('#rzPhone').value.trim();
-      if (nameVal.length < 2) return err('Zəhmət olmasa ad və soyadınızı daxil edin.');
-      if (phoneVal.length < 7) return err('Düzgün əlaqə nömrəsi daxil edin.');
-      if (!$('#rzTime').value) return err('Başqa tarix seçin.');
-
-      btn.disabled = true;
-      btn.textContent = 'Göndərilir…';
-
-      const f = {
-        name: nameVal,
-        phone: phoneVal,
-        date: $('#rzDate').value,
-        time: $('#rzTime').value,
-        guests: $('#rzGuests').value,
-        note: $('#rzNote').value.trim()
-      };
-
-      apiPost('createReservation', f)
-        .then((r) => {
-          btn.disabled = false;
-          btn.textContent = 'Masanı rezerv et';
-          if (!r || !r.ok) return err((r && r.error) || 'Rezervasiya alınmadı.');
-          showReservationDone(f, r.id, r.table);
-        })
-        .catch(() => {
-          btn.disabled = false;
-          btn.textContent = 'Masanı rezerv et';
-          err('Əlaqə xətası. Bir az sonra yenidən cəhd edin.');
-        });
-    };
-
-    function showReservationDone(f, rzId, tableLabel) {
-      $('#rzBox').innerHTML = `
-        <div class="done">
-          <h3>Rezervasiya göndərildi</h3>
-          <p>${esc(f.name)}, sizi ${fmtD(f.date)} saat ${esc(f.time)}-də gözləyirik.</p>
-          <div class="code" data-copy="${esc(rzId)}" title="Kodu kopyalamaq üçün klikləyin">${esc(rzId)} · ${esc(tableLabel)}</div>
-          <p style="margin-bottom: 14px">Komandamız tezliklə təsdiq üçün əlaqə saxlayacaq.</p>
-          <button class="btn" id="rzNewBtn">Yeni rezervasiya</button>
-        </div>
-      `;
-      $('#rzNewBtn').onclick = () => {
-        window.location.reload();
-      };
-    }
-
-    /* ========================================================================
-       8. KREATİV MENYU KATALOQU, KATEQORİYA ANİMASİYALARI VƏ SVG İLLÜSTRASİYALAR
-       ======================================================================== */
-    const MENU_CATEGORIES = [
-      {
-        id: 'all',
-        label: 'Hamısı',
-        emoji: '✨',
-        c1: '#4A2A17',
-        c2: '#241207',
-        accent: '#4A2A17',
-        bg1: '#F7ECDD',
-        bg2: '#EAD7BE',
-        anim: 'steam',
-        desc: 'Üstəgəl Kafe-nin bütün isti və soyuq kofeləri, imza desertləri, moxitoları və KvizArt setləri.'
-      },
-      {
-        id: 'sirniyyat',
-        label: 'Şirniyyat & Desert',
-        emoji: '🍰',
-        c1: '#7C3F1D',
-        c2: '#3D1C0B',
-        accent: '#8B4513',
-        bg1: '#FDF1E3',
-        bg2: '#F3DEC3',
-        anim: 'sparkle',
-        desc: 'Sobadan yeni çıxmış San Sebastián, südlü Trileçe, Grolet və ev üsulu tort dilimləri.'
-      },
-      {
-        id: 'isti-kofe',
-        label: 'İsti Kofelər',
-        emoji: '☕',
-        c1: '#4E2A15',
-        c2: '#231107',
-        accent: '#5C3317',
-        bg1: '#F6E8D7',
-        bg2: '#E5CFAF',
-        anim: 'steam',
-        desc: 'Təzə qovrulmuş 100% Arabica dənələrindən məxməri köpüklü klassik və imza isti kofelər.'
-      },
-      {
-        id: 'soyuq-kofe',
-        label: 'Soyuq Kofelər',
-        emoji: '🧊',
-        c1: '#1E4E68',
-        c2: '#132A3A',
-        accent: '#1E5B7A',
-        bg1: '#E5F3FA',
-        bg2: '#CCE5F3',
-        anim: 'ice',
-        desc: 'Buz kimi təravətləndirici Blue Ocean, Lavender, Strawberry Cloud və klassik soyuq espresso içkiləri.'
-      },
-      {
-        id: 'milkshake',
-        label: 'Milkshake',
-        emoji: '🥤',
-        c1: '#9E3A63',
-        c2: '#4A1830',
-        accent: '#A83866',
-        bg1: '#FCE9F1',
-        bg2: '#F5D0E0',
-        anim: 'bubbles',
-        desc: 'Təbii meyvə püreləri, dondurma və qaymaqlı krema ilə hazırlanan qatı milkshakelər.'
-      },
-      {
-        id: 'kokteyl',
-        label: 'Kokteyllər',
-        emoji: '🍹',
-        c1: '#B84A27',
-        c2: '#4B1D0E',
-        accent: '#C44D27',
-        bg1: '#FDECE3',
-        bg2: '#F8D4C2',
-        anim: 'bubbles',
-        desc: 'Tropik meyvə notları ilə zəngin alkoqolsuz müəllif kokteylləri və soyuq çay qarışıqları.'
-      },
-      {
-        id: 'alko-kokteyl',
-        label: 'Alko-kokteyl',
-        emoji: '🍸',
-        c1: '#59234B',
-        c2: '#240D1F',
-        accent: '#6E295C',
-        bg1: '#F6E6F2',
-        bg2: '#E8CBE0',
-        anim: 'sparkle',
-        desc: 'Axşam əhval-ruhiyyəsi üçün xüsusi reseptlə hazırlanan klassik və imza kokteyllər.'
-      },
-      {
-        id: 'moxito',
-        label: 'Moxito',
-        emoji: '🍃',
-        c1: '#1D6344',
-        c2: '#0E3524',
-        accent: '#1E6B49',
-        bg1: '#E4F7EE',
-        bg2: '#C7EAD9',
-        anim: 'bubbles',
-        desc: 'Təzə nanə yarpaqları, laym dilimləri və meyvə çeşidləri ilə köpüklü sərinlik.'
-      },
-      {
-        id: 'serin-ickiler',
-        label: 'Sərin İçəcəklər & Enerji',
-        emoji: '⚡',
-        c1: '#1B527A',
-        c2: '#0E293D',
-        accent: '#1E5B87',
-        bg1: '#E6F2FB',
-        bg2: '#CEE3F5',
-        anim: 'ice',
-        desc: 'Soyudulmuş qazlı içkilər, meyvə şirələri, yerli mineral sular və enerji içkiləri.'
-      },
-      {
-        id: 'cay-murebbe',
-        label: 'Çaylar & Mürəbbələr',
-        emoji: '🫖',
-        c1: '#7E2424',
-        c2: '#3B1010',
-        accent: '#8A2828',
-        bg1: '#FBE8E8',
-        bg2: '#F2CECE',
-        anim: 'steam',
-        desc: 'Ətirli dəmləmə çay və ev üsulu çiyələk, ağ gilas mürəbbələri ilə səmimi söhbətlər.'
-      },
-      {
-        id: 'atisdirmaliq',
-        label: 'Atışdırmalıqlar',
-        emoji: '🍿',
-        c1: '#8F5B14',
-        c2: '#422806',
-        accent: '#9A6316',
-        bg1: '#FCF2DF',
-        bg2: '#F4E1BE',
-        anim: 'sparkle',
-        desc: 'Kino və oyun axşamlarının ayrılmaz yoldaşı — isti popkorn, saçaq pendir, çips və çərəzlər.'
-      },
-      {
-        id: 'kvizart',
-        label: 'KvizArt Menu',
-        emoji: '🧠',
-        c1: '#352A6E',
-        c2: '#191338',
-        accent: '#3F3282',
-        bg1: '#ECEAFE',
-        bg2: '#D8D4FC',
-        anim: 'sparkle',
-        desc: '4 nəfərlik komandalar və intellektual oyun iştirakçıları üçün sərfəli çay + desert setləri.'
-      }
-    ];
-
-    const MENU_ITEMS = [
-      // 1. Şirniyyat & Desert
-      { cat: 'sirniyyat', name: 'San Sebastián', price: 7.00, note: 'Karamelizə olunmuş üst qatlı, kremli İspan çizkeyki' },
-      { cat: 'sirniyyat', name: 'Trileçe', price: 7.00, note: 'Üç südlü yumşaq biskvit və karamel sousu' },
-      { cat: 'sirniyyat', name: 'Bilincik', price: 6.00, note: 'Zərif bükülmüş krep və şirin içlik' },
-      { cat: 'sirniyyat', name: 'Grolet', price: 6.50, note: 'Fransız üsulu zərif muss və parlaq qlazur' },
-      { cat: 'sirniyyat', name: 'Cake (ballı tort)', price: 6.00, note: 'Təbii ballı qatlar və xama-qaymaq kremi' },
-      { cat: 'sirniyyat', name: 'Cake (velvet)', price: 6.00, note: 'Məxməri qırmızı biskvit və pendirli krem' },
-      { cat: 'sirniyyat', name: 'Ekler', price: 2.00, note: 'Zərif vanilli krem və şokoladlı qlazurlu klassik ekler' },
-      { cat: 'sirniyyat', name: 'Kurabiye', price: 1.00, note: 'Kərə yağı və şokolad damlalı xırtıldayan ev kurabiyəsi' },
-
-      // 2. İsti Kofelər
-      { cat: 'isti-kofe', name: 'Capuccino', price: 6.00, note: 'Klassik espresso və sıx ipək kimi süd köpüyü' },
-      { cat: 'isti-kofe', name: 'Latte', price: 6.00, note: 'Yumşaq südlü espresso və zərif latte art' },
-      { cat: 'isti-kofe', name: 'Americano', price: 5.00, note: 'Təmiz və balanslı qara espresso dadı' },
-      { cat: 'isti-kofe', name: 'Caramel Macchiato', price: 7.00, note: 'Vanil, buxarlanmış süd, espresso və karamel' },
-      { cat: 'isti-kofe', name: 'Mocha (dark chocolate)', price: 7.00, note: 'Tünd Belçika şokoladı ilə zənginləşdirilmiş latte' },
-      { cat: 'isti-kofe', name: 'Mocha (white chocolate)', price: 7.00, note: 'Ağ şokoladın kremli şirinliyi və espresso' },
-      { cat: 'isti-kofe', name: 'Cortado', price: 6.00, note: 'Bərabər nisbətdə tünd espresso və isti süd' },
-      { cat: 'isti-kofe', name: 'Filtre kahve', price: 5.00, note: 'Yavaş dəmlənmiş aromatik qara kofe' },
-      { cat: 'isti-kofe', name: 'Flat white', price: 6.00, note: 'İkiqat ristretto üzərində nazik mikroköpük' },
-      { cat: 'isti-kofe', name: 'Hot chocolate', price: 5.00, note: 'Qatı və məxməri isti şokolad' },
-      { cat: 'isti-kofe', name: 'Miel', price: 7.00, note: 'Təbii bal və darçın toxunuşlu imza kofe' },
-      { cat: 'isti-kofe', name: 'Raf coffee', price: 7.00, note: 'Qaymaq və vanil şəkəri ilə çırpılmış kremli kofe' },
-      { cat: 'isti-kofe', name: 'Sahlep', price: 5.00, note: 'Darçın səpilmiş ənənəvi isti səhləb' },
-      { cat: 'isti-kofe', name: 'Türk kahvesi', price: 5.00, note: 'Köz dadında köpüklü ənənəvi türk qəhvəsi' },
-      { cat: 'isti-kofe', name: 'Espresso (double)', price: 4.00, note: 'İkiqat enerji verən tünd crema-lı espresso' },
-      { cat: 'isti-kofe', name: 'Chai tea Latte', price: 5.00, note: 'Ədviyyatlı hind çayı və isti süd köpüyü' },
-      { cat: 'isti-kofe', name: 'Matcha', price: 7.00, note: 'Yapon yaşıl çay tozu və südlü məxməri dad' },
-
-      // 3. Soyuq Kofelər
-      { cat: 'soyuq-kofe', name: 'Frappe', price: 7.00, note: 'Buzlu köpüklü soyuq kofe klassikası' },
-      { cat: 'soyuq-kofe', name: 'Affogato', price: 6.00, note: 'Vanilli dondurma üzərinə tökülən isti espresso' },
-      { cat: 'soyuq-kofe', name: 'Ice Americano', price: 5.00, note: 'Buz kubları ilə təravətləndirici qara kofe' },
-      { cat: 'soyuq-kofe', name: 'Ice Latte', price: 6.00, note: 'Soyuq süd, buz və espresso harmoniyası' },
-      { cat: 'soyuq-kofe', name: 'Ice Mocha (white chocolate)', price: 7.00, note: 'Ağ şokoladlı buzlu kofe ləzzəti' },
-      { cat: 'soyuq-kofe', name: 'Ice Mocha (dark chocolate)', price: 7.00, note: 'Tünd şokolad souslu buzlu espresso' },
-      { cat: 'soyuq-kofe', name: 'Ice Caramel Macchiato', price: 7.00, note: 'Karamel xətləri ilə soyuq südlü espresso' },
-      { cat: 'soyuq-kofe', name: 'Ice Latte Lavender', price: 7.00, note: 'Zərif lavanda ətirli sərin latte' },
-      { cat: 'soyuq-kofe', name: 'Blue Ocean Ice Coffee', price: 7.00, note: 'Mavi okean rəngli qatlar və soyuq espresso' },
-      { cat: 'soyuq-kofe', name: 'Ice Strawberry Cloud Latte', price: 7.00, note: 'Çiyələkli bulud köpüyü ilə soyuq latte' },
-      { cat: 'soyuq-kofe', name: 'Ice Pumpkin Latte', price: 7.00, note: 'Ədviyyatlı balqabaq aromalı buzlu latte' },
-      { cat: 'soyuq-kofe', name: 'Summer is coffee', price: 7.00, note: 'Sitrus və meyvə notlu yay imza kofesi' },
-      { cat: 'soyuq-kofe', name: 'Ice Raff', price: 7.00, note: 'Soyuq qaymaqlı və vanilli kremli kofe' },
-
-      // 4. Milkshake
-      { cat: 'milkshake', name: 'Banan Milkshake', price: 8.00, note: 'Təzə banan, süd və qaymaqlı dondurma' },
-      { cat: 'milkshake', name: 'Çiyələk Milkshake', price: 8.00, note: 'Şirin çiyələk dadı və məxməri köpük' },
-      { cat: 'milkshake', name: 'Mango Milkshake', price: 8.00, note: 'Tropik manqo püresi ilə sərin milkshake' },
-      { cat: 'milkshake', name: 'Şokolad Milkshake', price: 8.00, note: 'Zəngin kakao və şokoladlı dondurma qarışığı' },
-      { cat: 'milkshake', name: 'Caramel Milkshake', price: 8.00, note: 'Duzlu-şirin karamel souslu kremli içki' },
-      { cat: 'milkshake', name: 'Vanil Milkshake', price: 8.00, note: 'Madaqaskar vanili ilə klassik milkshake' },
-      { cat: 'milkshake', name: 'Raspberry Milkshake', price: 8.00, note: 'Təravətli moruq notlu meyvəli milkshake' },
-
-      // 5. Kokteyllər
-      { cat: 'kokteyl', name: 'Blue angel', price: 7.00, note: 'Parlaq mavi sitrus və tropik meyvə qarışığı' },
-      { cat: 'kokteyl', name: 'Bull mocktail', price: 8.00, note: 'Enerji verən meyvəli və sərin mocktail' },
-      { cat: 'kokteyl', name: 'Cool line', price: 7.00, note: 'Laym və nanə təravətli yüngül kokteyl' },
-      { cat: 'kokteyl', name: 'Malibu Barbie', price: 7.00, note: 'Kokos və çəhrayı giləmeyvə aromalı kokteyl' },
-      { cat: 'kokteyl', name: 'Frozen', price: 6.00, note: 'Əzilmiş buz və meyvə şirəsi ilə sərinlik' },
-      { cat: 'kokteyl', name: 'Marakuya-lime mocktail', price: 7.00, note: 'Ekzotik marakuya və turşməzə laym balansı' },
-      { cat: 'kokteyl', name: 'Exotic Paradise', price: 8.00, note: 'Ananas, manqo və sitrus tropik buketi' },
-      { cat: 'kokteyl', name: 'Fındıq mocha', price: 8.00, note: 'Qovrulmuş fındıq və şokoladlı soyuq kokteyl' },
-      { cat: 'kokteyl', name: 'Mango-ananas soyuq çay', price: 7.00, note: 'Təbii dəmləmə çay, manqo və ananas dilimləri' },
-
-      // 6. Alko-kokteyl
-      { cat: 'alko-kokteyl', name: 'Long Iceland', price: 8.00, note: 'Klassik çoxkomponentli sərin axşam kokteyli' },
-      { cat: 'alko-kokteyl', name: 'Malibu Cocktail (Tequila, cin)', price: 8.00, note: 'Tequila, cin və tropik kokos harmoniyası' },
-      { cat: 'alko-kokteyl', name: 'Sunrise on the Beach', price: 7.50, note: 'Portağal və nar rəng keçidli günəşli kokteyl' },
-      { cat: 'alko-kokteyl', name: 'Mojito Fire', price: 7.00, note: 'Nanə, laym və xüsusi alovlu təqdimat' },
-      { cat: 'alko-kokteyl', name: 'Barbie Cocktail', price: 7.00, note: 'Zərif çəhrayı tonlu meyvəli axşam kokteyli' },
-
-      // 7. Moxito
-      { cat: 'moxito', name: 'Classic Moxito', price: 7.00, note: 'Təzə nanə, laym, qəhvəyi şəkər və qazlı su' },
-      { cat: 'moxito', name: 'Strawberry Moxito', price: 7.00, note: 'Təzə çiyələk dilimləri və nanəli sərinlik' },
-      { cat: 'moxito', name: 'Blueberry Moxito', price: 7.00, note: 'Meşə qaragiləsi və laym təravəti' },
-      { cat: 'moxito', name: 'Watermelon Moxito', price: 7.00, note: 'Şirəli qarpız və nanəli yay moxitosu' },
-      { cat: 'moxito', name: 'Mango Moxito', price: 7.00, note: 'Yetişmiş manqo və laym qarışığı' },
-      { cat: 'moxito', name: 'Ananas Moxito', price: 7.00, note: 'Tropik ananas şirəsi və təzə nanə' },
-      { cat: 'moxito', name: 'Raspberry Moxito', price: 7.00, note: 'Ətirli moruq gilələri ilə köpüklü moxito' },
-      { cat: 'moxito', name: 'Marakuya Moxito', price: 7.00, note: 'Ekzotik marakuya toxumları və laym' },
-
-      // 8. Sərin İçəcəklər & Enerji
-      { cat: 'serin-ickiler', name: 'CocaCola Tənəkə (0.5 L)', price: 3.00, note: 'Buz kimi soyuq klassik qazlı içki' },
-      { cat: 'serin-ickiler', name: 'CocaCola (0.5 L)', price: 2.50, note: 'Sərinləşdirici klassik kola' },
-      { cat: 'serin-ickiler', name: 'Sprite (0.5 L)', price: 2.50, note: 'Limon və laym dadlı şəffaf qazlı içki' },
-      { cat: 'serin-ickiler', name: 'Natura meyvə şirəsi', price: 1.50, note: 'Təbii meyvə nektarı çeşidləri' },
-      { cat: 'serin-ickiler', name: 'Fuse Tea (0.5 L)', price: 2.50, note: 'Soyuq çay və meyvə ekstraktı' },
-      { cat: 'serin-ickiler', name: 'Cappy - Şaftalı (0.5 L)', price: 2.50, note: 'Şirəli şaftalı nektarı' },
-      { cat: 'serin-ickiler', name: 'Cappy - Qarışıq subtropik meyvə (0.5 L)', price: 2.50, note: 'Multimeyvə vitamin qarışığı' },
-      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.5 L) Limon', price: 2.50, note: 'Təravətli limonlu soyuq çay' },
-      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.5 L) Şaftalı', price: 2.50, note: 'Şirin şaftalılı soyuq çay' },
-      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.35 L) Limon', price: 2.00, note: 'Limonlu soyuq çay (kompakt ölçü)' },
-      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.35 L) Şaftalı', price: 2.00, note: 'Şaftalılı soyuq çay (kompakt ölçü)' },
-      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.5 L) Mango-ananas', price: 2.50, note: 'Tropik manqo və ananaslı soyuq çay' },
-      { cat: 'serin-ickiler', name: 'Power Plus böyük', price: 2.00, note: 'Yüksək tonus verən enerji içkisi' },
-      { cat: 'serin-ickiler', name: 'Fanta (0.5 L)', price: 2.50, note: 'Parlaq portağal dadlı qazlı içki' },
-      { cat: 'serin-ickiler', name: 'Buzz Cola', price: 2.00, note: 'Sərinləşdirici kola içkisi' },
-      { cat: 'serin-ickiler', name: 'Badamlı (qazlı, qazsız)', price: 1.50, note: 'Təbii mineral süfrə suyu' },
-      { cat: 'serin-ickiler', name: 'Power Plus balaca', price: 1.50, note: 'Kompakt enerji içkisi' },
-      { cat: 'serin-ickiler', name: 'Dark Horse enerji içəcəyi', price: 2.00, note: 'Gecə oyunları üçün güclü enerji içkisi' },
-      { cat: 'serin-ickiler', name: 'Sirab qazlı (0.5 L)', price: 1.50, note: 'Naxçıvanın təbii qazlı mineral suyu' },
-      { cat: 'serin-ickiler', name: 'Sirab qazsız (0.5 L)', price: 1.50, note: 'Təbii bulaq mineral suyu' },
-      { cat: 'serin-ickiler', name: 'Sirab qazoz limon', price: 1.50, note: 'Limon ətirli sərin qazoz' },
-      { cat: 'serin-ickiler', name: 'Sirab qazoz alma', price: 1.50, note: 'Yaşıl alma ətirli sərin qazoz' },
-
-      // 9. Çaylar & Mürəbbələr
-      { cat: 'cay-murebbe', name: 'Çay (birnəfərlik, takeaway)', price: 2.00, note: 'Təzə dəmlənmiş ətirli qara çay' },
-      { cat: 'cay-murebbe', name: 'Çiyələk mürəbbəsi', price: 7.00, note: 'Bütöv giləli ev üsulu çiyələk mürəbbəsi' },
-      { cat: 'cay-murebbe', name: 'Ağ gilas mürəbbəsi', price: 8.00, note: 'Ənənəvi kəhrəba rəngli ağ gilas mürəbbəsi' },
-
-      // 10. Atışdırmalıqlar
-      { cat: 'atisdirmaliq', name: 'Çips balaca porsiya', price: 3.50, note: 'Xırtıldayan ədviyyatlı kartof çipsi' },
-      { cat: 'atisdirmaliq', name: 'Çips böyük porsiya', price: 4.50, note: 'Dostlarla bölüşmək üçün böyük porsiya çips' },
-      { cat: 'atisdirmaliq', name: 'Suxari', price: 2.50, note: 'Sarımsaqlı və ədviyyatlı xırtıldayan suxari' },
-      { cat: 'atisdirmaliq', name: 'Fıstıq', price: 3.00, note: 'Qovrulmuş duzlu yerfıstığı' },
-      { cat: 'atisdirmaliq', name: 'Saçaq pendir', price: 3.00, note: 'Təbii hisə verilmiş və ya klassik saçaq pendir' },
-      { cat: 'atisdirmaliq', name: 'Popkorn', price: 4.00, note: 'Kino axşamları üçün isti və xırtıldayan popkorn' },
-
-      // 11. KvizArt Menu
-      { cat: 'kvizart', name: '4 Çay + 4 San Sebastián', price: 30.00, note: 'Kviz komandası üçün 4 isti çay və 4 San Sebastián' },
-      { cat: 'kvizart', name: '4 Çay + 4 Trileçe', price: 27.00, note: '4 nəfərlik çay dəstgahı və 4 porsiya Trileçe' },
-      { cat: 'kvizart', name: '4 Çay + Gilas mürəbbəsi', price: 13.00, note: '4 stəkan dəmləmə çay və ağ gilas mürəbbəsi' },
-      { cat: 'kvizart', name: '4 Çay + Çiyələk mürəbbəsi', price: 12.00, note: '4 stəkan dəmləmə çay və çiyələk mürəbbəsi' }
-    ];
-
+// ... existing code ... -->
     const CreativeMenu = (() => {
+      const BOOK_PAGES = MENU_CATEGORIES.filter((c) => c.id !== 'all');
       const mState = {
-        cat: 'all',
+        pageIdx: 0,
         query: '',
-        tray: []
+        tray: [],
+        flipping: false
       };
 
-      const catMap = Object.fromEntries(MENU_CATEGORIES.map((c) => [c.id, c]));
+      const catMap = Object.fromEntries(BOOK_PAGES.map((c) => [c.id, c]));
+
+      function playPageSound() {
+        playTone(230, 0.045, 'triangle', 0.025);
+        setTimeout(() => playTone(310, 0.04, 'sine', 0.02), 35);
+      }
+
+      function syncExternalMenu(extItems) {
+        extItems.forEach((ext) => {
+          if (!ext || !ext.name) return;
+          const catId = catMap[ext.cat] ? ext.cat : 'isti-kofe';
+          const existing = MENU_ITEMS.find((i) => i.name.toLowerCase() === String(ext.name).trim().toLowerCase());
+          if (existing) {
+            if (ext.price !== undefined && !Number.isNaN(Number(ext.price))) existing.price = Number(ext.price);
+            if (ext.note) existing.note = String(ext.note);
+          } else {
+            MENU_ITEMS.push({
+              cat: catId,
+              name: String(ext.name).trim(),
+              price: Number(ext.price) || 0,
+              note: String(ext.note || '')
+            });
+          }
+        });
+        if ($('#menuCats')) {
+          renderCategories();
+          renderBookPage(false);
+        }
+      }
 
       function getTrayEntry(name) {
         return mState.tray.find((entry) => entry.name === name) || null;
@@ -4269,94 +3959,203 @@
         const wrap = $('#menuCats');
         if (!wrap) return;
 
-        wrap.innerHTML = MENU_CATEGORIES.map((c) => {
-          const count = c.id === 'all'
-            ? MENU_ITEMS.length
-            : MENU_ITEMS.filter((i) => i.cat === c.id).length;
-          const isOn = mState.cat === c.id;
-          return `<button type="button" class="m-cat-btn${isOn ? ' on' : ''}" data-mcat="${c.id}" style="--cat-accent:${c.accent}">
+        wrap.innerHTML = BOOK_PAGES.map((c, idx) => {
+          const count = MENU_ITEMS.filter((i) => i.cat === c.id).length;
+          const isOn = !mState.query.trim() && mState.pageIdx === idx;
+          return `<button type="button" class="m-cat-btn${isOn ? ' on' : ''}" data-mpage="${idx}" style="--cat-accent:${c.accent}">
             <span>${c.emoji} ${esc(c.label)}</span>
             <span class="cnt">${count}</span>
           </button>`;
         }).join('');
       }
 
-      function renderCatalog() {
-        const box = $('#menuCatalog');
-        if (!box) return;
+      function buildProductCardHtml(item, g, delay) {
+        const entry = getTrayEntry(item.name);
+        const actionHtml = entry
+          ? `<div class="m-qty-box">
+              <button type="button" data-mdec="${esc(item.name)}" aria-label="Azalt">−</button>
+              <span>${entry.qty}</span>
+              <button type="button" data-minc="${esc(item.name)}" aria-label="Artır">+</button>
+            </div>`
+          : `<button type="button" class="m-add-btn" data-madd="${esc(item.name)}">+ Sifarişə at</button>`;
 
-        const q = mState.query.trim().toLowerCase();
-        const filtered = MENU_ITEMS.filter((item) => {
-          const matchCat = mState.cat === 'all' || item.cat === mState.cat;
-          const matchQuery = !q ||
-            item.name.toLowerCase().includes(q) ||
-            item.note.toLowerCase().includes(q) ||
-            (catMap[item.cat] && catMap[item.cat].label.toLowerCase().includes(q));
-          return matchCat && matchQuery;
-        });
+        return `<article class="m-card" data-mitem="${esc(item.name)}"
+          style="animation-delay:${delay}ms;--item-accent:${g.accent};--item-bg1:${g.bg1};--item-bg2:${g.bg2}">
+          <div class="m-card-art">
+            <span class="m-card-cat">${g.emoji} ${esc(g.label)}</span>
+            ${buildMenuItemSvg(item)}
+            <span class="m-card-price">${item.price.toFixed(2)} ₼</span>
+          </div>
+          <div class="m-card-body">
+            <h4>${esc(item.name)}</h4>
+            <p class="m-card-note">${esc(item.note)}</p>
+            <div class="m-card-foot">
+              <span>Ətraflı bax</span>
+              ${actionHtml}
+            </div>
+          </div>
+        </article>`;
+      }
 
-        $('#menuStats').textContent = `${filtered.length} məhsul göstərilir`;
+      function buildBookPageMarkup(pageIdx) {
+        const g = BOOK_PAGES[pageIdx] || BOOK_PAGES[0];
+        const items = MENU_ITEMS.filter((it) => it.cat === g.id);
+        const isFirst = pageIdx <= 0;
+        const isLast = pageIdx >= BOOK_PAGES.length - 1;
 
-        if (!filtered.length) {
-          box.innerHTML = `<div class="empty">
-            <b>"${esc(mState.query)}"</b> üzrə məhsul tapılmadı. Başqa açar söz və ya kateqoriya yoxlayın.
-          </div>`;
+        const dotsHtml = BOOK_PAGES.map((p, idx) =>
+          `<button type="button" class="book-dot${idx === pageIdx ? ' on' : ''}" data-mpage="${idx}" aria-label="${esc(p.label)} (Səhifə ${idx + 1})" title="${esc(p.label)}"></button>`
+        ).join('');
+
+        return `
+          <div class="book-head">
+            <div class="book-folio-row">
+              <span>ÜSTƏGƏL KAFE • MENYU</span>
+              <span class="book-folio-badge">Səhifə ${pageIdx + 1} / ${BOOK_PAGES.length} · ${items.length} çeşid</span>
+            </div>
+            <div class="book-chapter">
+              <div class="book-chapter-ico" style="--ch-bg1:${g.bg1};--ch-bg2:${g.bg2};--ch-accent:${g.accent}" aria-hidden="true">${g.emoji}</div>
+              <div class="book-chapter-txt">
+                <h2>${esc(g.label)}</h2>
+                <p>${esc(g.desc)}</p>
+              </div>
+            </div>
+          </div>
+          <div class="book-body">
+            <div class="menu-grid">
+              ${items.map((item, i) => buildProductCardHtml(item, g, Math.min(i * 22, 300))).join('')}
+            </div>
+          </div>
+          <div class="book-foot">
+            <button type="button" class="book-turn-btn" data-bprev ${isFirst ? 'disabled' : ''} aria-label="Əvvəlki səhifə">‹ Əvvəlki</button>
+            <div class="book-dots" role="tablist" aria-label="Kitab səhifələri">${dotsHtml}</div>
+            <button type="button" class="book-turn-btn" data-bnext ${isLast ? 'disabled' : ''} aria-label="Növbəti səhifə">Növbəti ›</button>
+          </div>
+          ${!isFirst ? '<button type="button" class="book-curl prev" data-bprev aria-label="Əvvəlki səhifəyə vərəqlə" title="Əvvəlki səhifə"></button>' : ''}
+          ${!isLast ? '<button type="button" class="book-curl next" data-bnext aria-label="Növbəti səhifəyə vərəqlə" title="Növbəti səhifə"></button>' : ''}
+        `;
+      }
+
+      function buildSearchPageMarkup(q) {
+        const ql = q.trim().toLowerCase();
+        const filtered = MENU_ITEMS.filter((item) =>
+          item.name.toLowerCase().includes(ql) ||
+          item.note.toLowerCase().includes(ql) ||
+          (catMap[item.cat] && catMap[item.cat].label.toLowerCase().includes(ql))
+        );
+
+        $('#menuStats').textContent = `${filtered.length} məhsul tapıldı`;
+
+        const bodyHtml = filtered.length
+          ? `<div class="menu-grid">
+              ${filtered.map((item, i) => {
+                const g = catMap[item.cat] || BOOK_PAGES[0];
+                return buildProductCardHtml(item, g, Math.min(i * 20, 300));
+              }).join('')}
+            </div>`
+          : `<div class="empty"><b>"${esc(q)}"</b> üzrə məhsul tapılmadı. Başqa açar söz yoxlayın.</div>`;
+
+        return `
+          <div class="book-head">
+            <div class="book-folio-row">
+              <span>AXTARIŞ NƏTİCƏSİ</span>
+              <span class="book-folio-badge">${filtered.length} məhsul</span>
+            </div>
+            <div class="book-chapter">
+              <div class="book-chapter-ico" aria-hidden="true">🔍</div>
+              <div class="book-chapter-txt">
+                <h2>"${esc(q)}"</h2>
+                <p>Bütün kateqoriyalar üzrə uyğun gələn məhsullar.</p>
+              </div>
+            </div>
+          </div>
+          <div class="book-body">${bodyHtml}</div>
+          <div class="book-foot">
+            <button type="button" class="book-turn-btn" id="bookClearSearchBtn">‹ Kitaba qayıt</button>
+            <span style="font-size:12.5px;font-weight:700;color:var(--muted)">Səhifə ${mState.pageIdx + 1} / ${BOOK_PAGES.length}</span>
+          </div>
+        `;
+      }
+
+      let flipTimer = 0;
+      function renderBookPage(animate = false, dir = 'next', prevIdx = mState.pageIdx) {
+        const currentEl = $('#bookPageCurrent');
+        const leafEl = $('#bookFlipLeaf');
+        if (!currentEl) return;
+
+        const q = mState.query.trim();
+        if (q) {
+          if (leafEl) { leafEl.hidden = true; leafEl.className = 'book-page-surface book-flip-leaf'; }
+          currentEl.innerHTML = buildSearchPageMarkup(q);
           return;
         }
 
-        const groups = MENU_CATEGORIES.filter((c) => c.id !== 'all');
-        let html = '';
-        let cardIndex = 0;
+        const g = BOOK_PAGES[mState.pageIdx] || BOOK_PAGES[0];
+        const count = MENU_ITEMS.filter((it) => it.cat === g.id).length;
+        $('#menuStats').textContent = `Səhifə ${mState.pageIdx + 1} / ${BOOK_PAGES.length} · ${count} çeşid`;
 
-        groups.forEach((g) => {
-          const items = filtered.filter((it) => it.cat === g.id);
-          if (!items.length) return;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!animate || !leafEl || reduceMotion) {
+          if (leafEl) { leafEl.hidden = true; leafEl.className = 'book-page-surface book-flip-leaf'; }
+          currentEl.innerHTML = buildBookPageMarkup(mState.pageIdx);
+          return;
+        }
 
-          html += `
-            <div class="menu-group">
-              <div class="menu-group-head">
-                <div class="menu-group-title">
-                  <span style="font-size:24px" aria-hidden="true">${g.emoji}</span>
-                  <h3>${esc(g.label)}</h3>
-                </div>
-                <small style="color:var(--muted);font-weight:700">${items.length} çeşid</small>
-              </div>
-              <div class="menu-grid">
-                ${items.map((item) => {
-                  const delay = Math.min(cardIndex * 28, 420);
-                  cardIndex++;
-                  const entry = getTrayEntry(item.name);
-                  const actionHtml = entry
-                    ? `<div class="m-qty-box">
-                        <button type="button" data-mdec="${esc(item.name)}" aria-label="Azalt">−</button>
-                        <span>${entry.qty}</span>
-                        <button type="button" data-minc="${esc(item.name)}" aria-label="Artır">+</button>
-                      </div>`
-                    : `<button type="button" class="m-add-btn" data-madd="${esc(item.name)}">+ Sifarişə at</button>`;
+        clearTimeout(flipTimer);
+        leafEl.className = 'book-page-surface book-flip-leaf';
+        void leafEl.offsetWidth;
 
-                  return `<article class="m-card" data-mitem="${esc(item.name)}"
-                    style="animation-delay:${delay}ms;--item-accent:${g.accent};--item-bg1:${g.bg1};--item-bg2:${g.bg2}">
-                    <div class="m-card-art">
-                      <span class="m-card-cat">${g.emoji} ${esc(g.label)}</span>
-                      ${buildMenuItemSvg(item)}
-                      <span class="m-card-price">${item.price.toFixed(2)} ₼</span>
-                    </div>
-                    <div class="m-card-body">
-                      <h4>${esc(item.name)}</h4>
-                      <p class="m-card-note">${esc(item.note)}</p>
-                      <div class="m-card-foot">
-                        <span>Ətraflı bax</span>
-                        ${actionHtml}
-                      </div>
-                    </div>
-                  </article>`;
-                }).join('')}
-              </div>
-            </div>
-          `;
-        });
+        if (dir === 'next') {
+          leafEl.innerHTML = buildBookPageMarkup(prevIdx);
+          currentEl.innerHTML = buildBookPageMarkup(mState.pageIdx);
+          leafEl.hidden = false;
+          leafEl.classList.add('anim-next');
+          flipTimer = setTimeout(() => {
+            leafEl.hidden = true;
+            leafEl.className = 'book-page-surface book-flip-leaf';
+            leafEl.innerHTML = '';
+          }, 550);
+        } else {
+          currentEl.innerHTML = buildBookPageMarkup(prevIdx);
+          leafEl.innerHTML = buildBookPageMarkup(mState.pageIdx);
+          leafEl.hidden = false;
+          leafEl.classList.add('anim-prev');
+          flipTimer = setTimeout(() => {
+            currentEl.innerHTML = buildBookPageMarkup(mState.pageIdx);
+            leafEl.hidden = true;
+            leafEl.className = 'book-page-surface book-flip-leaf';
+            leafEl.innerHTML = '';
+          }, 550);
+        }
+      }
 
-        box.innerHTML = html;
+      function flipToPage(targetIdx) {
+        const clamped = Math.max(0, Math.min(BOOK_PAGES.length - 1, targetIdx));
+        if (mState.query.trim()) {
+          mState.query = '';
+          const si = $('#menuSearch');
+          if (si) si.value = '';
+          $('#menuSearchClear')?.classList.remove('show');
+        }
+        if (clamped === mState.pageIdx) {
+          updateActiveCat();
+          renderBookPage(false);
+          return;
+        }
+        const prevIdx = mState.pageIdx;
+        const dir = clamped > prevIdx ? 'next' : 'prev';
+        mState.pageIdx = clamped;
+        updateActiveCat();
+        playPageSound();
+        renderBookPage(true, dir, prevIdx);
+
+        const bookEl = $('#menuBook');
+        if (bookEl) {
+          const top = bookEl.getBoundingClientRect().top;
+          if (top < 74) {
+            window.scrollTo({ top: Math.max(0, window.scrollY + top - 84), behavior: 'smooth' });
+          }
+        }
       }
 
       let lastCount = 0;
@@ -4391,7 +4190,7 @@
         } else {
           mState.tray[idx].qty = qty;
         }
-        renderCatalog();
+        renderBookPage(false);
         renderTray();
       }
 
@@ -4416,7 +4215,7 @@
       }
 
       function updateActiveCat() {
-        $$('.m-cat-btn').forEach((b) => b.classList.toggle('on', b.dataset.mcat === mState.cat));
+        $$('.m-cat-btn').forEach((b) => b.classList.toggle('on', !mState.query.trim() && Number(b.dataset.mpage) === mState.pageIdx));
         const on = $('.m-cat-btn.on');
         if (on) on.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
@@ -4431,7 +4230,18 @@
           mState.tray.push({ name: item.name, price: item.price, qty: 1 });
         }
         if (!silent) showToast(`Sifarişə əlavə edildi: ${item.name}`);
-        renderCatalog();
+        renderBookPage(false);
+        renderTray();
+      }
+
+      function changeItemQty(name, delta) {
+        const idx = mState.tray.findIndex((entry) => entry.name === name);
+        if (idx === -1) return;
+        mState.tray[idx].qty += delta;
+        if (mState.tray[idx].qty <= 0) {
+          mState.tray.splice(idx, 1);
+        }
+        renderBookPage(false);
         renderTray();
       }
 
@@ -4614,7 +4424,7 @@
               return;
             }
             mState.tray = [];
-            renderCatalog();
+            renderBookPage(false);
             renderTray();
             showOrderDone(r.id, teamOrTable, customerName, linesSnapshot, r.total || totalSnapshot, r.createdAt);
           })
@@ -4647,9 +4457,8 @@
       }
 
       function init() {
-        renderStage(MENU_CATEGORIES[0]);
         renderCategories();
-        renderCatalog();
+        renderBookPage(false);
 
         const searchInput = $('#menuSearch');
         const clearBtn = $('#menuSearchClear');
@@ -4658,7 +4467,8 @@
           searchInput.addEventListener('input', () => {
             mState.query = searchInput.value;
             clearBtn.classList.toggle('show', Boolean(mState.query));
-            renderCatalog();
+            updateActiveCat();
+            renderBookPage(false);
           });
         }
 
@@ -4667,14 +4477,15 @@
             mState.query = '';
             searchInput.value = '';
             clearBtn.classList.remove('show');
-            renderCatalog();
+            updateActiveCat();
+            renderBookPage(false);
             searchInput.focus();
           });
         }
 
         $('#cartFabClear')?.addEventListener('click', () => {
           mState.tray = [];
-          renderCatalog();
+          renderBookPage(false);
           renderTray();
         });
 
@@ -4688,12 +4499,73 @@
           updateCatsEdges();
         }
 
+        /* Kitab üzərində barmaq/maus ilə sağa-sola sürüşdürərək (swipe) vərəqləmə */
+        const bookEl = $('#menuBook');
+        let swipeStartX = 0;
+        let swipeStartY = 0;
+        let swipeActive = false;
+        let justSwiped = false;
+
+        if (bookEl) {
+          bookEl.addEventListener('pointerdown', (e) => {
+            if (e.target.closest('button, input, a')) {
+              swipeActive = false;
+              return;
+            }
+            swipeStartX = e.clientX;
+            swipeStartY = e.clientY;
+            swipeActive = true;
+          }, { passive: true });
+
+          bookEl.addEventListener('pointerup', (e) => {
+            if (!swipeActive) return;
+            swipeActive = false;
+            const dx = e.clientX - swipeStartX;
+            const dy = e.clientY - swipeStartY;
+            if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy) * 1.35) {
+              justSwiped = true;
+              setTimeout(() => { justSwiped = false; }, 120);
+              if (dx < 0) flipToPage(mState.pageIdx + 1);
+              else flipToPage(mState.pageIdx - 1);
+            }
+          }, { passive: true });
+
+          bookEl.addEventListener('pointercancel', () => { swipeActive = false; }, { passive: true });
+        }
+
+        /* Klaviatura oxları ilə vərəqləmə */
+        document.addEventListener('keydown', (e) => {
+          if (S.page !== 'menu' || $('#ov').classList.contains('on')) return;
+          if (document.activeElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+          if (e.key === 'ArrowRight') flipToPage(mState.pageIdx + 1);
+          if (e.key === 'ArrowLeft') flipToPage(mState.pageIdx - 1);
+        });
+
         document.addEventListener('click', (e) => {
-          const catBtn = e.target.closest('[data-mcat]');
-          if (catBtn) {
-            mState.cat = catBtn.dataset.mcat;
+          if (justSwiped) return;
+
+          if (e.target.closest('#bookClearSearchBtn')) {
+            mState.query = '';
+            if (searchInput) searchInput.value = '';
+            clearBtn?.classList.remove('show');
             updateActiveCat();
-            renderCatalog();
+            renderBookPage(false);
+            return;
+          }
+
+          if (e.target.closest('[data-bprev]')) {
+            flipToPage(mState.pageIdx - 1);
+            return;
+          }
+
+          if (e.target.closest('[data-bnext]')) {
+            flipToPage(mState.pageIdx + 1);
+            return;
+          }
+
+          const pageBtn = e.target.closest('[data-mpage]');
+          if (pageBtn) {
+            flipToPage(Number(pageBtn.dataset.mpage));
             return;
           }
 
@@ -4739,7 +4611,7 @@
         });
       }
 
-      return { init, hintCats, syncTray: renderTray };
+      return { init, hintCats, syncTray: renderTray, syncExternalMenu };
     })();
 
     /* ========================================================================
