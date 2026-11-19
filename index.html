@@ -1319,26 +1319,15 @@
       border-bottom: 1px dashed var(--line);
       background: transparent;
       cursor: pointer;
-      opacity: 0;
-      transform: translateY(8px);
-      animation: menuRowIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      transition: background 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+      transition: background 0.18s ease, border-color 0.18s ease;
     }
 
     .m-row:last-child {
       border-bottom-color: transparent;
     }
 
-    @keyframes menuRowIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     .m-row:hover {
       background: color-mix(in srgb, var(--item-accent, var(--accent)) 7%, transparent);
-      transform: translateX(3px);
     }
 
     .m-row-ico {
@@ -1764,13 +1753,11 @@
     @media (max-width: 640px) { .menu-cats-wrap { margin: 0 -24px; } .cats-arrow { display: none; } }
 
     /* ==========================================================================
-       9b. KİTAB FORMASINDA MENYU (3D SAĞA-SOLA VƏRƏQLƏMƏ + DEFAULT YIRĞALANMA)
+       9b. KİTAB FORMASINDA MENYU (SADƏLƏŞDİRİLMİŞ VƏRƏQLƏMƏ)
        ========================================================================== */
     .menu-book-wrap {
       position: relative;
       margin: 6px 0 96px;
-      perspective: 2200px;
-      -webkit-perspective: 2200px;
     }
 
     .menu-book {
@@ -1786,10 +1773,9 @@
         9px 9px 0 #EFE2CE,
         10px 10px 0 #CBB392,
         0 20px 44px rgba(43, 26, 16, 0.14);
-      transform-style: preserve-3d;
-      overflow: visible;
+      overflow: hidden;
       touch-action: pan-y;
-      transition: border-color 0.35s ease, box-shadow 0.35s ease;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -1818,141 +1804,40 @@
       background: linear-gradient(90deg, rgba(36, 18, 7, 0.24) 0%, rgba(36, 18, 7, 0.06) 55%, transparent 100%);
       border-right: 1px dashed rgba(139, 94, 52, 0.28);
       pointer-events: none;
-      z-index: 6;
+      z-index: 4;
     }
 
-    /* Arxa və üst vərəqlərin by default yırğalanma (page-flutter) effekti */
-    .book-under-sheet {
-      position: absolute;
-      inset: 0;
-      border-radius: 8px 22px 22px 8px;
-      background: linear-gradient(90deg, #EFE3D2 0%, #FBF5EB 36px, #F6EBDC 100%);
-      border: 1px solid #DECAA8;
-      transform-origin: left center;
-      pointer-events: none;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .book-under-sheet {
-        background: linear-gradient(90deg, #1A110B 0%, #241811 36px, #1D130D 100%);
-        border-color: #3E2C1F;
-      }
-    }
-
-    .book-under-sheet.s1 {
-      z-index: 1;
-      animation: bookUnderSway1 4.4s ease-in-out infinite;
-    }
-
-    .book-under-sheet.s2 {
-      z-index: 2;
-      animation: bookUnderSway2 3.6s ease-in-out infinite;
+    .book-under-sheet,
+    .book-flip-leaf {
+      display: none !important;
     }
 
     .book-page-surface {
       position: relative;
-      z-index: 3;
+      z-index: 2;
       border-radius: 8px 22px 22px 8px;
       padding: 24px 26px 22px 36px;
       min-height: 500px;
       display: flex;
       flex-direction: column;
-      background: inherit;
-      transform-origin: left center;
-      will-change: transform, box-shadow;
-      animation: bookPageIdleSway 3.9s ease-in-out infinite;
     }
 
-    .menu-book:hover .book-page-surface,
-    .menu-book:hover .book-under-sheet,
-    .menu-book.is-flipping .book-page-surface,
-    .menu-book.is-flipping .book-under-sheet {
-      animation-play-state: paused;
+    .book-page-surface.slide-next {
+      animation: bookSlideNext 0.24s ease-out;
     }
 
-    @keyframes bookPageIdleSway {
-      0%, 100% {
-        transform: rotateY(0deg);
-        box-shadow: 0 0 0 rgba(36, 18, 7, 0);
-      }
-      35% {
-        transform: rotateY(-3.6deg);
-        box-shadow: 10px 4px 22px rgba(36, 18, 7, 0.13);
-      }
-      65% {
-        transform: rotateY(-1.1deg);
-        box-shadow: 4px 2px 10px rgba(36, 18, 7, 0.06);
-      }
-      82% {
-        transform: rotateY(-4.6deg);
-        box-shadow: 12px 5px 24px rgba(36, 18, 7, 0.15);
-      }
+    .book-page-surface.slide-prev {
+      animation: bookSlidePrev 0.24s ease-out;
     }
 
-    @keyframes bookUnderSway1 {
-      0%, 100% {
-        transform: rotateY(-0.5deg) translateX(2px);
-      }
-      50% {
-        transform: rotateY(-5.8deg) translateX(4px);
-      }
+    @keyframes bookSlideNext {
+      from { opacity: 0.4; transform: translateX(16px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
-    @keyframes bookUnderSway2 {
-      0%, 100% {
-        transform: rotateY(-1.2deg) translateX(1px);
-      }
-      45% {
-        transform: rotateY(-4.8deg) translateX(3px);
-      }
-    }
-
-    .book-flip-leaf {
-      position: absolute;
-      inset: 0;
-      z-index: 8;
-      pointer-events: none;
-      transform-origin: left center;
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      will-change: transform, opacity;
-      border-radius: 8px 22px 22px 8px;
-      overflow: hidden;
-      animation: none;
-      box-shadow: 14px 0 34px rgba(24, 13, 6, 0.30);
-    }
-
-    .book-flip-leaf[hidden] {
-      display: none;
-    }
-
-    .book-flip-leaf::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(0, 0, 0, 0.15) 0%, transparent 22%, rgba(255, 255, 255, 0.28) 78%, rgba(0, 0, 0, 0.12) 100%);
-      pointer-events: none;
-    }
-
-    .book-flip-leaf.anim-next {
-      animation: bookTurnNext 0.56s cubic-bezier(0.32, 0.04, 0.22, 1) forwards;
-    }
-
-    .book-flip-leaf.anim-prev {
-      animation: bookTurnPrev 0.56s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    @keyframes bookTurnNext {
-      0% { transform: rotateY(0deg); opacity: 1; }
-      68% { opacity: 0.96; }
-      100% { transform: rotateY(-158deg); opacity: 0; }
-    }
-
-    @keyframes bookTurnPrev {
-      0% { transform: rotateY(-152deg); opacity: 0.15; }
-      28% { opacity: 1; }
-      100% { transform: rotateY(0deg); opacity: 1; }
+    @keyframes bookSlidePrev {
+      from { opacity: 0.4; transform: translateX(-16px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     .book-head {
@@ -4755,8 +4640,7 @@
         return '🧠';
       }
 
-      function renderRowHtml(item, g, rowIndex) {
-        const delay = Math.min(rowIndex * 20, 320);
+      function renderRowHtml(item, g) {
         const entry = getTrayEntry(item.name);
         const emoji = getItemEmoji(item);
         const actionHtml = entry
@@ -4768,7 +4652,7 @@
           : `<button type="button" class="m-add-btn" data-madd="${esc(item.name)}">+ Əlavə et</button>`;
 
         return `<article class="m-row" data-mitem="${esc(item.name)}"
-          style="animation-delay:${delay}ms;--item-accent:${g.accent};--item-bg1:${g.bg1};--item-bg2:${g.bg2}">
+          style="--item-accent:${g.accent};--item-bg1:${g.bg1};--item-bg2:${g.bg2}">
           <span class="m-row-ico" aria-hidden="true">${emoji}</span>
           <div class="m-row-main">
             <div class="m-row-top">
@@ -4876,65 +4760,25 @@
           if (si) si.value = '';
           if (cb) cb.classList.remove('show');
         }
-        if (nextIdx === mState.pageIdx && !mState.flipping) {
+        if (nextIdx === mState.pageIdx) {
           renderCategories();
           renderBookPage();
           return;
         }
-        if (mState.flipping) return;
 
         const dir = nextIdx > mState.pageIdx ? 'next' : 'prev';
-        const bookEl = $('#menuBook');
         const currentEl = $('#bookPageCurrent');
-        const leafEl = $('#bookFlipLeaf');
+        mState.pageIdx = nextIdx;
+        updateActiveCat();
+        renderBookPage();
 
         SoundFX.tone(dir === 'next' ? 320 : 270, 0.06, 'sine', 0.03);
 
-        if (!currentEl || !leafEl || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          mState.pageIdx = nextIdx;
-          updateActiveCat();
-          renderBookPage();
-          return;
+        if (currentEl) {
+          currentEl.classList.remove('slide-next', 'slide-prev');
+          void currentEl.offsetWidth;
+          currentEl.classList.add(dir === 'next' ? 'slide-next' : 'slide-prev');
         }
-
-        mState.flipping = true;
-        if (bookEl) bookEl.classList.add('is-flipping');
-        const oldMarkup = currentEl.innerHTML;
-        const newMarkup = buildPageMarkup(nextIdx);
-        mState.pageIdx = nextIdx;
-        updateActiveCat();
-        $('#menuStats').textContent = `Səhifə ${mState.pageIdx + 1} / ${totalPages}`;
-
-        leafEl.className = 'book-page-surface book-flip-leaf';
-        if (dir === 'next') {
-          leafEl.innerHTML = oldMarkup;
-          currentEl.innerHTML = newMarkup;
-          leafEl.hidden = false;
-          void leafEl.offsetWidth;
-          leafEl.classList.add('anim-next');
-        } else {
-          leafEl.innerHTML = newMarkup;
-          leafEl.hidden = false;
-          void leafEl.offsetWidth;
-          leafEl.classList.add('anim-prev');
-        }
-
-        let finished = false;
-        const done = () => {
-          if (finished) return;
-          finished = true;
-          if (dir === 'prev') {
-            currentEl.innerHTML = newMarkup;
-          }
-          leafEl.hidden = true;
-          leafEl.className = 'book-page-surface book-flip-leaf';
-          leafEl.innerHTML = '';
-          if (bookEl) bookEl.classList.remove('is-flipping');
-          mState.flipping = false;
-        };
-
-        leafEl.addEventListener('animationend', done, { once: true });
-        setTimeout(done, 600);
       }
 
       let lastCount = 0;
