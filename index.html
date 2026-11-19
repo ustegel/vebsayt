@@ -449,6 +449,7 @@
       height: var(--companion-h);
       z-index: 35;
       pointer-events: none;
+      overflow: visible;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
@@ -461,6 +462,10 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
+      pointer-events: auto;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
       border-top-left-radius: 28px;
       -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.88) 12%, #000 24%),
                           linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.88) 8%, #000 18%);
@@ -470,46 +475,187 @@
       mask-composite: intersect;
     }
 
-    .companion-scene-svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
-      will-change: transform;
-      transform-origin: bottom right;
-      animation: naturalBreathing 5.4s ease-in-out infinite;
+    /* Toxunduqda əsəbiləşmə və ekrana doğru yumruq atma effektləri */
+    .coffee-companion.is-angry .companion-visual-shell {
+      animation: companionBodyPunch 2.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
-    .companion-sprite {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: none;
-      background-size: 500% 100%;
-      background-position: 0% 50%;
-      background-repeat: no-repeat;
-      will-change: background-position, transform;
-      transform-origin: bottom right;
-      animation: naturalBreathing 5.4s ease-in-out infinite;
+    @keyframes companionBodyPunch {
+      0% { transform: translate(0, 0) scale(1); }
+      10% { transform: translate(11px, 5px) scale(0.98); }
+      24% { transform: translate(-14px, -6px) scale(1.06); }
+      30% { transform: translate(-7px, -2px) scale(1.03); }
+      36% { transform: translate(-13px, -5px) scale(1.05); }
+      46% { transform: translate(-5px, -2px) scale(1.02); }
+      100% { transform: translate(0, 0) scale(1); }
     }
 
-    .companion-sprite.active {
-      display: block;
+    .companion-angry-face {
+      opacity: 0;
+      transition: opacity 0.14s ease;
     }
 
-    .companion-sprite.single-mode {
-      background-size: cover;
-      background-position: right bottom;
+    .companion-calm-face {
+      opacity: 1;
+      transition: opacity 0.14s ease;
     }
 
-    @keyframes naturalBreathing {
-      0%, 100% {
-        transform: translateY(0px) scale(1);
+    .coffee-companion.is-angry .companion-angry-face {
+      opacity: 1;
+    }
+
+    .coffee-companion.is-angry .companion-calm-face {
+      opacity: 0;
+    }
+
+    .coffee-companion.is-angry #frontArmGroup {
+      animation: frontArmHideDuringPunch 2.7s ease forwards;
+    }
+
+    @keyframes frontArmHideDuringPunch {
+      0%, 10% { opacity: 1; }
+      14%, 84% { opacity: 0; }
+      92%, 100% { opacity: 1; }
+    }
+
+    #punchFistGroup {
+      opacity: 0;
+      pointer-events: none;
+      transform-origin: 0px 0px;
+    }
+
+    .coffee-companion.is-angry #punchFistGroup {
+      animation: punchFistZoom 2.7s cubic-bezier(0.18, 0.89, 0.32, 1.22) forwards;
+    }
+
+    @keyframes punchFistZoom {
+      0% {
+        opacity: 0;
+        transform: translate(268px, 278px) scale(0.16) rotate(14deg);
       }
-      50% {
-        transform: translateY(-2.5px) scale(1.004);
+      12% {
+        opacity: 1;
+        transform: translate(254px, 274px) scale(0.32) rotate(8deg);
+      }
+      24% {
+        opacity: 1;
+        transform: translate(144px, 246px) scale(1.42) rotate(-6deg);
+      }
+      33% {
+        opacity: 1;
+        transform: translate(154px, 250px) scale(1.28) rotate(-2deg);
+      }
+      78% {
+        opacity: 1;
+        transform: translate(162px, 254px) scale(1.16) rotate(-2deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(245px, 274px) scale(0.25) rotate(8deg);
+      }
+    }
+
+    #punchImpactRing {
+      opacity: 0;
+      transform-origin: 144px 246px;
+    }
+
+    .coffee-companion.is-angry #punchImpactRing {
+      animation: punchShockwave 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.42s forwards;
+    }
+
+    @keyframes punchShockwave {
+      0% {
+        opacity: 0.95;
+        transform: scale(0.25);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.85);
+      }
+    }
+
+    /* Ağzından çıxan callout (danışıq balonu) */
+    .companion-callout {
+      position: absolute;
+      right: 53%;
+      top: 29%;
+      z-index: 42;
+      pointer-events: none;
+      opacity: 0;
+      width: max-content;
+      max-width: min(230px, 56vw);
+      padding: 10px 15px;
+      border-radius: 18px 18px 4px 18px;
+      background: #FFFFFF;
+      color: #2B1A10;
+      border: 2.5px solid #B3261E;
+      box-shadow: 0 12px 28px rgba(24, 13, 6, 0.34);
+      font: 800 14px/1.3 var(--font-sans);
+      letter-spacing: -0.01em;
+      transform-origin: bottom right;
+      transform: translate(14px, 10px) scale(0.5);
+    }
+
+    .companion-callout::after {
+      content: "";
+      position: absolute;
+      right: -11px;
+      bottom: 8px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 7px 0 7px 12px;
+      border-color: transparent transparent transparent #B3261E;
+    }
+
+    .companion-callout::before {
+      content: "";
+      position: absolute;
+      right: -7px;
+      bottom: 9px;
+      z-index: 1;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 6px 0 6px 10px;
+      border-color: transparent transparent transparent #FFFFFF;
+    }
+
+    .coffee-companion.is-angry .companion-callout {
+      animation: calloutPop 2.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes calloutPop {
+      0%, 14% {
+        opacity: 0;
+        transform: translate(16px, 12px) scale(0.45);
+      }
+      26% {
+        opacity: 1;
+        transform: translate(-4px, -3px) scale(1.08);
+      }
+      34% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      85% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(10px, 6px) scale(0.85);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .companion-callout {
+        right: 54%;
+        top: 22%;
+        padding: 8px 11px;
+        font-size: 12.5px;
+        max-width: 54vw;
       }
     }
 
@@ -3186,12 +3332,30 @@
           <ellipse cx="212" cy="184" rx="14" ry="11" fill="#D98B72" opacity="0.22"/>
           <path d="M 196,216 C 212,218 226,213 236,204" fill="none" stroke="#B67656" stroke-width="2.2" stroke-linecap="round" opacity="0.55"/>
 
-          <path d="M 183,197 C 187,197.5 191,197 194,196" fill="none" stroke="#B86B62" stroke-width="2" stroke-linecap="round"/>
-          <path d="M 182,193.5 C 185,193 188,194 191,195" fill="none" stroke="#C87B71" stroke-width="1.6" stroke-linecap="round"/>
+          <!-- Sakit ifadə -->
+          <g class="companion-calm-face">
+            <path d="M 183,197 C 187,197.5 191,197 194,196" fill="none" stroke="#B86B62" stroke-width="2" stroke-linecap="round"/>
+            <path d="M 182,193.5 C 185,193 188,194 191,195" fill="none" stroke="#C87B71" stroke-width="1.6" stroke-linecap="round"/>
 
-          <path d="M 193,152 C 199,149 207,150 213,153" fill="none" stroke="#2A1B12" stroke-width="2.4" stroke-linecap="round"/>
-          <path id="eyelidPath" d="M 196,163 C 201,166 207,166 211,163" fill="none" stroke="#24160E" stroke-width="2.2" stroke-linecap="round"/>
-          <path d="M 195,163 L 192,161 M 198,165 L 195,164" stroke="#24160E" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M 193,152 C 199,149 207,150 213,153" fill="none" stroke="#2A1B12" stroke-width="2.4" stroke-linecap="round"/>
+            <path id="eyelidPath" d="M 196,163 C 201,166 207,166 211,163" fill="none" stroke="#24160E" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M 195,163 L 192,161 M 198,165 L 195,164" stroke="#24160E" stroke-width="1.3" stroke-linecap="round"/>
+          </g>
+
+          <!-- Əsəbi ifadə (toxunduqda aktivləşir) -->
+          <g class="companion-angry-face">
+            <!-- Çatılmış əsəbi qaş -->
+            <path d="M 191,155 L 201,158 L 214,148" fill="none" stroke="#1E120B" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Qəzəbli göz -->
+            <ellipse cx="203" cy="163" rx="6.5" ry="4.2" fill="#FFFFFF"/>
+            <circle cx="201" cy="163" r="2.8" fill="#1E120B"/>
+            <path d="M 195,160 L 211,159" stroke="#1E120B" stroke-width="2.3" stroke-linecap="round"/>
+            <!-- Qışqıran/əsəbi ağız -->
+            <path d="M 181,194 C 186,191 193,192 195,196 C 194,202 186,203 181,199 Z" fill="#8E2424" stroke="#6E1818" stroke-width="1.4"/>
+            <path d="M 183,194.5 C 187,193.5 191,194 193,195.5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+            <!-- Alında əsəb işarəsi -->
+            <path d="M 218,132 L 222,136 L 218,140 M 228,132 L 224,136 L 228,140" fill="none" stroke="#D32F2F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
 
           <path d="M 228,102
                    C 204,102 192,118 192,138
@@ -3250,6 +3414,37 @@
             <path d="M -4,-12 C -12,-16 -19,-13 -20,-8" fill="none" stroke="url(#skinToneGrad)" stroke-width="5.2" stroke-linecap="round"/>
           </g>
         </g>
+
+        <!-- Ekrana (istifadəçiyə) doğru atılan perspektivli yumruq və zərbə dalğası -->
+        <g id="punchImpactRing">
+          <circle cx="144" cy="246" r="54" fill="none" stroke="#FFF3D1" stroke-width="4" stroke-dasharray="18 10"/>
+          <circle cx="144" cy="246" r="38" fill="none" stroke="#FF8A50" stroke-width="3"/>
+        </g>
+
+        <g id="punchFistGroup" filter="url(#softDropShadow)">
+          <!-- Hərəkət sürət xətləri -->
+          <line x1="48" y1="-26" x2="88" y2="-44" stroke="#FFF3D1" stroke-width="3.5" stroke-linecap="round" opacity="0.85"/>
+          <line x1="56" y1="0" x2="102" y2="0" stroke="#FFF3D1" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+          <line x1="48" y1="26" x2="88" y2="44" stroke="#FFF3D1" stroke-width="3.5" stroke-linecap="round" opacity="0.85"/>
+          <line x1="-46" y1="-34" x2="-82" y2="-54" stroke="#FFF3D1" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+          <line x1="-48" y1="32" x2="-84" y2="50" stroke="#FFF3D1" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+
+          <!-- Perspektivli pencək qolu və ağ manjet -->
+          <path d="M 16,-14 L 74,4 L 70,44 L 10,28 Z" fill="url(#blazerGrad)"/>
+          <ellipse cx="22" cy="8" rx="16" ry="24" transform="rotate(-14 22 8)" fill="#F4EFE8" stroke="#DFD7CC" stroke-width="1.5"/>
+
+          <!-- Sıxılmış böyük yumruq (ön görünüş) -->
+          <rect x="-38" y="-32" width="66" height="62" rx="24" fill="url(#skinToneGrad)" stroke="#A86949" stroke-width="2"/>
+          <!-- Barmaq bükümləri -->
+          <rect x="-36" y="-28" width="16" height="34" rx="8" fill="url(#skinToneGrad)" stroke="#B67656" stroke-width="1.6"/>
+          <rect x="-21" y="-31" width="17" height="37" rx="8.5" fill="url(#skinToneGrad)" stroke="#B67656" stroke-width="1.6"/>
+          <rect x="-5" y="-30" width="17" height="36" rx="8.5" fill="url(#skinToneGrad)" stroke="#B67656" stroke-width="1.6"/>
+          <rect x="11" y="-26" width="15" height="32" rx="7.5" fill="url(#skinShadowGrad)" stroke="#A86949" stroke-width="1.6"/>
+          <!-- Baş barmaq kilidi -->
+          <rect x="-32" y="4" width="44" height="17" rx="8.5" fill="url(#skinToneGrad)" stroke="#A86949" stroke-width="1.8"/>
+          <!-- Yumruq parıltısı -->
+          <path d="M -24,-22 C -12,-26 4,-25 14,-20" fill="none" stroke="#FFF3E6" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+        </g>
       </svg>
 
       <div class="companion-sprite" id="companionSprite" role="img" aria-label="Kofe içən xanım"></div>
@@ -3259,6 +3454,10 @@
         <span></span>
         <span></span>
       </div>
+    </div>
+
+    <div class="companion-callout" id="companionCallout" role="status" aria-live="polite">
+      Kofe içməyimə mane olma!
     </div>
   </aside>
 
@@ -4044,6 +4243,31 @@
       const syncScroll = () => {
         state.targetProgress = computeScrollTarget();
       };
+
+      // Qızın üzərinə kliklədikdə və ya mobildə toxunduqda ekrana yumruq atma və callout reaksiyası
+      const companionRoot = $('#coffeeCompanion');
+      const visualShell = companionRoot ? companionRoot.querySelector('.companion-visual-shell') : null;
+      let angryTimer = 0;
+
+      function triggerPunchReaction() {
+        if (!companionRoot) return;
+        clearTimeout(angryTimer);
+        companionRoot.classList.remove('is-angry');
+        void companionRoot.offsetWidth;
+        companionRoot.classList.add('is-angry');
+        playTone(190, 0.08, 'triangle', 0.06);
+        setTimeout(() => playTone(95, 0.16, 'sine', 0.09), 140);
+        angryTimer = setTimeout(() => {
+          companionRoot.classList.remove('is-angry');
+        }, 2700);
+      }
+
+      if (visualShell) {
+        visualShell.addEventListener('click', (e) => {
+          e.stopPropagation();
+          triggerPunchReaction();
+        });
+      }
 
       window.addEventListener('scroll', syncScroll, { passive: true });
       document.addEventListener('scroll', syncScroll, { passive: true });
