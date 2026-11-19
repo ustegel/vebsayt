@@ -513,9 +513,18 @@
     }
 
     @keyframes frontArmHideDuringPunch {
-      0%, 10% { opacity: 1; }
-      14%, 84% { opacity: 0; }
-      92%, 100% { opacity: 1; }
+      0% {
+        opacity: 1;
+        transform: translate(0px, 0px);
+      }
+      5%, 89% {
+        opacity: 0;
+        transform: translate(22px, 16px);
+      }
+      97%, 100% {
+        opacity: 1;
+        transform: translate(0px, 0px);
+      }
     }
 
     #punchFistGroup {
@@ -525,33 +534,37 @@
     }
 
     .coffee-companion.is-angry #punchFistGroup {
-      animation: punchFistZoom 2.7s cubic-bezier(0.18, 0.89, 0.32, 1.22) forwards;
+      animation: punchFistZoom 2.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
     @keyframes punchFistZoom {
-      0% {
+      0%, 6% {
         opacity: 0;
-        transform: translate(268px, 278px) scale(0.16) rotate(14deg);
+        transform: translate(268px, 280px) scale(0.20) rotate(14deg);
       }
-      12% {
+      10% {
         opacity: 1;
-        transform: translate(254px, 274px) scale(0.32) rotate(8deg);
+        transform: translate(260px, 276px) scale(0.34) rotate(10deg);
       }
-      24% {
+      16% {
         opacity: 1;
-        transform: translate(144px, 246px) scale(1.42) rotate(-6deg);
+        transform: translate(266px, 278px) scale(0.29) rotate(12deg);
       }
-      33% {
+      27% {
+        opacity: 1;
+        transform: translate(144px, 246px) scale(1.44) rotate(-6deg);
+      }
+      35% {
         opacity: 1;
         transform: translate(154px, 250px) scale(1.28) rotate(-2deg);
       }
-      78% {
+      80% {
         opacity: 1;
         transform: translate(162px, 254px) scale(1.16) rotate(-2deg);
       }
-      100% {
+      88%, 100% {
         opacity: 0;
-        transform: translate(245px, 274px) scale(0.25) rotate(8deg);
+        transform: translate(248px, 276px) scale(0.24) rotate(8deg);
       }
     }
 
@@ -561,7 +574,7 @@
     }
 
     .coffee-companion.is-angry #punchImpactRing {
-      animation: punchShockwave 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.42s forwards;
+      animation: punchShockwave 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.70s forwards;
     }
 
     @keyframes punchShockwave {
@@ -627,19 +640,19 @@
     }
 
     @keyframes calloutPop {
-      0%, 14% {
+      0%, 22% {
         opacity: 0;
         transform: translate(16px, 12px) scale(0.45);
       }
-      26% {
+      31% {
         opacity: 1;
         transform: translate(-4px, -3px) scale(1.08);
       }
-      34% {
+      38% {
         opacity: 1;
         transform: translate(0, 0) scale(1);
       }
-      85% {
+      83% {
         opacity: 1;
         transform: translate(0, 0) scale(1);
       }
@@ -4255,8 +4268,9 @@
         companionRoot.classList.remove('is-angry');
         void companionRoot.offsetWidth;
         companionRoot.classList.add('is-angry');
-        playTone(190, 0.08, 'triangle', 0.06);
-        setTimeout(() => playTone(95, 0.16, 'sine', 0.09), 140);
+        playTone(210, 0.06, 'triangle', 0.05);
+        setTimeout(() => playTone(160, 0.07, 'sine', 0.06), 380);
+        setTimeout(() => playTone(92, 0.18, 'sine', 0.10), 700);
         angryTimer = setTimeout(() => {
           companionRoot.classList.remove('is-angry');
         }, 2700);
