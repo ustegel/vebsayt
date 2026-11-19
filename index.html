@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Üstəgəl Kafe — Kofe, kino, intellektual oyunlar, canlı musiqi və karaoke bir məkanda.">
-  <title>Üstəgəl Kafe — Coffee • Events • Games</title>
+  <meta name="description" content="Üstəgəl Kafe — Suşi, kofe, kino, intellektual oyunlar, canlı musiqi və karaoke bir məkanda.">
+  <title>Üstəgəl Kafe — Sushi • Coffee • Events • Games</title>
   <link rel="icon" type="image/png" href="https://docs.google.com/drawings/d/e/2PACX-1vQbzxPda05zw-xlcupsexZXTdDejHMneiSYpebnPi4kDrTlAGoWDvzmG54n2X7AAZuNllQMYRsKgCjV/pub?w=693&h=690">
   <link rel="preconnect" href="https://script.google.com" crossorigin>
   <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
@@ -1191,165 +1191,8 @@
     }
 
     /* ==========================================================================
-       9. KREATİV MENYU BÖLMƏSİ, KATEQORİYA ANİMASİYALARI VƏ MƏHSUL KARTLARI
+       9. KREATİV MENYU BÖLMƏSİ, KATEQORİYA SLİDERİ VƏ MƏHSUL KARTLARI
        ========================================================================== */
-    .menu-stage {
-      position: relative;
-      border-radius: var(--radius-xl);
-      padding: 26px 28px;
-      margin-bottom: 24px;
-      color: #FBEFE0;
-      background: linear-gradient(135deg, var(--m-c1, #4A2A17) 0%, var(--m-c2, #241207) 100%);
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 20px;
-      align-items: center;
-      transition: background 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s ease;
-    }
-
-    .menu-stage::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.16) 0%, transparent 62%);
-      pointer-events: none;
-    }
-
-    .menu-stage-copy {
-      position: relative;
-      z-index: 2;
-    }
-
-    .menu-stage-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 12.5px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      background: rgba(255, 255, 255, 0.14);
-      border: 1px solid rgba(255, 255, 255, 0.24);
-      margin-bottom: 10px;
-    }
-
-    .menu-stage h2 {
-      font-size: clamp(26px, 4.5vw, 38px);
-      color: #FFFFFF;
-      margin-bottom: 6px;
-    }
-
-    .menu-stage p {
-      font-size: 15px;
-      opacity: 0.9;
-      max-width: 52ch;
-    }
-
-    .menu-stage-art {
-      position: relative;
-      z-index: 2;
-      width: 118px;
-      height: 118px;
-      display: grid;
-      place-items: center;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.20);
-      backdrop-filter: blur(6px);
-      animation: menuStagePop 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    @keyframes menuStagePop {
-      from {
-        opacity: 0;
-        transform: scale(0.86) rotate(-4deg);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-      }
-    }
-
-    .menu-particles {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 1;
-    }
-
-    .menu-particles i {
-      position: absolute;
-      font-style: normal;
-      opacity: 0;
-    }
-
-    .anim-steam .menu-particles i {
-      bottom: -10px;
-      width: 14px;
-      height: 46px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 248, 238, 0.45) 0%, transparent 72%);
-      filter: blur(4px);
-      animation: mSteamRise 3.8s infinite ease-in-out;
-    }
-
-    @keyframes mSteamRise {
-      0% { transform: translateY(10px) scaleX(0.8); opacity: 0; }
-      35% { opacity: 0.7; }
-      100% { transform: translateY(-130px) scaleX(1.5); opacity: 0; }
-    }
-
-    .anim-ice .menu-particles i {
-      top: -16px;
-      width: 14px;
-      height: 14px;
-      border-radius: 4px;
-      background: rgba(224, 247, 255, 0.32);
-      border: 1px solid rgba(255, 255, 255, 0.55);
-      animation: mIceDrift 4.8s infinite ease-in-out;
-    }
-
-    @keyframes mIceDrift {
-      0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
-      25% { opacity: 0.85; }
-      100% { transform: translateY(155px) rotate(135deg); opacity: 0; }
-    }
-
-    .anim-bubbles .menu-particles i {
-      bottom: -12px;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(255, 255, 255, 0.65);
-      background: rgba(255, 255, 255, 0.16);
-      animation: mBubbleRise 3.2s infinite ease-in;
-    }
-
-    @keyframes mBubbleRise {
-      0% { transform: translateY(0) scale(0.6); opacity: 0; }
-      30% { opacity: 0.85; }
-      100% { transform: translateY(-150px) scale(1.25); opacity: 0; }
-    }
-
-    .anim-sparkle .menu-particles i {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #FFF3D1;
-      box-shadow: 0 0 10px #FFE082;
-      animation: mSparkleTwinkle 2.8s infinite ease-in-out;
-    }
-
-    @keyframes mSparkleTwinkle {
-      0%, 100% { transform: scale(0.3); opacity: 0; }
-      50% { transform: scale(1.25); opacity: 0.9; }
-    }
-
     .menu-controls {
       display: flex;
       flex-direction: column;
@@ -1459,34 +1302,10 @@
       color: #FFFFFF;
     }
 
-    .menu-group-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin: 30px 0 14px;
-      padding-bottom: 8px;
-      border-bottom: 1.5px solid var(--line);
-    }
-
-    .menu-group-head:first-child {
-      margin-top: 6px;
-    }
-
-    .menu-group-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .menu-group-title h3 {
-      font-size: 23px;
-    }
-
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+      gap: 15px;
     }
 
     .m-card {
@@ -1520,7 +1339,7 @@
 
     .m-card-art {
       position: relative;
-      height: 146px;
+      height: 138px;
       display: grid;
       place-items: center;
       background: radial-gradient(circle at 50% 42%, var(--item-bg1, #F5E8D7) 0%, var(--item-bg2, #E8D5BC) 100%);
@@ -1528,8 +1347,8 @@
     }
 
     .m-card-art svg {
-      width: 112px;
-      height: 112px;
+      width: 108px;
+      height: 108px;
       transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
       filter: drop-shadow(0 8px 14px rgba(34, 18, 8, 0.16));
     }
@@ -1546,7 +1365,7 @@
       border-radius: 999px;
       font-size: 11px;
       font-weight: 700;
-      background: rgba(255, 255, 255, 0.86);
+      background: rgba(255, 255, 255, 0.88);
       color: #2B1A10;
       backdrop-filter: blur(4px);
     }
@@ -1573,12 +1392,12 @@
     }
 
     .m-card-body h4 {
-      font-size: 17.5px;
+      font-size: 17px;
       line-height: 1.25;
     }
 
     .m-card-note {
-      font-size: 13px;
+      font-size: 12.8px;
       color: var(--muted);
       line-height: 1.4;
       flex: 1;
@@ -1727,61 +1546,17 @@
       justify-content: space-between;
     }
 
-    .menu-tray {
-      margin-top: 28px;
-      padding: 18px 20px;
-      border-radius: var(--radius-lg);
-      background: var(--surface);
-      border: 1.5px solid var(--accent);
-      box-shadow: var(--shadow-md);
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .menu-tray.show {
-      display: flex;
-      animation: pageFadeIn 0.25s ease-out;
-    }
-
-    .menu-tray-info b {
-      display: block;
-      font-size: 16px;
-      margin-bottom: 2px;
-    }
-
-    .menu-tray-info span {
-      font-size: 13.5px;
-      color: var(--muted);
-    }
-
-    .menu-tray-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
     @media (max-width: 640px) {
-      .menu-stage {
-        grid-template-columns: 1fr;
-        padding: 20px;
-      }
-      .menu-stage-art {
-        width: 86px;
-        height: 86px;
-      }
       .menu-grid {
-        grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
-        gap: 12px;
+        grid-template-columns: repeat(auto-fill, minmax(152px, 1fr));
+        gap: 11px;
       }
       .m-card-art {
-        height: 122px;
+        height: 116px;
       }
       .m-card-art svg {
-        width: 92px;
-        height: 92px;
+        width: 88px;
+        height: 88px;
       }
     }
 
@@ -1937,7 +1712,7 @@
     .cover img[data-lazyfade].ld { opacity: 1; }
     .cover .badge { z-index: 2; }
 
-    /* Menyu: baner yoxdur, birbaşa axtarış + üfüqi slider kateqoriyalar */
+    /* Menyu: axtarış + üfüqi slider kateqoriyalar */
     #p-menu { padding-top: 22px; }
     .menu-controls { gap: 10px; margin-bottom: 18px; }
     .menu-search-row { flex-wrap: nowrap; }
@@ -1978,7 +1753,6 @@
     .menu-cats-wrap.at-end .cats-arrow { display: none; }
     @keyframes nudge { 50% { transform: translateX(4px); } }
     @media (max-width: 640px) { .menu-cats-wrap { margin: 0 -24px; } .cats-arrow { display: none; } }
-    #menuCatalog { margin-bottom: 96px; }
 
     /* ==========================================================================
        9b. KİTAB FORMASINDA MENYU (3D SAĞA-SOLA VƏRƏQLƏMƏ EFFEKTİ)
@@ -2024,7 +1798,6 @@
       }
     }
 
-    /* Kitabın sol cild tikişi və kölgəsi */
     .menu-book::before {
       content: "";
       position: absolute;
@@ -2047,7 +1820,6 @@
       background: inherit;
     }
 
-    /* 3D vərəqləmə yarpağı */
     .book-flip-leaf {
       position: absolute;
       inset: 0;
@@ -2084,34 +1856,17 @@
     }
 
     @keyframes bookTurnNext {
-      0% {
-        transform: rotateY(0deg);
-        opacity: 1;
-      }
-      68% {
-        opacity: 0.96;
-      }
-      100% {
-        transform: rotateY(-158deg);
-        opacity: 0;
-      }
+      0% { transform: rotateY(0deg); opacity: 1; }
+      68% { opacity: 0.96; }
+      100% { transform: rotateY(-158deg); opacity: 0; }
     }
 
     @keyframes bookTurnPrev {
-      0% {
-        transform: rotateY(-152deg);
-        opacity: 0.15;
-      }
-      28% {
-        opacity: 1;
-      }
-      100% {
-        transform: rotateY(0deg);
-        opacity: 1;
-      }
+      0% { transform: rotateY(-152deg); opacity: 0.15; }
+      28% { opacity: 1; }
+      100% { transform: rotateY(0deg); opacity: 1; }
     }
 
-    /* Səhifə başlığı (Kitab fəsli) */
     .book-head {
       display: flex;
       flex-direction: column;
@@ -2176,7 +1931,6 @@
       flex: 1;
     }
 
-    /* Kitab alt vərəqləmə paneli */
     .book-foot {
       display: flex;
       align-items: center;
@@ -2239,7 +1993,6 @@
       background: var(--brand);
     }
 
-    /* Qatlanmış səhifə küncü (Page curl hint) */
     .book-curl {
       position: absolute;
       bottom: 0;
@@ -2362,7 +2115,7 @@
     body, button, input, select, textarea { font-family: var(--font-sans); font-variant-ligatures: none; }
     h1, h2, h3, h4 { font-variant-ligatures: none; }
     .hero h1 { padding: 0.12em 0 0.06em; }
-    .tag, .menu-stage-badge, .vibe-item h3 { text-transform: none; }
+    .tag, .vibe-item h3 { text-transform: none; }
     .hero .tag { text-transform: uppercase; }
 
     /* ==========================================================================
@@ -2425,7 +2178,6 @@
     .pp-label.l { left: 5%; }
     .pp-label.r { right: 5%; }
 
-    /* Tam ekran modunda yuxarı panel gizlənir, masa maksimal enli olur, xal sol tərəfdə masanın üzərində görünür */
     .pp.is-full .pp-bar { display: none; }
     .pp-stage-score {
       display: none;
@@ -2474,7 +2226,6 @@
     }
     .pp-full-float button:hover { background: rgba(242, 211, 168, 0.24); }
 
-    /* Portret mobil cihazlarda tam ekran (landscape) 90 dərəcə dönüş rejimi */
     .pp.is-rotated .pp-stage {
       position: fixed;
       top: 50%;
@@ -2495,7 +2246,6 @@
     .pp-rotate { display: none; font-size: 13.5px; color: #F2D3A8 !important; }
     @media (orientation: portrait) and (max-width: 700px) { .pp-rotate { display: block; } }
 
-    /* Mərhələli animasiyalı son mesajlar (Masa tenisi & Körlinq) */
     .pp-overlay.is-visible { animation: pageFadeIn 0.35s ease-out forwards; }
     .end-step1 {
       font: 800 clamp(22px, 4.5vw, 32px)/1.2 var(--font-serif);
@@ -2565,7 +2315,6 @@
       z-index: 2;
     }
 
-    /* Körlinq Tam ekran modu: yuxarı panel gizlənir, ekran boyunca uzunasına açılır */
     .cl.is-full .cl-bar { display: none; }
     .cl-full-float {
       display: none;
@@ -2843,9 +2592,9 @@
         <div class="bokeh" id="heroBokeh" aria-hidden="true"></div>
         <div class="wrap">
           <div class="hero-inner">
-            <div class="tag" id="tagline">Coffee • Events • Games</div>
+            <div class="tag" id="tagline">Sushi • Coffee • Events • Games</div>
             <h1 id="heroTitle">Üstəgəl Kafe</h1>
-            <p>Kofe, kino, intellektual oyunlar, canlı musiqi və karaoke — bir məkanda. Masanı indi rezerv et, növbəti tədbirə yerini ayır.</p>
+            <p>Suşi, kofe, kino, intellektual oyunlar, canlı musiqi və karaoke — bir məkanda. Masanı indi rezerv et, növbəti tədbirə yerini ayır.</p>
             <div class="hero-actions">
               <button class="btn" id="heroMenu" data-go="menu">Menyuya bax</button>
               <button class="btn ghost" data-go="reserve">Masa rezerv et</button>
@@ -2875,10 +2624,10 @@
 
         <div class="vibe-strip reveal-group" aria-label="Kafe imkanları">
           <div class="vibe-item">
-            <span class="vibe-icon" aria-hidden="true">☕</span>
+            <span class="vibe-icon" aria-hidden="true">🍣</span>
             <div>
-              <h3>Specialty Kofe</h3>
-              <p>Təzə qovrulmuş dənələrdən hazırlanan espresso, latte və imza içkilər.</p>
+              <h3>Sushi & Specialty Kofe</h3>
+              <p>Təzə hazırlanan suşi rollar, qovrulmuş dənələrdən espresso və imza içkilər.</p>
             </div>
           </div>
           <div class="vibe-item">
@@ -2907,10 +2656,10 @@
         <div class="menu-controls">
           <div class="menu-search-row">
             <div class="menu-search-box">
-              <input id="menuSearch" type="search" placeholder="İçki, desert və ya dad axtar (məs: Latte, San Sebastián, Moxito)…" aria-label="Menyuda axtar">
+              <input id="menuSearch" type="search" placeholder="Suşi, kofe, sendviç və ya desert axtar (məs: Filadelfia, Latte, Club)…" aria-label="Menyuda axtar">
               <button class="menu-search-clear" id="menuSearchClear" type="button" aria-label="Axtarışı təmizlə">×</button>
             </div>
-            <div class="menu-stats" id="menuStats">Səhifə 1 / 11</div>
+            <div class="menu-stats" id="menuStats">Səhifə 1 / 17</div>
           </div>
           <div class="menu-cats-wrap at-start" id="menuCatsWrap">
             <div class="menu-cats" id="menuCats" role="tablist" aria-label="Menyu kateqoriyaları"></div>
@@ -3072,7 +2821,7 @@
        ======================================================================== -->
   <footer>
     <div class="wrap foot-bar">
-      <span id="footCopy">© Üstəgəl Kafe — Coffee • Events • Games</span>
+      <span id="footCopy">© Üstəgəl Kafe — Sushi • Coffee • Events • Games</span>
       <span>Səhifəni aşağı və yuxarı sürüşdürərək kofe anını izləyin ☕</span>
     </div>
   </footer>
@@ -3358,13 +3107,38 @@
       return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
     };
 
+    /* Ortaq yüngül səs mühərriki (Masa tenisi, Körlinq və Kitab vərəqləməsi üçün) */
+    const SoundFX = (() => {
+      let ac = null;
+      function tone(freq, dur = 0.07, type = 'sine', vol = 0.06) {
+        try {
+          const Ctx = window.AudioContext || window.webkitAudioContext;
+          if (!Ctx) return;
+          ac = ac || new Ctx();
+          if (ac.state === 'suspended') ac.resume();
+          const o = ac.createOscillator();
+          const g = ac.createGain();
+          o.type = type;
+          o.frequency.value = freq;
+          g.gain.setValueAtTime(vol, ac.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + dur);
+          o.connect(g);
+          g.connect(ac.destination);
+          o.start();
+          o.stop(ac.currentTime + dur);
+        } catch (_) {}
+      }
+      return { tone };
+    })();
+
     const S = {
       data: null,
       page: 'home',
       view: 'list',
       cat: 'all',
       month: new Date(),
-      sel: null
+      sel: null,
+      booted: false
     };
     S.month.setDate(1);
 
@@ -3598,17 +3372,19 @@
         });
     }
 
-    loadInitialData();
-
     function init(d) {
       const today = ymd(new Date());
-      d = { ...d, settings: normalizeSettings(d.settings || {}), events: (d.events || []).filter((e) => e.date >= today).map((e) => ({ ...e, cover: imgUrl(e.cover, 800) })) };
+      d = {
+        ...d,
+        settings: normalizeSettings(d.settings || {}),
+        events: (d.events || []).filter((e) => e.date >= today).map((e) => ({ ...e, cover: imgUrl(e.cover, 800) }))
+      };
       S.data = d;
       const s = d.settings || {};
 
       $('#heroTitle').textContent = s.CAFE_NAME || 'Üstəgəl Kafe';
-      $('#tagline').textContent = s.TAGLINE || 'Coffee • Events • Games';
-      $('#footCopy').textContent = `© ${new Date().getFullYear()} ${s.CAFE_NAME || 'Üstəgəl Kafe'} — ${s.TAGLINE || 'Coffee • Events • Games'}`;
+      $('#tagline').textContent = s.TAGLINE || 'Sushi • Coffee • Events • Games';
+      $('#footCopy').textContent = `© ${new Date().getFullYear()} ${s.CAFE_NAME || 'Üstəgəl Kafe'} — ${s.TAGLINE || 'Sushi • Coffee • Events • Games'}`;
 
       const cafeTitle = s.CAFE_NAME || 'Üstəgəl Kafe';
       const iconLogo = s.ICON_LOGO_URL || DEFAULT_ICON_LOGO;
@@ -3717,7 +3493,7 @@
     function card(e, i = 0, eager = false) {
       const k = catKey(e.category);
       const fb = fallbackCover(k);
-      const cover = e.cover || (S.data.settings && S.data.settings['COVER_' + k]) || fb;
+      const cover = e.cover || (S.data && S.data.settings && S.data.settings['COVER_' + k]) || fb;
       const full = e.seatsLeft === 0;
       const seatsLabel = e.seatsLeft !== null && e.seatsLeft !== undefined
         ? ' · ' + (full ? 'yer yoxdur' : e.seatsLeft + ' yer qalıb')
@@ -4053,167 +3829,228 @@
     }
 
     /* ========================================================================
-       8. KREATİV MENYU KATALOQU, KATEQORİYA ANİMASİYALARI VƏ SVG İLLÜSTRASİYALAR
+       8. KREATİV MENYU KATALOQU (KİTAB REJİMİ + PDF MƏZMUNU + SVG İLLÜSTRASİYALAR)
        ======================================================================== */
     const MENU_CATEGORIES = [
       {
-        id: 'all',
-        label: 'Hamısı',
-        emoji: '✨',
-        c1: '#4A2A17',
-        c2: '#241207',
-        accent: '#4A2A17',
-        bg1: '#F7ECDD',
-        bg2: '#EAD7BE',
-        anim: 'steam',
-        desc: 'Üstəgəl Kafe-nin bütün isti və soyuq kofeləri, imza desertləri, moxitoları və KvizArt setləri.'
+        id: 'sushi-classic',
+        label: 'Sushi • Classic',
+        emoji: '🍣',
+        accent: '#C24127',
+        bg1: '#FDECE8',
+        bg2: '#F8D2C8',
+        desc: 'Təzə qızıl balıq, krevetka, ton balığı və krem pendirlə hazırlanan klassik suşi rollar.'
       },
       {
-        id: 'sirniyyat',
-        label: 'Şirniyyat & Desert',
-        emoji: '🍰',
-        c1: '#7C3F1D',
-        c2: '#3D1C0B',
-        accent: '#8B4513',
-        bg1: '#FDF1E3',
-        bg2: '#F3DEC3',
-        anim: 'sparkle',
-        desc: 'Sobadan yeni çıxmış San Sebastián, südlü Trileçe, Ekler, Kurabiye və ev üsulu tort dilimləri.'
+        id: 'sushi-firin',
+        label: 'Sushi • Fırın',
+        emoji: '🔥',
+        accent: '#B5491C',
+        bg1: '#FDF0E4',
+        bg2: '#F6D8BE',
+        desc: 'Xüsusi fırın sousu və unaqi qlazuru ilə bişirilmiş isti və zərif suşi rollar.'
+      },
+      {
+        id: 'sushi-hot',
+        label: 'Sushi • Hot & Burgerlər',
+        emoji: '🍤',
+        accent: '#A83243',
+        bg1: '#FCE8EC',
+        bg2: '#F5CCD4',
+        desc: 'Xırtıldayan panko-tempura örtüklü isti rollar, pink souslu çeşidlər və suşi burgerlər.'
+      },
+      {
+        id: 'salatlar',
+        label: 'Salatlar',
+        emoji: '🥗',
+        accent: '#277344',
+        bg1: '#E6F7EC',
+        bg2: '#C9EBD5',
+        desc: 'Təzə tərəvəzlər, Sezar sousu, krevetka, ton balığı və toyuq filesi ilə hazırlanan salatlar.'
+      },
+      {
+        id: 'qelyanaltilar',
+        label: 'Qəlyanaltılar',
+        emoji: '🍟',
+        accent: '#B06A16',
+        bg1: '#FDF4E3',
+        bg2: '#F6E3BE',
+        desc: 'Qızılı kartof fri, evsayağı kartof, xırtıldayan toyuq stripsləri və krevetka tempura.'
+      },
+      {
+        id: 'sandvic-wrap',
+        label: 'Sandviç & Wrap',
+        emoji: '🌯',
+        accent: '#9C5521',
+        bg1: '#FCF0E4',
+        bg2: '#F3DBC4',
+        desc: 'Doyumlu Club sendviç, tuna və toyuqlu sendviçlər, tortilya lavaşında isti wraplar.'
       },
       {
         id: 'isti-kofe',
         label: 'İsti Kofelər',
         emoji: '☕',
-        c1: '#4E2A15',
-        c2: '#231107',
         accent: '#5C3317',
         bg1: '#F6E8D7',
         bg2: '#E5CFAF',
-        anim: 'steam',
         desc: 'Təzə qovrulmuş 100% Arabica dənələrindən məxməri köpüklü klassik və imza isti kofelər.'
       },
       {
         id: 'soyuq-kofe',
         label: 'Soyuq Kofelər',
         emoji: '🧊',
-        c1: '#1E4E68',
-        c2: '#132A3A',
         accent: '#1E5B7A',
         bg1: '#E5F3FA',
         bg2: '#CCE5F3',
-        anim: 'ice',
         desc: 'Buz kimi təravətləndirici Blue Ocean, Lavender, Strawberry Cloud və klassik soyuq espresso içkiləri.'
       },
       {
         id: 'milkshake',
         label: 'Milkshake',
         emoji: '🥤',
-        c1: '#9E3A63',
-        c2: '#4A1830',
         accent: '#A83866',
         bg1: '#FCE9F1',
         bg2: '#F5D0E0',
-        anim: 'bubbles',
         desc: 'Təbii meyvə püreləri, dondurma və qaymaqlı krema ilə hazırlanan qatı milkshakelər.'
       },
       {
         id: 'kokteyl',
         label: 'Kokteyllər',
         emoji: '🍹',
-        c1: '#B84A27',
-        c2: '#4B1D0E',
         accent: '#C44D27',
         bg1: '#FDECE3',
         bg2: '#F8D4C2',
-        anim: 'bubbles',
         desc: 'Tropik meyvə notları ilə zəngin alkoqolsuz müəllif kokteylləri və soyuq çay qarışıqları.'
-      },
-      {
-        id: 'alko-kokteyl',
-        label: 'Alko-kokteyl',
-        emoji: '🍸',
-        c1: '#59234B',
-        c2: '#240D1F',
-        accent: '#6E295C',
-        bg1: '#F6E6F2',
-        bg2: '#E8CBE0',
-        anim: 'sparkle',
-        desc: 'Axşam əhval-ruhiyyəsi üçün xüsusi reseptlə hazırlanan klassik və imza kokteyllər.'
       },
       {
         id: 'moxito',
         label: 'Moxito',
         emoji: '🍃',
-        c1: '#1D6344',
-        c2: '#0E3524',
         accent: '#1E6B49',
         bg1: '#E4F7EE',
         bg2: '#C7EAD9',
-        anim: 'bubbles',
         desc: 'Təzə nanə yarpaqları, laym dilimləri və meyvə çeşidləri ilə köpüklü sərinlik.'
       },
       {
+        id: 'alko-kokteyl',
+        label: 'Alko-kokteyl',
+        emoji: '🍸',
+        accent: '#6E295C',
+        bg1: '#F6E6F2',
+        bg2: '#E8CBE0',
+        desc: 'Axşam əhval-ruhiyyəsi üçün xüsusi reseptlə hazırlanan klassik və imza kokteyllər.'
+      },
+      {
         id: 'serin-ickiler',
-        label: 'Sərin İçəcəklər & Enerji',
+        label: 'Sərin İçkilər & Enerji',
         emoji: '⚡',
-        c1: '#1B527A',
-        c2: '#0E293D',
         accent: '#1E5B87',
         bg1: '#E6F2FB',
         bg2: '#CEE3F5',
-        anim: 'ice',
         desc: 'Soyudulmuş qazlı içkilər, meyvə şirələri, yerli mineral sular və enerji içkiləri.'
       },
       {
         id: 'cay-murebbe',
         label: 'Çaylar & Mürəbbələr',
         emoji: '🫖',
-        c1: '#7E2424',
-        c2: '#3B1010',
         accent: '#8A2828',
         bg1: '#FBE8E8',
         bg2: '#F2CECE',
-        anim: 'steam',
         desc: 'Ətirli dəmləmə çay və ev üsulu çiyələk, ağ gilas mürəbbələri ilə səmimi söhbətlər.'
+      },
+      {
+        id: 'sirniyyat',
+        label: 'Şirniyyat & Desert',
+        emoji: '🍰',
+        accent: '#8B4513',
+        bg1: '#FDF1E3',
+        bg2: '#F3DEC3',
+        desc: 'Sobadan yeni çıxmış San Sebastián, südlü Trileçe, Bilincik, Grolet, Kurabiyə və tort dilimləri.'
       },
       {
         id: 'atisdirmaliq',
         label: 'Atışdırmalıqlar',
         emoji: '🍿',
-        c1: '#8F5B14',
-        c2: '#422806',
         accent: '#9A6316',
         bg1: '#FCF2DF',
         bg2: '#F4E1BE',
-        anim: 'sparkle',
         desc: 'Kino və oyun axşamlarının ayrılmaz yoldaşı — isti popkorn, saçaq pendir, çips və çərəzlər.'
       },
       {
         id: 'kvizart',
         label: 'KvizArt Menu',
         emoji: '🧠',
-        c1: '#352A6E',
-        c2: '#191338',
         accent: '#3F3282',
         bg1: '#ECEAFE',
         bg2: '#D8D4FC',
-        anim: 'sparkle',
         desc: '4 nəfərlik komandalar və intellektual oyun iştirakçıları üçün sərfəli çay + desert setləri.'
       }
     ];
 
     const MENU_ITEMS = [
-      // 1. Şirniyyat & Desert
-      { cat: 'sirniyyat', name: 'San Sebastián', price: 7.00, note: 'Karamelizə olunmuş üst qatlı, kremli İspan çizkeyki' },
-      { cat: 'sirniyyat', name: 'Trileçe', price: 7.00, note: 'Üç südlü yumşaq biskvit və karamel sousu' },
-      { cat: 'sirniyyat', name: 'Ekler', price: 2.00, note: 'Zərif krem dolgulu və şokolad qlazurlu klassik ekler' },
-      { cat: 'sirniyyat', name: 'Kurabiye', price: 1.00, note: 'Təzə bişmiş şokolad damlalı xırtıldayan kurabiye' },
-      { cat: 'sirniyyat', name: 'Bilincik', price: 6.00, note: 'Zərif bükülmüş krep və şirin içlik' },
-      { cat: 'sirniyyat', name: 'Grolet', price: 6.50, note: 'Fransız üsulu zərif muss və parlaq qlazur' },
-      { cat: 'sirniyyat', name: 'Cake (ballı tort)', price: 6.00, note: 'Təbii ballı qatlar və xama-qaymaq kremi' },
-      { cat: 'sirniyyat', name: 'Cake (velvet)', price: 6.00, note: 'Məxməri qırmızı biskvit və pendirli krem' },
+      // 1. Sushi / Classic (PDF Səhifə 2)
+      { cat: 'sushi-classic', name: 'Filadelfia', price: 12.00, note: 'Düyü, nori, hisə verilmiş qızıl balıq, xiyar, pendir.' },
+      { cat: 'sushi-classic', name: 'Tokio', price: 11.00, note: 'Düyü, nori, qızardılmış qızıl balıq, xiyar, limon, pendir, tobiko.' },
+      { cat: 'sushi-classic', name: 'Pink Roll', price: 11.00, note: 'Düyü, nori, toyuq, xiyar, pendir, tobiko.' },
+      { cat: 'sushi-classic', name: 'Kalifornia', price: 11.00, note: 'Düyü, nori, krevetka, xiyar, pendir, tobiko.' },
+      { cat: 'sushi-classic', name: 'Suriken', price: 9.00, note: 'Düyü, nori, toyuq, xiyar, pendir, cipsi.' },
+      { cat: 'sushi-classic', name: 'Sezar roll', price: 9.00, note: 'Düyü, nori, toyuq, xiyar, pendir, küncüt, sweet chili.' },
+      { cat: 'sushi-classic', name: 'New-york', price: 12.00, note: 'Düyü, nori, krevetka tempura, xiyar, pendir.' },
+      { cat: 'sushi-classic', name: 'Tanto', price: 11.00, note: 'Düyü, nori, hisə verilmiş qızıl balıq, xiyar, pendir, cipsi.' },
+      { cat: 'sushi-classic', name: 'Bonito', price: 10.00, note: 'Düyü, nori, ton balığı, xiyar, pendir, bonito.' },
+      { cat: 'sushi-classic', name: 'Vakidzasi', price: 10.00, note: 'Düyü, nori, krab, xiyar, pendir, cipsi.' },
 
-      // 2. İsti Kofelər
+      // 2. Sushi / Fırın (PDF Səhifə 3)
+      { cat: 'sushi-firin', name: 'Filadelfia fırın', price: 13.00, note: 'Düyü, nori, hisə verilmiş qızıl balıq, xiyar, pendir, fırın sousu, unaqi sousu.' },
+      { cat: 'sushi-firin', name: 'Tokio fırın', price: 13.00, note: 'Düyü, nori, qızardılmış qızıl balıq, xiyar, limon, pendir, tobiko, fırın sousu, unaqi sousu.' },
+      { cat: 'sushi-firin', name: 'Pink Roll fırın', price: 12.00, note: 'Düyü, nori, toyuq, xiyar, pendir, tobiko, fırın sousu, unaqi sousu.' },
+      { cat: 'sushi-firin', name: 'Kalifornia fırın', price: 12.00, note: 'Düyü, nori, krevetka, xiyar, pendir, tobiko, fırın sousu, unaqi sousu.' },
+      { cat: 'sushi-firin', name: 'Sezar fırın', price: 10.00, note: 'Düyü, nori, toyuq, xiyar, pendir, küncüt, fırın sousu, unaqi sousu, sweet chili.' },
+      { cat: 'sushi-firin', name: 'Suriken fırın', price: 10.00, note: 'Düyü, nori, toyuq, xiyar, pendir, cipsi, fırın sousu, unaqi sousu.' },
+      { cat: 'sushi-firin', name: 'New-york fırın', price: 13.00, note: 'Düyü, nori, krevetka tempura, xiyar, pendir, fırın sousu, unaqi sousu.' },
+      { cat: 'sushi-firin', name: 'Tanto fırın', price: 12.00, note: 'Düyü, nori, hisə verilmiş qızıl balıq, xiyar, pendir, cipsi, fırın sousu, unaqi sousu.' },
+      { cat: 'sushi-firin', name: 'Bonito fırın', price: 11.00, note: 'Düyü, nori, ton balığı, xiyar, pendir, bonito, fırın sousu, unaqi sousu.' },
+      { cat: 'sushi-firin', name: 'Vakidzasi fırın', price: 11.00, note: 'Düyü, nori, krab, xiyar, pendir, cipsi, fırın sousu, unaqi sousu.' },
+
+      // 3. Sushi / Hot & Burgerlər (PDF Səhifə 4)
+      { cat: 'sushi-hot', name: 'Hot roll', price: 12.00, note: 'Düyü, nori, krevetka, xiyar, pendir, tempura, panko, unaqi sousu, sweet chili.' },
+      { cat: 'sushi-hot', name: 'Torri hot', price: 10.00, note: 'Düyü, nori, toyuq, xiyar, pendir, tempura, panko, unaqi sousu, sweet chili.' },
+      { cat: 'sushi-hot', name: 'Pink kalifornia hot', price: 12.00, note: 'Düyü, nori, krevetka, xiyar, pendir, tobiko, tempura, panko, unaqi sousu, sweet chili, pink sousu.' },
+      { cat: 'sushi-hot', name: 'Pink sezar hot', price: 10.00, note: 'Düyü, nori, toyuq, xiyar, pendir, tempura, panko, unaqi sousu, sweet chili, pink sousu.' },
+      { cat: 'sushi-hot', name: 'Sakura', price: 12.00, note: 'Düyü, nori, hisə verilmiş qızıl balıq, xiyar, pendir, tobiko, tempura, panko, unaqi sousu.' },
+      { cat: 'sushi-hot', name: 'Pink Bonito hot', price: 11.00, note: 'Düyü, nori, ton balığı, xiyar, pendir, tempura, panko, unaqi sousu, sweet chili, pink sousu.' },
+      { cat: 'sushi-hot', name: 'Bonito hot', price: 11.00, note: 'Düyü, nori, ton balığı, xiyar, pendir, tempura, panko, unaqi sousu, sweet chili.' },
+      { cat: 'sushi-hot', name: 'Pink filadelfia hot', price: 12.00, note: 'Düyü, nori, hisə verilmiş qızıl balıq, xiyar, pendir, tempura, panko, unaqi sousu, pink sousu.' },
+      { cat: 'sushi-hot', name: 'Hani Hot', price: 10.00, note: 'Düyü, nori, krab, xiyar, pendir, tempura, panko, unaqi sousu, sweet chili.' },
+      { cat: 'sushi-hot', name: 'Pink hani hot', price: 11.00, note: 'Düyü, nori, krab, xiyar, pendir, tempura, panko, unaqi sousu, sweet chili, pink sousu.' },
+      { cat: 'sushi-hot', name: 'Krab sushi burger', price: 9.00, note: 'Düyü, nori, krab, xiyar, pendir, tempura, panko, unaqi sousu, sweet chili.' },
+      { cat: 'sushi-hot', name: 'Chicken sushi burger', price: 9.00, note: 'Düyü, nori, toyuq, xiyar, pendir, tempura, panko, unaqi sousu, sweet chili.' },
+
+      // 4. Salatlar (PDF Səhifə 5)
+      { cat: 'salatlar', name: 'Yunan salatı', price: 7.00, note: 'Aysberq kahısı, pomidor, xiyar, göyərti, limon, ağ pendir, qara çörək, duz, Olivia sousu.' },
+      { cat: 'salatlar', name: 'Ceasar salat - Toyuq', price: 9.00, note: 'Toyuq filesi, aysberq kahısı, pomidor, Parmesan, suxari, Sezar sousu, özəl sous.' },
+      { cat: 'salatlar', name: 'Ceasar salat - Krevetka', price: 11.00, note: 'Krevetka, aysberq kahısı, pomidor, Parmesan, suxari, Sezar sousu, özəl sous.' },
+      { cat: 'salatlar', name: 'Ton salatı', price: 8.00, note: 'Ton balığı, aysberq kahısı, pomidor, xiyar, qarğıdalı, limon, qara çörək, duz, Olivia sousu.' },
+      { cat: 'salatlar', name: 'Cipsi salat', price: 7.00, note: 'Toyuq, pomidor, xiyar, qırmızı soğan, qarğıdalı, cipsi, özəl sous.' },
+
+      // 5. Qəlyanaltılar (PDF Səhifə 5)
+      { cat: 'qelyanaltilar', name: 'Kartof fri', price: 4.00, note: 'Kartof, mix baharat, Sezar sousu, sweet chili.' },
+      { cat: 'qelyanaltilar', name: 'Evsayağı kartof', price: 4.00, note: 'Kartof, mix baharat, Sezar sousu, sweet chili.' },
+      { cat: 'qelyanaltilar', name: 'Strips + Fri Mix', price: 6.00, note: 'Toyuq stripsləri, kartof fri, mix baharat, Sezar sousu, sweet chili.' },
+      { cat: 'qelyanaltilar', name: 'Toyuq stripsləri', price: 5.00, note: 'Toyuq stripsləri, mix baharat, Sezar sousu, sweet chili.' },
+      { cat: 'qelyanaltilar', name: 'Krevetka tempura', price: 8.00, note: 'Xırtıldayan panko örtüklü krevetka tempura, sweet chili sousu.' },
+
+      // 6. Sandviç & Wrap (PDF Səhifə 6)
+      { cat: 'sandvic-wrap', name: 'Club Sandwich', price: 10.00, note: 'Dilim çörək, toyuq filesi, yumurta, kahı, pomidor, xiyar, Holland pendiri, kartof fri, ketçup, mayonez.' },
+      { cat: 'sandvic-wrap', name: 'Cheese Sandwich', price: 6.00, note: 'Dilim çörək, kahı, pomidor, xiyar, Holland pendiri, pendir sousu, ketçup, mayonez.' },
+      { cat: 'sandvic-wrap', name: 'Chicken Sandwich', price: 7.00, note: 'Dilim çörək, toyuq filesi, kahı, pomidor, xiyar, sendviç sousu.' },
+      { cat: 'sandvic-wrap', name: 'Tuna Sandwich', price: 7.00, note: 'Çörək, tuna balığı, kahı, pomidor, xiyar, laym sousu.' },
+      { cat: 'sandvic-wrap', name: 'Üstəgəl wrap', price: 6.00, note: 'Tortilya lavaşı, toyuq stripsləri, pomidor, qırmızı soğan, kartof fri, özəl sous.' },
+      { cat: 'sandvic-wrap', name: 'Shaurma wrap', price: 6.00, note: 'Tortilya lavaşı, toyuq, turşu xiyar, kartof fri, sous.' },
+      { cat: 'sandvic-wrap', name: 'Ceasar wrap - Toyuq', price: 8.00, note: 'Tortilya lavaşı, toyuq stripsləri, aysberq kahısı, pomidor, Parmesan, Sezar sousu, özəl sous.' },
+      { cat: 'sandvic-wrap', name: 'Ceasar wrap - Krevetka', price: 10.00, note: 'Tortilya lavaşı, krevetka tempura, aysberq kahısı, pomidor, Parmesan, Sezar sousu, özəl sous, sweet chili.' },
+
+      // 7. İsti Kofelər (PDF Səhifə 7)
       { cat: 'isti-kofe', name: 'Capuccino', price: 6.00, note: 'Klassik espresso və sıx ipək kimi süd köpüyü' },
       { cat: 'isti-kofe', name: 'Latte', price: 6.00, note: 'Yumşaq südlü espresso və zərif latte art' },
       { cat: 'isti-kofe', name: 'Americano', price: 5.00, note: 'Təmiz və balanslı qara espresso dadı' },
@@ -4232,7 +4069,7 @@
       { cat: 'isti-kofe', name: 'Chai tea Latte', price: 5.00, note: 'Ədviyyatlı hind çayı və isti süd köpüyü' },
       { cat: 'isti-kofe', name: 'Matcha', price: 7.00, note: 'Yapon yaşıl çay tozu və südlü məxməri dad' },
 
-      // 3. Soyuq Kofelər
+      // 8. Soyuq Kofelər (PDF Səhifə 7)
       { cat: 'soyuq-kofe', name: 'Frappe', price: 7.00, note: 'Buzlu köpüklü soyuq kofe klassikası' },
       { cat: 'soyuq-kofe', name: 'Affogato', price: 6.00, note: 'Vanilli dondurma üzərinə tökülən isti espresso' },
       { cat: 'soyuq-kofe', name: 'Ice Americano', price: 5.00, note: 'Buz kubları ilə təravətləndirici qara kofe' },
@@ -4247,7 +4084,7 @@
       { cat: 'soyuq-kofe', name: 'Summer is coffee', price: 7.00, note: 'Sitrus və meyvə notlu yay imza kofesi' },
       { cat: 'soyuq-kofe', name: 'Ice Raff', price: 7.00, note: 'Soyuq qaymaqlı və vanilli kremli kofe' },
 
-      // 4. Milkshake
+      // 9. Milkshake (PDF Səhifə 8)
       { cat: 'milkshake', name: 'Banan Milkshake', price: 8.00, note: 'Təzə banan, süd və qaymaqlı dondurma' },
       { cat: 'milkshake', name: 'Çiyələk Milkshake', price: 8.00, note: 'Şirin çiyələk dadı və məxməri köpük' },
       { cat: 'milkshake', name: 'Mango Milkshake', price: 8.00, note: 'Tropik manqo püresi ilə sərin milkshake' },
@@ -4256,7 +4093,7 @@
       { cat: 'milkshake', name: 'Vanil Milkshake', price: 8.00, note: 'Madaqaskar vanili ilə klassik milkshake' },
       { cat: 'milkshake', name: 'Raspberry Milkshake', price: 8.00, note: 'Təravətli moruq notlu meyvəli milkshake' },
 
-      // 5. Kokteyllər
+      // 10. Kokteyllər (PDF Səhifə 8)
       { cat: 'kokteyl', name: 'Blue angel', price: 7.00, note: 'Parlaq mavi sitrus və tropik meyvə qarışığı' },
       { cat: 'kokteyl', name: 'Bull mocktail', price: 8.00, note: 'Enerji verən meyvəli və sərin mocktail' },
       { cat: 'kokteyl', name: 'Cool line', price: 7.00, note: 'Laym və nanə təravətli yüngül kokteyl' },
@@ -4267,14 +4104,7 @@
       { cat: 'kokteyl', name: 'Fındıq mocha', price: 8.00, note: 'Qovrulmuş fındıq və şokoladlı soyuq kokteyl' },
       { cat: 'kokteyl', name: 'Mango-ananas soyuq çay', price: 7.00, note: 'Təbii dəmləmə çay, manqo və ananas dilimləri' },
 
-      // 6. Alko-kokteyl
-      { cat: 'alko-kokteyl', name: 'Long Iceland', price: 8.00, note: 'Klassik çoxkomponentli sərin axşam kokteyli' },
-      { cat: 'alko-kokteyl', name: 'Malibu Cocktail (Tequila, cin)', price: 8.00, note: 'Tequila, cin və tropik kokos harmoniyası' },
-      { cat: 'alko-kokteyl', name: 'Sunrise on the Beach', price: 7.50, note: 'Portağal və nar rəng keçidli günəşli kokteyl' },
-      { cat: 'alko-kokteyl', name: 'Mojito Fire', price: 7.00, note: 'Nanə, laym və xüsusi alovlu təqdimat' },
-      { cat: 'alko-kokteyl', name: 'Barbie Cocktail', price: 7.00, note: 'Zərif çəhrayı tonlu meyvəli axşam kokteyli' },
-
-      // 7. Moxito
+      // 11. Moxito (PDF Səhifə 8)
       { cat: 'moxito', name: 'Classic Moxito', price: 7.00, note: 'Təzə nanə, laym, qəhvəyi şəkər və qazlı su' },
       { cat: 'moxito', name: 'Strawberry Moxito', price: 7.00, note: 'Təzə çiyələk dilimləri və nanəli sərinlik' },
       { cat: 'moxito', name: 'Blueberry Moxito', price: 7.00, note: 'Meşə qaragiləsi və laym təravəti' },
@@ -4284,44 +4114,61 @@
       { cat: 'moxito', name: 'Raspberry Moxito', price: 7.00, note: 'Ətirli moruq gilələri ilə köpüklü moxito' },
       { cat: 'moxito', name: 'Marakuya Moxito', price: 7.00, note: 'Ekzotik marakuya toxumları və laym' },
 
-      // 8. Sərin İçəcəklər & Enerji
-      { cat: 'serin-ickiler', name: 'CocaCola Tənəkə (0.5 L)', price: 3.00, note: 'Buz kimi soyuq klassik qazlı içki' },
-      { cat: 'serin-ickiler', name: 'CocaCola (0.5 L)', price: 2.50, note: 'Sərinləşdirici klassik kola' },
-      { cat: 'serin-ickiler', name: 'Sprite (0.5 L)', price: 2.50, note: 'Limon və laym dadlı şəffaf qazlı içki' },
+      // 12. Alko-kokteyl (PDF Səhifə 8)
+      { cat: 'alko-kokteyl', name: 'Long Iceland', price: 8.00, note: 'Klassik çoxkomponentli sərin axşam kokteyli' },
+      { cat: 'alko-kokteyl', name: 'Malibu Cocktail (Tequila, cin)', price: 8.00, note: 'Tequila, cin və tropik kokos harmoniyası' },
+      { cat: 'alko-kokteyl', name: 'Sunrise on the Beach', price: 7.50, note: 'Portağal və nar rəng keçidli günəşli kokteyl' },
+      { cat: 'alko-kokteyl', name: 'Mojito Fire', price: 7.00, note: 'Nanə, laym və xüsusi alovlu təqdimat' },
+      { cat: 'alko-kokteyl', name: 'Barbie Cocktail', price: 7.00, note: 'Zərif çəhrayı tonlu meyvəli axşam kokteyli' },
+
+      // 13. Sərin İçkilər & Enerji (PDF Səhifə 9)
+      { cat: 'serin-ickiler', name: 'CocaCola Tənəkə (0.5 l)', price: 3.00, note: 'Buz kimi soyuq klassik qazlı içki' },
+      { cat: 'serin-ickiler', name: 'CocaCola (0.5 l)', price: 2.50, note: 'Sərinləşdirici klassik kola' },
+      { cat: 'serin-ickiler', name: 'Sprite (0.5 l)', price: 2.50, note: 'Limon və laym dadlı şəffaf qazlı içki' },
       { cat: 'serin-ickiler', name: 'Natura meyvə şirəsi', price: 1.50, note: 'Təbii meyvə nektarı çeşidləri' },
-      { cat: 'serin-ickiler', name: 'Fuse Tea (0.5 L)', price: 2.50, note: 'Soyuq çay və meyvə ekstraktı' },
-      { cat: 'serin-ickiler', name: 'Cappy - Şaftalı (0.5 L)', price: 2.50, note: 'Şirəli şaftalı nektarı' },
-      { cat: 'serin-ickiler', name: 'Cappy - Qarışıq subtropik meyvə (0.5 L)', price: 2.50, note: 'Multimeyvə vitamin qarışığı' },
-      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.5 L) Limon', price: 2.50, note: 'Təravətli limonlu soyuq çay' },
-      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.5 L) Şaftalı', price: 2.50, note: 'Şirin şaftalılı soyuq çay' },
-      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.35 L) Limon', price: 2.00, note: 'Limonlu soyuq çay (kompakt ölçü)' },
-      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.35 L) Şaftalı', price: 2.00, note: 'Şaftalılı soyuq çay (kompakt ölçü)' },
-      { cat: 'serin-ickiler', name: 'Buzz Ice Tea (0.5 L) Mango-ananas', price: 2.50, note: 'Tropik manqo və ananaslı soyuq çay' },
+      { cat: 'serin-ickiler', name: 'Fuse Tea (0.5 l)', price: 2.50, note: 'Soyuq çay və meyvə ekstraktı' },
+      { cat: 'serin-ickiler', name: 'Cappy - Şaftalı (0.5 l)', price: 2.50, note: 'Şirəli şaftalı nektarı' },
+      { cat: 'serin-ickiler', name: 'Cappy - Qarışıq subtropik meyvə (0.5 l)', price: 2.50, note: 'Multimeyvə vitamin qarışığı' },
+      { cat: 'serin-ickiler', name: 'Buzz IceTea (0.5 l) Limon', price: 2.50, note: 'Təravətli limonlu soyuq çay' },
+      { cat: 'serin-ickiler', name: 'Buzz IceTea (0.5 l) Şaftalı', price: 2.50, note: 'Şirin şaftalılı soyuq çay' },
+      { cat: 'serin-ickiler', name: 'Buzz IceTea (0.350 l) Limon', price: 2.00, note: 'Limonlu soyuq çay (kompakt ölçü)' },
+      { cat: 'serin-ickiler', name: 'Buzz IceTea (0.350 l) Şaftalı', price: 2.00, note: 'Şaftalılı soyuq çay (kompakt ölçü)' },
+      { cat: 'serin-ickiler', name: 'Buzz IceTea (0.5 l) Mango-ananas', price: 2.50, note: 'Tropik manqo və ananaslı soyuq çay' },
       { cat: 'serin-ickiler', name: 'Power Plus böyük', price: 2.00, note: 'Yüksək tonus verən enerji içkisi' },
-      { cat: 'serin-ickiler', name: 'Fanta (0.5 L)', price: 2.50, note: 'Parlaq portağal dadlı qazlı içki' },
+      { cat: 'serin-ickiler', name: 'Fanta (0.5 l)', price: 2.50, note: 'Parlaq portağal dadlı qazlı içki' },
       { cat: 'serin-ickiler', name: 'Buzz Cola', price: 2.00, note: 'Sərinləşdirici kola içkisi' },
       { cat: 'serin-ickiler', name: 'Badamlı (qazlı, qazsız)', price: 1.50, note: 'Təbii mineral süfrə suyu' },
       { cat: 'serin-ickiler', name: 'Power Plus balaca', price: 1.50, note: 'Kompakt enerji içkisi' },
       { cat: 'serin-ickiler', name: 'Dark Horse enerji içəcəyi', price: 2.00, note: 'Gecə oyunları üçün güclü enerji içkisi' },
-      { cat: 'serin-ickiler', name: 'Sirab qazlı (0.5 L)', price: 1.50, note: 'Naxçıvanın təbii qazlı mineral suyu' },
-      { cat: 'serin-ickiler', name: 'Sirab qazsız (0.5 L)', price: 1.50, note: 'Təbii bulaq mineral suyu' },
+      { cat: 'serin-ickiler', name: 'Sirab qazlı (0.5 l)', price: 1.50, note: 'Naxçıvanın təbii qazlı mineral suyu' },
+      { cat: 'serin-ickiler', name: 'Sirab qazsız (0.5 l)', price: 1.50, note: 'Təbii bulaq mineral suyu' },
       { cat: 'serin-ickiler', name: 'Sirab qazoz limon', price: 1.50, note: 'Limon ətirli sərin qazoz' },
       { cat: 'serin-ickiler', name: 'Sirab qazoz alma', price: 1.50, note: 'Yaşıl alma ətirli sərin qazoz' },
 
-      // 9. Çaylar & Mürəbbələr
+      // 14. Çaylar & Mürəbbələr (PDF Səhifə 9)
       { cat: 'cay-murebbe', name: 'Çay (birnəfərlik, takeaway)', price: 2.00, note: 'Təzə dəmlənmiş ətirli qara çay' },
       { cat: 'cay-murebbe', name: 'Çiyələk mürəbbəsi', price: 7.00, note: 'Bütöv giləli ev üsulu çiyələk mürəbbəsi' },
       { cat: 'cay-murebbe', name: 'Ağ gilas mürəbbəsi', price: 8.00, note: 'Ənənəvi kəhrəba rəngli ağ gilas mürəbbəsi' },
 
-      // 10. Atışdırmalıqlar
-      { cat: 'atisdirmaliq', name: 'Çips balaca porsiya', price: 3.50, note: 'Xırtıldayan ədviyyatlı kartof çipsi' },
-      { cat: 'atisdirmaliq', name: 'Çips böyük porsiya', price: 4.50, note: 'Dostlarla bölüşmək üçün böyük porsiya çips' },
+      // 15. Şirniyyat & Desert (PDF Səhifə 10)
+      { cat: 'sirniyyat', name: 'San Sebastián', price: 7.00, note: 'Karamelizə olunmuş üst qatlı, kremli İspan çizkeyki' },
+      { cat: 'sirniyyat', name: 'Trileçe', price: 7.00, note: 'Üç südlü yumşaq biskvit və karamel sousu' },
+      { cat: 'sirniyyat', name: 'Bilincik', price: 6.00, note: 'Zərif bükülmüş krep və şirin içlik' },
+      { cat: 'sirniyyat', name: 'Grolet', price: 6.50, note: 'Fransız üsulu zərif muss və parlaq qlazur' },
+      { cat: 'sirniyyat', name: 'Cake (ballı tort)', price: 6.00, note: 'Təbii ballı qatlar və xama-qaymaq kremi' },
+      { cat: 'sirniyyat', name: 'Cake (velvet)', price: 6.00, note: 'Məxməri qırmızı biskvit və pendirli krem' },
+      { cat: 'sirniyyat', name: 'Kurabiyə', price: 1.00, note: 'Təzə bişmiş şokolad damlalı xırtıldayan kurabiyə' },
+      { cat: 'sirniyyat', name: 'Ekler', price: 2.00, note: 'Zərif bişmiş xəmir, vanilli krem və şokolad qlazuru' },
+
+      // 16. Atışdırmalıqlar (PDF Səhifə 10)
+      { cat: 'atisdirmaliq', name: 'Çips - balaca porsiya', price: 3.50, note: 'Xırtıldayan ədviyyatlı kartof çipsi' },
+      { cat: 'atisdirmaliq', name: 'Çips - böyük porsiya', price: 4.50, note: 'Dostlarla bölüşmək üçün böyük porsiya çips' },
       { cat: 'atisdirmaliq', name: 'Suxari', price: 2.50, note: 'Sarımsaqlı və ədviyyatlı xırtıldayan suxari' },
       { cat: 'atisdirmaliq', name: 'Fıstıq', price: 3.00, note: 'Qovrulmuş duzlu yerfıstığı' },
       { cat: 'atisdirmaliq', name: 'Saçaq pendir', price: 3.00, note: 'Təbii hisə verilmiş və ya klassik saçaq pendir' },
       { cat: 'atisdirmaliq', name: 'Popkorn', price: 4.00, note: 'Kino axşamları üçün isti və xırtıldayan popkorn' },
 
-      // 11. KvizArt Menu
+      // 17. KvizArt Menu (PDF Səhifə 10)
       { cat: 'kvizart', name: '4 Çay + 4 San Sebastián', price: 30.00, note: 'Kviz komandası üçün 4 isti çay və 4 San Sebastián' },
       { cat: 'kvizart', name: '4 Çay + 4 Trileçe', price: 27.00, note: '4 nəfərlik çay dəstgahı və 4 porsiya Trileçe' },
       { cat: 'kvizart', name: '4 Çay + Gilas mürəbbəsi', price: 13.00, note: '4 stəkan dəmləmə çay və ağ gilas mürəbbəsi' },
@@ -4329,7 +4176,6 @@
     ];
 
     const CreativeMenu = (() => {
-      const BOOK_PAGES = MENU_CATEGORIES.filter((c) => c.id !== 'all');
       const mState = {
         pageIdx: 0,
         query: '',
@@ -4337,35 +4183,7 @@
         flipping: false
       };
 
-      const catMap = Object.fromEntries(BOOK_PAGES.map((c) => [c.id, c]));
-
-      function playPageSound() {
-        playTone(230, 0.045, 'triangle', 0.025);
-        setTimeout(() => playTone(310, 0.04, 'sine', 0.02), 35);
-      }
-
-      function syncExternalMenu(extItems) {
-        extItems.forEach((ext) => {
-          if (!ext || !ext.name) return;
-          const catId = catMap[ext.cat] ? ext.cat : 'isti-kofe';
-          const existing = MENU_ITEMS.find((i) => i.name.toLowerCase() === String(ext.name).trim().toLowerCase());
-          if (existing) {
-            if (ext.price !== undefined && !Number.isNaN(Number(ext.price))) existing.price = Number(ext.price);
-            if (ext.note) existing.note = String(ext.note);
-          } else {
-            MENU_ITEMS.push({
-              cat: catId,
-              name: String(ext.name).trim(),
-              price: Number(ext.price) || 0,
-              note: String(ext.note || '')
-            });
-          }
-        });
-        if ($('#menuCats')) {
-          renderCategories();
-          renderBookPage(false);
-        }
-      }
+      const catMap = Object.fromEntries(MENU_CATEGORIES.map((c) => [c.id, c]));
 
       function getTrayEntry(name) {
         return mState.tray.find((entry) => entry.name === name) || null;
@@ -4383,72 +4201,186 @@
         return mState.tray.map((entry) => `${entry.name} ${entry.price.toFixed(2)} ₼ x ${entry.qty}`);
       }
 
+      function syncExternalMenu(extItems) {
+        extItems.forEach((ext) => {
+          if (!ext || !ext.name) return;
+          const catId = catMap[ext.cat] ? ext.cat : 'sushi-classic';
+          const existing = MENU_ITEMS.find((i) => i.name.toLowerCase() === String(ext.name).trim().toLowerCase());
+          if (existing) {
+            if (Number(ext.price) > 0) existing.price = Number(ext.price);
+            if (ext.note) existing.note = String(ext.note);
+          } else {
+            MENU_ITEMS.push({
+              cat: catId,
+              name: String(ext.name).trim(),
+              price: Number(ext.price) || 0,
+              note: String(ext.note || '')
+            });
+          }
+        });
+        renderCategories();
+        renderBookPage();
+      }
+
       function detectFlavorPalette(item) {
         const n = item.name.toLowerCase();
         if (n.includes('blue') || n.includes('ocean')) {
-          return { main: '#1E88E5', light: '#90CAF9', foam: '#E3F2FD', garnish: '🌊' };
+          return { main: '#1E88E5', light: '#90CAF9', foam: '#E3F2FD' };
         }
         if (n.includes('lavender')) {
-          return { main: '#8E6CEF', light: '#D1C4E9', foam: '#F3E5F5', garnish: '🪻' };
+          return { main: '#8E6CEF', light: '#D1C4E9', foam: '#F3E5F5' };
         }
         if (n.includes('strawberry') || n.includes('çiyələk') || n.includes('barbie')) {
-          return { main: '#E53965', light: '#F8BBD0', foam: '#FFF0F5', garnish: '🍓' };
+          return { main: '#E53965', light: '#F8BBD0', foam: '#FFF0F5' };
         }
         if (n.includes('raspberry') || n.includes('moruq')) {
-          return { main: '#C2185B', light: '#F48FB1', foam: '#FCE4EC', garnish: '🫐' };
+          return { main: '#C2185B', light: '#F48FB1', foam: '#FCE4EC' };
         }
         if (n.includes('blueberry')) {
-          return { main: '#3949AB', light: '#9FA8DA', foam: '#E8EAF6', garnish: '🫐' };
+          return { main: '#3949AB', light: '#9FA8DA', foam: '#E8EAF6' };
         }
         if (n.includes('watermelon') || n.includes('qarpız')) {
-          return { main: '#E53935', light: '#FFCDD2', foam: '#E8F5E9', garnish: '🍉' };
+          return { main: '#E53935', light: '#FFCDD2', foam: '#E8F5E9' };
         }
         if (n.includes('mango') || n.includes('ananas') || n.includes('exotic') || n.includes('sunrise') || n.includes('fanta') || n.includes('pumpkin')) {
-          return { main: '#FB8C00', light: '#FFE082', foam: '#FFF8E1', garnish: '🥭' };
+          return { main: '#FB8C00', light: '#FFE082', foam: '#FFF8E1' };
         }
         if (n.includes('banan')) {
-          return { main: '#FBC02D', light: '#FFF59D', foam: '#FFFDE7', garnish: '🍌' };
+          return { main: '#FBC02D', light: '#FFF59D', foam: '#FFFDE7' };
         }
         if (n.includes('matcha') || n.includes('alma')) {
-          return { main: '#43A047', light: '#A5D6A7', foam: '#E8F5E9', garnish: '🍵' };
+          return { main: '#43A047', light: '#A5D6A7', foam: '#E8F5E9' };
         }
         if (n.includes('white chocolate') || n.includes('vanil') || n.includes('sahlep') || n.includes('raff')) {
-          return { main: '#D7B899', light: '#F5E6D3', foam: '#FFFFFF', garnish: '🤍' };
+          return { main: '#D7B899', light: '#F5E6D3', foam: '#FFFFFF' };
         }
         if (n.includes('caramel') || n.includes('miel') || n.includes('ballı') || n.includes('trileçe') || n.includes('san sebastián')) {
-          return { main: '#B86B28', light: '#E6B57E', foam: '#FFF6E9', garnish: '🍯' };
+          return { main: '#B86B28', light: '#E6B57E', foam: '#FFF6E9' };
         }
         if (n.includes('velvet') || n.includes('gilas') || n.includes('fire')) {
-          return { main: '#9E1C28', light: '#E57373', foam: '#FFEBEE', garnish: '🍒' };
+          return { main: '#9E1C28', light: '#E57373', foam: '#FFEBEE' };
         }
-        if (n.includes('chocolate') || n.includes('mocha') || n.includes('şokolad') || n.includes('fındıq')) {
-          return { main: '#4E2A15', light: '#8D5B3C', foam: '#F3E5D8', garnish: '🍫' };
+        if (n.includes('chocolate') || n.includes('mocha') || n.includes('şokolad') || n.includes('fındıq') || n.includes('ekler') || n.includes('kurabiyə')) {
+          return { main: '#4E2A15', light: '#8D5B3C', foam: '#F3E5D8' };
         }
-        return { main: '#6F4226', light: '#C49A6C', foam: '#FBF5EE', garnish: '☕' };
+        return { main: '#6F4226', light: '#C49A6C', foam: '#FBF5EE' };
       }
 
       function buildMenuItemSvg(item) {
         const p = detectFlavorPalette(item);
         const n = item.name.toLowerCase();
 
+        if (item.cat === 'sushi-classic' || item.cat === 'sushi-firin' || item.cat === 'sushi-hot') {
+          if (n.includes('burger')) {
+            return `<svg viewBox="0 0 120 120" aria-hidden="true">
+              <ellipse cx="60" cy="96" rx="44" ry="8" fill="#D9C5AD"/>
+              <path d="M 28,74 L 92,74 C 92,84 82,88 60,88 C 38,88 28,84 28,74 Z" fill="#F3B86B" stroke="#B87324" stroke-width="2"/>
+              <rect x="25" y="65" width="70" height="9" rx="4.5" fill="#2E7D32"/>
+              <rect x="27" y="56" width="66" height="9" rx="4.5" fill="#F97316"/>
+              <path d="M 28,56 C 28,38 42,32 60,32 C 78,32 92,38 92,56 Z" fill="#F6C378" stroke="#B87324" stroke-width="2"/>
+              <circle cx="48" cy="42" r="2" fill="#FFF8E1"/><circle cx="60" cy="39" r="2" fill="#FFF8E1"/><circle cx="72" cy="43" r="2" fill="#FFF8E1"/>
+            </svg>`;
+          }
+          const topColor = item.cat === 'sushi-firin'
+            ? '#E67E22'
+            : (n.includes('pink') || n.includes('sakura') ? '#F472B6' : (n.includes('bonito') ? '#C084FC' : '#F97316'));
+          const coreColor = n.includes('krevetka') || n.includes('kalifornia') || n.includes('new-york')
+            ? '#FB7185'
+            : (n.includes('toyuq') || n.includes('sezar') || n.includes('suriken') || n.includes('torri') ? '#FBBF24' : '#EA580C');
+          return `<svg viewBox="0 0 120 120" aria-hidden="true">
+            <ellipse cx="60" cy="96" rx="46" ry="9" fill="#D9C5AD"/>
+            <line x1="22" y1="88" x2="98" y2="82" stroke="#8D5524" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="24" y1="93" x2="98" y2="88" stroke="#A46832" stroke-width="3.5" stroke-linecap="round"/>
+            <g transform="translate(42, 62)">
+              <ellipse cx="0" cy="14" rx="22" ry="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+              <rect x="-22" y="-4" width="44" height="18" rx="9" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+              <path d="M -22,2 C -22,-10 22,-10 22,2 L 22,6 C 12,1 0,1 -22,6 Z" fill="${topColor}"/>
+              <ellipse cx="0" cy="-2" rx="15" ry="7.5" fill="#1E293B"/>
+              <circle cx="-4" cy="-2" r="4.5" fill="${coreColor}"/>
+              <circle cx="5" cy="-1" r="3.5" fill="#4ADE80"/>
+              <circle cx="0" cy="-5" r="2.5" fill="#FEF9C3"/>
+            </g>
+            <g transform="translate(76, 56)">
+              <ellipse cx="0" cy="14" rx="20" ry="11" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+              <rect x="-20" y="-4" width="40" height="18" rx="8.5" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+              <path d="M -20,2 C -20,-9 20,-9 20,2 L 20,6 C 10,1 0,1 -20,6 Z" fill="${topColor}"/>
+              <ellipse cx="0" cy="-2" rx="13.5" ry="6.8" fill="#1E293B"/>
+              <circle cx="-3" cy="-2" r="4" fill="${coreColor}"/>
+              <circle cx="4" cy="-1" r="3" fill="#4ADE80"/>
+            </g>
+          </svg>`;
+        }
+
+        if (item.cat === 'salatlar') {
+          return `<svg viewBox="0 0 120 120" aria-hidden="true">
+            <ellipse cx="60" cy="95" rx="38" ry="8" fill="#D9C5AD"/>
+            <circle cx="44" cy="54" r="14" fill="#4ADE80"/>
+            <circle cx="62" cy="48" r="15" fill="#22C55E"/>
+            <circle cx="76" cy="55" r="13" fill="#16A34A"/>
+            <circle cx="50" cy="52" r="5" fill="#EF4444"/>
+            <circle cx="70" cy="51" r="4.5" fill="#FACC15"/>
+            <rect x="56" y="44" width="8" height="8" rx="2" fill="#FFFFFF" transform="rotate(15 60 48)"/>
+            <path d="M 24,58 C 24,82 40,92 60,92 C 80,92 96,82 96,58 Z" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+          </svg>`;
+        }
+
+        if (item.cat === 'qelyanaltilar') {
+          if (n.includes('krevetka')) {
+            return `<svg viewBox="0 0 120 120" aria-hidden="true">
+              <ellipse cx="60" cy="95" rx="42" ry="8" fill="#D9C5AD"/>
+              <path d="M 42,76 C 32,62 42,40 62,42 C 76,43 82,56 72,66 C 66,72 58,68 60,60" fill="none" stroke="#F59E0B" stroke-width="13" stroke-linecap="round"/>
+              <path d="M 72,66 L 86,74 L 82,62 Z" fill="#EF4444"/>
+              <circle cx="38" cy="78" r="9" fill="#DC2626"/>
+            </svg>`;
+          }
+          return `<svg viewBox="0 0 120 120" aria-hidden="true">
+            <ellipse cx="60" cy="96" rx="38" ry="8" fill="#D9C5AD"/>
+            <rect x="42" y="28" width="7" height="36" rx="3" fill="#FACC15" transform="rotate(-10 45 46)"/>
+            <rect x="52" y="24" width="7" height="38" rx="3" fill="#FBBF24"/>
+            <rect x="62" y="26" width="7" height="36" rx="3" fill="#F59E0B" transform="rotate(8 65 44)"/>
+            <rect x="71" y="30" width="7" height="34" rx="3" fill="#FACC15" transform="rotate(16 74 47)"/>
+            <path d="M 36,52 L 84,52 L 76,92 L 44,92 Z" fill="#DC2626"/>
+            <circle cx="60" cy="72" r="8" fill="#FDE68A"/>
+          </svg>`;
+        }
+
+        if (item.cat === 'sandvic-wrap') {
+          if (n.includes('wrap')) {
+            return `<svg viewBox="0 0 120 120" aria-hidden="true">
+              <ellipse cx="60" cy="96" rx="42" ry="8" fill="#D9C5AD"/>
+              <g transform="rotate(-24 60 60)">
+                <rect x="34" y="26" width="52" height="68" rx="18" fill="#F3D19E" stroke="#C68B45" stroke-width="2"/>
+                <path d="M 36,42 Q 60,52 84,42" fill="none" stroke="#C68B45" stroke-width="2"/>
+                <ellipse cx="60" cy="30" rx="22" ry="8" fill="#22C55E"/>
+                <circle cx="54" cy="29" r="5" fill="#EF4444"/>
+                <circle cx="66" cy="30" r="5" fill="#F59E0B"/>
+              </g>
+            </svg>`;
+          }
+          return `<svg viewBox="0 0 120 120" aria-hidden="true">
+            <ellipse cx="60" cy="96" rx="44" ry="8" fill="#D9C5AD"/>
+            <path d="M 24,74 L 96,74 L 60,36 Z" fill="#F5D09C" stroke="#B87A35" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M 22,74 L 98,74 L 94,82 L 26,82 Z" fill="#22C55E"/>
+            <path d="M 24,82 L 96,82 L 93,88 L 27,88 Z" fill="#FACC15"/>
+            <path d="M 26,88 L 94,88 L 92,94 L 28,94 Z" fill="#E6B272" stroke="#B87A35" stroke-width="1.5"/>
+          </svg>`;
+        }
+
         if (item.cat === 'sirniyyat') {
           if (n.includes('ekler')) {
             return `<svg viewBox="0 0 120 120" aria-hidden="true">
-              <ellipse cx="60" cy="94" rx="44" ry="9" fill="#D9C5AD"/>
-              <rect x="22" y="54" width="76" height="28" rx="14" fill="#E8B872" stroke="#A66B24" stroke-width="2"/>
-              <path d="M 24,62 C 24,52 96,52 96,62 C 92,68 82,63 72,67 C 62,71 54,63 44,67 C 34,71 26,66 24,62 Z" fill="#4E2A15"/>
-              <path d="M 34,58 Q 60,54 86,58" fill="none" stroke="#F5E6D3" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+              <ellipse cx="60" cy="96" rx="44" ry="9" fill="#D9C5AD"/>
+              <rect x="24" y="54" width="72" height="28" rx="14" fill="#E6B36A" stroke="#A66B24" stroke-width="2"/>
+              <path d="M 26,64 C 26,52 94,52 94,64 C 84,68 74,62 60,66 C 46,70 36,62 26,64 Z" fill="#3E1F0D"/>
             </svg>`;
           }
-          if (n.includes('kurabiye')) {
+          if (n.includes('kurabiyə')) {
             return `<svg viewBox="0 0 120 120" aria-hidden="true">
               <ellipse cx="60" cy="96" rx="38" ry="8" fill="#D9C5AD"/>
-              <circle cx="60" cy="64" r="28" fill="#D99B52" stroke="#9C6324" stroke-width="2.2"/>
-              <circle cx="49" cy="54" r="3.5" fill="#3E200E"/>
-              <circle cx="68" cy="52" r="3.2" fill="#3E200E"/>
-              <circle cx="58" cy="66" r="4" fill="#3E200E"/>
-              <circle cx="72" cy="70" r="3.4" fill="#3E200E"/>
-              <circle cx="46" cy="72" r="3" fill="#3E200E"/>
+              <circle cx="60" cy="64" r="28" fill="#D99B52" stroke="#9C6424" stroke-width="2"/>
+              <circle cx="50" cy="55" r="3.5" fill="#3E1F0D"/><circle cx="68" cy="54" r="3" fill="#3E1F0D"/>
+              <circle cx="56" cy="71" r="3.5" fill="#3E1F0D"/><circle cx="71" cy="69" r="3" fill="#3E1F0D"/>
+              <circle cx="46" cy="67" r="2.5" fill="#3E1F0D"/>
             </svg>`;
           }
           if (n.includes('bilincik')) {
@@ -4595,42 +4527,14 @@
         </svg>`;
       }
 
-      function renderStage(catObj) {
-        const stage = $('#menuStage');
-        const particles = $('#menuParticles');
-        if (!stage || !particles) return;
-
-        stage.style.setProperty('--m-c1', catObj.c1);
-        stage.style.setProperty('--m-c2', catObj.c2);
-        stage.className = `menu-stage anim-${catObj.anim}`;
-
-        $('#menuStageBadge').textContent = `${catObj.emoji} ${catObj.label}`;
-        $('#menuStageTitle').textContent = catObj.id === 'all' ? 'Bütün Dadlar Bir Yerdə' : catObj.label;
-        $('#menuStageDesc').textContent = catObj.desc;
-
-        let dots = '';
-        for (let i = 0; i < 9; i++) {
-          const left = 6 + i * 10.5;
-          const top = 16 + ((i * 19) % 68);
-          const delay = (i * 0.42).toFixed(2);
-          dots += `<i style="left:${left}%;top:${catObj.anim === 'sparkle' ? top + '%' : 'auto'};animation-delay:${delay}s"></i>`;
-        }
-        particles.innerHTML = dots;
-
-        const artBox = $('#menuStageArt');
-        artBox.style.animation = 'none';
-        void artBox.offsetWidth;
-        artBox.style.animation = '';
-        artBox.innerHTML = `<span style="font-size:54px;line-height:1;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.28))">${catObj.emoji}</span>`;
-      }
-
       function renderCategories() {
         const wrap = $('#menuCats');
         if (!wrap) return;
+        const activeCatId = MENU_CATEGORIES[mState.pageIdx]?.id || MENU_CATEGORIES[0].id;
 
-        wrap.innerHTML = BOOK_PAGES.map((c, idx) => {
+        wrap.innerHTML = MENU_CATEGORIES.map((c, idx) => {
           const count = MENU_ITEMS.filter((i) => i.cat === c.id).length;
-          const isOn = !mState.query.trim() && mState.pageIdx === idx;
+          const isOn = !mState.query.trim() && activeCatId === c.id;
           return `<button type="button" class="m-cat-btn${isOn ? ' on' : ''}" data-mpage="${idx}" style="--cat-accent:${c.accent}">
             <span>${c.emoji} ${esc(c.label)}</span>
             <span class="cnt">${count}</span>
@@ -4638,7 +4542,8 @@
         }).join('');
       }
 
-      function buildProductCardHtml(item, g, delay) {
+      function renderCardHtml(item, g, cardIndex) {
+        const delay = Math.min(cardIndex * 24, 340);
         const entry = getTrayEntry(item.name);
         const actionHtml = entry
           ? `<div class="m-qty-box">
@@ -4666,21 +4571,23 @@
         </article>`;
       }
 
-      function buildBookPageMarkup(pageIdx) {
-        const g = BOOK_PAGES[pageIdx] || BOOK_PAGES[0];
+      function buildPageMarkup(idx) {
+        const totalPages = MENU_CATEGORIES.length;
+        const safeIdx = Math.max(0, Math.min(totalPages - 1, idx));
+        const g = MENU_CATEGORIES[safeIdx];
         const items = MENU_ITEMS.filter((it) => it.cat === g.id);
-        const isFirst = pageIdx <= 0;
-        const isLast = pageIdx >= BOOK_PAGES.length - 1;
+        const hasPrev = safeIdx > 0;
+        const hasNext = safeIdx < totalPages - 1;
 
-        const dotsHtml = BOOK_PAGES.map((p, idx) =>
-          `<button type="button" class="book-dot${idx === pageIdx ? ' on' : ''}" data-mpage="${idx}" aria-label="${esc(p.label)} (Səhifə ${idx + 1})" title="${esc(p.label)}"></button>`
+        const dotsHtml = MENU_CATEGORIES.map((c, i) =>
+          `<button type="button" class="book-dot${i === safeIdx ? ' on' : ''}" data-mpage="${i}" aria-label="${esc(c.label)} səhifəsi"></button>`
         ).join('');
 
         return `
           <div class="book-head">
             <div class="book-folio-row">
-              <span>ÜSTƏGƏL KAFE • MENYU</span>
-              <span class="book-folio-badge">Səhifə ${pageIdx + 1} / ${BOOK_PAGES.length} · ${items.length} çeşid</span>
+              <span>Fəsil ${String(safeIdx + 1).padStart(2, '0')} / ${String(totalPages).padStart(2, '0')}</span>
+              <span class="book-folio-badge">${items.length} çeşid</span>
             </div>
             <div class="book-chapter">
               <div class="book-chapter-ico" style="--ch-bg1:${g.bg1};--ch-bg2:${g.bg2};--ch-accent:${g.accent}" aria-hidden="true">${g.emoji}</div>
@@ -4692,139 +4599,127 @@
           </div>
           <div class="book-body">
             <div class="menu-grid">
-              ${items.map((item, i) => buildProductCardHtml(item, g, Math.min(i * 22, 300))).join('')}
+              ${items.map((item, i) => renderCardHtml(item, g, i)).join('')}
             </div>
           </div>
           <div class="book-foot">
-            <button type="button" class="book-turn-btn" data-bprev ${isFirst ? 'disabled' : ''} aria-label="Əvvəlki səhifə">‹ Əvvəlki</button>
-            <div class="book-dots" role="tablist" aria-label="Kitab səhifələri">${dotsHtml}</div>
-            <button type="button" class="book-turn-btn" data-bnext ${isLast ? 'disabled' : ''} aria-label="Növbəti səhifə">Növbəti ›</button>
+            <button type="button" class="book-turn-btn" data-bprev ${hasPrev ? '' : 'disabled'}>‹ Əvvəlki</button>
+            <div class="book-dots">${dotsHtml}</div>
+            <button type="button" class="book-turn-btn" data-bnext ${hasNext ? '' : 'disabled'}>Növbəti ›</button>
           </div>
-          ${!isFirst ? '<button type="button" class="book-curl prev" data-bprev aria-label="Əvvəlki səhifəyə vərəqlə" title="Əvvəlki səhifə"></button>' : ''}
-          ${!isLast ? '<button type="button" class="book-curl next" data-bnext aria-label="Növbəti səhifəyə vərəqlə" title="Növbəti səhifə"></button>' : ''}
+          ${hasPrev ? '<button type="button" class="book-curl prev" data-bprev aria-label="Əvvəlki səhifəyə vərəqlə"></button>' : ''}
+          ${hasNext ? '<button type="button" class="book-curl next" data-bnext aria-label="Növbəti səhifəyə vərəqlə"></button>' : ''}
         `;
       }
 
-      function buildSearchPageMarkup(q) {
-        const ql = q.trim().toLowerCase();
-        const filtered = MENU_ITEMS.filter((item) =>
-          item.name.toLowerCase().includes(ql) ||
-          item.note.toLowerCase().includes(ql) ||
-          (catMap[item.cat] && catMap[item.cat].label.toLowerCase().includes(ql))
-        );
-
-        $('#menuStats').textContent = `${filtered.length} məhsul tapıldı`;
-
-        const bodyHtml = filtered.length
-          ? `<div class="menu-grid">
-              ${filtered.map((item, i) => {
-                const g = catMap[item.cat] || BOOK_PAGES[0];
-                return buildProductCardHtml(item, g, Math.min(i * 20, 300));
-              }).join('')}
-            </div>`
-          : `<div class="empty"><b>"${esc(q)}"</b> üzrə məhsul tapılmadı. Başqa açar söz yoxlayın.</div>`;
-
-        return `
-          <div class="book-head">
-            <div class="book-folio-row">
-              <span>AXTARIŞ NƏTİCƏSİ</span>
-              <span class="book-folio-badge">${filtered.length} məhsul</span>
-            </div>
-            <div class="book-chapter">
-              <div class="book-chapter-ico" aria-hidden="true">🔍</div>
-              <div class="book-chapter-txt">
-                <h2>"${esc(q)}"</h2>
-                <p>Bütün kateqoriyalar üzrə uyğun gələn məhsullar.</p>
-              </div>
-            </div>
-          </div>
-          <div class="book-body">${bodyHtml}</div>
-          <div class="book-foot">
-            <button type="button" class="book-turn-btn" id="bookClearSearchBtn">‹ Kitaba qayıt</button>
-            <span style="font-size:12.5px;font-weight:700;color:var(--muted)">Səhifə ${mState.pageIdx + 1} / ${BOOK_PAGES.length}</span>
-          </div>
-        `;
-      }
-
-      let flipTimer = 0;
-      function renderBookPage(animate = false, dir = 'next', prevIdx = mState.pageIdx) {
+      function renderBookPage() {
         const currentEl = $('#bookPageCurrent');
-        const leafEl = $('#bookFlipLeaf');
         if (!currentEl) return;
 
-        const q = mState.query.trim();
+        const q = mState.query.trim().toLowerCase();
         if (q) {
-          if (leafEl) { leafEl.hidden = true; leafEl.className = 'book-page-surface book-flip-leaf'; }
-          currentEl.innerHTML = buildSearchPageMarkup(q);
+          const matches = MENU_ITEMS.filter((item) =>
+            item.name.toLowerCase().includes(q) ||
+            item.note.toLowerCase().includes(q) ||
+            (catMap[item.cat] && catMap[item.cat].label.toLowerCase().includes(q))
+          );
+
+          $('#menuStats').textContent = `${matches.length} nəticə tapıldı`;
+          currentEl.innerHTML = `
+            <div class="book-head">
+              <div class="book-folio-row">
+                <span>Menyuda axtarış</span>
+                <span class="book-folio-badge">${matches.length} nəticə</span>
+              </div>
+              <div class="book-chapter">
+                <div class="book-chapter-ico" style="--ch-bg1:#F7ECDD;--ch-bg2:#EAD7BE;--ch-accent:#4A2A17" aria-hidden="true">🔍</div>
+                <div class="book-chapter-txt">
+                  <h2>"${esc(mState.query)}" üzrə nəticələr</h2>
+                  <p>Kitabın bütün səhifələri üzrə uyğun məhsullar.</p>
+                </div>
+              </div>
+            </div>
+            <div class="book-body">
+              ${matches.length
+                ? `<div class="menu-grid">${matches.map((it, i) => renderCardHtml(it, catMap[it.cat] || MENU_CATEGORIES[0], i)).join('')}</div>`
+                : `<div class="empty"><b>"${esc(mState.query)}"</b> üzrə məhsul tapılmadı.</div>`
+              }
+            </div>
+          `;
           return;
         }
 
-        const g = BOOK_PAGES[mState.pageIdx] || BOOK_PAGES[0];
-        const count = MENU_ITEMS.filter((it) => it.cat === g.id).length;
-        $('#menuStats').textContent = `Səhifə ${mState.pageIdx + 1} / ${BOOK_PAGES.length} · ${count} çeşid`;
-
-        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (!animate || !leafEl || reduceMotion) {
-          if (leafEl) { leafEl.hidden = true; leafEl.className = 'book-page-surface book-flip-leaf'; }
-          currentEl.innerHTML = buildBookPageMarkup(mState.pageIdx);
-          return;
-        }
-
-        clearTimeout(flipTimer);
-        leafEl.className = 'book-page-surface book-flip-leaf';
-        void leafEl.offsetWidth;
-
-        if (dir === 'next') {
-          leafEl.innerHTML = buildBookPageMarkup(prevIdx);
-          currentEl.innerHTML = buildBookPageMarkup(mState.pageIdx);
-          leafEl.hidden = false;
-          leafEl.classList.add('anim-next');
-          flipTimer = setTimeout(() => {
-            leafEl.hidden = true;
-            leafEl.className = 'book-page-surface book-flip-leaf';
-            leafEl.innerHTML = '';
-          }, 550);
-        } else {
-          currentEl.innerHTML = buildBookPageMarkup(prevIdx);
-          leafEl.innerHTML = buildBookPageMarkup(mState.pageIdx);
-          leafEl.hidden = false;
-          leafEl.classList.add('anim-prev');
-          flipTimer = setTimeout(() => {
-            currentEl.innerHTML = buildBookPageMarkup(mState.pageIdx);
-            leafEl.hidden = true;
-            leafEl.className = 'book-page-surface book-flip-leaf';
-            leafEl.innerHTML = '';
-          }, 550);
-        }
+        const totalPages = MENU_CATEGORIES.length;
+        $('#menuStats').textContent = `Səhifə ${mState.pageIdx + 1} / ${totalPages}`;
+        currentEl.innerHTML = buildPageMarkup(mState.pageIdx);
       }
 
-      function flipToPage(targetIdx) {
-        const clamped = Math.max(0, Math.min(BOOK_PAGES.length - 1, targetIdx));
+      function turnBookPage(targetIdx) {
+        const totalPages = MENU_CATEGORIES.length;
+        const nextIdx = Math.max(0, Math.min(totalPages - 1, targetIdx));
         if (mState.query.trim()) {
           mState.query = '';
           const si = $('#menuSearch');
+          const cb = $('#menuSearchClear');
           if (si) si.value = '';
-          $('#menuSearchClear')?.classList.remove('show');
+          if (cb) cb.classList.remove('show');
         }
-        if (clamped === mState.pageIdx) {
-          updateActiveCat();
-          renderBookPage(false);
+        if (nextIdx === mState.pageIdx && !mState.flipping) {
+          renderCategories();
+          renderBookPage();
           return;
         }
-        const prevIdx = mState.pageIdx;
-        const dir = clamped > prevIdx ? 'next' : 'prev';
-        mState.pageIdx = clamped;
-        updateActiveCat();
-        playPageSound();
-        renderBookPage(true, dir, prevIdx);
+        if (mState.flipping) return;
 
-        const bookEl = $('#menuBook');
-        if (bookEl) {
-          const top = bookEl.getBoundingClientRect().top;
-          if (top < 74) {
-            window.scrollTo({ top: Math.max(0, window.scrollY + top - 84), behavior: 'smooth' });
-          }
+        const dir = nextIdx > mState.pageIdx ? 'next' : 'prev';
+        const currentEl = $('#bookPageCurrent');
+        const leafEl = $('#bookFlipLeaf');
+
+        SoundFX.tone(dir === 'next' ? 320 : 270, 0.06, 'sine', 0.03);
+
+        if (!currentEl || !leafEl || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          mState.pageIdx = nextIdx;
+          updateActiveCat();
+          renderBookPage();
+          return;
         }
+
+        mState.flipping = true;
+        const oldMarkup = currentEl.innerHTML;
+        const newMarkup = buildPageMarkup(nextIdx);
+        mState.pageIdx = nextIdx;
+        updateActiveCat();
+        $('#menuStats').textContent = `Səhifə ${mState.pageIdx + 1} / ${totalPages}`;
+
+        leafEl.className = 'book-page-surface book-flip-leaf';
+        if (dir === 'next') {
+          leafEl.innerHTML = oldMarkup;
+          currentEl.innerHTML = newMarkup;
+          leafEl.hidden = false;
+          void leafEl.offsetWidth;
+          leafEl.classList.add('anim-next');
+        } else {
+          leafEl.innerHTML = newMarkup;
+          leafEl.hidden = false;
+          void leafEl.offsetWidth;
+          leafEl.classList.add('anim-prev');
+        }
+
+        let finished = false;
+        const done = () => {
+          if (finished) return;
+          finished = true;
+          if (dir === 'prev') {
+            currentEl.innerHTML = newMarkup;
+          }
+          leafEl.hidden = true;
+          leafEl.className = 'book-page-surface book-flip-leaf';
+          leafEl.innerHTML = '';
+          mState.flipping = false;
+        };
+
+        leafEl.addEventListener('animationend', done, { once: true });
+        setTimeout(done, 580);
       }
 
       let lastCount = 0;
@@ -4859,7 +4754,7 @@
         } else {
           mState.tray[idx].qty = qty;
         }
-        renderBookPage(false);
+        renderBookPage();
         renderTray();
       }
 
@@ -4884,7 +4779,10 @@
       }
 
       function updateActiveCat() {
-        $$('.m-cat-btn').forEach((b) => b.classList.toggle('on', !mState.query.trim() && Number(b.dataset.mpage) === mState.pageIdx));
+        const isSearching = Boolean(mState.query.trim());
+        $$('.m-cat-btn').forEach((b) => {
+          b.classList.toggle('on', !isSearching && Number(b.dataset.mpage) === mState.pageIdx);
+        });
         const on = $('.m-cat-btn.on');
         if (on) on.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
@@ -4899,7 +4797,7 @@
           mState.tray.push({ name: item.name, price: item.price, qty: 1 });
         }
         if (!silent) showToast(`Sifarişə əlavə edildi: ${item.name}`);
-        renderBookPage(false);
+        renderBookPage();
         renderTray();
       }
 
@@ -4910,14 +4808,14 @@
         if (mState.tray[idx].qty <= 0) {
           mState.tray.splice(idx, 1);
         }
-        renderBookPage(false);
+        renderBookPage();
         renderTray();
       }
 
       function openItemModal(name) {
         const item = MENU_ITEMS.find((i) => i.name === name);
         if (!item) return;
-        const g = catMap[item.cat] || BOOK_PAGES[0];
+        const g = catMap[item.cat] || MENU_CATEGORIES[0];
         const entry = getTrayEntry(item.name);
         const inTray = Boolean(entry);
         const min = inTray ? 0 : 1;
@@ -5082,7 +4980,7 @@
               return;
             }
             mState.tray = [];
-            renderBookPage(false);
+            renderBookPage();
             renderTray();
             showOrderDone(r.id, teamOrTable, customerName, linesSnapshot, r.total || totalSnapshot, r.createdAt);
           })
@@ -5116,7 +5014,7 @@
 
       function init() {
         renderCategories();
-        renderBookPage(false);
+        renderBookPage();
 
         const searchInput = $('#menuSearch');
         const clearBtn = $('#menuSearchClear');
@@ -5126,7 +5024,7 @@
             mState.query = searchInput.value;
             clearBtn.classList.toggle('show', Boolean(mState.query));
             updateActiveCat();
-            renderBookPage(false);
+            renderBookPage();
           });
         }
 
@@ -5136,14 +5034,14 @@
             searchInput.value = '';
             clearBtn.classList.remove('show');
             updateActiveCat();
-            renderBookPage(false);
+            renderBookPage();
             searchInput.focus();
           });
         }
 
         $('#cartFabClear')?.addEventListener('click', () => {
           mState.tray = [];
-          renderBookPage(false);
+          renderBookPage();
           renderTray();
         });
 
@@ -5157,73 +5055,47 @@
           updateCatsEdges();
         }
 
-        /* Kitab üzərində barmaq/maus ilə sağa-sola sürüşdürərək (swipe) vərəqləmə */
+        /* Kitab səhifəsini barmaqla sağa-sola sürüşdürərək (swipe) vərəqləmə */
         const bookEl = $('#menuBook');
-        let swipeStartX = 0;
-        let swipeStartY = 0;
-        let swipeActive = false;
-        let justSwiped = false;
-
         if (bookEl) {
-          bookEl.addEventListener('pointerdown', (e) => {
-            if (e.target.closest('button, input, a')) {
-              swipeActive = false;
-              return;
-            }
-            swipeStartX = e.clientX;
-            swipeStartY = e.clientY;
-            swipeActive = true;
+          let touchStartX = 0;
+          let touchStartY = 0;
+          bookEl.addEventListener('touchstart', (e) => {
+            if (e.touches.length !== 1) return;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
           }, { passive: true });
 
-          bookEl.addEventListener('pointerup', (e) => {
-            if (!swipeActive) return;
-            swipeActive = false;
-            const dx = e.clientX - swipeStartX;
-            const dy = e.clientY - swipeStartY;
-            if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy) * 1.35) {
-              justSwiped = true;
-              setTimeout(() => { justSwiped = false; }, 120);
-              if (dx < 0) flipToPage(mState.pageIdx + 1);
-              else flipToPage(mState.pageIdx - 1);
+          bookEl.addEventListener('touchend', (e) => {
+            if (!touchStartX || mState.query.trim()) return;
+            const t = e.changedTouches[0];
+            const dx = t.clientX - touchStartX;
+            const dy = t.clientY - touchStartY;
+            touchStartX = 0;
+            if (Math.abs(dx) > 54 && Math.abs(dx) > Math.abs(dy) * 1.35) {
+              if (dx < 0 && mState.pageIdx < MENU_CATEGORIES.length - 1) {
+                turnBookPage(mState.pageIdx + 1);
+              } else if (dx > 0 && mState.pageIdx > 0) {
+                turnBookPage(mState.pageIdx - 1);
+              }
             }
           }, { passive: true });
-
-          bookEl.addEventListener('pointercancel', () => { swipeActive = false; }, { passive: true });
         }
 
-        /* Klaviatura oxları ilə vərəqləmə */
-        document.addEventListener('keydown', (e) => {
-          if (S.page !== 'menu' || $('#ov').classList.contains('on')) return;
-          if (document.activeElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
-          if (e.key === 'ArrowRight') flipToPage(mState.pageIdx + 1);
-          if (e.key === 'ArrowLeft') flipToPage(mState.pageIdx - 1);
-        });
-
         document.addEventListener('click', (e) => {
-          if (justSwiped) return;
-
-          if (e.target.closest('#bookClearSearchBtn')) {
-            mState.query = '';
-            if (searchInput) searchInput.value = '';
-            clearBtn?.classList.remove('show');
-            updateActiveCat();
-            renderBookPage(false);
+          const pageBtn = e.target.closest('[data-mpage]');
+          if (pageBtn) {
+            turnBookPage(Number(pageBtn.dataset.mpage));
             return;
           }
 
           if (e.target.closest('[data-bprev]')) {
-            flipToPage(mState.pageIdx - 1);
+            turnBookPage(mState.pageIdx - 1);
             return;
           }
 
           if (e.target.closest('[data-bnext]')) {
-            flipToPage(mState.pageIdx + 1);
-            return;
-          }
-
-          const pageBtn = e.target.closest('[data-mpage]');
-          if (pageBtn) {
-            flipToPage(Number(pageBtn.dataset.mpage));
+            turnBookPage(mState.pageIdx + 1);
             return;
           }
 
@@ -5321,31 +5193,13 @@
     })();
 
     /* ========================================================================
-       ORTAQ SƏS EFFEKTİ (HƏMİŞƏ AKTİV VƏ YÜNGÜL)
-       ======================================================================== */
-    let _sharedAc = null;
-    function playTone(freq, dur = 0.07, type = 'sine', vol = 0.06) {
-      try {
-        _sharedAc = _sharedAc || new (window.AudioContext || window.webkitAudioContext)();
-        if (_sharedAc.state === 'suspended') _sharedAc.resume();
-        const o = _sharedAc.createOscillator();
-        const g = _sharedAc.createGain();
-        o.type = type;
-        o.frequency.value = freq;
-        g.gain.setValueAtTime(vol, _sharedAc.currentTime);
-        g.gain.exponentialRampToValueAtTime(0.0001, _sharedAc.currentTime + dur);
-        o.connect(g); g.connect(_sharedAc.destination);
-        o.start(); o.stop(_sharedAc.currentTime + dur);
-      } catch (_) {}
-    }
-
-    /* ========================================================================
-       8c. MASA TENİSİ MİNİ-OYUNU (CANVAS + TAM EKRAN LANDSCAPE)
+       8c. MASA TENİSİ MİNİ-OYUNU (TAM EKRAN / ÜFÜQİ REJİMLİ CANVAS)
        ======================================================================== */
     const PingPong = (() => {
       const root = $('#pp');
       const cv = $('#ppCanvas');
       const stage = $('#ppStage');
+      const fullBtn = $('#ppFull');
       const ctx = cv.getContext('2d');
       const TAU = Math.PI * 2;
       const BOUNCE = 0.72;
@@ -5354,80 +5208,79 @@
       const USER_END_X = 0.86;
       const LOSE_X = 1.04;
 
-      let W = 0, H = 0, dpr = 1, raf = 0, running = false, last = 0, lostTimer = 0;
+      let W = 0, H = 0, dpr = 1, raf = 0, running = false, last = 0;
+      let isFullscreen = false, isRotated = false, endTimer = 0;
 
       const G = {
         state: 'ready', rally: 0, best: 0,
         shot: null, serveTimer: 0, oppY: 0.5, oppSwing: 0, userSwing: 0,
-        racket: { x: 0.85, y: 0.5 }, fx: [], trail: [], shake: 0,
-        full: false, rotated: false
+        racket: { x: 0.85, y: 0.5 }, fx: [], trail: [], shake: 0
       };
       try { G.best = Number(localStorage.getItem('ustegel:pp:best')) || 0; } catch (_) {}
 
       const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
       const rand = (a, b) => a + Math.random() * (b - a);
-      const tFor = (r) => Math.max(0.38, 1.65 * Math.pow(0.94, r)) * rand(0.95, 1.05);
+      const tFor = (r) => Math.max(0.56, 1.65 - 0.072 * r) * rand(0.95, 1.05);
       const hitR = () => Math.max(50, Math.min(W, H) * 0.115);
       const ballR = () => Math.max(9, Math.min(W, H) * 0.024);
       const hMax = () => Math.min(H * 0.2, 120);
 
-      /* ---------- ölçü və tam ekran orientasiya ---------- */
+      function updateLayoutMode() {
+        const portrait = window.innerHeight > window.innerWidth;
+        isRotated = isFullscreen && portrait;
+        root.classList.toggle('is-full', isFullscreen);
+        root.classList.toggle('is-rotated', isRotated);
+        if (fullBtn) {
+          fullBtn.classList.toggle('active', isFullscreen);
+          fullBtn.textContent = isFullscreen ? '✕' : '⛶';
+        }
+        resize();
+      }
+
+      async function enterFullscreen() {
+        isFullscreen = true;
+        try {
+          if (root.requestFullscreen && !document.fullscreenElement) await root.requestFullscreen();
+          else if (root.webkitRequestFullscreen) root.webkitRequestFullscreen();
+        } catch (_) {}
+        try {
+          if (screen.orientation && screen.orientation.lock) await screen.orientation.lock('landscape');
+        } catch (_) {}
+        updateLayoutMode();
+      }
+
+      async function exitFullscreen() {
+        isFullscreen = false;
+        try {
+          if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+        } catch (_) {}
+        try {
+          if (document.fullscreenElement && document.exitFullscreen) await document.exitFullscreen();
+          else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
+        } catch (_) {}
+        updateLayoutMode();
+      }
+
+      function toggleFullscreen() {
+        if (isFullscreen) exitFullscreen();
+        else enterFullscreen();
+      }
+
       function resize() {
-        const r = stage.getBoundingClientRect();
+        if (isRotated) {
+          W = Math.max(1, window.innerHeight);
+          H = Math.max(1, window.innerWidth);
+        } else {
+          const r = stage.getBoundingClientRect();
+          W = Math.max(1, r.width);
+          H = Math.max(1, r.height);
+        }
         dpr = Math.min(window.devicePixelRatio || 1, 2);
-        W = Math.max(1, G.rotated ? r.height : r.width);
-        H = Math.max(1, G.rotated ? r.width : r.height);
         cv.width = Math.round(W * dpr);
         cv.height = Math.round(H * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
 
-      function syncFullLayout() {
-        const isPortrait = window.innerHeight > window.innerWidth;
-        G.rotated = G.full && isPortrait;
-        root.classList.toggle('is-full', G.full);
-        root.classList.toggle('is-rotated', G.rotated);
-        const fullBtn = $('#ppFull');
-        if (fullBtn) fullBtn.classList.toggle('active', G.full);
-        requestAnimationFrame(resize);
-      }
-
-      async function enterFull() {
-        G.full = true;
-        try {
-          if (root.requestFullscreen && !document.fullscreenElement) {
-            await root.requestFullscreen();
-          } else if (root.webkitRequestFullscreen) {
-            root.webkitRequestFullscreen();
-          }
-        } catch (_) {}
-        try {
-          if (screen.orientation && screen.orientation.lock) {
-            await screen.orientation.lock('landscape');
-          }
-        } catch (_) {}
-        syncFullLayout();
-      }
-
-      async function exitFull() {
-        G.full = false;
-        G.rotated = false;
-        try {
-          if (screen.orientation && screen.orientation.unlock) {
-            screen.orientation.unlock();
-          }
-        } catch (_) {}
-        try {
-          if (document.fullscreenElement && document.exitFullscreen) {
-            await document.exitFullscreen();
-          } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-          }
-        } catch (_) {}
-        syncFullLayout();
-      }
-
-      /* ---------- vuruş məntiqi ---------- */
       const heightAt = (t) => {
         if (t < BOUNCE) { const u = t / BOUNCE; return (1 - u) * 0.22 + 4 * u * (1 - u) * 0.78; }
         const v = Math.min(1, (t - BOUNCE) / 0.5);
@@ -5441,65 +5294,60 @@
       };
 
       function serveFromOpp(fromY) {
-        G.shot = { dir: 1, x0: OPP_X, y0: fromY, x1: USER_END_X, y1: rand(0.2, 0.8), t: 0, T: tFor(G.rally), bounced: false };
+        G.shot = { dir: 1, x0: OPP_X, y0: fromY, x1: USER_END_X, y1: rand(0.18, 0.82), t: 0, T: tFor(G.rally), bounced: false };
         G.oppSwing = 1;
         G.trail.length = 0;
-        playTone(520 + Math.min(G.rally, 20) * 14, 0.06, 'triangle', 0.07);
+        SoundFX.tone(520 + Math.min(G.rally, 20) * 14, 0.06, 'triangle', 0.07);
       }
 
       function userHit() {
         if (G.state !== 'play') return;
         G.userSwing = 1;
         const sh = G.shot;
-        if (!sh || sh.dir !== 1 || sh.t < HIT_FROM) { playTone(180, 0.05, 'sine', 0.025); return; }
+        if (!sh || sh.dir !== 1 || sh.t < HIT_FROM) { SoundFX.tone(180, 0.05, 'sine', 0.025); return; }
         const b = drawnBall(sh);
         const rx = G.racket.x * W, ry = G.racket.y * H;
         const d = Math.hypot(b.x - rx, b.y - ry);
-        if (d > hitR()) { playTone(180, 0.05, 'sine', 0.025); return; }
+        if (d > hitR()) { SoundFX.tone(180, 0.05, 'sine', 0.025); return; }
 
         G.rally += 1;
         const off = clamp((b.y - ry) / hitR(), -1, 1);
         const sp = shotPos(sh);
-        const y1 = clamp(sp.y + off * 0.32 + rand(-0.12, 0.12), 0.16, 0.84);
-        G.shot = { dir: -1, x0: clamp(sp.x, 0.52, 1), y0: sp.y, x1: 0.12, y1, t: 0, T: Math.max(0.35, tFor(G.rally) * 0.92), bounced: false };
+        const y1 = clamp(sp.y + off * 0.34 + rand(-0.14, 0.14), 0.15, 0.85);
+        G.shot = { dir: -1, x0: clamp(sp.x, 0.52, 1), y0: sp.y, x1: 0.12, y1, t: 0, T: Math.max(0.5, tFor(G.rally) * 0.92), bounced: false };
         G.trail.length = 0;
         for (let i = 0; i < 12; i++) G.fx.push({ k: 'spark', x: b.x, y: b.y, vx: rand(-220, 220), vy: rand(-220, 220), age: 0, life: rand(0.3, 0.6) });
         G.fx.push({ k: 'ring', x: b.x, y: b.y, age: 0, life: 0.4 });
-        playTone(660 + Math.min(G.rally, 25) * 18, 0.08, 'square', 0.05);
+        SoundFX.tone(660 + Math.min(G.rally, 25) * 18, 0.08, 'square', 0.05);
         updateHud();
       }
 
       function lose() {
         G.state = 'lost';
         G.shake = 0.5;
-        playTone(140, 0.35, 'sawtooth', 0.07);
+        SoundFX.tone(140, 0.35, 'sawtooth', 0.07);
         if (G.rally > G.best) {
           G.best = G.rally;
           try { localStorage.setItem('ustegel:pp:best', String(G.best)); } catch (_) {}
         }
         updateHud();
         $('#ppLostInfo').textContent = `Qaytardığınız top: ${G.rally} · Rekord: ${G.best}`;
-
-        const lostOv = $('#ppLost');
+        const ov = $('#ppLost');
         const step2 = $('#ppLostStep2');
-        clearTimeout(lostTimer);
-        lostOv.classList.remove('is-visible');
         step2.classList.remove('is-shown');
-        lostOv.hidden = false;
-        requestAnimationFrame(() => {
-          lostOv.classList.add('is-visible');
-          lostTimer = setTimeout(() => step2.classList.add('is-shown'), 950);
-        });
+        ov.hidden = false;
+        ov.classList.add('is-visible');
+        clearTimeout(endTimer);
+        endTimer = setTimeout(() => step2.classList.add('is-shown'), 950);
       }
 
       function updateHud() {
         const bestVal = Math.max(G.best, G.rally);
         $('#ppScore').textContent = G.rally;
         $('#ppBest').textContent = bestVal;
-        const stScore = $('#ppStageScoreVal');
-        const stBest = $('#ppStageBestVal');
-        if (stScore) stScore.textContent = G.rally;
-        if (stBest) stBest.textContent = bestVal;
+        const s1 = $('#ppStageScoreVal'), s2 = $('#ppStageBestVal');
+        if (s1) s1.textContent = G.rally;
+        if (s2) s2.textContent = bestVal;
       }
 
       function reset() {
@@ -5508,7 +5356,6 @@
         updateHud();
       }
 
-      /* ---------- yeniləmə ---------- */
       function update(dt) {
         G.oppSwing = Math.max(0, G.oppSwing - dt * 5);
         G.userSwing = Math.max(0, G.userSwing - dt * 5);
@@ -5533,11 +5380,11 @@
         if (!sh.bounced && sh.t >= BOUNCE) {
           sh.bounced = true;
           G.fx.push({ k: 'ring', x: b.gx, y: b.gy, age: 0, life: 0.45, flat: true });
-          playTone(sh.dir === 1 ? 300 : 340, 0.04, 'sine', 0.05);
+          SoundFX.tone(sh.dir === 1 ? 300 : 340, 0.04, 'sine', 0.05);
         }
 
         if (sh.dir === -1) {
-          G.oppY += (sh.y1 - G.oppY) * Math.min(1, dt * (7 + G.rally * 0.35));
+          G.oppY += (sh.y1 - G.oppY) * Math.min(1, dt * 8);
           if (sh.t >= 1) serveFromOpp(sh.y1);
         } else {
           G.oppY += (0.5 - G.oppY) * Math.min(1, dt * 1.5);
@@ -5545,8 +5392,8 @@
         }
       }
 
-      /* ---------- çəkmə ---------- */
       function rr(x, y, w, h, r) {
+        r = Math.min(r, w / 2, h / 2);
         ctx.beginPath();
         ctx.moveTo(x + r, y);
         ctx.arcTo(x + w, y, x + w, y + h, r);
@@ -5590,10 +5437,7 @@
         bg.addColorStop(0, '#3A200F'); bg.addColorStop(1, '#120904');
         ctx.fillStyle = bg; ctx.fillRect(-20, -20, W + 40, H + 40);
 
-        const tx = G.full ? W * 0.015 : W * 0.03;
-        const ty = G.full ? H * 0.04 : H * 0.09;
-        const tw = G.full ? W * 0.97 : W * 0.94;
-        const th = G.full ? H * 0.90 : H * 0.80;
+        const tx = W * 0.02, ty = H * 0.05, tw = W * 0.96, th = H * 0.9;
         ctx.save();
         ctx.shadowColor = 'rgba(0,0,0,0.55)'; ctx.shadowBlur = 28; ctx.shadowOffsetY = 14;
         const tg = ctx.createLinearGradient(0, ty, 0, ty + th);
@@ -5606,6 +5450,7 @@
         rr(tx + 8, ty + 8, tw - 16, th - 16, 10); ctx.stroke();
         ctx.lineWidth = 1.5; ctx.strokeStyle = 'rgba(255,244,228,0.45)';
         ctx.beginPath(); ctx.moveTo(tx + 8, ty + th / 2); ctx.lineTo(tx + tw - 8, ty + th / 2); ctx.stroke();
+
         const nx = W / 2;
         ctx.fillStyle = 'rgba(255,255,255,0.22)'; ctx.fillRect(nx - 4, ty - 10, 8, th + 20);
         ctx.strokeStyle = 'rgba(255,255,255,0.55)'; ctx.lineWidth = 1;
@@ -5670,11 +5515,10 @@
         raf = requestAnimationFrame(frame);
       }
 
-      /* ---------- idarəetmə ---------- */
       function setRacket(e) {
         const r = cv.getBoundingClientRect();
         let nx, ny;
-        if (G.rotated) {
+        if (isRotated) {
           nx = (e.clientY - r.top) / r.height;
           ny = 1 - (e.clientX - r.left) / r.width;
         } else {
@@ -5688,7 +5532,7 @@
       function open() {
         root.hidden = false;
         document.body.style.overflow = 'hidden';
-        syncFullLayout();
+        updateLayoutMode();
         G.state = 'ready'; G.rally = 0; G.shot = null; G.fx.length = 0; G.trail.length = 0;
         updateHud();
         $('#ppStart').hidden = false;
@@ -5702,39 +5546,41 @@
       function close() {
         running = false;
         cancelAnimationFrame(raf);
-        clearTimeout(lostTimer);
-        if (G.full) exitFull();
+        clearTimeout(endTimer);
+        if (isFullscreen) exitFullscreen();
         root.hidden = true;
         document.body.style.overflow = '';
       }
 
       function start() {
-        clearTimeout(lostTimer);
         $('#ppStart').hidden = true;
         $('#ppLost').hidden = true;
+        clearTimeout(endTimer);
         reset();
-        playTone(440, 0.08, 'triangle', 0.05);
+        SoundFX.tone(440, 0.08, 'triangle', 0.05);
       }
 
       cv.addEventListener('pointermove', setRacket, { passive: true });
       cv.addEventListener('pointerdown', (e) => { e.preventDefault(); setRacket(e); userHit(); });
       $('#ppGo').addEventListener('click', start);
-      $('#ppStartFull').addEventListener('click', async () => { await enterFull(); start(); });
-      $('#ppFull').addEventListener('click', () => (G.full ? exitFull() : enterFull()));
-      $('#ppExitFullFloat').addEventListener('click', exitFull);
+      $('#ppStartFull').addEventListener('click', async () => {
+        await enterFullscreen();
+        start();
+      });
       $('#ppAgain').addEventListener('click', start);
       $('#ppExit').addEventListener('click', close);
       $('#ppClose').addEventListener('click', close);
+      if (fullBtn) fullBtn.addEventListener('click', toggleFullscreen);
+      $('#ppExitFullFloat')?.addEventListener('click', exitFullscreen);
       document.addEventListener('fullscreenchange', () => {
-        if (!document.fullscreenElement && G.full) {
-          G.full = false;
-          G.rotated = false;
-          syncFullLayout();
+        if (!document.fullscreenElement && isFullscreen && !isRotated) {
+          isFullscreen = false;
+          updateLayoutMode();
         }
       });
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !root.hidden) close(); });
-      window.addEventListener('resize', () => { if (!root.hidden) syncFullLayout(); });
-      window.addEventListener('orientationchange', () => setTimeout(() => { if (!root.hidden) syncFullLayout(); }, 250));
+      window.addEventListener('resize', () => { if (!root.hidden) updateLayoutMode(); });
+      window.addEventListener('orientationchange', () => setTimeout(() => { if (!root.hidden) updateLayoutMode(); }, 250));
       document.addEventListener('click', (e) => { if (e.target.closest('[data-play="pingpong"]')) open(); });
 
       return { open, close };
@@ -5747,60 +5593,93 @@
       const root = $('#cl');
       const cv = $('#clCanvas');
       const stage = $('#clStage');
+      const fullBtn = $('#clFull');
+      const hintEl = $('#clHint');
       const ctx = cv.getContext('2d');
       const TAU = Math.PI * 2;
-      const HINT_TEXT = 'Oxun istiqamətini tutarkən ekranı basılı saxla və şiddəti tənzimləyərək topu burax.';
 
-      let W = 0, H = 0, dpr = 1, raf = 0, running = false, last = 0, endTimer = 0, aiTimer = 0;
+      const STONES_PER_TEAM = 4;
+      const MIN_DIST = 0.20;
+      const MAX_DIST = 0.90;
+      const FRICTION = 2.65;
+      const SWEEP_SPEED = 2.75; // +25% daha dinamik istiqamət oxu
+      const POWER_SPEED = 1.32; // +25% daha dinamik şiddət ayarı
 
-      const L = { x: 0, y: 0, w: 0, h: 0, houseX: 0, houseY: 0, rings: [], launchX: 0, launchY: 0, stoneR: 16 };
+      let W = 0, H = 0, dpr = 1, raf = 0, running = false, last = 0;
+      let isFullscreen = false, endTimer = 0, aiTimer = 0;
 
       const G = {
-        phase: 'ready', // 'ready' | 'aim' | 'charge' | 'slide' | 'ai_wait' | 'end'
-        turn: 'user',   // 'user' | 'opp'
-        userUsed: 0,
-        oppUsed: 0,
+        phase: 'ready',
+        userThrown: 0,
+        oppThrown: 0,
         stones: [],
-        angle: 0,
-        angleDir: 1,
-        power: 0.08,
+        active: null,
+        aimAngle: 0,
+        aimDir: 1,
+        power: 0,
         powerDir: 1,
-        slideTime: 0,
-        oppPlan: [],
-        full: false,
+        charging: false,
         fx: []
       };
 
       const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
       const rand = (a, b) => a + Math.random() * (b - a);
 
-      function layout() {
-        const padX = G.full ? Math.max(12, W * 0.035) : Math.max(16, W * 0.06);
-        const padTop = G.full ? Math.max(50, H * 0.068) : Math.max(16, H * 0.028);
-        const padBot = G.full ? Math.max(56, H * 0.078) : Math.max(58, H * 0.088);
-        const maxW = Math.min(W - padX * 2, G.full ? 520 : 440);
-        L.w = Math.max(220, maxW);
-        L.h = Math.max(300, H - padTop - padBot);
-        L.x = (W - L.w) / 2;
-        L.y = padTop;
+      function tableMetrics() {
+        const padX = isFullscreen ? Math.max(8, W * 0.025) : Math.max(12, W * 0.05);
+        const padY = isFullscreen ? Math.max(8, H * 0.02) : Math.max(12, H * 0.03);
+        const tx = padX;
+        const ty = padY;
+        const tw = W - padX * 2;
+        const th = H - padY * 2;
+        const cx = tx + tw / 2;
+        const houseY = ty + th * 0.25;
+        const launchY = ty + th * 0.87;
+        const maxR = Math.min(tw * 0.34, th * 0.175);
+        const stoneR = Math.max(13, maxR * 0.165);
+        return { tx, ty, tw, th, cx, houseY, launchY, maxR, stoneR };
+      }
 
-        L.houseX = L.x + L.w / 2;
-        L.houseY = L.y + L.h * 0.27;
-        const maxR = Math.min(L.w * 0.42, L.h * 0.20);
-        L.rings = [
-          { r: maxR * 1.00, pts: 1, c1: '#3B82F6', c2: '#1D4ED8', stroke: '#DBEAFE' },
-          { r: maxR * 0.74, pts: 2, c1: '#FFFFFF', c2: '#E2E8F0', stroke: '#94A3B8' },
-          { r: maxR * 0.49, pts: 3, c1: '#EF4444', c2: '#B91C1C', stroke: '#FEE2E2' },
-          { r: maxR * 0.24, pts: 4, c1: '#FBBF24', c2: '#D97706', stroke: '#FEF3C7' }
-        ];
+      function stonePoints(st, m) {
+        const d = Math.hypot(st.x - m.cx, st.y - m.houseY);
+        const edgeDist = d - m.stoneR;
+        if (edgeDist <= m.maxR * 0.25) return 4;
+        if (edgeDist <= m.maxR * 0.50) return 3;
+        if (edgeDist <= m.maxR * 0.75) return 2;
+        if (edgeDist <= m.maxR * 1.00) return 1;
+        return 0;
+      }
 
-        L.launchX = L.x + L.w / 2;
-        L.launchY = L.y + L.h * 0.88;
-        L.stoneR = clamp(Math.min(L.w * 0.048, maxR * 0.16), 11, 19);
+      function computeScores() {
+        const m = tableMetrics();
+        let user = 0, opp = 0;
+        G.stones.forEach((st) => {
+          const pts = stonePoints(st, m);
+          if (st.team === 'user') user += pts;
+          else opp += pts;
+        });
+        return { user, opp };
+      }
+
+      function updateHud() {
+        const sc = computeScores();
+        $('#clUserScore').textContent = sc.user;
+        $('#clOppScore').textContent = sc.opp;
+
+        const uDots = $$('#clUserDots i');
+        uDots.forEach((el, idx) => el.classList.toggle('used', idx < G.userThrown));
+        const oDots = $$('#clOppDots i');
+        oDots.forEach((el, idx) => el.classList.toggle('used', idx < G.oppThrown));
+
+        const turnEl = $('#clTurn');
+        if (turnEl) {
+          const isOpp = G.phase === 'ai_wait' || (G.active && G.active.team === 'opp');
+          turnEl.textContent = isOpp ? 'Rəqibin növbəsi' : 'Sənin növbən';
+          turnEl.classList.toggle('opp', Boolean(isOpp));
+        }
       }
 
       function resize() {
-        const prevW = W, prevH = H;
         const r = stage.getBoundingClientRect();
         dpr = Math.min(window.devicePixelRatio || 1, 2);
         W = Math.max(1, r.width);
@@ -5808,283 +5687,225 @@
         cv.width = Math.round(W * dpr);
         cv.height = Math.round(H * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
 
-        const old = { x: L.x, y: L.y, w: L.w, h: L.h };
-        layout();
-        if (prevW > 0 && prevH > 0 && old.w > 0 && old.h > 0 && G.stones.length) {
-          G.stones.forEach((s) => {
-            const rx = (s.x - old.x) / old.w;
-            const ry = (s.y - old.y) / old.h;
-            s.x = L.x + rx * L.w;
-            s.y = L.y + ry * L.h;
-          });
+      function updateLayoutMode() {
+        root.classList.toggle('is-full', isFullscreen);
+        if (fullBtn) {
+          fullBtn.classList.toggle('active', isFullscreen);
+          fullBtn.textContent = isFullscreen ? '✕' : '⛶';
         }
+        resize();
       }
 
-      function syncFullLayout() {
-        root.classList.toggle('is-full', G.full);
-        $('#clFull')?.classList.toggle('active', G.full);
-        requestAnimationFrame(resize);
-      }
-
-      async function enterFull() {
-        G.full = true;
+      async function enterFullscreen() {
+        isFullscreen = true;
         try {
           if (root.requestFullscreen && !document.fullscreenElement) await root.requestFullscreen();
           else if (root.webkitRequestFullscreen) root.webkitRequestFullscreen();
         } catch (_) {}
-        syncFullLayout();
+        updateLayoutMode();
       }
 
-      async function exitFull() {
-        G.full = false;
+      async function exitFullscreen() {
+        isFullscreen = false;
         try {
           if (document.fullscreenElement && document.exitFullscreen) await document.exitFullscreen();
           else if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
         } catch (_) {}
-        syncFullLayout();
+        updateLayoutMode();
       }
 
-      function stonePoints(s) {
-        const d = Math.hypot(s.x - L.houseX, s.y - L.houseY);
-        const touch = L.stoneR * 0.85;
-        for (let i = L.rings.length - 1; i >= 0; i--) {
-          if (d <= L.rings[i].r + touch) return L.rings[i].pts;
-        }
-        return 0;
+      function toggleFullscreen() {
+        if (isFullscreen) exitFullscreen();
+        else enterFullscreen();
       }
 
-      function calcScores() {
-        let user = 0, opp = 0;
-        G.stones.forEach((s) => {
-          const p = stonePoints(s);
-          if (s.owner === 'user') user += p;
-          else opp += p;
-        });
-        return { user, opp };
-      }
-
-      function updateHud() {
-        const sc = calcScores();
-        $('#clUserScore').textContent = sc.user;
-        $('#clOppScore').textContent = sc.opp;
-
-        const uDots = $('#clUserDots')?.children || [];
-        for (let i = 0; i < uDots.length; i++) uDots[i].classList.toggle('used', i < G.userUsed);
-
-        const oDots = $('#clOppDots')?.children || [];
-        for (let i = 0; i < oDots.length; i++) oDots[i].classList.toggle('used', i < G.oppUsed);
-
-        const turnEl = $('#clTurn');
-        if (turnEl) {
-          const isOpp = G.turn === 'opp';
-          turnEl.classList.toggle('opp', isOpp);
-          turnEl.textContent = G.phase === 'end'
-            ? 'Oyun bitdi'
-            : (isOpp ? 'Rəqibin növbəsi' : 'Sənin növbən');
-        }
-      }
-
-      function makeOppPlan() {
-        const presets = [
-          [3, 3, 3, 2],
-          [4, 3, 2, 2],
-          [3, 3, 2, 2],
-          [4, 3, 3, 2],
-          [3, 3, 3, 1]
-        ];
-        return presets[Math.floor(Math.random() * presets.length)].slice();
-      }
-
-      function travelDistance(power) {
-        return L.h * (0.10 + 0.80 * power);
-      }
-
-      function launchStone(owner, angle, power) {
-        const decel = 0.72 * L.h;
-        const dist = travelDistance(power);
-        const v0 = Math.sqrt(2 * decel * dist);
-        const vx = Math.sin(angle) * v0;
-        const vy = -Math.cos(angle) * v0;
-
-        G.stones.push({
-          owner,
-          x: L.launchX,
-          y: L.launchY,
-          vx,
-          vy,
-          angle
-        });
-
-        if (owner === 'user') G.userUsed += 1;
-        else G.oppUsed += 1;
-
-        G.slideTime = 0;
-        G.phase = 'slide';
+      function launchStone(team, angle, powerRatio) {
+        const m = tableMetrics();
+        const travelDist = m.th * (MIN_DIST + (MAX_DIST - MIN_DIST) * clamp(powerRatio, 0, 1));
+        const speed = Math.sqrt(2 * FRICTION * travelDist);
+        const st = {
+          team,
+          x: m.cx,
+          y: m.launchY,
+          vx: Math.sin(angle) * speed,
+          vy: -Math.cos(angle) * speed
+        };
+        G.stones.push(st);
+        G.active = st;
+        G.phase = 'sliding';
+        G.charging = false;
+        if (team === 'user') G.userThrown += 1;
+        else G.oppThrown += 1;
         updateHud();
-        playTone(owner === 'user' ? 490 : 370, 0.08, 'triangle', 0.06);
+        SoundFX.tone(team === 'user' ? 420 : 350, 0.08, 'triangle', 0.06);
       }
 
-      function aiThrow() {
-        if (!running || G.phase !== 'ai_wait') return;
-        const idx = clamp(G.oppUsed, 0, 3);
-        const targetPts = G.oppPlan[idx] || 3;
-        const ringIdx = clamp(targetPts - 1, 0, L.rings.length - 1);
-        const innerR = ringIdx === 3 ? 0 : L.rings[ringIdx + 1].r;
-        const outerR = L.rings[ringIdx].r;
-        const targetR = innerR + (outerR - innerR) * rand(0.28, 0.72);
-        const theta = rand(-Math.PI * 0.85, Math.PI * 0.85);
-
-        const tx = clamp(L.houseX + Math.cos(theta) * targetR, L.x + L.stoneR * 1.5, L.x + L.w - L.stoneR * 1.5);
-        const ty = L.houseY + Math.sin(theta) * targetR * 0.75;
-
-        const dx = tx - L.launchX;
-        const dy = ty - L.launchY;
-        const angle = clamp(Math.atan2(dx, -dy), -0.62, 0.62);
-        const dist = Math.hypot(dx, dy);
-        const power = clamp((dist / L.h - 0.10) / 0.80, 0.14, 0.98);
-
-        launchStone('opp', angle, power);
-      }
-
-      function finishGame() {
-        G.phase = 'end';
+      function scheduleAiTurn() {
+        G.phase = 'ai_wait';
         updateHud();
-        const sc = calcScores();
-        const finalUser = sc.user;
-        const finalOpp = sc.opp;
+        clearTimeout(aiTimer);
+        aiTimer = setTimeout(() => {
+          if (!running || G.phase !== 'ai_wait') return;
+          const m = tableMetrics();
+          const current = computeScores();
+          const remaining = STONES_PER_TEAM - G.oppThrown;
+          const targetTotal = rand(10, 12.2);
+          const neededAvg = (targetTotal - current.opp) / Math.max(1, remaining);
 
-        const ov = $('#clEnd');
+          let ringFactor = 0.35;
+          if (neededAvg >= 3.3) ringFactor = rand(0.04, 0.22);
+          else if (neededAvg >= 2.3) ringFactor = rand(0.24, 0.48);
+          else if (neededAvg >= 1.3) ringFactor = rand(0.50, 0.74);
+          else ringFactor = rand(0.76, 0.96);
+
+          const targetAngle = rand(-0.22, 0.22);
+          const targetY = m.houseY + rand(-1, 1) * m.maxR * ringFactor;
+          const desiredDist = Math.hypot(Math.sin(targetAngle) * (m.launchY - targetY), m.launchY - targetY);
+          const pwr = clamp((desiredDist / m.th - MIN_DIST) / (MAX_DIST - MIN_DIST), 0.18, 0.86);
+
+          launchStone('opp', targetAngle, pwr);
+        }, 720);
+      }
+
+      function finishMatch() {
+        G.phase = 'ended';
+        const sc = computeScores();
         const step1 = $('#clEndStep1');
         const step2 = $('#clEndStep2');
         const msgEl = $('#clEndMsg');
         const infoEl = $('#clEndInfo');
 
-        if (finalUser > finalOpp) {
-          step1.textContent = 'Təbriklər, qalib gəldiniz! 🏆';
+        if (sc.user > sc.opp) {
+          step1.textContent = 'Təbriklər! Qalib gəldiniz! 🎯';
           msgEl.textContent = 'Üstəgələ gəl, bərabər oynayaq!';
-          playTone(780, 0.24, 'triangle', 0.08);
-        } else if (finalUser === finalOpp) {
-          step1.textContent = 'Əla cəhd idi! 🤝';
-          msgEl.textContent = 'Bərabərə bitdi!';
-          playTone(540, 0.20, 'sine', 0.07);
+          SoundFX.tone(660, 0.14, 'triangle', 0.07);
+        } else if (sc.user === sc.opp) {
+          step1.textContent = 'Əla cəhd idi! Bərabərlik! 🤝';
+          msgEl.textContent = 'Üstəgələ gəl, bərabər oynayaq!';
+          SoundFX.tone(520, 0.14, 'triangle', 0.06);
         } else {
           step1.textContent = 'Əla cəhd idi! 👏';
           msgEl.textContent = 'Üstəgələ gəl, bərabər oynayaq!';
-          playTone(220, 0.28, 'sawtooth', 0.06);
+          SoundFX.tone(240, 0.24, 'sawtooth', 0.06);
         }
 
-        infoEl.textContent = `Sənin xalın: ${finalUser} · Rəqibin xalı: ${finalOpp}`;
-
-        clearTimeout(endTimer);
-        ov.classList.remove('is-visible');
+        infoEl.textContent = `Sənin xalın: ${sc.user} · Rəqibin xalı: ${sc.opp}`;
+        const ov = $('#clEnd');
         step2.classList.remove('is-shown');
         ov.hidden = false;
-        requestAnimationFrame(() => {
-          ov.classList.add('is-visible');
-          endTimer = setTimeout(() => step2.classList.add('is-shown'), 950);
-        });
+        ov.classList.add('is-visible');
+        clearTimeout(endTimer);
+        endTimer = setTimeout(() => step2.classList.add('is-shown'), 950);
+      }
+
+      function onAllStopped() {
+        G.active = null;
+        updateHud();
+
+        if (G.userThrown >= STONES_PER_TEAM && G.oppThrown >= STONES_PER_TEAM) {
+          finishMatch();
+          return;
+        }
+
+        if (G.userThrown > G.oppThrown && G.oppThrown < STONES_PER_TEAM) {
+          scheduleAiTurn();
+        } else {
+          G.phase = 'aim';
+          G.power = 0;
+          G.powerDir = 1;
+          updateHud();
+        }
       }
 
       function update(dt) {
         G.fx = G.fx.filter((f) => (f.age += dt) < f.life);
 
         if (G.phase === 'aim') {
-          const maxAng = 0.64;
-          G.angle += G.angleDir * 3.45 * dt;
-          if (G.angle > maxAng) { G.angle = maxAng; G.angleDir = -1; }
-          if (G.angle < -maxAng) { G.angle = -maxAng; G.angleDir = 1; }
-        } else if (G.phase === 'charge') {
-          G.power += G.powerDir * 1.38 * dt;
-          if (G.power >= 1) { G.power = 1; G.powerDir = -1; }
-          if (G.power <= 0.08) { G.power = 0.08; G.powerDir = 1; }
-        } else if (G.phase === 'slide') {
-          G.slideTime += dt;
-          const decel = 0.72 * L.h;
-          const r = L.stoneR;
-          let moving = false;
-
-          for (let i = 0; i < G.stones.length; i++) {
-            const s = G.stones[i];
-            const spd = Math.hypot(s.vx, s.vy);
-            if (spd > 0.5) {
-              moving = true;
-              s.x += s.vx * dt;
-              s.y += s.vy * dt;
-              s.angle = Math.atan2(s.vx, -s.vy);
-              const nextSpd = Math.max(0, spd - decel * dt);
-              const k = nextSpd / spd;
-              s.vx *= k;
-              s.vy *= k;
-
-              if (s.x < L.x + r) { s.x = L.x + r; s.vx = Math.abs(s.vx) * 0.65; }
-              if (s.x > L.x + L.w - r) { s.x = L.x + L.w - r; s.vx = -Math.abs(s.vx) * 0.65; }
-              if (s.y < L.y + r) { s.y = L.y + r; s.vy = Math.abs(s.vy) * 0.45; }
-              if (s.y > L.y + L.h - r) { s.y = L.y + L.h - r; s.vy = -Math.abs(s.vy) * 0.45; }
-            } else {
-              s.vx = 0;
-              s.vy = 0;
-            }
+          if (!G.charging) {
+            G.aimAngle += G.aimDir * SWEEP_SPEED * dt;
+            if (G.aimAngle > 0.62) { G.aimAngle = 0.62; G.aimDir = -1; }
+            if (G.aimAngle < -0.62) { G.aimAngle = -0.62; G.aimDir = 1; }
+          } else {
+            G.power += G.powerDir * POWER_SPEED * dt;
+            if (G.power > 1) { G.power = 1; G.powerDir = -1; }
+            if (G.power < 0.04) { G.power = 0.04; G.powerDir = 1; }
           }
+          return;
+        }
 
-          for (let i = 0; i < G.stones.length; i++) {
-            for (let j = i + 1; j < G.stones.length; j++) {
-              const a = G.stones[i];
-              const b = G.stones[j];
-              const dx = b.x - a.x;
-              const dy = b.y - a.y;
-              const dist = Math.hypot(dx, dy);
-              const minD = r * 2;
-              if (dist > 0.001 && dist < minD) {
-                const nx = dx / dist;
-                const ny = dy / dist;
-                const overlap = (minD - dist) * 0.5;
-                a.x -= nx * overlap;
-                a.y -= ny * overlap;
-                b.x += nx * overlap;
-                b.y += ny * overlap;
+        if (G.phase !== 'sliding') return;
 
-                const dv = (a.vx - b.vx) * nx + (a.vy - b.vy) * ny;
-                if (dv > 0) {
-                  const imp = dv * 0.92;
-                  a.vx -= imp * nx;
-                  a.vy -= imp * ny;
-                  b.vx += imp * nx;
-                  b.vy += imp * ny;
-                  moving = true;
-                  G.fx.push({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2, age: 0, life: 0.35 });
-                  playTone(460, 0.05, 'triangle', 0.05);
-                }
+        const m = tableMetrics();
+        let anyMoving = false;
+
+        G.stones.forEach((st) => {
+          const sp = Math.hypot(st.vx, st.vy);
+          if (sp <= 0.5) {
+            st.vx = 0;
+            st.vy = 0;
+            return;
+          }
+          anyMoving = true;
+          st.x += st.vx * dt;
+          st.y += st.vy * dt;
+
+          const newSp = Math.max(0, sp - FRICTION * m.th * 0.42 * dt);
+          const ratio = sp > 0 ? newSp / sp : 0;
+          st.vx *= ratio;
+          st.vy *= ratio;
+
+          const minX = m.tx + m.stoneR + 4;
+          const maxX = m.tx + m.tw - m.stoneR - 4;
+          const minY = m.ty + m.stoneR + 4;
+          const maxY = m.ty + m.th - m.stoneR - 4;
+
+          if (st.x < minX) { st.x = minX; st.vx = Math.abs(st.vx) * 0.68; SoundFX.tone(260, 0.04, 'sine', 0.04); }
+          if (st.x > maxX) { st.x = maxX; st.vx = -Math.abs(st.vx) * 0.68; SoundFX.tone(260, 0.04, 'sine', 0.04); }
+          if (st.y < minY) { st.y = minY; st.vy = Math.abs(st.vy) * 0.55; SoundFX.tone(240, 0.04, 'sine', 0.04); }
+          if (st.y > maxY) { st.y = maxY; st.vy = -Math.abs(st.vy) * 0.55; }
+        });
+
+        for (let i = 0; i < G.stones.length; i++) {
+          for (let j = i + 1; j < G.stones.length; j++) {
+            const a = G.stones[i];
+            const b = G.stones[j];
+            const dx = b.x - a.x;
+            const dy = b.y - a.y;
+            const dist = Math.hypot(dx, dy);
+            const minD = m.stoneR * 2;
+            if (dist > 0.001 && dist < minD) {
+              const nx = dx / dist;
+              const ny = dy / dist;
+              const overlap = (minD - dist) * 0.5;
+              a.x -= nx * overlap;
+              a.y -= ny * overlap;
+              b.x += nx * overlap;
+              b.y += ny * overlap;
+
+              const rvx = b.vx - a.vx;
+              const rvy = b.vy - a.vy;
+              const velAlongNormal = rvx * nx + rvy * ny;
+              if (velAlongNormal < 0) {
+                const imp = -(1 + 0.86) * velAlongNormal * 0.5;
+                a.vx -= imp * nx;
+                a.vy -= imp * ny;
+                b.vx += imp * nx;
+                b.vy += imp * ny;
+                anyMoving = true;
+                G.fx.push({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2, age: 0, life: 0.35 });
+                SoundFX.tone(580, 0.05, 'triangle', 0.06);
               }
             }
           }
-
-          if (!moving || G.slideTime > 5.5) {
-            G.stones.forEach((s) => { s.vx = 0; s.vy = 0; });
-            updateHud();
-            if (G.userUsed >= 4 && G.oppUsed >= 4) {
-              finishGame();
-            } else if (G.turn === 'user') {
-              G.turn = 'opp';
-              G.phase = 'ai_wait';
-              updateHud();
-              clearTimeout(aiTimer);
-              aiTimer = setTimeout(aiThrow, 650);
-            } else {
-              G.turn = 'user';
-              G.phase = 'aim';
-              G.angle = 0;
-              G.angleDir = 1;
-              G.power = 0.08;
-              G.powerDir = 1;
-              updateHud();
-            }
-          }
         }
+
+        if (!anyMoving) onAllStopped();
       }
 
       function rr(x, y, w, h, r) {
-        r = Math.max(0, Math.min(r, Math.abs(w) / 2, Math.abs(h) / 2));
+        r = Math.min(r, w / 2, h / 2);
         ctx.beginPath();
         ctx.moveTo(x + r, y);
         ctx.arcTo(x + w, y, x + w, y + h, r);
@@ -6094,348 +5915,290 @@
         ctx.closePath();
       }
 
-      function drawStone(x, y, r, owner, pts, angle = 0) {
+      function drawStone(x, y, r, team) {
+        const isUser = team === 'user';
         ctx.save();
-        ctx.translate(x, y);
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.22)';
+        ctx.beginPath();
+        ctx.arc(x + 2, y + 4, r, 0, TAU);
+        ctx.fill();
 
-        // Buz üzərində kölgə
-        ctx.fillStyle = 'rgba(15, 23, 42, 0.32)';
-        ctx.beginPath(); ctx.arc(2.5, 4.5, r, 0, TAU); ctx.fill();
+        const rim = ctx.createRadialGradient(x - r * 0.3, y - r * 0.3, r * 0.1, x, y, r);
+        rim.addColorStop(0, '#64748B');
+        rim.addColorStop(1, '#1E293B');
+        ctx.fillStyle = rim;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, TAU);
+        ctx.fill();
 
-        // Cilalanmış qranit kənar
-        const granite = ctx.createRadialGradient(-r * 0.32, -r * 0.35, r * 0.1, 0, 0, r);
-        granite.addColorStop(0, '#F8FAFC');
-        granite.addColorStop(0.55, '#94A3B8');
-        granite.addColorStop(0.88, '#475569');
-        granite.addColorStop(1, '#334155');
-        ctx.fillStyle = granite;
-        ctx.beginPath(); ctx.arc(0, 0, r, 0, TAU); ctx.fill();
-
-        // Rəngli üst qapaq
-        const core = ctx.createRadialGradient(-r * 0.22, -r * 0.26, r * 0.08, 0, 0, r * 0.74);
-        if (owner === 'user') {
-          core.addColorStop(0, '#FED7AA');
-          core.addColorStop(0.45, '#F97316');
-          core.addColorStop(1, '#9A3412');
+        const core = ctx.createRadialGradient(x - r * 0.25, y - r * 0.25, r * 0.05, x, y, r * 0.72);
+        if (isUser) {
+          core.addColorStop(0, '#FDBA74');
+          core.addColorStop(0.5, '#F97316');
+          core.addColorStop(1, '#C2410C');
         } else {
-          core.addColorStop(0, '#BFDBFE');
-          core.addColorStop(0.45, '#2563EB');
+          core.addColorStop(0, '#93C5FD');
+          core.addColorStop(0.5, '#2563EB');
           core.addColorStop(1, '#1E3A8A');
         }
         ctx.fillStyle = core;
-        ctx.beginPath(); ctx.arc(0, 0, r * 0.74, 0, TAU); ctx.fill();
-
-        // Üst şüşə parıltısı
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
-        ctx.lineWidth = Math.max(1.2, r * 0.08);
         ctx.beginPath();
-        ctx.arc(0, 0, r * 0.56, Math.PI * 1.12, Math.PI * 1.62);
-        ctx.stroke();
+        ctx.arc(x, y, r * 0.72, 0, TAU);
+        ctx.fill();
 
-        if (pts > 0) {
-          // Halqaya təmas edibsə xal nişanı
-          ctx.fillStyle = 'rgba(15, 23, 42, 0.52)';
-          ctx.beginPath(); ctx.arc(0, 0, r * 0.54, 0, TAU); ctx.fill();
-          ctx.fillStyle = '#FFFFFF';
-          ctx.font = `800 ${Math.max(10, Math.round(r * 0.76))}px Manrope, sans-serif`;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText('+' + pts, 0, 0.5);
-        } else {
-          // Körlinq daşının tutacağı (handle)
-          ctx.rotate(angle);
-          ctx.fillStyle = 'rgba(15, 23, 42, 0.35)';
-          rr(-r * 0.14 + 1, -r * 0.42 + 1.5, r * 0.28, r * 0.78, r * 0.12);
-          ctx.fill();
-          ctx.fillStyle = owner === 'user' ? '#FFF7ED' : '#EFF6FF';
-          rr(-r * 0.13, -r * 0.44, r * 0.26, r * 0.76, r * 0.12);
-          ctx.fill();
-        }
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.lineWidth = Math.max(2.5, r * 0.18);
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(x - r * 0.22, y + r * 0.16);
+        ctx.lineTo(x + r * 0.22, y - r * 0.16);
+        ctx.stroke();
         ctx.restore();
       }
 
       function draw() {
-        // Kafe qoz ağacı fonu
-        const bg = ctx.createRadialGradient(W / 2, H / 2, 20, W / 2, H / 2, Math.max(W, H) * 0.78);
+        const m = tableMetrics();
+        ctx.save();
+
+        const bg = ctx.createRadialGradient(W / 2, H / 2, 20, W / 2, H / 2, Math.max(W, H) * 0.8);
         bg.addColorStop(0, '#3A200F');
-        bg.addColorStop(0.55, '#221208');
         bg.addColorStop(1, '#120904');
         ctx.fillStyle = bg;
         ctx.fillRect(0, 0, W, H);
 
-        // Xarici qoz ağacı masa çərçivəsi
-        const framePad = 9;
+        // Qoz ağacı masa çərçivəsi və təmiz ağ buz səthi
         ctx.save();
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.62)';
-        ctx.shadowBlur = 28;
-        ctx.shadowOffsetY = 12;
-        const wood = ctx.createLinearGradient(L.x - framePad, L.y - framePad, L.x + L.w + framePad, L.y + L.h + framePad);
-        wood.addColorStop(0, '#6B3E1E');
-        wood.addColorStop(0.5, '#4A2812');
-        wood.addColorStop(1, '#2D1709');
-        ctx.fillStyle = wood;
-        rr(L.x - framePad, L.y - framePad, L.w + framePad * 2, L.h + framePad * 2, 22);
+        ctx.shadowColor = 'rgba(0,0,0,0.45)';
+        ctx.shadowBlur = 24;
+        ctx.shadowOffsetY = 10;
+        ctx.fillStyle = '#5C3317';
+        rr(m.tx - 6, m.ty - 6, m.tw + 12, m.th + 12, 20);
         ctx.fill();
         ctx.restore();
 
-        ctx.strokeStyle = 'rgba(242, 211, 168, 0.34)';
-        ctx.lineWidth = 1.5;
-        rr(L.x - framePad + 1, L.y - framePad + 1, L.w + framePad * 2 - 2, L.h + framePad * 2 - 2, 21);
-        ctx.stroke();
-
-        // Buz meydançası
-        ctx.save();
-        const ice = ctx.createLinearGradient(L.x, L.y, L.x + L.w, L.y + L.h);
-        ice.addColorStop(0, '#F7FBFF');
-        ice.addColorStop(0.5, '#FFFFFF');
-        ice.addColorStop(1, '#F0F7FC');
-        ctx.fillStyle = ice;
-        rr(L.x, L.y, L.w, L.h, 14);
+        const iceGrad = ctx.createLinearGradient(0, m.ty, 0, m.ty + m.th);
+        iceGrad.addColorStop(0, '#FFFFFF');
+        iceGrad.addColorStop(0.55, '#F8FAFC');
+        iceGrad.addColorStop(1, '#F1F5F9');
+        ctx.fillStyle = iceGrad;
+        rr(m.tx, m.ty, m.tw, m.th, 15);
         ctx.fill();
 
-        // Buz üzərində zərif işıq zolağı
-        ctx.clip();
-        const sheen = ctx.createLinearGradient(L.x, L.y, L.x + L.w, L.y + L.h * 0.65);
-        sheen.addColorStop(0, 'rgba(255, 255, 255, 0.45)');
-        sheen.addColorStop(0.5, 'rgba(255, 255, 255, 0.06)');
-        sheen.addColorStop(1, 'rgba(255, 255, 255, 0.25)');
-        ctx.fillStyle = sheen;
-        ctx.fillRect(L.x, L.y, L.w, L.h);
-
-        // Rəsmi körlinq meydança xətləri (Center, Tee, Back, Hog line)
-        const hogY = L.y + L.h * 0.63;
-        const backY = L.houseY - L.rings[0].r;
-
-        ctx.strokeStyle = 'rgba(220, 38, 38, 0.34)';
-        ctx.lineWidth = 2.5;
-        ctx.beginPath();
-        ctx.moveTo(L.x, hogY);
-        ctx.lineTo(L.x + L.w, hogY);
+        ctx.strokeStyle = '#CBD5E1';
+        ctx.lineWidth = 2;
+        rr(m.tx, m.ty, m.tw, m.th, 15);
         ctx.stroke();
 
-        ctx.strokeStyle = 'rgba(30, 58, 138, 0.18)';
-        ctx.lineWidth = 1.25;
-        ctx.beginPath();
-        ctx.moveTo(L.houseX, L.y);
-        ctx.lineTo(L.houseX, L.y + L.h);
-        ctx.moveTo(L.x, L.houseY);
-        ctx.lineTo(L.x + L.w, L.houseY);
-        ctx.moveTo(L.x, backY);
-        ctx.lineTo(L.x + L.w, backY);
-        ctx.stroke();
-
-        // 4 konsentrik hədəf halqası (1, 2, 3, 4 xal)
-        L.rings.forEach((rg) => {
-          const rgGrad = ctx.createRadialGradient(
-            L.houseX - rg.r * 0.2,
-            L.houseY - rg.r * 0.2,
-            rg.r * 0.05,
-            L.houseX,
-            L.houseY,
-            rg.r
-          );
-          rgGrad.addColorStop(0, rg.c1);
-          rgGrad.addColorStop(1, rg.c2);
-
-          ctx.beginPath();
-          ctx.arc(L.houseX, L.houseY, rg.r, 0, TAU);
-          ctx.fillStyle = rgGrad;
-          ctx.fill();
-          ctx.lineWidth = 2;
-          ctx.strokeStyle = rg.stroke;
-          ctx.stroke();
-        });
-
-        // Halqaların xal etiketləri
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.font = `800 ${Math.max(10, Math.round(L.stoneR * 0.72))}px Manrope, sans-serif`;
-        L.rings.forEach((rg, idx) => {
-          if (idx === 3) {
-            ctx.fillStyle = '#2B1A10';
-            ctx.fillText('4', L.houseX, L.houseY + 0.5);
-          } else {
-            const nextR = L.rings[idx + 1].r;
-            const midR = (rg.r + nextR) / 2;
-            ctx.fillStyle = idx === 1 ? '#1E293B' : '#FFFFFF';
-            ctx.fillText(String(rg.pts), L.houseX, L.houseY - midR);
-          }
-        });
-
-        // Buraxılış dairəsi (Hack)
-        ctx.strokeStyle = 'rgba(30, 58, 138, 0.22)';
+        // Rəsmi körlinq meydança xətləri
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.38)';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
-        ctx.arc(L.launchX, L.launchY, L.stoneR * 1.45, 0, TAU);
+        ctx.moveTo(m.cx, m.ty + 8);
+        ctx.lineTo(m.cx, m.ty + m.th - 8);
+        ctx.moveTo(m.tx + 8, m.houseY);
+        ctx.lineTo(m.tx + m.tw - 8, m.houseY);
         ctx.stroke();
 
-        // Tam ekran modunda yuxarıda kompakt xal paneli
-        if (G.full) {
-          const sc = calcScores();
-          ctx.save();
-          ctx.fillStyle = 'rgba(20, 10, 4, 0.82)';
-          rr(L.x + 10, L.y + 8, L.w - 20, 32, 16);
+        // Hog xətti
+        const hogY = m.ty + m.th * 0.62;
+        ctx.strokeStyle = 'rgba(239, 68, 68, 0.35)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(m.tx + 8, hogY);
+        ctx.lineTo(m.tx + m.tw - 8, hogY);
+        ctx.stroke();
+
+        // 4 fərqli rəngdə konsentrik hədəf halqası (1, 2, 3, 4 xal)
+        const rings = [
+          { r: m.maxR * 1.00, fill: '#1E3A8A', pts: '1', labelCol: '#FFFFFF', labelY: m.houseY - m.maxR * 0.87 },
+          { r: m.maxR * 0.75, fill: '#E2E8F0', pts: '2', labelCol: '#1E293B', labelY: m.houseY - m.maxR * 0.62 },
+          { r: m.maxR * 0.50, fill: '#B91C1C', pts: '3', labelCol: '#FFFFFF', labelY: m.houseY - m.maxR * 0.37 },
+          { r: m.maxR * 0.25, fill: '#D97706', pts: '4', labelCol: '#FFFFFF', labelY: m.houseY }
+        ];
+
+        rings.forEach((rg) => {
+          ctx.fillStyle = rg.fill;
+          ctx.beginPath();
+          ctx.arc(m.cx, m.houseY, rg.r, 0, TAU);
           ctx.fill();
+
+          ctx.strokeStyle = 'rgba(255,255,255,0.65)';
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+
+          ctx.fillStyle = rg.labelCol;
+          ctx.font = `800 ${Math.max(11, Math.round(m.maxR * 0.13))}px Manrope, sans-serif`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(rg.pts, m.cx, rg.labelY);
+        });
+
+        // Tam ekran modunda masanın yuxarısında kompakt xal və daş göstəricisi
+        if (isFullscreen) {
+          const sc = computeScores();
+          const pillW = Math.min(m.tw - 24, 340);
+          const pillX = m.cx - pillW / 2;
+          const pillY = m.ty + 10;
+          ctx.fillStyle = 'rgba(20, 10, 4, 0.82)';
+          rr(pillX, pillY, pillW, 32, 16);
+          ctx.fill();
+
           ctx.font = '800 13px Manrope, sans-serif';
           ctx.textBaseline = 'middle';
           ctx.textAlign = 'left';
           ctx.fillStyle = '#FDBA74';
-          ctx.fillText(`Sən: ${sc.user} (${4 - G.userUsed} daş)`, L.x + 24, L.y + 24);
+          ctx.fillText(`Sən: ${sc.user} (${STONES_PER_TEAM - G.userThrown} daş)`, pillX + 14, pillY + 16);
+
           ctx.textAlign = 'right';
           ctx.fillStyle = '#93C5FD';
-          ctx.fillText(`Rəqib: ${sc.opp} (${4 - G.oppUsed} daş)`, L.x + L.w - 24, L.y + 24);
-          ctx.restore();
+          ctx.fillText(`Rəqib: ${sc.opp} (${STONES_PER_TEAM - G.oppThrown} daş)`, pillX + pillW - 14, pillY + 16);
         }
 
         // Atılmış daşlar
-        G.stones.forEach((s) => {
-          drawStone(s.x, s.y, L.stoneR, s.owner, G.phase === 'slide' ? 0 : stonePoints(s), s.angle || 0);
-        });
+        G.stones.forEach((st) => drawStone(st.x, st.y, m.stoneR, st.team));
 
         // Toqquşma halqaları
         G.fx.forEach((f) => {
           const a = 1 - f.age / f.life;
-          ctx.strokeStyle = `rgba(249, 115, 22, ${a.toFixed(3)})`;
+          ctx.strokeStyle = `rgba(249, 115, 22, ${a.toFixed(2)})`;
           ctx.lineWidth = 2.5;
           ctx.beginPath();
-          ctx.arc(f.x, f.y, L.stoneR * 0.6 + f.age * 70, 0, TAU);
+          ctx.arc(f.x, f.y, m.stoneR * (0.8 + f.age * 3.5), 0, TAU);
           ctx.stroke();
         });
 
-        // İstifadəçinin növbəti daşı, spidometr istiqamət oxu və şiddət şkalası
-        if (G.turn === 'user' && (G.phase === 'aim' || G.phase === 'charge')) {
-          const dirX = Math.sin(G.angle);
-          const dirY = -Math.cos(G.angle);
+        // İstifadəçi atışa hazırlaşarkən (spidometr oxu + sıxıb saxladıqda məsafə proqnozu)
+        if (G.phase === 'aim' && G.userThrown < STONES_PER_TEAM) {
+          const sx = m.cx;
+          const sy = m.launchY;
 
-          if (G.phase === 'charge') {
-            const dist = travelDistance(G.power);
-            const endX = L.launchX + dirX * dist;
-            const endY = L.launchY + dirY * dist;
+          // Spidometr qövsü və dərəcə bölgüləri
+          const arcR = Math.min(m.tw * 0.32, 118);
+          ctx.strokeStyle = 'rgba(100, 116, 139, 0.35)';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(sx, sy, arcR, -Math.PI / 2 - 0.65, -Math.PI / 2 + 0.65);
+          ctx.stroke();
 
-            // Məsafə trayektoriyası
-            ctx.save();
-            const trailGrad = ctx.createLinearGradient(L.launchX, L.launchY, endX, endY);
-            trailGrad.addColorStop(0, 'rgba(249, 115, 22, 0.25)');
-            trailGrad.addColorStop(1, 'rgba(234, 88, 12, 0.90)');
-            ctx.strokeStyle = trailGrad;
-            ctx.lineWidth = 3.5;
-            ctx.setLineDash([7, 5]);
+          for (let k = -4; k <= 4; k++) {
+            const ang = (k / 4) * 0.62;
+            const r1 = arcR - (k === 0 ? 8 : 4);
+            const r2 = arcR + (k === 0 ? 8 : 4);
+            ctx.strokeStyle = k === 0 ? '#16A34A' : 'rgba(100, 116, 139, 0.45)';
+            ctx.lineWidth = k === 0 ? 3 : 1.5;
             ctx.beginPath();
-            ctx.moveTo(L.launchX, L.launchY);
+            ctx.moveTo(sx + Math.sin(ang) * r1, sy - Math.cos(ang) * r1);
+            ctx.lineTo(sx + Math.sin(ang) * r2, sy - Math.cos(ang) * r2);
+            ctx.stroke();
+          }
+
+          if (G.charging) {
+            const travelDist = m.th * (MIN_DIST + (MAX_DIST - MIN_DIST) * G.power);
+            const endX = sx + Math.sin(G.aimAngle) * travelDist;
+            const endY = sy - Math.cos(G.aimAngle) * travelDist;
+
+            ctx.save();
+            ctx.setLineDash([7, 6]);
+            ctx.strokeStyle = 'rgba(234, 88, 12, 0.78)';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(sx, sy);
             ctx.lineTo(endX, endY);
             ctx.stroke();
-            ctx.setLineDash([]);
+            ctx.restore();
 
-            // Hədəf dayanma dairəsi
             ctx.strokeStyle = '#EA580C';
             ctx.lineWidth = 2.5;
             ctx.beginPath();
-            ctx.arc(endX, endY, L.stoneR, 0, TAU);
+            ctx.arc(endX, endY, m.stoneR, 0, TAU);
             ctx.stroke();
-            ctx.fillStyle = 'rgba(249, 115, 22, 0.24)';
+            ctx.fillStyle = 'rgba(249, 115, 22, 0.22)';
             ctx.fill();
 
-            // Sağ tərəfdə şaquli şiddət göstəricisi (Power Meter)
+            // Sağ kənarda canlı güc şkalası
             const barW = 12;
-            const barH = Math.min(L.h * 0.28, 135);
-            const barX = L.x + L.w - barW - 14;
-            const barY = L.launchY - barH + L.stoneR;
-            ctx.fillStyle = 'rgba(15, 23, 42, 0.65)';
+            const barH = Math.min(m.th * 0.34, 165);
+            const barX = m.tx + m.tw - barW - 14;
+            const barY = sy - barH;
+            ctx.fillStyle = 'rgba(15, 23, 42, 0.14)';
             rr(barX, barY, barW, barH, 6);
             ctx.fill();
 
             const fillH = barH * G.power;
-            const pGrad = ctx.createLinearGradient(0, barY + barH, 0, barY);
-            pGrad.addColorStop(0, '#22C55E');
-            pGrad.addColorStop(0.55, '#F59E0B');
-            pGrad.addColorStop(1, '#EF4444');
-            ctx.fillStyle = pGrad;
-            rr(barX + 2, barY + barH - fillH + 2, barW - 4, Math.max(4, fillH - 4), 4);
+            const pg = ctx.createLinearGradient(0, barY + barH, 0, barY);
+            pg.addColorStop(0, '#22C55E');
+            pg.addColorStop(0.55, '#F59E0B');
+            pg.addColorStop(1, '#EF4444');
+            ctx.fillStyle = pg;
+            rr(barX, barY + barH - fillH, barW, fillH, 6);
             ctx.fill();
-            ctx.restore();
           } else {
-            // Spidometr tipli qövs və dərəcə bölgüləri
-            const arrowLen = Math.min(L.h * 0.23, 120);
-            const maxAng = 0.64;
-            ctx.save();
-            ctx.strokeStyle = 'rgba(30, 41, 59, 0.24)';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.arc(L.launchX, L.launchY, arrowLen, -Math.PI / 2 - maxAng, -Math.PI / 2 + maxAng);
-            ctx.stroke();
+            const arrowLen = arcR + 14;
+            const ax = sx + Math.sin(G.aimAngle) * arrowLen;
+            const ay = sy - Math.cos(G.aimAngle) * arrowLen;
 
-            for (let t = -4; t <= 4; t++) {
-              const a = (t / 4) * maxAng;
-              const isCenter = t === 0;
-              const r1 = arrowLen - (isCenter ? 9 : 5);
-              const r2 = arrowLen + (isCenter ? 7 : 4);
-              ctx.strokeStyle = isCenter ? '#16A34A' : 'rgba(30, 41, 59, 0.35)';
-              ctx.lineWidth = isCenter ? 2.5 : 1.5;
-              ctx.beginPath();
-              ctx.moveTo(L.launchX + Math.sin(a) * r1, L.launchY - Math.cos(a) * r1);
-              ctx.lineTo(L.launchX + Math.sin(a) * r2, L.launchY - Math.cos(a) * r2);
-              ctx.stroke();
-            }
-
-            // İşıqlı spidometr əqrəbi
-            const ax = L.launchX + dirX * arrowLen;
-            const ay = L.launchY + dirY * arrowLen;
-            const needleGrad = ctx.createLinearGradient(L.launchX, L.launchY, ax, ay);
-            needleGrad.addColorStop(0, '#F97316');
-            needleGrad.addColorStop(1, '#DC2626');
-            ctx.strokeStyle = needleGrad;
-            ctx.lineWidth = 4;
+            ctx.strokeStyle = '#EA580C';
+            ctx.lineWidth = 3.5;
             ctx.lineCap = 'round';
             ctx.beginPath();
-            ctx.moveTo(L.launchX, L.launchY);
+            ctx.moveTo(sx, sy);
             ctx.lineTo(ax, ay);
             ctx.stroke();
 
-            const head = 12;
-            const ang = Math.atan2(dirY, dirX);
-            ctx.fillStyle = '#DC2626';
+            const headAng = Math.atan2(ay - sy, ax - sx);
+            ctx.fillStyle = '#EA580C';
             ctx.beginPath();
             ctx.moveTo(ax, ay);
-            ctx.lineTo(ax - head * Math.cos(ang - 0.45), ay - head * Math.sin(ang - 0.45));
-            ctx.lineTo(ax - head * Math.cos(ang + 0.45), ay - head * Math.sin(ang + 0.45));
+            ctx.lineTo(ax - 12 * Math.cos(headAng - 0.42), ay - 12 * Math.sin(headAng - 0.42));
+            ctx.lineTo(ax - 12 * Math.cos(headAng + 0.42), ay - 12 * Math.sin(headAng + 0.42));
             ctx.closePath();
             ctx.fill();
-            ctx.restore();
           }
 
-          drawStone(L.launchX, L.launchY, L.stoneR, 'user', 0, G.angle);
+          ctx.strokeStyle = 'rgba(249, 115, 22, 0.35)';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(sx, sy, m.stoneR * 1.55, 0, TAU);
+          ctx.stroke();
+
+          drawStone(sx, sy, m.stoneR, 'user');
         }
 
-        ctx.restore(); // clip
-
-        // Daxili buz kənarı kölgəsi
-        ctx.strokeStyle = 'rgba(15, 23, 42, 0.16)';
-        ctx.lineWidth = 2;
-        rr(L.x, L.y, L.w, L.h, 14);
-        ctx.stroke();
+        ctx.restore();
       }
 
       function frame(ts) {
         if (!running) return;
-        raf = requestAnimationFrame(frame);
         const dt = Math.min(0.05, (ts - last) / 1000 || 0.016);
         last = ts;
         update(dt);
         draw();
+        raf = requestAnimationFrame(frame);
+      }
+
+      function reset() {
+        clearTimeout(aiTimer);
+        clearTimeout(endTimer);
+        G.phase = 'aim';
+        G.userThrown = 0;
+        G.oppThrown = 0;
+        G.stones = [];
+        G.active = null;
+        G.aimAngle = 0;
+        G.aimDir = 1;
+        G.power = 0;
+        G.powerDir = 1;
+        G.charging = false;
+        G.fx = [];
+        updateHud();
       }
 
       function open() {
         root.hidden = false;
         document.body.style.overflow = 'hidden';
-        syncFullLayout();
+        updateLayoutMode();
+        reset();
         G.phase = 'ready';
-        G.stones = [];
-        G.userUsed = 0;
-        G.oppUsed = 0;
-        G.turn = 'user';
-        G.fx.length = 0;
-        $('#clHint').textContent = HINT_TEXT;
-        updateHud();
         $('#clStart').hidden = false;
         $('#clEnd').hidden = true;
         running = true;
@@ -6447,69 +6210,59 @@
       function close() {
         running = false;
         cancelAnimationFrame(raf);
-        clearTimeout(endTimer);
         clearTimeout(aiTimer);
-        if (G.full) exitFull();
+        clearTimeout(endTimer);
+        if (isFullscreen) exitFullscreen();
         root.hidden = true;
         document.body.style.overflow = '';
       }
 
       function start() {
-        clearTimeout(endTimer);
-        clearTimeout(aiTimer);
         $('#clStart').hidden = true;
         $('#clEnd').hidden = true;
-        G.stones = [];
-        G.userUsed = 0;
-        G.oppUsed = 0;
-        G.turn = 'user';
-        G.angle = 0;
-        G.angleDir = 1;
-        G.power = 0.08;
-        G.powerDir = 1;
-        G.oppPlan = makeOppPlan();
-        G.fx.length = 0;
-        G.phase = 'aim';
-        updateHud();
-        playTone(440, 0.08, 'triangle', 0.05);
+        reset();
+        SoundFX.tone(480, 0.08, 'triangle', 0.05);
       }
 
       cv.addEventListener('pointerdown', (e) => {
+        if (G.phase !== 'aim' || G.userThrown >= STONES_PER_TEAM) return;
         e.preventDefault();
-        if (G.phase === 'aim' && G.turn === 'user') {
-          G.power = 0.08;
-          G.powerDir = 1;
-          G.phase = 'charge';
-          playTone(380, 0.05, 'sine', 0.04);
-        }
+        G.charging = true;
+        G.power = 0.06;
+        G.powerDir = 1;
+        if (hintEl) hintEl.textContent = 'Məsafəni izləyin və istədiyiniz nöqtədə barmağınızı buraxın!';
+        SoundFX.tone(360, 0.04, 'sine', 0.04);
       });
 
       const releaseShot = () => {
-        if (G.phase === 'charge' && G.turn === 'user') {
-          launchStone('user', G.angle, G.power);
+        if (G.phase === 'aim' && G.charging) {
+          if (hintEl) hintEl.textContent = 'Oxun istiqamətini tutarkən ekranı basılı saxla və şiddəti tənzimləyərək topu burax.';
+          launchStone('user', G.aimAngle, G.power);
         }
       };
 
+      cv.addEventListener('pointerup', releaseShot);
+      cv.addEventListener('pointercancel', releaseShot);
       window.addEventListener('pointerup', releaseShot);
-      window.addEventListener('pointercancel', releaseShot);
 
       $('#clGo').addEventListener('click', start);
-      $('#clStartFull').addEventListener('click', async () => { await enterFull(); start(); });
-      $('#clFull').addEventListener('click', () => (G.full ? exitFull() : enterFull()));
-      $('#clExitFullFloat').addEventListener('click', exitFull);
+      $('#clStartFull').addEventListener('click', async () => {
+        await enterFullscreen();
+        start();
+      });
       $('#clAgain').addEventListener('click', start);
       $('#clExit').addEventListener('click', close);
       $('#clClose').addEventListener('click', close);
-
+      if (fullBtn) fullBtn.addEventListener('click', toggleFullscreen);
+      $('#clExitFullFloat')?.addEventListener('click', exitFullscreen);
       document.addEventListener('fullscreenchange', () => {
-        if (!document.fullscreenElement && G.full) {
-          G.full = false;
-          syncFullLayout();
+        if (!document.fullscreenElement && isFullscreen) {
+          isFullscreen = false;
+          updateLayoutMode();
         }
       });
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !root.hidden) close(); });
-      window.addEventListener('resize', () => { if (!root.hidden) syncFullLayout(); });
-      window.addEventListener('orientationchange', () => setTimeout(() => { if (!root.hidden) syncFullLayout(); }, 250));
+      window.addEventListener('resize', () => { if (!root.hidden) updateLayoutMode(); });
       document.addEventListener('click', (e) => { if (e.target.closest('[data-play="curling"]')) open(); });
 
       return { open, close };
@@ -6547,6 +6300,9 @@
       }
       ta.remove();
     }
+
+    /* İlkin məlumatların yüklənməsini başlat */
+    loadInitialData();
   </script>
 </body>
 </html>
