@@ -12,6 +12,10 @@
   <link rel="dns-prefetch" href="https://docs.google.com">
   <link rel="preload" as="image" href="https://docs.google.com/drawings/d/e/2PACX-1vQbzxPda05zw-xlcupsexZXTdDejHMneiSYpebnPi4kDrTlAGoWDvzmG54n2X7AAZuNllQMYRsKgCjV/pub?w=693&h=690" fetchpriority="high">
   <script>
+    (function () {
+      var path = location.pathname.replace(/\/index\.html$/i, '').replace(/\/+$/, '') || '/';
+      if (path === '/tedbirler/qeydiyyat') document.documentElement.classList.add('route-qeydiyyat');
+    })();
     /* Sorğu səhifə yüklənən kimi başlayır + son uğurlu data keşdən dərhal göstərilir */
     (function () {
       var API = 'https://script.google.com/macros/s/AKfycbziig0rBRdHKOE32h9BwUQ7aoEzVG8FNgF92KiWPOG2xLrgt0RIfd1a2kmbl50H2lL0/exec';
@@ -749,6 +753,51 @@
     section.page.on {
       display: block;
       animation: pageFadeIn 0.24s ease-out;
+    }
+
+    /* Birbaşa /tedbirler/qeydiyyat açılışında ana səhifə qısa müddətə görünməsin */
+    html.route-qeydiyyat #p-home {
+      display: none;
+    }
+
+    html.route-qeydiyyat #p-qeydiyyat {
+      display: block;
+    }
+
+    html.route-qeydiyyat nav [data-go="events"] {
+      background: var(--brand);
+      color: var(--brand-ink);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .reg-frame {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      max-width: 760px;
+    }
+
+    .reg-frame iframe {
+      display: block;
+      width: 100%;
+      border: 0;
+      height: 2020px;
+      background: #fff;
+    }
+
+    @media (max-width: 700px) {
+      .reg-frame iframe {
+        height: 2210px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .reg-frame iframe {
+        height: 2380px;
+      }
     }
 
     #p-home {
@@ -3664,6 +3713,7 @@
             <h2>Tədbirlər</h2>
             <p>Bu gündən etibarən bütün tədbirlər.</p>
           </div>
+          <a class="btn" href="/tedbirler/qeydiyyat" data-go="qeydiyyat">Oyunlara qeydiyyat</a>
         </div>
         <div class="tools">
           <div class="seg" role="tablist">
@@ -3722,6 +3772,25 @@
             <li>Masa 2 saat ərzində sizin üçün saxlanılır.</li>
             <li>Böyük qrup və xüsusi günlər üçün bizə zəng edin: <b id="phone2"></b></li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. OYUN QEYDİYYATI — Google Form, /tedbirler/qeydiyyat -->
+    <section class="page" id="p-qeydiyyat">
+      <div class="wrap">
+        <div class="sec-h">
+          <div>
+            <h2>Oyunlara qeydiyyat</h2>
+            <p>Qoşulmaq istədiyiniz oyunu seçin və qeydiyyatı buradan tamamlayın.</p>
+          </div>
+          <a class="btn ghost" href="/#events" data-go="events" style="color: var(--ink); border-color: var(--line)">Tədbirlərə qayıt</a>
+        </div>
+        <div class="reg-frame" id="regFrame">
+          <iframe
+            id="regForm"
+            title="Oyunlara qeydiyyat forması"
+          >Form yüklənir…</iframe>
         </div>
       </div>
     </section>
@@ -4431,19 +4500,139 @@
     /* ========================================================================
 4. DAXİLİ NAVİQASİYA (SPA ROUTING) VƏ KLİK HADİSƏLƏRİ
        ======================================================================== */
-    function go(id) {
+    const REG_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScJlmgfby_w6Yhoa_RxIHiVCwtaEZSV-Vo_HBBSMxMfOutZlQ/viewform?embedded=true';
+    const PAGE_TITLE = 'Üstəgəl Kafe — Sushi • Kofe • Tədbirlər • Oyunlar';
+    /* Formun öz hündürlüyü enə görə. Aralıqlar xətti götürülür ki, iframe
+       formdan nə qısa (iç scroll), nə də uzun (boş sahə) qalmasın. */
+    const REG_FORM_HEIGHTS = [
+      [320, 2460],
+      [360, 2430],
+      [520, 2372],
+      [640, 2202],
+      [760, 2012],
+      [1200, 2012]
+    ];
+    let regReportedHeight = 0;
+
+    function pageFromLocation() {
+      const path = location.pathname.replace(/\/index\.html$/i, '').replace(/\/+$/, '') || '/';
+      if (path === '/tedbirler/qeydiyyat') return 'qeydiyyat';
+      const hash = (location.hash || '').replace(/^#/, '');
+      if (['home', 'menu', 'games', 'events', 'reserve'].includes(hash)) return hash;
+      return 'home';
+    }
+
+    function syncRouteUrl(id, push) {
+      const path = location.pathname.replace(/\/index\.html$/i, '').replace(/\/+$/, '') || '/';
+      const onForm = path === '/tedbirler/qeydiyyat';
+      let desired = null;
+      if (id === 'qeydiyyat') desired = '/tedbirler/qeydiyyat';
+      else if (onForm || location.hash) desired = id === 'home' ? '/' : '/#' + id;
+      if (!desired) return;
+      const current = path + (onForm ? '' : location.hash);
+      if (current === desired) return;
+      history[push ? 'pushState' : 'replaceState']({ page: id }, '', desired);
+    }
+
+    function regFormHeightForWidth(w) {
+      const rows = REG_FORM_HEIGHTS;
+      if (w <= rows[0][0]) return rows[0][1];
+      for (let i = 1; i < rows.length; i++) {
+        if (w <= rows[i][0]) {
+          const w0 = rows[i - 1][0];
+          const h0 = rows[i - 1][1];
+          const w1 = rows[i][0];
+          const h1 = rows[i][1];
+          return h0 + (h1 - h0) * ((w - w0) / (w1 - w0));
+        }
+      }
+      return rows[rows.length - 1][1];
+    }
+
+    function messageHeight(data) {
+      if (data == null) return 0;
+      if (typeof data === 'number') return data;
+      if (typeof data === 'string') {
+        const matched = data.match(/(?:height|setHeight|embed-height)[^\d]{0,16}(\d{3,5})/i);
+        if (matched) return +matched[1];
+        try { return messageHeight(JSON.parse(data)); } catch (_) { return 0; }
+      }
+      if (typeof data === 'object') {
+        if (Array.isArray(data)) {
+          for (let i = 0; i < data.length; i++) {
+            const h = messageHeight(data[i]);
+            if (h) return h;
+          }
+          return 0;
+        }
+        const direct = data.height || data.embedHeight || data['embed-height'] || data.setHeight;
+        if (typeof direct === 'number') return direct;
+        if (data.data) return messageHeight(data.data);
+      }
+      return 0;
+    }
+
+    function fitRegForm() {
+      const frame = $('#regForm');
+      if (!frame) return;
+      const shell = frame.parentElement;
+      const w = (shell && shell.clientWidth) || window.innerWidth;
+      let h = regReportedHeight;
+      if (!(h > 400 && h < 8000)) h = regFormHeightForWidth(w);
+      const next = Math.ceil(h);
+      if (frame.style.height !== next + 'px') frame.style.height = next + 'px';
+    }
+
+    function mountRegForm() {
+      const frame = $('#regForm');
+      if (!frame || frame.dataset.mounted === '1') {
+        fitRegForm();
+        return;
+      }
+      frame.dataset.mounted = '1';
+      frame.addEventListener('load', () => {
+        regReportedHeight = 0;
+        fitRegForm();
+      });
+      window.addEventListener('message', (event) => {
+        if (event.source !== frame.contentWindow) return;
+        let host = '';
+        try { host = new URL(event.origin).hostname; } catch (_) { return; }
+        if (!/(^|\.)google\.com$/.test(host)) return;
+        const h = messageHeight(event.data);
+        if (!(h > 400 && h < 8000)) return;
+        regReportedHeight = h;
+        fitRegForm();
+      });
+      if (window.ResizeObserver) {
+        const shell = frame.parentElement;
+        if (shell) new ResizeObserver(() => { if (S.page === 'qeydiyyat') fitRegForm(); }).observe(shell);
+      }
+      frame.src = REG_FORM_URL;
+    }
+
+    function go(id, opts) {
+      opts = opts || {};
       S.page = id;
+      document.documentElement.classList.toggle('route-qeydiyyat', id === 'qeydiyyat');
       $$('section.page').forEach((p) => p.classList.toggle('on', p.id === 'p-' + id));
-      $$('nav button').forEach((b) => b.classList.toggle('on', b.dataset.go === id));
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const navKey = id === 'qeydiyyat' ? 'events' : id;
+      $$('nav button, nav a').forEach((b) => b.classList.toggle('on', b.dataset.go === navKey));
+      document.title = id === 'qeydiyyat' ? 'Oyunlara qeydiyyat — Üstəgəl Kafe' : PAGE_TITLE;
+      if (id === 'qeydiyyat') mountRegForm();
+      window.scrollTo({ top: 0, behavior: opts.push === false ? 'auto' : 'smooth' });
       CoffeeCompanion.onPageChange(id);
       CreativeMenu.syncTray();
       if (id === 'menu') setTimeout(CreativeMenu.hintCats, 450);
+      syncRouteUrl(id, opts.push !== false);
     }
 
     document.addEventListener('click', (e) => {
       const g = e.target.closest('[data-go]');
-      if (g) return go(g.dataset.go);
+      if (g) {
+        e.preventDefault();
+        return go(g.dataset.go);
+      }
 
       const r = e.target.closest('[data-reg]');
       if (r) return register(r.dataset.reg);
@@ -7029,6 +7218,8 @@
        ======================================================================== */
     CreativeMenu.init();
     loadInitialData();
+    window.addEventListener('popstate', () => go(pageFromLocation(), { push: false }));
+    if (pageFromLocation() !== 'home') go(pageFromLocation(), { push: false });
   </script>
 </body>
 </html>
