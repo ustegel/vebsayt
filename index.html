@@ -770,33 +770,36 @@
       box-shadow: var(--shadow-sm);
     }
 
+    #p-qeydiyyat {
+      color: var(--ink);
+      padding-bottom: 0;
+    }
+
     .reg-frame {
       position: relative;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
+      width: 100%;
+      background: #fff;
+      border-top: 1px solid var(--line);
       overflow: hidden;
-      max-width: 760px;
     }
 
     .reg-frame iframe {
       display: block;
       width: 100%;
       border: 0;
-      height: 2020px;
+      height: 2800px;
       background: #fff;
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 760px) {
       .reg-frame iframe {
-        height: 2210px;
+        height: 3100px;
       }
     }
 
     @media (max-width: 520px) {
       .reg-frame iframe {
-        height: 2380px;
+        height: 3450px;
       }
     }
 
@@ -3786,12 +3789,12 @@
           </div>
           <a class="btn ghost" href="/#events" data-go="events" style="color: var(--ink); border-color: var(--line)">Tədbirlərə qayıt</a>
         </div>
-        <div class="reg-frame" id="regFrame">
-          <iframe
-            id="regForm"
-            title="Oyunlara qeydiyyat forması"
-          >Form yüklənir…</iframe>
-        </div>
+      </div>
+      <div class="reg-frame" id="regFrame">
+        <iframe
+          id="regForm"
+          title="Oyunlara qeydiyyat forması"
+        >Form yüklənir…</iframe>
       </div>
     </section>
   </main>
@@ -4502,17 +4505,18 @@
        ======================================================================== */
     const REG_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScJlmgfby_w6Yhoa_RxIHiVCwtaEZSV-Vo_HBBSMxMfOutZlQ/viewform?embedded=true';
     const PAGE_TITLE = 'Üstəgəl Kafe — Sushi • Kofe • Tədbirlər • Oyunlar';
-    /* Formun öz hündürlüyü enə görə. Aralıqlar xətti götürülür ki, iframe
-       formdan nə qısa (iç scroll), nə də uzun (boş sahə) qalmasın. */
+    /* Google Forms cross-origin səbəbilə hündürlük göndərmir; əlavə suallar,
+       seçimlər və xəta mesajları da iç scroll açmadan sığsın deyə geniş saxlanılır. */
     const REG_FORM_HEIGHTS = [
-      [320, 2460],
-      [360, 2430],
-      [520, 2372],
-      [640, 2202],
-      [760, 2012],
-      [1200, 2012]
+      [320, 3650],
+      [390, 3450],
+      [520, 3200],
+      [640, 3000],
+      [760, 2800],
+      [1400, 2800]
     ];
     let regReportedHeight = 0;
+    let regFormLoads = 0;
 
     function pageFromLocation() {
       const path = location.pathname.replace(/\/index\.html$/i, '').replace(/\/+$/, '') || '/';
@@ -4591,8 +4595,13 @@
       }
       frame.dataset.mounted = '1';
       frame.addEventListener('load', () => {
+        regFormLoads += 1;
         regReportedHeight = 0;
         fitRegForm();
+        if (regFormLoads > 1) {
+          const top = frame.getBoundingClientRect().top + window.scrollY - 76;
+          if (window.scrollY > top) window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+        }
       });
       window.addEventListener('message', (event) => {
         if (event.source !== frame.contentWindow) return;
