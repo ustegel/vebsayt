@@ -6983,40 +6983,73 @@
     })();
 
     /* ========================================================================
-       9. BİLDİRİŞ (TOAST) VƏ BUFERƏ KOPYALAMA KÖMƏKÇİLƏRİ
+       8. KİTAB FORMATLI MENYU KATALOQU (PDF ARDICILLIĞI İLƏ — ƏVVƏLDƏ KVİZ SETLƏRİ)
        ======================================================================== */
-    function showToast(text) {
-      const wrap = $('#toastWrap');
-      if (!wrap) return;
-      const el = document.createElement('div');
-      el.className = 'toast';
-      el.textContent = text;
-      wrap.appendChild(el);
-      setTimeout(() => {
-        el.style.opacity = '0';
-        el.style.transition = 'opacity 0.25s ease';
-        setTimeout(() => el.remove(), 260);
-      }, 2800);
-    }
-
-    function copyText(text) {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      try {
-        document.execCommand('copy');
-        showToast(`Kod kopyalandı: ${text}`);
-      } catch (_) {
-        showToast(text);
+    const MENU_CATEGORIES = [
+      {
+        id: 'kvizart',
+        label: 'Kviz Setləri',
+        emoji: '🧠',
+        accent: '#3F3282',
+        bg1: '#ECEAFE',
+        bg2: '#D8D4FC',
+        desc: 'Kviz komandaları üçün sərfəli suşi, salat, qəlyanaltı və çay-desert setləri.'
+      },
+      {
+        id: 'sushi-classic',
+        label: 'Sushi • Classic',
+        emoji: '🍣',
+        accent: '#B83A2D',
+        bg1: '#FDECE8',
+        bg2: '#F6D2C8',
+        desc: 'Təzə dəniz məhsulları və klassik yapon reseptləri ilə soyuq rollar.'
+      },
+// ... existing code ... -->
+      {
+        id: 'atisdirmaliq',
+        label: 'Atışdırmalıqlar',
+        emoji: '🍿',
+        accent: '#9A6316',
+        bg1: '#FCF2DF',
+        bg2: '#F4E1BE',
+        desc: 'Kino və oyun axşamları üçün popkorn, saçaq pendir, çips və çərəzlər.'
       }
-      ta.remove();
-    }
+    ];
 
-    /* İlkin yükləməni işə sal */
-    loadInitialData();
-  </script>
-</body>
-</html>
+    const MENU_ITEMS = [
+      // 1. Kviz Setləri (Yeni PDF setləri + Çay-Desert setləri)
+      { cat: 'kvizart', name: 'KvizArt (4-5 nəfər)', price: 19.00, kcal: 980, note: '1 suşi rollu (seçimə uyğun), 1 salat (seçimə uyğun), 1 porsiya kartof fri. Qeyd: Filadelfia çeşidləri və krevetkalı Sezar salatı istisnadır.' },
+      { cat: 'kvizart', name: 'Üstəgəl set (6-7 nəfər)', price: 25.00, kcal: 1370, note: '1 suşi rollu (seçimə uyğun), 1 salat (seçimə uyğun), 1 porsiya kartof fri, 1 porsiya krevetka tempura. Qeyd: Filadelfia çeşidləri və krevetkalı Sezar salatı istisnadır.' },
+      { cat: 'kvizart', name: 'Talpa set (8-10 nəfər)', price: 33.00, kcal: 1680, note: '2 suşi rollu (seçimə uyğun), 1 salat (seçimə uyğun), 2 porsiya kartof fri. Qeyd: Filadelfia çeşidləri və krevetkalı Sezar salatı istisnadır.' },
+      { cat: 'kvizart', name: '4 Çay + 4 San Sebastián', price: 30.00, kcal: 1700, note: 'Kviz komandası üçün 4 isti çay və 4 porsiya San Sebastián.' },
+      { cat: 'kvizart', name: '4 Çay + 4 Trileçe', price: 27.00, kcal: 1460, note: '4 nəfərlik dəmləmə çay və 4 porsiya Trileçe.' },
+      { cat: 'kvizart', name: '4 Çay + Gilas mürəbbəsi', price: 13.00, kcal: 325, note: '4 stəkan dəmləmə çay və ağ gilas mürəbbəsi.' },
+      { cat: 'kvizart', name: '4 Çay + Çiyələk mürəbbəsi', price: 12.00, kcal: 310, note: '4 stəkan dəmləmə çay və çiyələk mürəbbəsi.' },
+
+      // 2. Sushi • Classic (PDF səhifə 2)
+      { cat: 'sushi-classic', name: 'Filadelfia', price: 12.00, kcal: 340, note: 'Düyü, nori, hisə verilmiş qızıl balıq, xiyar, pendir.' },
+// ... existing code ... -->
+      { cat: 'atisdirmaliq', name: 'Saçaq pendir', price: 3.00, kcal: 260, note: 'Təbii hisə verilmiş saçaq pendir.' },
+      { cat: 'atisdirmaliq', name: 'Popkorn', price: 4.00, kcal: 290, note: 'Kino axşamları üçün isti və xırtıldayan popkorn.' }
+    ];
+
+    const CreativeMenu = (() => {
+// ... existing code ... -->
+        if (item.cat === 'atisdirmaliq') {
+          if (n.includes('popkorn')) return '🍿';
+          if (n.includes('pendir')) return '🧀';
+          if (n.includes('fıstıq')) return '🥜';
+          if (n.includes('suxari')) return '🥨';
+          return '🍟';
+        }
+        if (item.cat === 'kvizart') {
+          if (n.includes('kvizart')) return '🍱';
+          if (n.includes('üstəgəl set')) return '🍤';
+          if (n.includes('talpa set')) return '🏆';
+          return '🫖';
+        }
+        return '🧠';
+      }
+
+      function renderCategories() {
+// ... existing code ... -->
